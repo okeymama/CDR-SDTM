@@ -8,13 +8,17 @@ import { UserService } from '../_services/index';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  userName : string= '';
+  userName = '';
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    let userDetails = this.userService.getUser();
-    let userDetail = userDetails.firstName + ' ' + userDetails.lastName;
+    const userDetails = this.userService.getUser();
+    if (userDetails !== undefined) {
+    const userDetail = userDetails.firstName + ' ' + userDetails.lastName;
     this.userName = userDetail;
+    } else {
+      this.userName = 'Admin';
+    }
   }
 
 }
