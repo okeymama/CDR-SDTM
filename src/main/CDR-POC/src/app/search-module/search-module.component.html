@@ -4,43 +4,9 @@
         <!-- PAGE CONTENT BEGINS -->
         <div>
             <div class="tabbable">
-                <ul class="nav nav-tabs padding-6 tab-color-blue background-blue" id="myTab4">
-                    <li>
-                        <a data-toggle="tab" [routerLink]="['/home']" style="font-family: serif;font-size: 14px;width:165px"><b><i class="ace-icon fa fa-home home-icon"></i>Home</b></a>
-                    </li>
-                    <li *ngIf="paramId == 'studyInfo'" class="active">
-                        <a data-toggle="tab" href="/searchModule/studyInfo" style="font-family: serif;font-size: 14px;width:110px"><b><i class="ace-icon fa fa-book" style="color:black"></i>Study Info</b></a>
-                    </li>
-                    <li *ngIf="paramId != 'studyInfo'">
-                        <a data-toggle="tab" href="/searchModule/studyInfo" style="font-family: serif;font-size: 14px;width:110px"><b><i class="ace-icon fa fa-book" style="color:black"></i>Study Info</b></a>
-                    </li>
-                    <li *ngIf="paramId == 'businessRule'" class="active">
-                        <a data-toggle="tab" href="/searchModule/businessRule" style="font-family: serif;font-size: 14px;width:230px"><b><i class="ace-icon fa fa-briefcase" style="color:black"></i>Business Rule Configuration</b></a>
-                    </li>
-                    <li *ngIf="paramId != 'businessRule'">
-                        <a data-toggle="tab" href="/searchModule/businessRule" style="font-family: serif;font-size: 14px;width:230px"><b><i class="ace-icon fa fa-briefcase" style="color:black"></i>Business Rule Configuration</b></a>
-                    </li>
-                    <li *ngIf="paramId == 'jobExecution'" class="active">
-                        <a data-toggle="tab" href="/searchModule/jobExecution" style="font-family: serif;font-size: 14px;width:210px"><b><i class="ace-icon fa fa-tasks" style="color:black"></i>Job Execution</b></a>
-                    </li>
-                    <li *ngIf="paramId != 'jobExecution'">
-                        <a data-toggle="tab" href="/searchModule/jobExecution" style="font-family: serif;font-size: 14px;width:210px"><b><i class="ace-icon fa fa-tasks" style="color:black"></i>Job Execution</b></a>
-                    </li>
-                    <li *ngIf="paramId == 'dqw'" class="active">
-                        <a data-toggle="tab" href="/searchModule/dqw" style="font-family: serif;font-size: 14px;width:200px"><b><i class="ace-icon fa fa-check-square" style="color:black"></i>Data Quality Workbench</b></a>
-                    </li>
-                    <li *ngIf="paramId != 'dqw'">
-                        <a data-toggle="tab" href="/searchModule/dqw" style="font-family: serif;font-size: 14px;width:200px"><b><i class="ace-icon fa fa-check-square" style="color:black"></i>Data Quality Workbench</b></a>
-                    </li>
-                    <li *ngIf="paramId == 'analytics'" class="active">
-                        <a data-toggle="tab" href="/searchModule/analytics" style="font-family: serif;font-size: 14px;width:200px"><b><i class="ace-icon fa fa-connectdevelop" style="color:black"></i>Analytics</b></a>
-                    </li>
-                    <li *ngIf="paramId != 'analytics'">
-                        <a data-toggle="tab" href="/searchModule/analytics" style="font-family: serif;font-size: 15px;width:200px"><b><i class="ace-icon fa fa-connectdevelop" style="color:black"></i>Analytics</b></a>
-                    </li>
-                </ul>
+               <app-header></app-header>
                 <!-- Enter Study Info -->
-                <div *ngIf="paramId == 'studyInfo'">
+                
                 <form name="form"  #f="ngForm" novalidate>
                   <fieldset>
                     <div class="tab-content">
@@ -67,9 +33,11 @@
                                     <label for="form-field-8" style="font-family: serif;font-size: 14px;"><b>Phase</b></label>
                                     <select class="form-control"  id="form-field-select-1" name="phase" [(ngModel)]="searchStudy.phase">
                                         <option value="undefined" disabled selected style="display: none;">Select an Option</option>
-   					                            <option value="Phase1">Phase 1</option>
+                                        <option value="Phase0">Phase 0</option>          
+                                        <option value="Phase1">Phase 1</option>
                                         <option value="Phase2">Phase 2</option>
                                         <option value="Phase3">Phase 3</option>
+                                        <option value="Phase4">Phase 4</option>
                                     </select>
                                 </div>
                             </div>
@@ -152,18 +120,9 @@
                       </kendo-grid-edit-form>
                 </div>
               </div>
-            </div>
+            
           </div>    <!-- /.row -->      <!-- /.page-content -->
         </div>
-        <div>
-          <div *ngIf="paramId == 'jobExecution'">
-            <app-job-execution></app-job-execution>
-          </div>
-        </div>
-        <div>
-          <div *ngIf="paramId == 'businessRule'">
-            <app-business-rule></app-business-rule>
-          </div>
-        </div>
+       
       </div>      <!-- /.main-content -->
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
