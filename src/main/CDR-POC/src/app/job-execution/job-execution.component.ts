@@ -20,7 +20,8 @@ export class JobExecutionComponent implements OnInit {
   public view: Observable<GridDataResult>;
   data: any[] = [];
   private msg: any;
-  
+  jobStatus: boolean = false;
+
    public gridState: State = {
       sort: [],
       skip: 0,
@@ -51,6 +52,7 @@ export class JobExecutionComponent implements OnInit {
                               {"id":6,"itemName":"Domain3"},
                               {"id":7,"itemName":"Domain4"}
                             ];
+
       /*  this.selectedItems = [
                               //  {"id":1,"itemName":"Demographics"},
                               //  {"id":3,"itemName":"Concomitant Medications"}
@@ -83,8 +85,10 @@ export class JobExecutionComponent implements OnInit {
  onSelectAll (items: any) {
    console.log(items);
  }
+
   public searchJobExecution(searchJob,selectedItems) {
     this.loading = true;
+    this.jobStatus =  true;
 
   //  console.log( "selectedItems");
   //  console.log( this.selectedItems);
@@ -105,27 +109,27 @@ export class JobExecutionComponent implements OnInit {
     params = params.append('study', searchJob.study);
     console.log( "params3");
     console.log(params);
-    if(searchJob.study) {
+    //if(searchJob.study) {
       console.log( "params4");
     /******************************************************Actual Code********************************************
 
     return this.http.get<any[]>(`http://localhost:3000/JobDetails?`, { params: params })
        .subscribe(data => {this.data = data });
-    ******************************************************Actual Code********************************************/
-     this.msg = "Job Completed";
+    *****************************************************Actual Code********************************************/
+
      let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
-       return this.http.post(`http://35.171.8.239:2000`, {headers: headers})
+       return this.http.post(`http://35.171.8.239:3000`, {headers: headers})
        .subscribe(data => {
          this.msg = data;
-        });
+       });
 
 
-    } else {
+   /* } else {
       console.log( "params5");
       this.alertService.error("Please choose a study!");
       this.loading = false;
-    }
+    }*/
 
 //    this.jobExecutionService.read(searchJob);
 
@@ -140,6 +144,8 @@ export class JobExecutionComponent implements OnInit {
     this.searchJob.domain = "";
     this.searchJob.study = "";
     this.selectedItemsList = [];
+    this.jobStatus =  false;
+
     //this.view = '';
     f.form.reset();
 

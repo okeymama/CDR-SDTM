@@ -7,6 +7,10 @@
     text-align: left;
 }
 </style>
+<div class="tabbable">
+  <app-header></app-header>
+</div>
+<br>
 <div class="panel panel-default">
 <div>
   <form name="jobForm"  #f="ngForm" novalidate>
@@ -15,7 +19,7 @@
         <div class="tab-pane in active">
           <div class="space"></div>
           <div class="space"></div>
-          <div style='text-align: left'><h6><b>Enter Study Data to import Path to SDTM Matrix template</b></h6></div>
+          <div style='text-align: left'><h6><b>Select input parameters for job execution</b></h6></div>
           <div class="space"></div>
           <div class="space"></div>
 
@@ -29,7 +33,10 @@
                           style="border-radius: 4px;border: 1px solid #adadad;padding: 6px 12px; margin-bottom: 0; font-size: 14px;
                           font-weight: 400;line-height: 1.52857143;text-align: left;vertical-align: middle;">
                               <option value="Calerie">Calerie</option>
-                              <option value="Status1">Status1</option>
+                              <option value="Camp">Camp</option>
+							  <option value="Digitalis">Digitalis</option>
+							  <option value="Framingham">Framingham</option>
+							  <option value="EDC Study 1">EDC Study 1</option>
                           </select>
                     </div>
                 </div>
@@ -57,7 +64,7 @@
               <div class="col-xs-12 col-sm-4">
                <div>
                  <br><br><br>
-                 <button  (click)="searchJobExecution(searchJob,selectedItems)" class="btn btn-success" style="font-size: 13px;"><b>Search</b></button>
+                 <button  (click)="searchJobExecution(searchJob,selectedItems)" class="btn btn-success" style="font-size: 13px;"><b>Submit</b></button>
                  &nbsp; &nbsp;
                  <button  (click)="reset(searchJob,selectedItems,f)" class="btn btn-inverse" style="font-size: 13px;color : black;background-color : #86BC60;"><b>Clear</b></button>
                </div>
@@ -72,9 +79,10 @@
   <h6 style="text-align: left ; background-color: #86bc25;padding : 8px">&nbsp;&nbsp;<b>Job Status</b></h6>
   <div class="space"></div>
   <div class="space"></div>
-  
-  <div *ngIf="msg !=''" style="text-align: center"> <b>{{msg}}</b></div>
-
+  <div *ngIf="msg" style="text-align: center"> <b>{{msg.data}}</b></div>
+  <button *ngIf="jobStatus && !(msg)" class="btn btn-success">Running...
+       				<i class="fa fa-spinner fa-spin"></i>
+  </button>
   <div class="space"></div>
   <div class="space"></div>
 
