@@ -39,7 +39,7 @@ export class EditService extends BehaviorSubject<any[]> {
     public save(data: any, searchStudy, isNew?: boolean ) {
         const action = isNew ? CREATE_ACTION : UPDATE_ACTION;
         this.reset();
-        this.validateStudyDetails(data)
+        this.validateStudyDetails(data);
         this.fetch(data, action)
           .subscribe(() => this.read(searchStudy), () => this.read(searchStudy));
     }
@@ -70,9 +70,9 @@ export class EditService extends BehaviorSubject<any[]> {
         this.data = [];
     }
 
-    private fetch(searchStudy,action: string = '', data?: any): Observable<any> {
+    private fetch(searchStudy, action: string = '', data?: any): Observable<any> {
         let params = new HttpParams();
-      if(action == 'create') {
+      if(action === 'create') {
         const searchUrl = '/api/CDR/study/create';
         let url = `${searchUrl}`;
         let headers = new HttpHeaders();
