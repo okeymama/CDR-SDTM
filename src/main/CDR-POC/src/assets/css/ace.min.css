@@ -26,7 +26,7 @@ body {
     font-family: 'Open Sans';
     font-size: 12px;
     color: #393939;
-    line-height: 0.2
+    line-height: 0.2 
 }
 
 h1,
@@ -1248,7 +1248,7 @@ pre.prettyprint {
     -webkit-box-shadow: none;
     box-shadow: none;
     min-height: 5px;
-    background: #012169;
+    background: #86bc25;
 }
 
 .navbar .navbar-link,
@@ -5654,13 +5654,13 @@ body.mob-safari .sidebar.sidebar-fixed {
 
 .btn-group-lg > .btn,
 .btn-lg {
-    border-width: 0px;
+    border-width: 1px;
     line-height: 1.4;
-    padding: 7px 7px 80px;
-    background-color: #86bc25;
+    padding: 20px 7px 80px;
+    background-color: white;
     font-family: serif;
-    width: 300px;
-    height: 180px;
+    width: 260px;
+    height: 130px;
 }
 
 .btn-group-xlg > .btn,
@@ -13902,8 +13902,8 @@ tr.detail-row > td {
 
 .login-layout {
 
-    background-image: url(../images/clinical.jpg);
-    background-position: center center;
+    background-image: url(../images/Picbg1.png);
+    background-position: right;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -13918,15 +13918,14 @@ tr.detail-row > td {
     margin-left: 0!important;
     margin-right: 0!important;
     min-height: 100%;
-    padding-left: 15px;
-    padding-right: 15px
+    padding-left: 600px;
+    padding-right: 70px
 }
 
 .login-layout .widget-box {
     visibility: hidden;
     position: fixed;
     z-index: -5;
-    border-bottom: none;
     box-shadow: none;
     padding: 6px;
     background-color: #ffffff;
@@ -14644,7 +14643,7 @@ tr.detail-row > td {
 }
 
 li[class*=item-] {
-    border: 1px solid #DDD;
+    border: 0px solid #DDD;
     border-left-width: 3px
 }
 
