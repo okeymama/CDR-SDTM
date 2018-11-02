@@ -1,0 +1,43 @@
+<style>
+    .pull-right {
+      float: right;
+      padding-right:12px;
+      }
+  </style>
+<div class="container" >
+        <div class="row">
+            <div class="row" >
+                <h4  style="text-align:left;font-family: serif;font-size:14px">
+                <b *ngIf = "location == '/searchModule' ">&nbsp;&nbsp;&nbsp;&nbsp;Home > Study Configuration</b>
+                <b *ngIf = "location == '/busRules' ">&nbsp;&nbsp;&nbsp;&nbsp;Home > Business Rule Configuration</b>
+                <b *ngIf = "location == '/job' ">&nbsp;&nbsp;&nbsp;&nbsp;Home > Job Execution</b>
+                <b *ngIf = "location == '/dataQuality' ">&nbsp;&nbsp;&nbsp;&nbsp;Home > Data Quality Workbench</b>
+                <b class="pull-right"> &nbsp;&nbsp;&nbsp;Welcome {{userName}} | <button type="button" [routerLink]="['']" style="background-color:#012169;color: white;padding: 3px 7px">Logout</button></b></h4>
+              </div> 
+        </div>
+</div>
+<ul class="nav nav-tabs padding-6 tab-color-blue background-blue" id="myTab4">
+  <li>
+      <a data-toggle="tab" [routerLink]="['/home']" style="font-family: serif;font-size: 14px;width:165px"><b><i class="ace-icon fa fa-home home-icon"></i>Home</b></a>
+  </li>
+  <li [routerLinkActive]="['active']">
+      <a data-toggle="tab" routerLink="/searchModule"  style="font-family: serif;font-size: 14px;width:230px"><b><i class="ace-icon fa fa-book" style="color:black"></i>Study Configuration</b></a>
+  </li>
+ 
+  <li [routerLinkActive]="['active']">
+      <a data-toggle="tab" routerLink="/busRules"  style="font-family: serif;font-size: 14px;width:230px"><b><i class="ace-icon fa fa-briefcase" style="color:black"></i>Business Rule Configuration</b></a>
+  </li>
+  
+  <li [routerLinkActive]="['active']">
+      <a data-toggle="tab" routerLink="/job"  style="font-family: serif;font-size: 14px;width:160px"><b><i class="ace-icon fa fa-tasks" style="color:black"></i>Job Execution</b></a>
+  </li>
+  
+  <li [routerLinkActive]="['active']">
+      <a data-toggle="tab" routerLink="/dataQuality"  style="font-family: serif;font-size: 14px;width:200px"><b><i class="ace-icon fa fa-check-square" style="color:black"></i>Data Quality Workbench</b></a>
+  </li>
+  
+ <!-- <li [routerLinkActive]="['active']">
+      <a data-toggle="tab" routerLink="/analytics"  style="font-family: serif;font-size: 14px;width:200px"><b><i class="ace-icon fa fa-connectdevelop" style="color:black"></i>Analytics</b></a>
+  </li> -->
+  
+</ul>
