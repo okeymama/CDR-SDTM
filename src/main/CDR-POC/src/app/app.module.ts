@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HttpClient, HttpClientModule, HttpClientJsonpModule } from '@angular/common/http'
+import { HttpClient, HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { HttpModule } from '@angular/http';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AlertService, AuthenticationService, UserService , EditService } from './_services/index';
 import { SearchModuleComponent } from './search-module/search-module.component';
 import { AlertComponent } from './_directives/index';
@@ -18,7 +18,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { JobExecutionComponent } from './job-execution/job-execution.component';
 import { BusinessRuleComponent } from './business-rule/business-rule.component';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown'; 
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { DataQualityComponent } from './data-quality/data-quality.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import {BreadcrumbsModule} from 'ng6-breadcrumbs';
 
 
 @NgModule({
@@ -31,7 +36,11 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     HomeComponent,
     EditFormComponent,
     JobExecutionComponent,
-    BusinessRuleComponent
+    BusinessRuleComponent,
+    DataQualityComponent,
+    AnalyticsComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     AppRoutingModule,
@@ -44,6 +53,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     GridModule,
     ReactiveFormsModule,
     DialogsModule,
+    BreadcrumbsModule,
     NgMultiSelectDropDownModule.forRoot()
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA],
