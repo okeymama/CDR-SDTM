@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./business-rule.component.css']
 })
 export class BusinessRuleComponent implements OnInit {
+  searchBRStudy: any;
 
   constructor() { }
 
