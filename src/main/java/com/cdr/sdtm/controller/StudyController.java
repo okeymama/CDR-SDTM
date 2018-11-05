@@ -89,5 +89,15 @@ public class StudyController {
 			return new ResponseEntity<>("Study not found", HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	
+	@RequestMapping(value = "/study/dropdown", method = RequestMethod.GET)
+	public List<String> getDistinctStudy() {
+		LOGGER.info("Distinct Study method - STARTS");
+		List<String> studies = new ArrayList<String>();
+		studies = studyService.findDistinctStudies();
+		LOGGER.info("Search Study method - ENDS");
+		return studies;	
+	}
 
 }
