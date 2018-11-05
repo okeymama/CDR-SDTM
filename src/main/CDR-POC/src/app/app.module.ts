@@ -26,7 +26,6 @@ import { FooterComponent } from './footer/footer.component';
 import {BreadcrumbsModule} from 'ng6-breadcrumbs';
 import { BusinessEditFormComponent } from './business-edit-form/business-edit-form.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

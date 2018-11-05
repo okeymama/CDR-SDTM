@@ -6,7 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Headers, RequestOptions } from '@angular/http';
-
 import { tap } from 'rxjs/operators/tap';
 import { map } from 'rxjs/operators/map';
 

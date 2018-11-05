@@ -66,4 +66,5 @@ export class BusinessRuleComponent implements OnInit {
      public removeHandler({dataItem}) {
          this.businessEditService.remove(dataItem, this.searchBRStudy);
      }
+     
  }
