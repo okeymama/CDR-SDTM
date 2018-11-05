@@ -8,6 +8,6 @@ import com.cdr.sdtm.model.PathToSdtmTemplate;
 
 public interface SdtmTemplateRepository extends JpaRepository<PathToSdtmTemplate, Long>{
 
-	List<PathToSdtmTemplate> findByDomain(String domain);
+	List<PathToSdtmTemplate> findByStudyAndDomain(String study, String domain);
 
 }
