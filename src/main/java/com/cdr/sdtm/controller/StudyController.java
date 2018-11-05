@@ -93,10 +93,10 @@ public class StudyController {
 	
 	@RequestMapping(value = "/study/dropdown", method = RequestMethod.GET)
 	public List<String> getDistinctStudy() {
-		LOGGER.info("Distinct Study method - STARTS");
+		LOGGER.info("Distinct Study title method - STARTS");
 		List<String> studies = new ArrayList<String>();
 		studies = studyService.findDistinctStudies();
-		LOGGER.info("Search Study method - ENDS");
+		LOGGER.info("Search Study title method - ENDS");
 		return studies;	
 	}
 
