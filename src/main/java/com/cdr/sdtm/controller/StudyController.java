@@ -97,7 +97,7 @@ public class StudyController {
 		List<String> studies = new ArrayList<String>();
 		studies = studyService.findDistinctStudies();
 		LOGGER.info("Search Study title method - ENDS");
-		return studies;	 
+		return studies;
 	}
 
 }
