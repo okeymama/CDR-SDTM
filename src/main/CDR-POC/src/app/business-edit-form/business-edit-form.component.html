@@ -1,0 +1,143 @@
+
+<style>
+* {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+input[type=text], select, textarea {
+    width: 80%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+    margin-right: 260px;
+}
+
+
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.col-25 {
+    float: left;
+    width: 15%;
+    margin-top: -1px;
+    text-align: right;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+}
+}
+</style>
+<kendo-dialog *ngIf="active" (close)="closeForm()">
+<kendo-dialog-titlebar style="background-color : #86bc25">
+  <b style="color : black;font-size: 16px;font-family: serif;">{{ isNew ? 'Import SDTM Matrix' : 'Edit SDTM Matrix' }}</b>
+</kendo-dialog-titlebar>
+
+  <form novalidate [formGroup]="editBusinessForm">
+    <div class="container">
+    <div class="row">
+      <div class="col-25">
+        <label for="sourceFile" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Source File:</label>
+      </div>
+      <div class="col-75">
+        <input type="text" placeholder="Select Source File" formControlName="sourceFile" />&nbsp;
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="sourceField" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Source Variable:</label>
+      </div>
+      <div class="col-75">
+        <input type="text" placeholder="Enter Source Variable" formControlName="sourceField" />&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lookUpFile" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Look up File:</label>
+      </div>
+      <div class="col-75">
+        <input type="text" placeholder="Select Look up File" formControlName="lookUpFile" />&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25" >
+        <label for="joinLogic" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Join Logic:</label>
+      </div>
+      <div class="col-75">
+        <input type="text" placeholder="Enter Join Logic" formControlName="joinLogic" />&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="targetFile" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Target File:</label>
+      </div>
+      <div class="col-75">
+        <input type="text" placeholder="Select Target File" formControlName="targetFile" />&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="domain" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Domain:</label>
+      </div>
+      <div class="col-75">
+        <select id="domain" style="font-size:14px;font-family: serif;color:grey" formControlName="domain" name="domain">
+          <option [ngValue]="null" style="display: none;">Select an Option</option>
+          <option value="Demographics">Demographics</option>
+          <option value="Adver Event">Adver Event</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="study" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Study:</label>
+      </div>
+      <div class="col-75">
+        <select id="study" style="font-size:14px;font-family: serif;color:grey" formControlName="study" name="study">
+          <option [ngValue]="null" style="display: none;">Select an Option</option>
+          <option value="NCT0001">Calerie</option>
+          <option value="NCT0002">Camp</option>
+          <option value="NCT0003">Digitalis</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="transformation" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Transformation:</label>
+      </div>
+      <div class="col-75">
+        <input type="text" placeholder="Enter Transformation" formControlName="transformation" />&nbsp;&nbsp;
+      </div>
+    </div>
+</div>
+
+</form>
+<kendo-dialog-actions>
+    <button class="k-button" (click)="onCancel($event)" style="color : black;font-family: serif;font-size: 16px;"><b>Cancel</b></button>
+    <button class="k-button k-primary" style="color : black;font-size: 16px;background-color : #86bc25;font-family: serif;font-size: 18px;" [disabled]="!editBusinessForm.valid" (click)="onSave($event)"><b>Save</b></button>
+</kendo-dialog-actions>
+</kendo-dialog>
