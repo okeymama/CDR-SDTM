@@ -146,6 +146,16 @@ public class PathToSdtmMatrix {
 		this.transformation_type = transformation_type;
 		this.transformation_logic = transformation_logic;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	
 	
 	
 	
