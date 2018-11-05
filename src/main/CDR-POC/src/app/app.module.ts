@@ -6,7 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { AlertService, AuthenticationService, UserService , EditService } from './_services/index';
+import { AlertService, AuthenticationService, UserService , EditService, BusinessEditService } from './_services/index';
 import { SearchModuleComponent } from './search-module/search-module.component';
 import { AlertComponent } from './_directives/index';
 import { StudyInfoComponent } from './study-info/study-info.component';
@@ -24,7 +24,7 @@ import { AnalyticsComponent } from './analytics/analytics.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {BreadcrumbsModule} from 'ng6-breadcrumbs';
-
+import { BusinessEditFormComponent } from './business-edit-form/business-edit-form.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,8 @@ import {BreadcrumbsModule} from 'ng6-breadcrumbs';
     DataQualityComponent,
     AnalyticsComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    BusinessEditFormComponent
   ],
   imports: [
     AppRoutingModule,
@@ -62,6 +63,11 @@ import {BreadcrumbsModule} from 'ng6-breadcrumbs';
       deps: [HttpClient],
       provide: EditService,
       useFactory: (jsonp: HttpClient) => () => new EditService(jsonp)
+    },
+    {
+      deps: [HttpClient],
+      provide: BusinessEditService,
+      useFactory: (jsonp: HttpClient) => () => new BusinessEditService(jsonp)
     },
     AlertService,
     AuthenticationService,
