@@ -15,9 +15,9 @@ public class SdtmTemplateServiceImpl implements SdtmTemplateService {
 	SdtmTemplateRepository sdtmTemplateRepository;
 
 	@Override
-	public List<PathToSdtmTemplate> findByDomain(String domain) {
+	public List<PathToSdtmTemplate> findByDomainAndStudy(String study, String domain) {
 		
-		return sdtmTemplateRepository.findByDomain(domain);
+		return sdtmTemplateRepository.findByStudyAndDomain(study, domain);
 	}
 
 }
