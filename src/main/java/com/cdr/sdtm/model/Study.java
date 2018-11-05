@@ -1,17 +1,22 @@
 package com.cdr.sdtm.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity
+@Entity(name="STUDY")
+@Table(name="STUDY")
 public class Study {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
     private String studyID;
+    
+    @Column(name="TITLE")
     private String title;
     private String phase;
     private String status;
