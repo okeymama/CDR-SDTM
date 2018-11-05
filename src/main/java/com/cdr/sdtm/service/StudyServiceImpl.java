@@ -90,7 +90,7 @@ public class StudyServiceImpl implements StudyService {
 
 	@Override
 	public List<String> findDistinctStudies() {
-		return studyRepository.findDistinctTitles();
+		return studyRepository.findDistinctTitles(); 
 	}
 	
 	

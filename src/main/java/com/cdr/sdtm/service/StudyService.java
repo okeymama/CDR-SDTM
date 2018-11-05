@@ -21,6 +21,6 @@ public interface StudyService {
 	
 	List<Study> findAll(Study study);
 
-	List<String> findDistinctStudies();
+	List<String> findDistinctStudies(); 
 
 }
