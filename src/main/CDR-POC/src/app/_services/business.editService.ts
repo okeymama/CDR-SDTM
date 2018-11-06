@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators/map';
 
 const CREATE_ACTION = 'create';
 const UPDATE_ACTION = 'update';
-const REMOVE_ACTION = 'destroy';
+const REMOVE_ACTION = 'delete';
 
 @Injectable()
 export class BusinessEditService extends BehaviorSubject<any[]> {
@@ -24,6 +24,7 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
         /*if (this.data.length) {
             return super.next(this.data);
         }*/
+        console.log("====ssss===searchBRStudy===="+searchBRStudy);
         this.fetch(searchBRStudy)
             .pipe(
                 tap(data => {
@@ -36,7 +37,6 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
     }
 
     public save(data: any, searchBRStudy, isNew?: boolean ) {
-      console.log(data+"============ddd===="+searchBRStudy);
         const action = isNew ? CREATE_ACTION : UPDATE_ACTION;
         this.reset();
         this.fetch(data, action)
@@ -54,11 +54,24 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
     }
 
     private fetch(searchBRStudy, action: string = '', data?: any): Observable<any> {
-        let params = new HttpParams();
-        console.log(JSON.stringify(searchBRStudy)+"===searchBRStudy=="+searchBRStudy);
-        params =  params.set('domain', 'Invalid');
-        return this.http.get<any[]>(`/api/CDR/template/${searchBRStudy}`)
-            .pipe(map(res => <any[]>res));
-    }
-
+    	let params = new HttpParams();
+    	if(action == 'update') {
+	        const updateUrl = '/api/CDR/matrix/update';
+	        let url = `${updateUrl}/${searchBRStudy.id}`;
+	        let body = JSON.stringify(searchBRStudy);
+	        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+	          return this.http.put(url, searchBRStudy, {headers: headers});
+      	} else if(action == 'delete') {
+	        const deleteUrl = '/api/CDR/matrix/delete';
+	        let url = `${deleteUrl}/${searchBRStudy.id}`;
+	        let body = JSON.stringify(searchBRStudy);
+	        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+	          return this.http.delete(url, searchBRStudy);
+	    } else {        
+	        console.log(JSON.stringify(searchBRStudy)+"=aaa==searchBRStudy=="+searchBRStudy.brStudy);
+	        params =  params.set('domain', 'Invalid');
+	        return this.http.get<any[]>(`/api/CDR/template/${searchBRStudy.brStudy}/${searchBRStudy.brSdtmDomain}`)
+	            .pipe(map(res => <any[]>res));
+    	}
+	}
 }

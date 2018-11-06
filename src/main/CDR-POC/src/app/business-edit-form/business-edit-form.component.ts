@@ -21,14 +21,17 @@ export class BusinessEditFormComponent {
     public opened: boolean = false;
     public errorMsg: string;
     public editBusinessForm: FormGroup = new FormGroup({
-      'sourceFile': new FormControl(),
-      'sourceField': new FormControl(),
-      'lookUpFile': new FormControl(),
-      'joinLogic': new FormControl(),
-      'targetFile': new FormControl(),
-      'domain': new FormControl(),
-      'study': new FormControl(),
-      'transformation': new FormControl()
+    	'id': new FormControl(),
+		'study': new FormControl(),
+		'domain': new FormControl(),	      
+      	'subDomain': new FormControl(),
+      	'targetFile': new FormControl(),
+      	'targetField': new FormControl(),
+      	'sourceFile': new FormControl(),
+      	'sourceField': new FormControl(),
+	    'joinLogic': new FormControl(),      
+      	'transformation_type': new FormControl(),
+      	'transformation_logic': new FormControl()
     });
 
     constructor(private http: HttpClient) {}

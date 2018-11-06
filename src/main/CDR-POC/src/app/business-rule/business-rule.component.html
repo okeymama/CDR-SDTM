@@ -13,7 +13,7 @@
               <div class="col-xs-12 col-sm-2">
                   <div class="form-group">
                       <label for="form-field-8" style="font-family: serif;font-size: 14px;"><b>Select Therapeutic Area</b></label>
-                      <select class="form-control" id="form-field-select-1" name="brTherapeuticArea" [(ngModel)]="searchBRStudy">
+                      <select class="form-control" id="form-field-select-1" name="brTherapeuticArea" [(ngModel)]="searchBRStudy.brTherapeuticArea">
                         <option value="undefined" disabled selected style="display: none;">Select an Option</option>
                           <option value="TherapeuticArea1">Therapeutic Area 1</option>
                           <option value="TherapeuticArea2">Therapeutic Area 2</option>
@@ -25,11 +25,11 @@
               <div class="col-xs-12 col-sm-2">
                   <div class="form-group">
                       <label for="form-field-8" style="font-family: serif;font-size: 14px;"><b>Select Study</b></label>
-                      <select class="form-control"  id="form-field-select-1" name="brStudy" [(ngModel)]="searchBRStudy">
+                      <select class="form-control"  id="form-field-select-1" name="brStudy" [(ngModel)]="searchBRStudy.brStudy">
                           <option value="undefined" disabled selected style="display: none;">Select an Option</option>
-                          <option value="NCT0001">Calerie</option>
-                          <option value="NCT0002">Camp</option>
-                          <option value="NCT0003">Digitalis</option>
+                          <option value="Calerie">Calerie</option>
+                          <option value="STUDY1">STUDY1</option>
+                          <option value="STUDY2">STUDY2</option>
                       </select>
                   </div>
               </div>
@@ -37,7 +37,7 @@
               <div class="col-xs-12 col-sm-2">
                   <div class="form-group">
                     <label for="form-field-8" style="font-family: serif;font-size: 14px;"><b>Select SDTM Domain</b></label>
-                    <select class="form-control" id="form-field-select-1" name="sdtmDomain" [(ngModel)]="searchBRStudy">
+                    <select class="form-control" id="form-field-select-1" name="brSdtmDomain" [(ngModel)]="searchBRStudy.brSdtmDomain">
                       <option value="undefined" disabled selected style="display: none;">Select an Option</option>
                         <option value="Demographics">Demographics</option>
                         <option value="Adver Event">Adver Event</option>
@@ -59,9 +59,9 @@
     <div>
         <kendo-grid
               [data]="view | async"
-              [height]="400"
+              [height]="400" 
               [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
-              [pageable]="true" [sortable]="true"
+              [pageable]="true" [sortable]="true"     
               (dataStateChange)="onStateChange(searchBRStudy, $event)"
               (edit)="editHandler($event, searchBRStudy)" (remove)="removeHandler($event)"
               (add)="addHandler($event)"
@@ -74,17 +74,17 @@
 
               </div>
             </ng-template>
-            <kendo-grid-column [headerStyle]="{'width':'70px','font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="study" title="Study"></kendo-grid-column>
-            <kendo-grid-column [headerStyle]="{'width':'75px','font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="domain" title="Domain"></kendo-grid-column>
-            <kendo-grid-column [headerStyle]="{'width':'100px','font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="subDomain" title="Sub Domain"></kendo-grid-column>  
-            <kendo-grid-column [headerStyle]="{'width':'100px','font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="targetFile" title="Target File"></kendo-grid-column>
-            <kendo-grid-column [headerStyle]="{'width':'120px','font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="targetField" title="Target Variable"></kendo-grid-column>          
-            <kendo-grid-column [headerStyle]="{'width':'100px','font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="sourceFile" title="Source File"></kendo-grid-column>
-            <kendo-grid-column [headerStyle]="{'width':'130px','font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="sourceField"  title="Source Variable"></kendo-grid-column>
-            <kendo-grid-column [headerStyle]="{'width':'90px','font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="joinLogic" title="Join Logic"></kendo-grid-column>
-            <kendo-grid-column [headerStyle]="{'width':'160px','font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="transformationType" title="Transformation Type"></kendo-grid-column>
-            <kendo-grid-column [headerStyle]="{'width':'160px','font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="transformationLogic" title="Transformation Logic"></kendo-grid-column>
-            <kendo-grid-command-column [headerStyle]="{'width':'150px','font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" title="Actions" width="220">
+            <kendo-grid-column [width]="100"  [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="study" title="Study"></kendo-grid-column>
+            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="domain" title="Domain"></kendo-grid-column>
+            <kendo-grid-column [width]="150"  [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="subDomain" title="Sub Domain"></kendo-grid-column>  
+            <kendo-grid-column [width]="100" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="targetFile" title="Target File"></kendo-grid-column>
+            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="targetField" title="Target Variable"></kendo-grid-column>          
+            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="sourceFile" title="Source File"></kendo-grid-column>
+            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="sourceField"  title="Source Variable"></kendo-grid-column>
+            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="joinLogic" title="Join Logic"></kendo-grid-column>
+            <kendo-grid-column [width]="160" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="transformation_type" title="Transformation Type"></kendo-grid-column>
+            <kendo-grid-column [width]="160" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="transformation_logic" title="Transformation Logic"></kendo-grid-column>
+            <kendo-grid-command-column [width]="140" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" title="Actions" width="220">
                 <ng-template kendoGridCellTemplate>
                     <button kendoGridEditCommand [primary]="true" style="color : white;background-color : #012169;border-color: white;font-family: serif;font-size: 14px;"><b>Edit</b></button>
                     <button kendoGridRemoveCommand style="font-family: serif;font-size: 14px;"><b>Delete</b></button>

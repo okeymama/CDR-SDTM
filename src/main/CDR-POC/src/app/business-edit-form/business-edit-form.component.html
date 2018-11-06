@@ -61,6 +61,46 @@ label {
     <div class="container">
     <div class="row">
       <div class="col-25">
+        <label for="study" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Study:</label>
+      </div>
+      <div class="col-75">
+	      <input type="text"  formControlName="study" />&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="domain" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Domain:</label>
+      </div>
+      <div class="col-75">
+        <input type="text"  formControlName="domain" />&nbsp;&nbsp;     
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="subDomain" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Sub Domain:</label>
+      </div>
+      <div class="col-75">
+         <input type="text" formControlName="subDomain" />&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="targetFile" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Target File:</label>
+      </div>
+      <div class="col-75">
+        <input type="text" placeholder="Select Target File" formControlName="targetFile" />&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="targetField" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Target Variable:</label>
+      </div>
+      <div class="col-75">
+        <input type="text" placeholder="Select Target Variable" formControlName="targetField" />&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
         <label for="sourceFile" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Source File:</label>
       </div>
       <div class="col-75">
@@ -76,60 +116,27 @@ label {
       </div>
     </div>
     <div class="row">
-      <div class="col-25">
-        <label for="lookUpFile" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Look up File:</label>
-      </div>
-      <div class="col-75">
-        <input type="text" placeholder="Select Look up File" formControlName="lookUpFile" />&nbsp;&nbsp;
-      </div>
-    </div>
-    <div class="row">
       <div class="col-25" >
         <label for="joinLogic" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Join Logic:</label>
       </div>
       <div class="col-75">
         <input type="text" placeholder="Enter Join Logic" formControlName="joinLogic" />&nbsp;&nbsp;
       </div>
-    </div>
+    </div>        
     <div class="row">
       <div class="col-25">
-        <label for="targetFile" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Target File:</label>
+        <label for="transformation_type" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Transformation Type:</label>
       </div>
       <div class="col-75">
-        <input type="text" placeholder="Select Target File" formControlName="targetFile" />&nbsp;&nbsp;
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-        <label for="domain" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Domain:</label>
-      </div>
-      <div class="col-75">
-        <select id="domain" style="font-size:14px;font-family: serif;color:grey" formControlName="domain" name="domain">
-          <option [ngValue]="null" style="display: none;">Select an Option</option>
-          <option value="Demographics">Demographics</option>
-          <option value="Adver Event">Adver Event</option>
-        </select>
+        <input type="text" placeholder="Enter Transformation" formControlName="transformation_type" />&nbsp;&nbsp;
       </div>
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="study" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Study:</label>
+        <label for="transformation_logic" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Transformation Logic:</label>
       </div>
       <div class="col-75">
-        <select id="study" style="font-size:14px;font-family: serif;color:grey" formControlName="study" name="study">
-          <option [ngValue]="null" style="display: none;">Select an Option</option>
-          <option value="NCT0001">Calerie</option>
-          <option value="NCT0002">Camp</option>
-          <option value="NCT0003">Digitalis</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-        <label for="transformation" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Transformation:</label>
-      </div>
-      <div class="col-75">
-        <input type="text" placeholder="Enter Transformation" formControlName="transformation" />&nbsp;&nbsp;
+        <input type="text" placeholder="Enter Transformation" formControlName="transformation_logic" />&nbsp;&nbsp;
       </div>
     </div>
 </div>

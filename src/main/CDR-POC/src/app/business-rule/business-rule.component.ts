@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators/map';
   styleUrls: ['./business-rule.component.css']
 })
 export class BusinessRuleComponent implements OnInit {
-  searchBRStudy: any;
+  public searchBRStudy: any = {};
   public view: Observable<GridDataResult>;
    public gridState: State = {
        sort: [],
