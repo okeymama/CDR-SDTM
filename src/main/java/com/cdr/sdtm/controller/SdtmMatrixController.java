@@ -1,10 +1,14 @@
 package com.cdr.sdtm.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,6 +54,17 @@ public class SdtmMatrixController {
 			LOGGER.info("Error while deleting Matrix.");
 			return new ResponseEntity<>("Matrix not found", HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	
+	@GetMapping("/matrix/{study}/{domain}")
+	public List<PathToSdtmMatrix> findByDomain(@PathVariable String study, @PathVariable String domain) {
+		LOGGER.info("Method Starts requested template for domain " + domain +" And Study " + study);
+		List<PathToSdtmMatrix> matrices = new ArrayList<PathToSdtmMatrix>();
+		 matrices = sdtmMatrixService.findByStudyAndDomain(study,domain);
+		LOGGER.info("Method Ends."+ matrices.size());
+		return matrices;
+		
 	}
 
 }

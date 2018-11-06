@@ -95,7 +95,7 @@ public class StudyServiceImpl implements StudyService {
 
 	@Override
 	public List<String> findStudyIds() {
-		return studyRepository.findStudyIds();
+		return studyRepository.findStudyIds(); 
 	}
 	
 	

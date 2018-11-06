@@ -23,6 +23,6 @@ public interface StudyService {
 
 	List<String> findDistinctStudies(); 
 	
-	List<String> findStudyIds();
+	List<String> findStudyIds(); 
 
 }

@@ -21,6 +21,6 @@ public interface StudyRepository extends JpaRepository<Study, Integer>, QueryByE
 	List<String> findDistinctTitles();
 	
 	@Query("select distinct studyID from STUDY where studyID is not null")
-	List<String> findStudyIds();
+	List<String> findStudyIds(); 
 	
 }
