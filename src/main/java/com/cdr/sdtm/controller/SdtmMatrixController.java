@@ -19,7 +19,7 @@ import com.cdr.sdtm.service.SdtmMatrixService;
 @RequestMapping("/api/CDR")
 public class SdtmMatrixController {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(StudyController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(SdtmMatrixController.class);
 	
 	@Autowired
 	SdtmMatrixService sdtmMatrixService;
