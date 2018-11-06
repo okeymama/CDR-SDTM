@@ -99,5 +99,14 @@ public class StudyController {
 		LOGGER.info("Search Study title method - ENDS");
 		return studies;
 	}
+	
+	@RequestMapping(value = "/study/studyIds", method = RequestMethod.GET)
+	public List<String> getStudyIds() {
+		LOGGER.info("getStudyIds method - STARTS");
+		List<String> studies = new ArrayList<String>();
+		studies = studyService.findStudyIds();
+		LOGGER.info("getStudyIds method - ENDS");
+		return studies;
+	}
 
 }

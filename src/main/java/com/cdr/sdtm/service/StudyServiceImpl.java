@@ -92,6 +92,11 @@ public class StudyServiceImpl implements StudyService {
 	public List<String> findDistinctStudies() {
 		return studyRepository.findDistinctTitles(); 
 	}
+
+	@Override
+	public List<String> findStudyIds() {
+		return studyRepository.findStudyIds();
+	}
 	
 	
 	
