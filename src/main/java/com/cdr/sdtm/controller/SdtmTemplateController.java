@@ -21,7 +21,7 @@ import com.cdr.sdtm.service.SdtmTemplateService;
 @RequestMapping("/api/CDR")
 public class SdtmTemplateController {
 	
-private static final Logger LOGGER = LoggerFactory.getLogger(StudyController.class);
+private static final Logger LOGGER = LoggerFactory.getLogger(SdtmTemplateController.class);
 	
 	@Autowired
 	SdtmTemplateService sdtmTemplateService;
