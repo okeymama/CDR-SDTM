@@ -8,5 +8,5 @@ export class Matrix {
     public subDomain: string;
     public study: string;
     public transformation_type: string;
-    public transformation_logic: string; 
+    public transformation_logic: string;
 }

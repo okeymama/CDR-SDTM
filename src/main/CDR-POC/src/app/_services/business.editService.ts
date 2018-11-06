@@ -24,7 +24,6 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
         /*if (this.data.length) {
             return super.next(this.data);
         }*/
-        console.log("====ssss===searchBRStudy===="+searchBRStudy);
         this.fetch(searchBRStudy)
             .pipe(
                 tap(data => {

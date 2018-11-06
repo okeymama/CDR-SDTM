@@ -15,7 +15,7 @@ export class BusinessRuleComponent implements OnInit {
   public searchBRStudy: any = {};
   public view: Observable<GridDataResult>;
    public gridState: State = {
-       sort: [],
+       sort: [], 
        skip: 0,
        take: 10
    };
