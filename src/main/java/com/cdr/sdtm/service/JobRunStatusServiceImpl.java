@@ -19,4 +19,9 @@ public class JobRunStatusServiceImpl implements JobRunStatusService {
 		return jobRunStatusRepository.findByStudyAndDomain(study, domain);
 	}
 
+	@Override
+	public List<JobRunStatus> findByStudyAndDomains(String study, List<String> domains) {
+		return jobRunStatusRepository.findByStudyAndDomains(study, domains);
+	}
+
 }

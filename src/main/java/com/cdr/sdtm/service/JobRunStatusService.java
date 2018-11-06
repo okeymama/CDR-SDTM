@@ -7,5 +7,7 @@ import com.cdr.sdtm.model.JobRunStatus;
 public interface JobRunStatusService {
 	
 	List<JobRunStatus> findByStudyAndDomain(String study, String domain);
+	
+	List<JobRunStatus> findByStudyAndDomains(String study, List<String> domains);
 
 }
