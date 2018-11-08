@@ -61,7 +61,7 @@
               [data]="view | async"
               [height]="400" 
               [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
-              [pageable]="true" [sortable]="true"     
+              [pageable]="false" [sortable]="false"     
               (dataStateChange)="onStateChange(searchBRStudy, $event)"
               (edit)="editHandler($event, searchBRStudy)" (remove)="removeHandler($event)"
               (add)="addHandler($event)"

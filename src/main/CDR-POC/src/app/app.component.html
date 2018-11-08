@@ -1,8 +1,167 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<br/>
-<div class="col-md-6 col-md-offset-3"><alert></alert></div>
-<div style="text-align:center">
-  <div class="col-sm-12">
-  <!-- <breadcrumb [allowBootstrap]="true"></breadcrumb> -->
-  <router-outlet></router-outlet>
-  <!-- <app-footer></app-footer> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>CDR</title>
+
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <!-- ace settings handler -->
+    <script src="assets/js/ace-extra.min.js"></script>
+</head>
+<body *ngIf="Login">
+    <div>
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar navbar-default" role="navigation">
+          <h3 class="col-sm-12" style='color:white;text-align:center;font-family: Roboto;' >Clinical Analytics Platform</h3>
+        </div>
+      </nav>
+    </div>
+    <div>
+      <app-login></app-login>
+    </div>
+</body>
+<body *ngIf="!(Login)" class="no-skin" style="line-height: 0">
+    <div id="navbar" class="navbar navbar-default          ace-save-state">
+      <div class="" id="navbar-container">
+        <div class="">
+					<h3 class="col-sm-8" style='font-size: 21px;margin-top: 11px;margin-bottom: -10px;width: 100.666%;color:white;text-align:center;font-family: Roboto;'>
+              Clinical Analytics Platform
+              <div class=" pull-right" role="navigation">
+                <ul class="nav ace-nav" >
+                    <li class="dropdown-modal" >
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+          								<img class="" style="margin-top:12px" src="assets/images/avatars/LoginUser.png" alt="User Image" />
+          								<span class="user-info">
+          									<p style='font-size: 13px;'>Welcome,<br/>Admin</p>
+          								</span><i class="ace-icon fa fa-caret-down"></i>
+							          </a>
+                        <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li>
+                                <a href="login.html"><i class="ace-icon fa fa-power-off"></i>Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+          </h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-container ace-save-state" id="main-container">
+        <a href="#" class="menu-toggler invisible" id="menu-toggler" data-target="#sidebar"></a>
+        <div id="sidebar" class="sidebar responsive-min ace-save-state">
+            <ul class="nav nav-list">
+                <li class="">
+                    <a href="#" class="dropdown-toggle">
+        							<i class="menu-icon fa fa-filter"></i>
+        							<span class="menu-text">
+        								<a href="">Filter</a>
+        							</span>
+        							<b class="arrow fa fa-angle-down"></b>
+        						</a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        <li class="active open">
+                            <a href="#" class="dropdown-toggle">
+									            <i class="menu-icon fa fa-caret-right"></i>Work 1
+            									<b class="arrow fa fa-angle-down"></b>
+            								</a>
+                            <b class="arrow"></b>
+                            <ul class="submenu">
+                                <li class="">
+                                    <a href="top-menu.html">
+                											<i class="menu-icon fa fa-caret-right"></i>
+                											Work Detail 1
+                										</a>
+                                    <b class="arrow"></b>
+                                </li>
+                                <li class="">
+                                    <a href="two-menu-1.html">
+                											<i class="menu-icon fa fa-caret-right"></i>
+                											Work Detail 2
+                										</a>
+                                    <b class="arrow"></b>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /.nav-list -->
+
+            <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+            </div>
+
+            <div class="sidebar-toggle sidebar-expand" id="sidebar-expand">
+                <i class="ace-icon fa fa-angle-double-right" data-icon1="ace-icon fa fa-angle-double-right" data-icon2="ace-icon fa fa-angle-double-left"></i>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="main-content-inner">
+                <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="ace-icon fa fa-home home-icon"></i>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="active">Study Configuration</li>
+                    </ul>
+                    <!-- /.breadcrumb -->
+                </div>
+                <div class="page-content">
+                  <div class="row">
+                        <div class="col-xs-12">
+                                <div class="tabbable">
+                                    <div class="tab-content" style="padding: 0px 12px;">
+                                      <div class="row blue">
+                                        <div class="col-md-6 col-md-offset-3"><alert></alert></div>
+                                        <div style="text-align:center">
+                                          <div class="col-sm-12">
+                                            <router-outlet></router-outlet>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  <div class="footer">
+                                      <div class="footer-inner">
+                                          <div class="footer-content">
+                                              <span class="bigger-120">
+                                                <span class="blue bolder">Clinical Analytics Platform</span> Deloitte &copy; 2018-2019
+                                              </span>&nbsp; &nbsp;
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                            <!-- PAGE CONTENT ENDS -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.page-content -->
+            </div>
+        </div>
+        <!-- /.main-content -->
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+    </div>
+    <!-- /.main-container -->
+</body>
+</html>

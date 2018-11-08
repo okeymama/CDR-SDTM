@@ -21,12 +21,12 @@ html {
 }
 
 body {
-    background-color: #FFF;
+    background-color: #E4E6E9;
     padding-bottom: 0;
     font-family: 'Open Sans';
     font-size: 12px;
     color: #393939;
-    line-height: 0.2 
+    line-height: 0.2
 }
 
 h1,
@@ -1240,7 +1240,7 @@ pre.prettyprint {
 }
 
 .navbar {
-    margin: 0;
+    margin: 0px;
     padding-left: 0;
     padding-right: 0;
     border-width: 0;
@@ -1248,7 +1248,7 @@ pre.prettyprint {
     -webkit-box-shadow: none;
     box-shadow: none;
     min-height: 5px;
-    background: #86bc25;
+    background: #007dab
 }
 
 .navbar .navbar-link,
@@ -1301,7 +1301,7 @@ pre.prettyprint {
 }
 
 .ace-nav > li > a {
-    background-color: #2E6589;
+    background-color: #007dab;
     color: #FFF;
     display: block;
     line-height: inherit;
@@ -1310,7 +1310,8 @@ pre.prettyprint {
     width: auto;
     min-width: 50px;
     padding: 0 8px;
-    position: relative
+    position: relative;
+    margin-top: -18px;
 }
 
 .ace-nav > li > a > .ace-icon {
@@ -1332,7 +1333,7 @@ pre.prettyprint {
 .ace-nav > li.open > a,
 .ace-nav > li > a:focus,
 .ace-nav > li > a:hover {
-    background-color: #2c5976;
+    background-color: #007dab;
     color: #FFF
 }
 
@@ -1343,7 +1344,7 @@ pre.prettyprint {
 .ace-nav > li.blue > a:focus,
 .ace-nav > li.blue > a:hover,
 .ace-nav > li.open.blue > a {
-    background-color: #2c5976
+    background-color: #007dab
 }
 
 .ace-nav > li.grey > a {
@@ -1746,7 +1747,7 @@ pre.prettyprint {
     vertical-align: top;
     line-height: 15px;
     position: relative;
-    top: 6px
+    top: 15px
 }
 
 .user-info small {
@@ -5046,7 +5047,8 @@ body.mob-safari .sidebar.sidebar-fixed {
     background-color: #F5F5F5;
     min-height: 41px;
     line-height: 40px;
-    padding: 0 12px 0 0
+    padding: 0 12px 0 0;
+    font-family: Roboto
 }
 
 .breadcrumb {
@@ -5630,7 +5632,7 @@ body.mob-safari .sidebar.sidebar-fixed {
     border-radius: 3px;
     box-shadow: none!important;
     padding: 0 20px 0 20px;
-    line-height: 30px;
+    line-height: 24px;
     height: 32px;
     -webkit-transition: background-color .15s, border-color .15s, opacity .15s;
     -o-transition: background-color .15s, border-color .15s, opacity .15s;
@@ -5654,13 +5656,14 @@ body.mob-safari .sidebar.sidebar-fixed {
 
 .btn-group-lg > .btn,
 .btn-lg {
-    border-width: 1px;
-    line-height: 1.4;
-    padding: 20px 7px 80px;
-    background-color: white;
-    font-family: serif;
-    width: 260px;
-    height: 130px;
+  border-width: 1px;
+  line-height: 1.4;
+  padding: 20px 7px 80px;
+  background-color: white;
+  width: 200px;
+  height: 150px;
+  font-family: Roboto, 'Segoe UI', Tahoma, sans-serif;
+
 }
 
 .btn-group-xlg > .btn,
@@ -5811,8 +5814,8 @@ fieldset[disabled] .btn:hover {
 .btn-primary,
 .btn-primary.focus,
 .btn-primary:focus {
-    background-color: #86bc25!important;
-    border-color: #86bc25
+    background-color: #007dab!important;
+    border-color: #007dab
 }
 
 .btn-primary.focus:hover,
@@ -5825,18 +5828,18 @@ fieldset[disabled] .btn:hover {
 .open > .btn-primary.dropdown-toggle:active,
 .open > .btn-primary.dropdown-toggle:focus,
 .open > .btn-primary.dropdown-toggle:hover {
-    background-color: #86bc25!important;
-    border-color: #86bc25
+    background-color: #007dab!important;
+    border-color: #007dab
 }
 
 .btn-primary.no-border:active,
 .btn-primary.no-border:hover {
-    border-color: #86bc25
+    border-color: #007dab
 }
 
 .btn-primary.no-hover:active,
 .btn-primary.no-hover:hover {
-    background-color: #86bc25!important
+    background-color: #007dab!important
 }
 
 .btn-primary.active,
@@ -6003,8 +6006,8 @@ fieldset[disabled] .btn-info2:hover {
 .btn-success,
 .btn-success.focus,
 .btn-success:focus {
-    background-color: #012169!important;
-    border-color: #012169
+    background-color: #007dab!important;
+    border-color: #007dab
 }
 
 .btn-success.focus:hover,
@@ -6017,8 +6020,8 @@ fieldset[disabled] .btn-info2:hover {
 .open > .btn-success.dropdown-toggle:active,
 .open > .btn-success.dropdown-toggle:focus,
 .open > .btn-success.dropdown-toggle:hover {
-    background-color: #012169!important;
-    border-color: #012169
+    background-color: #007dab!important;
+    border-color: #007dab
 }
 
 .btn-success.no-border:active,
@@ -6196,8 +6199,8 @@ fieldset[disabled] .btn-danger:hover {
 .btn-inverse.focus,
 .btn-inverse:focus {
     background-color: #fff!important;
-    border-color: #012169;
-    color: #012169;
+    border-color: #FE5E3C;
+    color: #fe5e3c;
 }
 
 .btn-inverse.focus:hover,
@@ -6211,8 +6214,8 @@ fieldset[disabled] .btn-danger:hover {
 .open > .btn-inverse.dropdown-toggle:focus,
 .open > .btn-inverse.dropdown-toggle:hover {
    background-color: #fff!important;
-    border-color: #012169;
-    color: #012169;
+    border-color: #FE5E3C;
+    color: #fe5e3c;
 }
 
 .btn-inverse.no-border:active,
@@ -10945,7 +10948,7 @@ textarea.input-transparent:focus {
 
 .tab-content {
     border: 1px solid #C5D0DC;
-    padding: 5px 12px;
+    padding: 16px 12px;
    /* position: relative */
 }
 
@@ -11219,7 +11222,7 @@ textarea.input-transparent:focus {
 }
 
 .nav.nav-tabs.padding-6 {
-    padding-left: 6px
+    padding-left: 0px
 }
 
 .tabs-left > .nav.nav-tabs.padding-6,
@@ -11267,7 +11270,7 @@ textarea.input-transparent:focus {
     color: #8b8989;
     margin-right: -1px;
     line-height: 18px;
-    width: 200px;
+    width: 222px;
     text-align: center;
     position: relative
 }
@@ -11290,7 +11293,7 @@ textarea.input-transparent:focus {
     border-color: #C5D0DC #C5D0DC transparent;
     border-top: 2px solid #4C8FBD;
     background-color: #FFF;
-    font-size: 15px;
+    font-size: 13px;
     z-index: 1;
     line-height: 18px;
     margin-top: -1px;
@@ -11470,9 +11473,9 @@ textarea.input-transparent:focus {
 .nav-tabs[class*=tab-color-] > li > a,
 .nav-tabs[class*=tab-color-] > li > a:focus,
 .nav-tabs[class*=tab-color-] > li > a:hover {
-    color: black;
+    color: #FFF;
     border-color: transparent;
-    margin-right: 6px
+    margin-right: 3px
 }
 
 .nav-tabs[class*=tab-color-] > li > a > .badge {
@@ -11497,7 +11500,8 @@ textarea.input-transparent:focus {
 
 .nav-tabs.tab-color-blue > li > a,
 .nav-tabs.tab-color-blue > li > a:focus {
-    background-color: #86bc25;
+    background-color: #007dab;
+    min-width: 118px;
     text-align: center;
 }
 
@@ -11528,7 +11532,7 @@ textarea.input-transparent:focus {
 }
 
 .nav-tabs.background-blue {
-    padding-top: 6px;
+    padding-top: 0px;
     background-color: #EFF3F8;
     border: 1px solid #C5D0DC
 }
@@ -11797,7 +11801,7 @@ tr.detail-row > td {
 .widget-box {
     padding: 0;
     box-shadow: none;
-    margin: 100px 0;
+    margin: 3px 0;
     border: 1px solid #CCC
 }
 
@@ -13903,7 +13907,7 @@ tr.detail-row > td {
 .login-layout {
 
     background-image: url(../images/Picbg1.png);
-    background-position: right;
+    background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -13918,8 +13922,8 @@ tr.detail-row > td {
     margin-left: 0!important;
     margin-right: 0!important;
     min-height: 100%;
-    padding-left: 600px;
-    padding-right: 70px
+    padding-left: 400px;
+    padding-right: 15px
 }
 
 .login-layout .widget-box {
@@ -13950,10 +13954,11 @@ tr.detail-row > td {
     -webkit-transition: -webkit-transform .3s ease;
     -o-transition: -o-transform .2s ease;
     opacity: 0.9;
+    text-align: center;
 }
 
 .login-layout .widget-box .widget-main {
-    padding: 16px 36px 36px;
+    padding: 30px 36px 36px;
     background: #F7F7F7
 }
 
@@ -13967,10 +13972,10 @@ tr.detail-row > td {
     text-shadow: 1px 0 1px rgba(0, 0, 0, .25)
 }
 .login-box {
-    padding: 70px 25px 30px;
+    padding: 16px 36px 5px;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
-    box-shadow: 1px 1px 10px #86bc25;
+    box-shadow: 1px 1px 3px #007dab;
 }
 
 .login-box .forgot-password-link {
@@ -14031,8 +14036,7 @@ tr.detail-row > td {
 }
 
 .login-layout .login-box .widget-main {
-    padding-bottom: 50px;
-    padding-top: 40px
+    padding-bottom: 30px
 }
 
 .social-or-login {
@@ -14643,7 +14647,7 @@ tr.detail-row > td {
 }
 
 li[class*=item-] {
-    border: 0px solid #DDD;
+    border: 1px solid #DDD;
     border-left-width: 3px
 }
 
