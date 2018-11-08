@@ -13,12 +13,13 @@ export class AppComponent {
   title = 'app';
   paramId: string;
   route: string;
-  Login: boolean;
+  Login: boolean = false;
 
   constructor(location: Location, router: Router) {
     router.events.subscribe((val) => {
       if(location.path() != ''){
         this.route = location.path();
+        this.Login = false;
       } else {
         this.Login = true;
       }
