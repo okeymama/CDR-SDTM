@@ -41,9 +41,11 @@ export class JobExecutionComponent implements OnInit {
   dropdownSettings = {};
   selectedItemsList = [];
   loading = false;
-
+  missingFields = false;
+  
   public ngOnInit() {
-        this.dropdownList = [
+        this.dropdownList = //loadDropdown();
+        					[
                               {"id":1,"itemName":"Demographics"},
                               {"id":2,"itemName":"Adverse Events"},
                               {"id":3,"itemName":"Concomitant Medications"},
@@ -81,18 +83,22 @@ export class JobExecutionComponent implements OnInit {
 
    //this.selectedItems = item;
 
+  loadDropdown(){
+        let params = new HttpParams();
+		const searchUrl = '/api/CDR/study/dropdown';
+        let url = `${searchUrl}`;
+        let headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+        return this.http.get(url, {headers: headers});
+   }
 
  onSelectAll (items: any) {
    console.log(items);
  }
 
+
   public searchJobExecution(searchJob,selectedItems) {
-    this.loading = true;
     this.jobStatus =  true;
-
-  //  console.log( "selectedItems");
-  //  console.log( this.selectedItems);
-
 
     console.log( " searchJobExecution selectedItemsList");
     console.log( this.selectedItemsList);
@@ -109,27 +115,19 @@ export class JobExecutionComponent implements OnInit {
     params = params.append('study', searchJob.study);
     console.log( "params3");
     console.log(params);
-    //if(searchJob.study) {
+    
+    if(searchJob.study) {
+      this.loading = true;
+    
       console.log( "params4");
-    /******************************************************Actual Code********************************************
 
-    return this.http.get<any[]>(`http://localhost:3000/JobDetails?`, { params: params })
+    return this.http.get<any[]>(`http://localhost:8080/api/CDR/jobStatus/${searchJob.study}/${this.selectedItemsList}`)
        .subscribe(data => {this.data = data });
-    *****************************************************Actual Code********************************************/
-
-     let headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/json');
-       return this.http.post(`http://35.171.8.239:3000`, {headers: headers})
-       .subscribe(data => {
-         this.msg = data;
-       });
 
 
-   /* } else {
-      console.log( "params5");
-      this.alertService.error("Please choose a study!");
-      this.loading = false;
-    }*/
+    }else{
+     this.missingFields = true;
+    }
 
 //    this.jobExecutionService.read(searchJob);
 
@@ -151,6 +149,12 @@ export class JobExecutionComponent implements OnInit {
 
   }
 
+ public actionOnJobExecution(item,action){
+ 
+ 	return this.http.get<any[]>(`url`)
+       .subscribe(data => {this.msg = data });
 
+ 	
+ }
 
 }

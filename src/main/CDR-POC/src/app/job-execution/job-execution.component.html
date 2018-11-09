@@ -7,6 +7,7 @@
     text-align: left;
 }
 </style>
+
 <div class="tabbable">
   <app-header></app-header>
 </div>
@@ -31,13 +32,23 @@
                         <label for="form-field-8"><b>Select Study</b></label>
                           <select class="form-control" id="form-field-select-1" name="study" [(ngModel)]="searchJob.study"
                           style="border-radius: 4px;border: 1px solid #adadad;padding: 6px 12px; margin-bottom: 0; font-size: 14px;
-                          font-weight: 400;line-height: 1.52857143;text-align: left;vertical-align: middle;">
+                          font-weight: 400;line-height: 1.52857143;text-align: left;vertical-align: middle;" required>
                               <option value="Calerie">Calerie</option>
                               <option value="Camp">Camp</option>
 							  <option value="Digitalis">Digitalis</option>
 							  <option value="Framingham">Framingham</option>
 							  <option value="EDC Study 1">EDC Study 1</option>
+							 <!-- 
+							 option ng-repeat="item in study" value="{{item.name}}">{{item.name}}</option> -->
                           </select>
+                         
+                         <div *ngIf="missingFields && !(loading)" class="alert alert-danger alert-dismissible fade in">
+                             <a href="#/job" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                         	Please choose a study!
+
+                             <!--    <div *ngIf="study.errors.required">
+  								</div> -->
+  						</div> 
                     </div>
                 </div>
 
@@ -76,23 +87,26 @@
   </form>
   <br/>
 
-  <h6 style="text-align: left ; background-color: #86bc25;padding : 8px">&nbsp;&nbsp;<b>Job Status</b></h6>
-  <div class="space"></div>
+  <h6 style="text-align: center ; background-color: #007dab;padding : 8px">&nbsp;&nbsp;<b>Job Status</b></h6>
+  <!--  <div class="space"></div>
   <div class="space"></div>
   <div *ngIf="msg" style="text-align: center"> <b>{{msg.data}}</b></div>
-  <button *ngIf="jobStatus && !(msg)" class="btn btn-success">Running...
+  <button *ngIf="jobStatus && study" class="btn btn-success">Fetching...
        				<i class="fa fa-spinner fa-spin"></i>
   </button>
   <div class="space"></div>
-  <div class="space"></div>
+  <div class="space"></div>-->
 
+  <div *ngIf="loading"> 
 
-  <!--<table class="table">
+  <table class="table">
     <thead>
       <tr>
         <th>Study Title</th>
         <th>SDTM Domain</th>
         <th>Status</th>
+        <th>Action</th>
+        
       </tr>
     </thead>
     <tbody>
@@ -100,12 +114,16 @@
 
         <td class="text-align: left;">{{item.study}}</td>
         <td class="text-align: left;">{{item.domain}}</td>
-        <td class="text-align: left;">{{item.status}}</td>
+        <td class="text-align: left;">{{item.job_status}}</td>
+        <td><button  (click)="actionOnJobExecution(item,'Run')" class="btn btn-success" style="font-size: 13px;"><b>Start</b></button>
+                 &nbsp; &nbsp;
+             <button  (click)="actionOnJobExecution(item,'Abort')" class="btn btn-success" style="font-size: 13px;"><b>Abort</b></button> </td>
+        
       </tr>
 
     </tbody>
   </table>
--->
+  </div>
 
   </div>
 
