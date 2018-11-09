@@ -43,7 +43,8 @@ export class JobExecutionComponent implements OnInit {
   loading = false;
 
   public ngOnInit() {
-        this.dropdownList = [
+        this.dropdownList = //loadDropdown();
+        					[
                               {"id":1,"itemName":"Demographics"},
                               {"id":2,"itemName":"Adverse Events"},
                               {"id":3,"itemName":"Concomitant Medications"},
@@ -81,10 +82,19 @@ export class JobExecutionComponent implements OnInit {
 
    //this.selectedItems = item;
 
+  loadDropdown(){
+        let params = new HttpParams();
+		const searchUrl = '/api/CDR/study/dropdown';
+        let url = `${searchUrl}`;
+        let headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+        return this.http.get(url, {headers: headers});
+   }
 
  onSelectAll (items: any) {
    console.log(items);
  }
+
 
   public searchJobExecution(searchJob,selectedItems) {
     this.loading = true;
@@ -109,7 +119,7 @@ export class JobExecutionComponent implements OnInit {
     params = params.append('study', searchJob.study);
     console.log( "params3");
     console.log(params);
-    //if(searchJob.study) {
+    if(searchJob.study) {
       console.log( "params4");
     /******************************************************Actual Code********************************************
 
@@ -125,7 +135,7 @@ export class JobExecutionComponent implements OnInit {
        });
 
 
-   /* } else {
+    } /*else {
       console.log( "params5");
       this.alertService.error("Please choose a study!");
       this.loading = false;
