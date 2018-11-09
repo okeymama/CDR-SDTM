@@ -31,13 +31,22 @@
                         <label for="form-field-8"><b>Select Study</b></label>
                           <select class="form-control" id="form-field-select-1" name="study" [(ngModel)]="searchJob.study"
                           style="border-radius: 4px;border: 1px solid #adadad;padding: 6px 12px; margin-bottom: 0; font-size: 14px;
-                          font-weight: 400;line-height: 1.52857143;text-align: left;vertical-align: middle;">
+                          font-weight: 400;line-height: 1.52857143;text-align: left;vertical-align: middle;" required>
                               <option value="Calerie">Calerie</option>
                               <option value="Camp">Camp</option>
 							  <option value="Digitalis">Digitalis</option>
 							  <option value="Framingham">Framingham</option>
 							  <option value="EDC Study 1">EDC Study 1</option>
+							 <!-- 
+							 option ng-repeat="item in study" value="{{item.name}}">{{item.name}}</option> -->
                           </select>
+                         <div *ngIf="loading && !study" class="alert alert-danger alert-dismissible fade in">
+                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                         	Please choose a study!
+
+                             <!--    <div *ngIf="study.errors.required">
+  								</div> -->
+  						</div> 
                     </div>
                 </div>
 
@@ -80,7 +89,7 @@
   <div class="space"></div>
   <div class="space"></div>
   <div *ngIf="msg" style="text-align: center"> <b>{{msg.data}}</b></div>
-  <button *ngIf="jobStatus && !(msg)" class="btn btn-success">Running...
+  <button *ngIf="jobStatus && study && !(msg)" class="btn btn-success">Running...
        				<i class="fa fa-spinner fa-spin"></i>
   </button>
   <div class="space"></div>
