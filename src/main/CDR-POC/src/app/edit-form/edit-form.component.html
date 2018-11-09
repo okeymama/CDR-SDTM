@@ -54,8 +54,8 @@ label {
 }
 </style>
 <kendo-dialog *ngIf="active" (close)="closeForm()">
-<kendo-dialog-titlebar style="background-color : #86bc25">
-  <b style="color : black;font-size: 16px;font-family: serif;">{{ isNew ? 'Add new Study Details' : 'Edit Study Details' }}</b>
+<kendo-dialog-titlebar style="background-color : #007dab">
+  <b style="color : white;font-size: 16px;font-family: Roboto;">{{ isNew ? 'Add New Study Details' : 'Edit Study Details' }}</b>
 </kendo-dialog-titlebar>
 
   <form novalidate [formGroup]="editForm">
@@ -66,33 +66,33 @@ label {
     <div class="row">
       <div>
         <kendo-popup [offset]="offset" *ngIf="opened" >
-        <div *ngIf="opened" style="color : #f31700;font-size:14px;font-family: serif;"><b> {{errorMsg}} </b></div>
+        <div *ngIf="opened" style="color : #f31700;font-size:14px;font-family: Roboto;"><b> {{errorMsg}} </b></div>
       </kendo-popup>
       </div>
       <div class="col-25">
-        <label for="studyID" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Study ID:</label>
+        <label for="studyID" style="font-size:14px;font-family: Roboto;font-weight:bold;color:black">Study ID:</label>
       </div>
       <div *ngIf="isNew" class="col-75">
-        <input type="text" placeholder="Enter Study Number" formControlName="studyID" ><span style="color: red">*</span>
+        <input class="searchLabel" type="text" placeholder="Enter Study Number" formControlName="studyID" ><span style="color: red">*</span>
       </div>
       <div *ngIf="!(isNew)" class="col-75">
-        <input type="text" readonly placeholder="Enter Study Number" formControlName="studyID" />&nbsp;
+        <input type="text" readonly class="searchLabel" placeholder="Enter Study Number" formControlName="studyID" />&nbsp;
       </div>
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="title" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Title:</label>
+        <label for="title" style="font-size:14px;font-family: Roboto;font-weight:bold;color:black">Title:</label>
       </div>
       <div class="col-75">
-        <input type="text" placeholder="Enter Study Title" formControlName="title" />&nbsp;&nbsp;
+        <input type="text" class="searchLabel" placeholder="Enter Study Title" formControlName="title" />&nbsp;&nbsp;
       </div>
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="phase" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Phase:</label>
+        <label for="phase" style="font-size:14px;font-family: Roboto;font-weight:bold;color:black">Phase:</label>
       </div>
       <div class="col-75">
-        <select id="phase" style="font-size:14px;font-family: serif;color:grey" formControlName="phase" name="phase">
+        <select id="phase" class="searchLabel"  formControlName="phase" name="phase">
           <option [ngValue]="null" style="display: none;">Select an Option</option>
           <option value="Phase0">Phase 0</option>
           <option value="Phase1">Phase 1</option>
@@ -104,10 +104,10 @@ label {
     </div>
     <div class="row">
       <div class="col-25" >
-        <label for="status" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Status:</label>
+        <label for="status" style="font-size:14px;font-family: Roboto;font-weight:bold;color:black">Status:</label>
       </div>
       <div class="col-75">
-        <select id="status" style="font-size:14px;font-family: serif;color:grey" formControlName="status" name="status" >
+        <select id="status" class="searchLabel" formControlName="status" name="status" >
           <option [ngValue]="null" style="display: none;">Select an Option</option>
           <option value="active">Active</option>
           <option value="Inactive">Inactive</option>
@@ -116,25 +116,25 @@ label {
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="therapeuticArea" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Therapeutic Area:</label>
+        <label for="therapeuticArea" style="font-size:14px;font-family: Roboto;font-weight:bold;color:black">Therapeutic Area:</label>
       </div>
       <div class="col-75">
-        <input type="text" placeholder="Enter Therapeutic Area" formControlName="therapeuticArea" />&nbsp;&nbsp;
+        <input type="text" class="searchLabel" placeholder="Enter Therapeutic Area" formControlName="therapeuticArea" />&nbsp;&nbsp;
       </div>
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="source" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Source:</label>
+        <label for="source" style="font-size:14px;font-family: Roboto;font-weight:bold;color:black">Source:</label>
       </div>
       <div class="col-75">
-        <input type="text" placeholder="Enter Source" formControlName="source" />&nbsp;&nbsp;
+        <input type="text" placeholder="Enter Source" class="searchLabel" formControlName="source" />&nbsp;&nbsp;
       </div>
     </div>
 </div>
 
 </form>
 <kendo-dialog-actions>
-    <button class="k-button" (click)="onCancel($event)" style="color : black;font-family: serif;font-size: 16px;"><b>Cancel</b></button>
-    <button class="k-button k-primary" style="color : black;font-size: 16px;background-color : #86bc25;font-family: serif;font-size: 18px;" [disabled]="!editForm.valid" (click)="onSave($event)"><b>Save</b></button>
+    <button class="k-button" (click)="onCancel($event)" style="color : #007dab;font-family: Roboto;font-size: 16px;"><b>Cancel</b></button>
+    <button class="k-button k-primary" style="color : white;font-size: 16px;background-color : #007dab;font-family: serif;font-size: 18px;" [disabled]="!editForm.valid" (click)="onSave($event)"><b>Save</b></button>
 </kendo-dialog-actions>
 </kendo-dialog>

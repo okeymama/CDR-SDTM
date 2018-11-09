@@ -4,7 +4,7 @@
     padding-right:12px;
 }
 </style>
-<div class="row" >
+<div class="row">
   <h4  style="text-align:left;font-family: serif;font-size:14px">
    <b *ngIf="paramId == 'studyInfo'">&nbsp;&nbsp;&nbsp;&nbsp;Home > Study Configuration</b>
    <b *ngIf="paramId == 'businessRule'">&nbsp;&nbsp;&nbsp;&nbsp;Home > Business Rule Configuration</b>
@@ -16,23 +16,23 @@
       <a data-toggle="tab" [routerLink]="['/home']" style="font-family: serif;font-size: 14px;width:90px"><b><!--i class="ace-icon fa fa-home home-icon" style="color:black"></i-->Home</b></a>
   </li>
   <li [routerLinkActive]="['active']">
-      <a data-toggle="tab" routerLink="/searchModule"  style="font-family: serif;font-size: 14px;width:165px"><b><!--img src="../assets/images/Study_sm.png" style="margin-top: -2px;width: 15px;height:10px;color:black;"-->Study Configuration</b></a>
+      <a data-toggle="tab" routerLink="/searchModule"  style="font-family: serif;font-size: 14px;width:200px"><b><!--img src="../assets/images/Study_sm.png" style="margin-top: -2px;width: 15px;height:10px;color:black;"-->Study Configuration</b></a>
   </li>
 
   <li [routerLinkActive]="['active']">
-      <a data-toggle="tab" routerLink="/busRules"  style="font-family: serif;font-size: 14px;width:200px"><b><!--img src="../assets/images/BizRulz-sm.png" style="margin-top: -2px;width: 15px;height:10px;color:black;"-->Business Rule Configuration</b></a>
+      <a data-toggle="tab" routerLink="/busRules"  style="font-family: serif;font-size: 14px;width:260px"><b><!--img src="../assets/images/BizRulz-sm.png" style="margin-top: -2px;width: 15px;height:10px;color:black;"-->Business Rule Configuration</b></a>
   </li>
 
   <li [routerLinkActive]="['active']">
-      <a data-toggle="tab" routerLink="/job"  style="font-family: serif;font-size: 14px;width:160px"><b><!--i class="ace-icon fa fa-tasks" style="color:black"></i-->Job Execution</b></a>
+      <a data-toggle="tab" routerLink="/job"  style="font-family: serif;font-size: 14px;width:210px"><b><!--i class="ace-icon fa fa-tasks" style="color:black"></i-->Job Execution</b></a>
   </li>
 
   <li [routerLinkActive]="['active']">
-      <a data-toggle="tab" routerLink="/dataQuality"  style="font-family: serif;font-size: 14px;width:190px"><b><!--i class="ace-icon fa fa-check-square" style="color:black"></i-->Data Quality Workbench</b></a>
+      <a data-toggle="tab" routerLink="/dataQuality"  style="font-family: serif;font-size: 14px;width:180px"><b><!--i class="ace-icon fa fa-check-square" style="color:black"></i-->Data Quality Workbench</b></a>
   </li>
 
-  <li [routerLinkActive]="['active']">
-      <a data-toggle="tab" routerLink="/analytics"  style="font-family: serif;font-size: 14px;width:172px"><b><!--i class="ace-icon fa fa-connectdevelop" style="color:black"></i-->Analytics</b></a>
+  <!-- <li [routerLinkActive]="['active']">
+      <a data-toggle="tab" routerLink="/analytics"  style="font-family: serif;font-size: 14px;width:172px"><b>i class="ace-icon fa fa-connectdevelop" style="color:black"></iAnalytics</b></a>
   </li>
-
+ -->
 </ul>

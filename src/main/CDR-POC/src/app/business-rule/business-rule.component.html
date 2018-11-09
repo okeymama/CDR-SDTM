@@ -5,15 +5,15 @@
   <form name="form"  #f="ngForm" novalidate>
     <fieldset>
       <div class="tab-content">
-          <div style='text-align: left'><h6 style="font-family: serif;font-size: 16px;">
+          <div style='text-align: left'><h6 class="p-label">
             <b>Select Study info to import Path to SDTM global library - </b></h6></div><br/><br/>
             <!-- Business Rule SEARCH -->
             <div class="row">
 
               <div class="col-xs-12 col-sm-2">
                   <div class="form-group">
-                      <label for="form-field-8" style="font-family: serif;font-size: 14px;"><b>Select Therapeutic Area</b></label>
-                      <select class="form-control" id="form-field-select-1" name="brTherapeuticArea" [(ngModel)]="searchBRStudy.brTherapeuticArea">
+                      <label for="form-field-8" class="searchLabel"><b>Select Therapeutic Area</b></label>
+                      <select class="form-control searchLabel" id="form-field-select-1" name="brTherapeuticArea" [(ngModel)]="searchBRStudy.brTherapeuticArea">
                         <option value="undefined" disabled selected style="display: none;">Select an Option</option>
                           <option value="TherapeuticArea1">Therapeutic Area 1</option>
                           <option value="TherapeuticArea2">Therapeutic Area 2</option>
@@ -24,8 +24,8 @@
 
               <div class="col-xs-12 col-sm-2">
                   <div class="form-group">
-                      <label for="form-field-8" style="font-family: serif;font-size: 14px;"><b>Select Study</b></label>
-                      <select class="form-control"  id="form-field-select-1" name="brStudy" [(ngModel)]="searchBRStudy.brStudy">
+                      <label for="form-field-8" class="searchLabel"><b>Select Study</b></label>
+                      <select class="form-control searchLabel"  id="form-field-select-1" name="brStudy" [(ngModel)]="searchBRStudy.brStudy">
                           <option value="undefined" disabled selected style="display: none;">Select an Option</option>
                           <option value="Calerie">Calerie</option>
                           <option value="STUDY1">STUDY1</option>
@@ -36,8 +36,8 @@
 
               <div class="col-xs-12 col-sm-2">
                   <div class="form-group">
-                    <label for="form-field-8" style="font-family: serif;font-size: 14px;"><b>Select SDTM Domain</b></label>
-                    <select class="form-control" id="form-field-select-1" name="brSdtmDomain" [(ngModel)]="searchBRStudy.brSdtmDomain">
+                    <label for="form-field-8" class="searchLabel"><b>Select SDTM Domain</b></label>
+                    <select class="form-control searchLabel" id="form-field-select-1" name="brSdtmDomain" [(ngModel)]="searchBRStudy.brSdtmDomain">
                       <option value="undefined" disabled selected style="display: none;">Select an Option</option>
                         <option value="Demographics">Demographics</option>
                         <option value="Adver Event">Adver Event</option>
@@ -46,8 +46,8 @@
               </div>
               <div class="col-xs-12">
                <div>
-                 <button (click)="fetchTemplate(searchBRStudy)" class="btn btn-success" style="background-color : #012169;font-size: 14px;color : white;font-family: serif;"><b>Import</b></button> &nbsp;
-                 <button (click)="clear()" class="btn btn-success" style="font-size: 14px;font-family: serif;color : white;background-color : #012169;"><b>Clear</b></button> &nbsp;
+                 <button (click)="fetchTemplate(searchBRStudy)" class="btn btn-success searchButton"><b>Import</b></button> &nbsp;
+                 <button (click)="clear()" class="btn btn-success searchButton" ><b>Clear</b></button> &nbsp;
                 </div>
               </div>
             </div>
@@ -69,25 +69,25 @@
             >
             <ng-template  kendoGridToolbarTemplate >
               <div style="">
-                <label style="margin-top:3px;float: left;text-align: left;font-family: serif;font-size: 14px;color:black"><b>&nbsp;&nbsp;Path to SDTM Matrix </b></label>&nbsp;
-                <button kendoGridAddCommand [primary]="true" style="border-color: white;float: right;color : white;background-color : #012169;font-size : 16px;font-family: serif;"><b>Import Matrix</b></button>
+                <label style="margin-top:3px;float: left;text-align: left;font-family: Roboto;font-size: 14px;color:#007dab"><b>&nbsp;&nbsp;Path to SDTM Matrix </b></label>&nbsp;
+                <button kendoGridAddCommand [primary]="true" style="border-color: white;float: right;color : white;background-color : #007dab;font-size : 16px;font-family: Roboto;"><b>Import Matrix</b></button>
 
               </div>
             </ng-template>
-            <kendo-grid-column [width]="100"  [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="study" title="Study"></kendo-grid-column>
-            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="domain" title="Domain"></kendo-grid-column>
-            <kendo-grid-column [width]="150"  [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="subDomain" title="Sub Domain"></kendo-grid-column>  
-            <kendo-grid-column [width]="100" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="targetFile" title="Target File"></kendo-grid-column>
-            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="targetField" title="Target Variable"></kendo-grid-column>          
-            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="sourceFile" title="Source File"></kendo-grid-column>
-            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="sourceField"  title="Source Variable"></kendo-grid-column>
-            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="joinLogic" title="Join Logic"></kendo-grid-column>
-            <kendo-grid-column [width]="160" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="transformation_type" title="Transformation Type"></kendo-grid-column>
-            <kendo-grid-column [width]="160" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" field="transformation_logic" title="Transformation Logic"></kendo-grid-column>
-            <kendo-grid-command-column [width]="140" [headerStyle]="{'font-family': 'serif','font-size': '14px','background-color': '#86bc25','font-weight':'bold','color':'black'}" title="Actions" width="220">
+            <kendo-grid-column [width]="100"  [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="study" title="Study"></kendo-grid-column>
+            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="domain" title="Domain"></kendo-grid-column>
+            <kendo-grid-column [width]="150"  [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="subDomain" title="Sub Domain"></kendo-grid-column>  
+            <kendo-grid-column [width]="100" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="targetFile" title="Target File"></kendo-grid-column>
+            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="targetField" title="Target Variable"></kendo-grid-column>          
+            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="sourceFile" title="Source File"></kendo-grid-column>
+            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="sourceField"  title="Source Variable"></kendo-grid-column>
+            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="joinLogic" title="Join Logic"></kendo-grid-column>
+            <kendo-grid-column [width]="160" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="transformation_type" title="Transformation Type"></kendo-grid-column>
+            <kendo-grid-column [width]="160" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="transformation_logic" title="Transformation Logic"></kendo-grid-column>
+            <kendo-grid-command-column [width]="140" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" title="Actions" width="220">
                 <ng-template kendoGridCellTemplate>
-                    <button kendoGridEditCommand [primary]="true" style="color : white;background-color : #012169;border-color: white;font-family: serif;font-size: 14px;"><b>Edit</b></button>
-                    <button kendoGridRemoveCommand style="font-family: serif;font-size: 14px;"><b>Delete</b></button>
+                    <button kendoGridEditCommand [primary]="true" style="color : white;background-color : #007dab;border-color: white;font-family: Roboto;font-size: 14px;"><b>Edit</b></button>
+                    <button kendoGridRemoveCommand style="font-family: Roboto;font-size: 14px;"><b>Delete</b></button>
                 </ng-template>
             </kendo-grid-command-column>
           </kendo-grid>

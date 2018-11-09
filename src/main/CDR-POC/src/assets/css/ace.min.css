@@ -6006,8 +6006,8 @@ fieldset[disabled] .btn-info2:hover {
 .btn-success,
 .btn-success.focus,
 .btn-success:focus {
-    background-color: #007dab!important;
-    border-color: #007dab
+    background-color: #3333!important;
+    border-color: #3333
 }
 
 .btn-success.focus:hover,
@@ -9458,9 +9458,9 @@ textarea {
     color: #333333;
     background-color: #FFF;
     border: 1px solid #D5D5D5;
-    padding: 5px 4px 6px;
-    font-size: 12px;
-    font-family: inherit;
+    padding: 5px 15px 6px;
+    font-size: 13px;
+    font-family: Roboto;
     -webkit-box-shadow: none!important;
     box-shadow: none!important;
     -webkit-transition-duration: .1s;
@@ -10949,6 +10949,7 @@ textarea.input-transparent:focus {
 .tab-content {
     border: 1px solid #C5D0DC;
     padding: 16px 12px;
+    padding-top: 1px;
    /* position: relative */
 }
 
@@ -21492,7 +21493,9 @@ input.typeahead.scrollable ~ .tt-menu {
 .page-content > .row .col-sm-12,
 .page-content > .row .col-xs-12 {
     float: left;
-    max-width: 100%
+    max-width: 100%;
+    padding-right: 1px;
+    padding-left: 2px
 }
 
 .col-xs-reset {
@@ -22472,7 +22475,7 @@ input.typeahead.scrollable ~ .tt-menu {
 
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 0px;
 }
 
 /* Track */
@@ -22488,4 +22491,29 @@ input.typeahead.scrollable ~ .tt-menu {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #a2a8ac;
+}
+.p-label {
+	font-family: Roboto;
+	font-size: 16px;
+	text-align: left
+}
+.searchLabel {
+	font-family: Roboto;
+	font-size: 14px;
+	margin-bottom: 9px;
+	margin-top: 2px;
+    color: black;
+}
+.searchButton { 
+	font-size: 14px;
+    color: #007dab;
+    font-family: Roboto;
+}
+.Kendo-Label {
+	margin-top:3px;
+	float: left;
+	text-align: left;
+	font-family: serif;
+	font-size: 14px;
+	color:black
 }
