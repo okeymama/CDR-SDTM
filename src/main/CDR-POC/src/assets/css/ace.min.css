@@ -22475,7 +22475,7 @@ input.typeahead.scrollable ~ .tt-menu {
 
 /* width */
 ::-webkit-scrollbar {
-    width: 0px;
+    width: 3px;
 }
 
 /* Track */
