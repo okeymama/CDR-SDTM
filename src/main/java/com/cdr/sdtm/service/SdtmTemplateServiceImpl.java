@@ -20,4 +20,9 @@ public class SdtmTemplateServiceImpl implements SdtmTemplateService {
 		return sdtmTemplateRepository.findByStudyAndDomain(study, domain);
 	}
 
+	@Override
+	public List<String> findDomainByStudy(String study) {
+		return sdtmTemplateRepository.findDomainByStudy(study);
+	}
+
 }

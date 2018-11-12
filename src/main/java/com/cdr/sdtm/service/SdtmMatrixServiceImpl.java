@@ -7,13 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cdr.sdtm.model.PathToSdtmMatrix;
+import com.cdr.sdtm.model.Transformation;
 import com.cdr.sdtm.repository.SdtmMatrixRepository;
+import com.cdr.sdtm.repository.TransRepository;
 
 @Service
 public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 	
 	@Autowired
 	SdtmMatrixRepository sdtmMatrixRepository;
+	
+	@Autowired
+	TransRepository transRepository;
 
 	@Override
 	public PathToSdtmMatrix saveMatrix(PathToSdtmMatrix pathToSdtmMatrix) {
@@ -60,6 +65,11 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 			return true;
 		} 
 		return false;
+	}
+
+	@Override
+	public List<Transformation> getTransTypes() {
+		return transRepository.findAll();
 	}
 
 

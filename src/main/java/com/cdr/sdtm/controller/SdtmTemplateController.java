@@ -55,4 +55,13 @@ private static final Logger LOGGER = LoggerFactory.getLogger(SdtmTemplateControl
 		return matrices;
 		
 	}
+	
+	
+	@GetMapping("/domains/{study}")
+	public List<String> findDomainByStudy(@PathVariable String study) {
+		List<String> domains = new ArrayList<String>();
+		domains = sdtmTemplateService.findDomainByStudy(study);
+		return domains;
+		
+	}
 }
