@@ -32,7 +32,24 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 
 	@Override
 	public List<PathToSdtmMatrix> findByStudyAndDomain(String study, String domain) {
-		return sdtmMatrixRepository.findByStudyAndDomain(study, domain);
+		List<PathToSdtmMatrix> matrices = sdtmMatrixRepository.findByStudyAndDomain(study, domain);
+		String tempLogic;
+		for(PathToSdtmMatrix matrix: matrices) {
+			if(matrix.getTransformation_logic() != null && !"".equals(matrix.getTransformation_logic())) {
+				
+				if(matrix.getTransformation_type().equalsIgnoreCase("Manual Entry") || matrix.getTransformation_type().equalsIgnoreCase("No Transformation")) {
+					// do nothing
+				} else {
+					 tempLogic = matrix.getTransformation_logic();
+					 int firstIndex = tempLogic.indexOf('(');
+				     int lastIndex = tempLogic.lastIndexOf(')');
+				     String str = tempLogic.substring(firstIndex + 1, lastIndex);
+				     matrix.setTransformation_logic(str);
+				}
+				
+			}
+		}
+		return matrices;
 	}
 
 	@Override
@@ -44,7 +61,11 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 			 _matrix.setSourceField(pathToSdtmMatrix.getSourceField());
 			 _matrix.setJoinLogic(pathToSdtmMatrix.getJoinLogic());
 			 _matrix.setTransformation_type(pathToSdtmMatrix.getTransformation_type());
-			 _matrix.setTransformation_logic(pathToSdtmMatrix.getTransformation_logic());
+			 if(pathToSdtmMatrix.getTransformation_logic() != null && pathToSdtmMatrix.getTransformation_logic() != "") {
+			 _matrix.setTransformation_logic(getTransformationLogic(pathToSdtmMatrix.getTransformation_type(),pathToSdtmMatrix.getTransformation_logic()));
+			 } else {
+				 _matrix.setTransformation_logic(pathToSdtmMatrix.getTransformation_logic()); 
+			 }
 		     sdtmMatrixRepository.save(_matrix);
 		  return true;
 		 }
@@ -70,6 +91,51 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 	@Override
 	public List<Transformation> getTransTypes() {
 		return transRepository.findAll();
+	}
+	
+	public String getTransformationLogic(String type, String logic) {
+		String storedLogic = "";
+		//String delims = "[+\\-]+";
+		
+		switch(type) {
+		   case "Manual Entry": storedLogic = logic;
+			                    break;
+			                          
+		   case "Concatenation": storedLogic = "CONCAT(" + logic + ")";
+                                 break;
+                                      
+		   case "Upper": storedLogic = "UPPER(" + logic + ")";
+           			     break;
+           							  
+		   case "Lower": storedLogic = "LOWER(" + logic + ")";
+		   				 break;
+		   							  
+		   case "Minimum": storedLogic = "MIN(" + logic + ")";
+                           break;
+		   case "Maximum": storedLogic = "MAX(" + logic + ")";
+                           break;
+		   case "Average": storedLogic = "AVG(" + logic + ")";
+                           break;
+		   case "Arithemetic Operation": storedLogic = "ARITH(" + logic + ")";
+                                         break;
+		   case "Number of Days": storedLogic = "DAYDIFF(" + logic + ")";
+                                  break;
+		   case "ISO Date Format": storedLogic = "DATEISO(" + logic + ")";
+                                   break;
+		   case "Lookup Transformation": storedLogic = "CODE_LIST(" + logic + ")";
+                                         break;
+		   case "Date Computation": //String[] tokens = logic.split(delims);
+			                         storedLogic = "DATECOMPUTATION" + logic;
+                                     break;
+		   case "No Transformation": storedLogic = "No Transformation";
+                                     break;
+		   case "Sequence Generator": storedLogic = "SEQGENERATOR(" + logic + ")";
+                                      break;
+		   case "Custom Code": storedLogic = "PYTHONSCRIPT(" + logic + ")";
+                               break;
+		
+		}
+		return storedLogic;
 	}
 
 
