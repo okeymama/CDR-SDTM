@@ -25,7 +25,7 @@
               <div class="col-xs-12 col-sm-2">
                   <div class="form-group">
                       <label for="form-field-8" class="searchLabel"><b>Select Study</b></label>
-                      <select class="form-control searchLabel"  id="form-field-select-1" name="brStudy" [(ngModel)]="searchBRStudy.brStudy">
+                      <select class="form-control searchLabel"  id="form-field-select-1" name="brStudy" [(ngModel)]="searchBRStudy.brStudy" (change)="filterDomains($event.target.value)">
                           <option value="undefined" disabled selected style="display: none;">Select an Option</option>
                           <option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option>
                       </select>
@@ -37,8 +37,7 @@
                     <label for="form-field-8" class="searchLabel"><b>Select SDTM Domain</b></label>
                     <select class="form-control searchLabel" id="form-field-select-1" name="brSdtmDomain" [(ngModel)]="searchBRStudy.brSdtmDomain">
                       <option value="undefined" disabled selected style="display: none;">Select an Option</option>
-                        <option value="Demographics">Demographics</option>
-                        <option value="Adver Event">Adver Event</option>
+                      <option *ngFor="let domain of studyDomains" value="{{domain}}">{{domain}}</option>
                     </select>
                   </div>
               </div>
