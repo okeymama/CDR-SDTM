@@ -128,7 +128,10 @@ label {
         <label for="transformation_type" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Transformation Type:</label>
       </div>
       <div class="col-75">
-        <input type="text" placeholder="Enter Transformation" formControlName="transformation_type" />&nbsp;&nbsp;
+        <select placeholder="Enter Transformation" formControlName="transformation_type">
+          <option  [ngValue]="null" disabled selected style="display: none;">Select an Option</option>
+          <option *ngFor="let type of transTypes" value="{{type.transType}}">{{type.transType}}</option>
+        </select>&nbsp;&nbsp;
       </div>
     </div>
     <div class="row">

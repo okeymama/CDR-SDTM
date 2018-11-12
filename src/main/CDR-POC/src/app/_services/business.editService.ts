@@ -43,6 +43,10 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
         return this.http.get<any[]>(`/api/CDR/domains/${study}`);
     }
 
+    public fetchTransformationTypes() {
+        return this.http.get<any[]>(`/api/CDR/matrix/transformations`);
+    }
+
     public save(data: any, searchBRStudy, isNew?: boolean ) {
         const action = isNew ? CREATE_ACTION : UPDATE_ACTION;
         this.reset();
