@@ -27,9 +27,7 @@
                       <label for="form-field-8" class="searchLabel"><b>Select Study</b></label>
                       <select class="form-control searchLabel"  id="form-field-select-1" name="brStudy" [(ngModel)]="searchBRStudy.brStudy">
                           <option value="undefined" disabled selected style="display: none;">Select an Option</option>
-                          <option value="Calerie">Calerie</option>
-                          <option value="STUDY1">STUDY1</option>
-                          <option value="STUDY2">STUDY2</option> 
+                          <option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option>
                       </select>
                   </div>
               </div>
