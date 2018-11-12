@@ -1,9 +1,10 @@
 package com.cdr.sdtm.service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Optional;import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cdr.sdtm.model.PathToSdtmMatrix;
+import com.cdr.sdtm.model.Transformation;
 
 public interface SdtmMatrixService {
 
@@ -18,5 +19,7 @@ public interface SdtmMatrixService {
 	public Optional<PathToSdtmMatrix> findById(Long id);
 
 	boolean deleteById(Long matrixId);
+	
+	List<Transformation> getTransTypes();
 
 }

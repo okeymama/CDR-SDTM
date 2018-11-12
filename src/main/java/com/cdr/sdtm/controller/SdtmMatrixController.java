@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cdr.sdtm.model.PathToSdtmMatrix;
+import com.cdr.sdtm.model.Transformation;
 import com.cdr.sdtm.service.SdtmMatrixService;
 
 @RestController
@@ -65,6 +66,13 @@ public class SdtmMatrixController {
 		LOGGER.info("Method Ends."+ matrices.size());
 		return matrices;
 		
+	}
+	
+	@GetMapping("/matrix/transformations")
+	public List<Transformation> getAllTransformations() {
+		List<Transformation> transTypes = new ArrayList<Transformation>();
+		transTypes = sdtmMatrixService.getTransTypes();
+		return transTypes;
 	}
 
 }

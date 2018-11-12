@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, Inject, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { Matrix } from '../_models/index';
 import { BusinessEditService } from '../_services/index';
@@ -9,6 +9,7 @@ import { Headers, RequestOptions } from '@angular/http';
 import { tap } from 'rxjs/operators/tap';
 import { map } from 'rxjs/operators/map';
 
+
 @Component({
   selector: 'kendo-grid-business-edit-form',
   styles: [
@@ -16,7 +17,9 @@ import { map } from 'rxjs/operators/map';
     ],
   templateUrl: './business-edit-form.component.html'
 })
-export class BusinessEditFormComponent {
+export class BusinessEditFormComponent  implements OnInit {
+    private businessEditService: BusinessEditService;
+    public transTypes: any[];
     public active = false;
     public opened: boolean = false;
     public errorMsg: string;
@@ -34,7 +37,9 @@ export class BusinessEditFormComponent {
       	'transformation_logic': new FormControl()
     });
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, @Inject(BusinessEditService) businessEditServiceFactory: any) {
+        this.businessEditService = businessEditServiceFactory();
+    }
     private res: any[] = [];
     @Input() public isNew = false;
 
@@ -65,5 +70,11 @@ export class BusinessEditFormComponent {
     private closeForm(): void {
         this.active = false;
         this.cancel.emit();
+    }
+
+    public ngOnInit(): void {
+     this.businessEditService.fetchTransformationTypes().subscribe(data => {
+         this.transTypes = data;
+     });
     }
 }

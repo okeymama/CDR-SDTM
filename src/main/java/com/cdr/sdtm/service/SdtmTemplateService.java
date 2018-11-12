@@ -7,5 +7,8 @@ import com.cdr.sdtm.model.PathToSdtmTemplate;
 public interface SdtmTemplateService {
 
 	List<PathToSdtmTemplate> findByDomainAndStudy(String study, String domain);
+	
+	
+	List<String> findDomainByStudy(String study);
 
 }

@@ -12,6 +12,8 @@ import { map } from 'rxjs/operators/map';
   styleUrls: ['./business-rule.component.css']
 })
 export class BusinessRuleComponent implements OnInit {
+  public studyTitles: any[];
+  public studyDomains: any[];
   public searchBRStudy: any = {};
   public view: Observable<GridDataResult>;
    public gridState: State = {
@@ -31,13 +33,16 @@ export class BusinessRuleComponent implements OnInit {
          this.view = this.businessEditService.pipe(map(data => process(data, this.gridState)));
 
       //   this.businessEditService.read();
+      this.businessEditService.fetchStudyTitles().subscribe(data => {
+          this.studyTitles = data;
+      });
      }
 
      public fetchTemplate(searchBRStudy): void {
        this.businessEditService.read(searchBRStudy);
      }
 
-     public onStateChange(searchBRStudy,state: State) {
+     public onStateChange(searchBRStudy, state: State) {
          this.gridState = state;
 
          this.businessEditService.read(searchBRStudy);
@@ -66,5 +71,14 @@ export class BusinessRuleComponent implements OnInit {
      public removeHandler({dataItem}) {
          this.businessEditService.remove(dataItem, this.searchBRStudy);
      }
-     
+
+     filterDomains(studyTitle: any) {
+         if (studyTitle === 'undefined') {
+            this.studyDomains = [];
+         } else {
+            this.businessEditService.fetchDomainsByStudy(studyTitle).subscribe(data => {
+                this.studyDomains = data;
+            });
+         }
+     }
  }
