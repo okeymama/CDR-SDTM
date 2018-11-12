@@ -20,8 +20,11 @@ export class AppComponent {
       if(location.path() != ''){
         this.route = location.path();
         this.Login = false;
+        console.log("printing route "+this.route)
       } else {
         this.Login = true;
+        console.log("printing route1 "+this.route)
+        
       }
     });
   }

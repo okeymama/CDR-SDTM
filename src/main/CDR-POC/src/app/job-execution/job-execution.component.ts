@@ -143,6 +143,8 @@ export class JobExecutionComponent implements OnInit {
     this.searchJob.study = "";
     this.selectedItemsList = [];
     this.jobStatus =  false;
+    this.loading = false;
+    
 
     //this.view = '';
     f.form.reset();
