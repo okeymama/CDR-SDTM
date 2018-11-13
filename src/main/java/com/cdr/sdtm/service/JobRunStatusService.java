@@ -10,4 +10,6 @@ public interface JobRunStatusService {
 	
 	List<JobRunStatus> findByStudyAndDomains(String study, List<String> domains);
 
+	List<JobRunStatus> findByStudy(String study);
+
 }

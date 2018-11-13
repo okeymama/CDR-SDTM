@@ -32,24 +32,7 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 
 	@Override
 	public List<PathToSdtmMatrix> findByStudyAndDomain(String study, String domain) {
-		List<PathToSdtmMatrix> matrices = sdtmMatrixRepository.findByStudyAndDomain(study, domain);
-		String tempLogic;
-		for(PathToSdtmMatrix matrix: matrices) {
-			if(matrix.getTransformation_logic() != null && !"".equals(matrix.getTransformation_logic())) {
-				
-				if(matrix.getTransformation_type().equalsIgnoreCase("Manual Entry") || matrix.getTransformation_type().equalsIgnoreCase("No Transformation")) {
-					// do nothing
-				} else {
-					 tempLogic = matrix.getTransformation_logic();
-					 int firstIndex = tempLogic.indexOf('(');
-				     int lastIndex = tempLogic.lastIndexOf(')');
-				     String str = tempLogic.substring(firstIndex + 1, lastIndex);
-				     matrix.setTransformation_logic(str);
-				}
-				
-			}
-		}
-		return matrices;
+		return sdtmMatrixRepository.findByStudyAndDomain(study, domain);
 	}
 
 	@Override
@@ -61,10 +44,9 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 			 _matrix.setSourceField(pathToSdtmMatrix.getSourceField());
 			 _matrix.setJoinLogic(pathToSdtmMatrix.getJoinLogic());
 			 _matrix.setTransformation_type(pathToSdtmMatrix.getTransformation_type());
+			 _matrix.setTransformation_logic(pathToSdtmMatrix.getTransformation_logic()); 
 			 if(pathToSdtmMatrix.getTransformation_logic() != null && pathToSdtmMatrix.getTransformation_logic() != "") {
-			 _matrix.setTransformation_logic(getTransformationLogic(pathToSdtmMatrix.getTransformation_type(),pathToSdtmMatrix.getTransformation_logic()));
-			 } else {
-				 _matrix.setTransformation_logic(pathToSdtmMatrix.getTransformation_logic()); 
+			 _matrix.setBack_transformation_logic(getTransformationLogic(pathToSdtmMatrix.getTransformation_type(),pathToSdtmMatrix.getTransformation_logic()));
 			 }
 		     sdtmMatrixRepository.save(_matrix);
 		  return true;
@@ -136,6 +118,17 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 		
 		}
 		return storedLogic;
+	}
+	
+	
+	@Override
+	public List<String> findDistinctStudies() {
+		return sdtmMatrixRepository.findDistinctStudies(); 
+	}
+
+	@Override
+	public List<String> findDomainByStudy(String study) {
+		return sdtmMatrixRepository.findDomainByStudy(study);
 	}
 
 

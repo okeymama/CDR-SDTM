@@ -38,9 +38,11 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
     public fetchStudyTitles() {
         return this.http.get<any[]>(`/api/CDR/study/dropdown`);
     }
-
+    public fetchMatrixStudyTitles() {
+        return this.http.get<any[]>(`/api/CDR/matrix/importStudy`);
+    }
     public fetchDomainsByStudy(study: any) {
-        return this.http.get<any[]>(`/api/CDR/domains/${study}`);
+        return this.http.get<any[]>(`/api/CDR/busRules/domains/${study}`);
     }
 
     public fetchTransformationTypes() {
@@ -78,10 +80,13 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
 	        let body = JSON.stringify(searchBRStudy);
 	        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 	          return this.http.delete(url, searchBRStudy);
-	    } else {        
+	    } else if (searchBRStudy === 'clear') {
+	        return this.http.get<any[]>(`/api/CDR/matrix/fetchOrInsert/${searchBRStudy}/${searchBRStudy}/${searchBRStudy}`)
+	            .pipe(map(res => <any[]>res));
+    	} else {        
 	        console.log(JSON.stringify(searchBRStudy)+"=aaa==searchBRStudy=="+searchBRStudy.brStudy);
 	        params =  params.set('domain', 'Invalid');
-	        return this.http.get<any[]>(`/api/CDR/template/${searchBRStudy.brStudy}/${searchBRStudy.brSdtmDomain}`)
+	        return this.http.get<any[]>(`/api/CDR/matrix/fetchOrInsert/${searchBRStudy.brStudy}/${searchBRStudy.brMatrixStudy}/${searchBRStudy.brSdtmDomain}`)
 	            .pipe(map(res => <any[]>res));
     	}
 	}

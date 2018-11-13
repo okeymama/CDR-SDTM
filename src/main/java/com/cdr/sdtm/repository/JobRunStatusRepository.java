@@ -15,4 +15,6 @@ public interface JobRunStatusRepository extends JpaRepository<JobRunStatus, Long
 	@Query(nativeQuery=true,value="select * FROM job_run_status where study=:study and domain in (:domains)")
 	List<JobRunStatus> findByStudyAndDomains(@Param("study") String study, @Param("domains") List<String> domains);
 
+	List<JobRunStatus> findByStudy(String study);
+
 }

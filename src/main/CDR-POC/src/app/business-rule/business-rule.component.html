@@ -21,17 +21,26 @@
                       </select>
                   </div>
               </div>
-
+            <!-- Studies from study table-->
               <div class="col-xs-12 col-sm-2">
                   <div class="form-group">
                       <label for="form-field-8" class="searchLabel"><b>Select Study</b></label>
-                      <select class="form-control searchLabel"  id="form-field-select-1" name="brStudy" [(ngModel)]="searchBRStudy.brStudy" (change)="filterDomains($event.target.value)">
+                      <select class="form-control searchLabel"  id="form-field-select-1" name="brStudy" [(ngModel)]="searchBRStudy.brStudy">
                           <option value="undefined" disabled selected style="display: none;">Select an Option</option>
                           <option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option>
                       </select>
                   </div>
               </div>
-
+              <!-- Studies from matrix table-->
+              <div class="col-xs-12 col-sm-2">
+                <div class="form-group">
+                    <label for="form-field-8" class="searchLabel"><b>Import From</b></label>
+                    <select class="form-control searchLabel"  id="form-field-select-1" name="brMatrixStudy" [(ngModel)]="searchBRStudy.brMatrixStudy" (change)="filterDomains($event.target.value)">
+                        <option value="undefined" disabled selected style="display: none;">Select an Option</option>
+                        <option *ngFor="let matrixStudy of matrixStudyTitles" value="{{matrixStudy}}">{{matrixStudy}}</option>
+                    </select>
+                </div>
+            </div>
               <div class="col-xs-12 col-sm-2">
                   <div class="form-group">
                     <label for="form-field-8" class="searchLabel"><b>Select SDTM Domain</b></label>

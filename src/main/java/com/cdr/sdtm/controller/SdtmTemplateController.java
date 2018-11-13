@@ -32,13 +32,12 @@ private static final Logger LOGGER = LoggerFactory.getLogger(SdtmTemplateControl
 	@GetMapping("/template/{study}/{domain}")
 	public List<PathToSdtmMatrix> findByDomain(@PathVariable String study, @PathVariable String domain) {
 		LOGGER.info("Method Starts requested template for domain " + domain +" And Study " + study);
-		List<PathToSdtmMatrix> matrices = null;
+		List<PathToSdtmMatrix> matrices = new ArrayList<PathToSdtmMatrix>();;
 		PathToSdtmMatrix matrix = null;
 		List<PathToSdtmTemplate> localTemp = sdtmTemplateService.findByDomainAndStudy(study,domain);
 		if(localTemp != null && localTemp.size() > 0) {
 	    matrices = sdtmMatrixService.findByStudyAndDomain(study,domain);
 			if(matrices == null || (matrices != null && matrices.size() == 0)) {
-				matrices = new ArrayList<PathToSdtmMatrix>();
 				for(PathToSdtmTemplate template : localTemp) {
 					matrix = new PathToSdtmMatrix();
 					matrix.setStudy(template.getStudy());
@@ -51,7 +50,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(SdtmTemplateControl
 				matrices = sdtmMatrixService.saveMatrixForDomain(matrices);
 			}
 		}
-		LOGGER.info("Method Ends."+ matrices.size());
+		//LOGGER.info("Method Ends."+ matrices.size());
 		return matrices;
 		
 	}

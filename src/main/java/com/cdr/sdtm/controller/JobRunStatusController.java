@@ -32,5 +32,11 @@ public class JobRunStatusController {
 	public List<JobRunStatus> findByStudyAndDomains(@PathVariable String study, @PathVariable List<String> domains) {
 		return jobRunStatusService.findByStudyAndDomains(study, domains);
 	}
+	
+	@GetMapping("/jobsForStudy/{study}")
+	public List<JobRunStatus> findByStudy(@PathVariable String study) {
+		LOGGER.info("Jobs requested for study: " + study);
+		return jobRunStatusService.findByStudy(study);
+	}
 
 }

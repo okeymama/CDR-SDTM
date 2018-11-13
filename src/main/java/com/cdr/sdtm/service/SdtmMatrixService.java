@@ -21,5 +21,9 @@ public interface SdtmMatrixService {
 	boolean deleteById(Long matrixId);
 	
 	List<Transformation> getTransTypes();
+	
+	List<String> findDistinctStudies();
+	
+	List<String> findDomainByStudy(String study);
 
 }

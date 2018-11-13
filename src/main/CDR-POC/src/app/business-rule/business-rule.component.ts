@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators/map';
   styleUrls: ['./business-rule.component.css']
 })
 export class BusinessRuleComponent implements OnInit {
+  public matrixStudyTitles: any[];
   public studyTitles: any[];
   public studyDomains: any[];
   public searchBRStudy: any = {};
@@ -36,6 +37,9 @@ export class BusinessRuleComponent implements OnInit {
       this.businessEditService.fetchStudyTitles().subscribe(data => {
           this.studyTitles = data;
       });
+      this.businessEditService.fetchMatrixStudyTitles().subscribe(data => {
+        this.matrixStudyTitles = data;
+    });
      }
 
      public fetchTemplate(searchBRStudy): void {
@@ -63,7 +67,7 @@ export class BusinessRuleComponent implements OnInit {
      }
 
      public saveHandler(template: Template) {
-         this.businessEditService.save(template, this.isNew);
+         this.businessEditService.save(template, this.searchBRStudy, this.isNew);
 
          this.editBizDataItem = undefined;
      }
@@ -80,5 +84,10 @@ export class BusinessRuleComponent implements OnInit {
                 this.studyDomains = data;
             });
          }
+     }
+
+     public clear() {
+        this.searchBRStudy = {};
+        this.businessEditService.read('clear');
      }
  }
