@@ -18,7 +18,7 @@ import { map } from 'rxjs/operators/map';
     templateUrl: './business-edit-form.component.html'
 })
 export class BusinessEditFormComponent implements OnInit {
-    public transPlaceHolder = 'Enter Transformation';
+    public transPlaceHolder = 'Enter Transformation'; 
     private businessEditService: BusinessEditService;
     public transTypes: any[];
     public active = false;
