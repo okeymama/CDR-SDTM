@@ -128,7 +128,7 @@ label {
         <label for="transformation_type" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Transformation Type:</label>
       </div>
       <div class="col-75">
-        <select placeholder="Enter Transformation" formControlName="transformation_type">
+        <select placeholder="Enter Transformation" formControlName="transformation_type" (change)="changePlaceholderAndValue($event.target.value)">
           <option  [ngValue]="null" disabled selected style="display: none;">Select an Option</option>
           <option *ngFor="let type of transTypes" value="{{type.transType}}">{{type.transType}}</option>
         </select>&nbsp;&nbsp;
@@ -139,7 +139,7 @@ label {
         <label for="transformation_logic" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Transformation Logic:</label>
       </div>
       <div class="col-75">
-        <input type="text" placeholder="Enter Transformation" formControlName="transformation_logic" />&nbsp;&nbsp;
+        <input type="text" placeholder="{{transPlaceHolder}}" formControlName="transformation_logic" />&nbsp;&nbsp;
       </div>
     </div>
 </div>
