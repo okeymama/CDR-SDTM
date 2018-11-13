@@ -42,6 +42,7 @@ export class JobExecutionComponent implements OnInit {
   selectedItemsList = [];
   loading = false;
   missingFields = false;
+  public studyTitles: any[];
   
   public ngOnInit() {
         this.dropdownList = //loadDropdown();
@@ -70,7 +71,13 @@ export class JobExecutionComponent implements OnInit {
                             maxHeight: 190,//197 is deafult
                             allowSearchFilter: true
                           };
+        this.fetchStudyTitles().subscribe(data => {
+          this.studyTitles = data;
+      });
    }
+    public fetchStudyTitles() {
+        return this.http.get<any[]>(`/api/CDR/study/dropdown`);
+    }
    onItemSelect (item:any) {
     // if(typeof item!= 'undefined' && item!= null && item.length>0){
    // console.log(this.item+item+" on select before setting"+this.selectedItemsList);
