@@ -47,6 +47,9 @@ public class PathToSdtmMatrix {
 	
 	@Column(name="TRANSFORMATION_LOGIC")
 	private String transformation_logic;
+	
+	@Column(name="BACK_TRANSFORMATION_LOGIC")
+	private String back_transformation_logic;
 
 	public String getStudy() {
 		return study;
@@ -132,21 +135,6 @@ public class PathToSdtmMatrix {
 		
 	}
 
-	public PathToSdtmMatrix(String study, String domain, String subDomain, String targetFile, String targetField,
-			String sourceFile, String sourceField, String joinLogic, String transformation_type,
-			String transformation_logic) {
-		this.study = study;
-		this.domain = domain;
-		this.subDomain = subDomain;
-		this.targetFile = targetFile;
-		this.targetField = targetField;
-		this.sourceFile = sourceFile;
-		this.sourceField = sourceField;
-		this.joinLogic = joinLogic;
-		this.transformation_type = transformation_type;
-		this.transformation_logic = transformation_logic;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -154,9 +142,13 @@ public class PathToSdtmMatrix {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
-	
-	
+
+	public String getBack_transformation_logic() {
+		return back_transformation_logic;
+	}
+
+	public void setBack_transformation_logic(String back_transformation_logic) {
+		this.back_transformation_logic = back_transformation_logic;
+	}
 	
 }
