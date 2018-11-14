@@ -78,15 +78,14 @@
               </div>
               <div class="col-xs-12 col-sm-1"></div>
               
-              <div class="col-xs-12 col-sm-2">
+              <div class="col-xs-12 col-sm-3">
                <div>
-                 <br><br><br>
+                 <br><br><br><br>
                  <button  (click)="searchJobExecution(searchJob,selectedItems)" class="btn btn-success" style="font-size: 13px;"><b>Submit</b></button>
                  &nbsp; &nbsp;
                  <button  (click)="reset(searchJob,selectedItems,f)" class="btn btn-inverse" style="font-size: 13px;color : black;background-color : #86BC60;"><b>Clear</b></button>
                </div>
               </div>
-              <div class="col-xs-12 col-sm-1"></div>
               
             </div>
         </div>
@@ -108,13 +107,18 @@
   <div *ngIf="loading"> 
 
   <table class="table">
-    <thead>
+      <thead>
       <tr>
-        <th>Study Title</th>
+       <th>Study Title</th>
+       <td>{{searchJob.study}}</td>
+       <td></td>
+       <td><button  (click)="runForAllDomains(searchJob.study,'Run')" class="btn btn-success" style="font-size: 13px;"><b>Run for all domains</b></button> </td>
+      </tr>
+      <tr>
         <th>SDTM Domain</th>
         <th>Status</th>
         <th>Action</th>
-        
+        <th></th>
       </tr>
     </thead>
     <tbody>

@@ -21,6 +21,8 @@ export class JobExecutionComponent implements OnInit {
   data: any[] = [];
   private msg: any;
   jobStatus: boolean = false;
+  isDomain: boolean = false;
+  
 
    public gridState: State = {
       sort: [],
@@ -43,6 +45,7 @@ export class JobExecutionComponent implements OnInit {
   loading = false;
   missingFields = false;
   public studyTitles: any[];
+  domainList = [];
   
   public ngOnInit() {
         this.dropdownList = //loadDropdown();
@@ -116,6 +119,7 @@ export class JobExecutionComponent implements OnInit {
 
   if(typeof this.selectedItemsList!= 'undefined' && this.selectedItemsList!= null && this.selectedItemsList.length>0){
    console.log("inside domain looop"+this.selectedItemsList);
+   this.isDomain = true;
     params = params.append('domain', this.selectedItemsList.toString());
     }
     console.log( "params2");
@@ -127,10 +131,13 @@ export class JobExecutionComponent implements OnInit {
       this.loading = true;
     
       console.log( "params4");
-
-    return this.http.get<any[]>(`http://localhost:8080/api/CDR/jobStatus/${searchJob.study}/${this.selectedItemsList}`)
+    if(this.isDomain){
+    	return this.http.get<any[]>(`/api/CDR/jobStatus/${searchJob.study}/${this.selectedItemsList}`)
        .subscribe(data => {this.data = data });
-
+    }else{
+    	return this.http.get<any[]>(`/api/CDR/jobsForStudy/${searchJob.study}`)
+       .subscribe(data => {this.data = data });
+    }
 
     }else{
      this.missingFields = true;
@@ -159,6 +166,17 @@ export class JobExecutionComponent implements OnInit {
   }
 
  public actionOnJobExecution(item,action){
+    this.domainList.push(item.domain);
+    //domainList.push('Adverse Events');
+    let headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+ 	return this.http.post(`http://35.171.8.239:3000?Study_name=${item.study}&domain_array=${this.domainList}&Action=${action}`,{headers: headers})
+       .subscribe(data => {this.msg = data });
+
+ 	
+ }
+ 
+ public runForAllDomains(study,action){
  
  	return this.http.get<any[]>(`url`)
        .subscribe(data => {this.msg = data });

@@ -25,6 +25,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {BreadcrumbsModule} from 'ng6-breadcrumbs';
 import { BusinessEditFormComponent } from './business-edit-form/business-edit-form.component';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,9 @@ import { BusinessEditFormComponent } from './business-edit-form/business-edit-fo
     ReactiveFormsModule,
     DialogsModule,
     BreadcrumbsModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    BsDropdownModule.forRoot()
+    
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA],
   providers: [
