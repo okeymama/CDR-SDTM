@@ -28,6 +28,7 @@ export class SearchModuleComponent implements OnInit {
     public searchStudy: any = {};
     private editService: EditService;
     paramId: string;
+    drpSelected: boolean = false;
     constructor(private route: ActivatedRoute, @Inject(EditService) editServiceFactory: any) {
         this.editService = editServiceFactory();
     }
@@ -44,6 +45,11 @@ export class SearchModuleComponent implements OnInit {
 
     public fetch(searchStudy): void {
       this.editService.read(searchStudy);
+    }
+
+    public drp(): void {
+      console.log("===ddddd====");
+      this.drpSelected = true;
     }
 
     public clear() {

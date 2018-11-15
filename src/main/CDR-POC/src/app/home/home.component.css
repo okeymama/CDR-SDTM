@@ -1,0 +1,31 @@
+.panel-footer {
+    border-width: 0px;
+    background-color: #E4E6E9;
+    margin-top: 7px;
+    margin-left: -100px;
+}
+
+.panel-default {
+    height: 120px;
+    width: 120px;
+    padding: 5px;
+}
+
+.panel-body {
+    padding: 5px;
+}
+
+.panel {
+    border-radius: 30px;
+    box-shadow:  1px 2px rgb(190, 192, 196);
+}
+
+label {
+    font-family:Open Sans Regular;
+    font-size: 12px;
+    color:black;
+    width: 120px;
+    line-height: 1;
+    text-align: center;
+    margin-left: -15px;
+}

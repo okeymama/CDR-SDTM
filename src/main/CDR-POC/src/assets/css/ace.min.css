@@ -72,7 +72,9 @@ h6 {
 
 .main-content {
     margin-left: 0;
-    padding: 0
+    padding-left: 90px;
+    padding-right: 85px;
+    padding-top: 18px;
 }
 
 .main-content:after,
@@ -104,7 +106,10 @@ li.divider:before {
     background-color: #FFF;
     position: relative;
     margin: 0;
-    padding: 8px 20px 24px
+	  padding: 0px 4px 24px;
+    height: 270px;
+    width: 110%;
+    margin-left: -27px;
 }
 
 .page-header {
@@ -1248,7 +1253,9 @@ pre.prettyprint {
     -webkit-box-shadow: none;
     box-shadow: none;
     min-height: 5px;
-    background: #007dab
+    background: white;
+    margin-top: -12px;
+    padding-bottom: 0px;
 }
 
 .navbar .navbar-link,
@@ -2176,11 +2183,13 @@ pre.prettyprint {
 }
 
 .sidebar {
-    width: 190px;
+    width: 200px;
     float: left;
     position: static;
     padding-left: 0;
-    padding-right: 0
+    padding-right: 0;
+    height: 345px;
+    margin-top: -4px;
 }
 
 .sidebar:before {
@@ -2240,7 +2249,7 @@ pre.prettyprint {
 
 .nav-list > li > a > .menu-icon {
     display: inline-block;
-    min-width: 30px;
+    min-width: 22px;
     margin-right: 2px;
     vertical-align: sub;
     text-align: center;
@@ -5598,13 +5607,15 @@ body.mob-safari .sidebar.sidebar-fixed {
 }
 
 .footer .footer-inner .footer-content {
-    position: absolute;
-    left: 12px;
-    right: 12px;
-    bottom: 4px;
-    padding: 8px;
-    line-height: 36px;
-    border-top: 3px double #E5E5E5
+    position: fixed;
+    padding: 17px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    color: black;
+    text-align: center;
+    height: 30px;
 }
 
 .footer.footer-fixed .footer-inner {
@@ -5631,9 +5642,9 @@ body.mob-safari .sidebar.sidebar-fixed {
     background-image: none!important;
     border-radius: 3px;
     box-shadow: none!important;
-    padding: 0 20px 0 20px;
-    line-height: 24px;
-    height: 32px;
+    padding: -3 20px 0 20px;
+    line-height: 8px;
+    height: 24px;
     -webkit-transition: background-color .15s, border-color .15s, opacity .15s;
     -o-transition: background-color .15s, border-color .15s, opacity .15s;
     transition: background-color .15s, border-color .15s, opacity .15s;
@@ -5678,8 +5689,9 @@ body.mob-safari .sidebar.sidebar-fixed {
 .btn-sm {
     border-width: 4px;
     font-size: 13px;
-    padding: 4px 9px;
-    line-height: 1.38
+    padding: 0px 9px;
+    line-height: 1.38;
+    height:30px
 }
 
 .btn-group-xs > .btn,
@@ -6020,8 +6032,8 @@ fieldset[disabled] .btn-info2:hover {
 .open > .btn-success.dropdown-toggle:active,
 .open > .btn-success.dropdown-toggle:focus,
 .open > .btn-success.dropdown-toggle:hover {
-    background-color: #007dab!important;
-    border-color: #007dab
+    background-color: #3333!important;
+    border-color: #3333
 }
 
 .btn-success.no-border:active,
@@ -9458,9 +9470,9 @@ textarea {
     color: #333333;
     background-color: #FFF;
     border: 1px solid #D5D5D5;
-    padding: 5px 15px 6px;
-    font-size: 13px;
-    font-family: Roboto;
+    padding: 5px 4px 6px;
+    font-size: 12px;
+    font-family: inherit;
     -webkit-box-shadow: none!important;
     box-shadow: none!important;
     -webkit-transition-duration: .1s;
@@ -9675,7 +9687,8 @@ span.input-icon {
 
 .input-icon > input {
     padding-left: 24px;
-    padding-right: 6px
+    padding-right: 42px;
+    padding-top: 8px;
 }
 
 .input-icon.input-icon-right > input {
@@ -9687,7 +9700,7 @@ span.input-icon {
     padding: 0 3px;
     z-index: 2;
     position: absolute;
-    top: 1px;
+    top: 0px;
     bottom: 1px;
     left: 3px;
     line-height: 30px;
@@ -10949,7 +10962,6 @@ textarea.input-transparent:focus {
 .tab-content {
     border: 1px solid #C5D0DC;
     padding: 16px 12px;
-    padding-top: 1px;
    /* position: relative */
 }
 
@@ -11256,7 +11268,7 @@ textarea.input-transparent:focus {
     border-color: #C5D0DC;
     margin-bottom: 0!important;
     position: relative;
-    top: 1px
+    top: 0px
 }
 
 .nav-tabs > li > a {
@@ -11474,9 +11486,10 @@ textarea.input-transparent:focus {
 .nav-tabs[class*=tab-color-] > li > a,
 .nav-tabs[class*=tab-color-] > li > a:focus,
 .nav-tabs[class*=tab-color-] > li > a:hover {
-    color: #FFF;
+    color: black;
     border-color: transparent;
-    margin-right: 3px
+    margin-right: 0px;
+    margin-top: -1px
 }
 
 .nav-tabs[class*=tab-color-] > li > a > .badge {
@@ -11486,7 +11499,8 @@ textarea.input-transparent:focus {
 .nav-tabs[class*=tab-color-] > li:not(.active) > a:hover {
     opacity: .85;
     border-color: rgba(0, 0, 0, .15);
-    border-bottom-color: transparent
+    border-bottom-color: transparent;
+    border-top-color: #007dab;
 }
 
 .nav-tabs[class*=tab-color-] > li:not(.active) > a > .ace-icon:first-child {
@@ -11501,8 +11515,8 @@ textarea.input-transparent:focus {
 
 .nav-tabs.tab-color-blue > li > a,
 .nav-tabs.tab-color-blue > li > a:focus {
-    background-color: #007dab;
-    min-width: 118px;
+    background-color: #33333;
+    min-width: 145px;
     text-align: center;
 }
 
@@ -11519,9 +11533,10 @@ textarea.input-transparent:focus {
 .nav-tabs.tab-color-blue > li.active > a:focus,
 .nav-tabs.tab-color-blue > li.active > a:hover {
     color: #4c718a;
-    min-width: 195px;
+    min-width: 70px;
     text-align: center;
-    border-color: #0079c2 #0079c2 transparent
+    /*border-color: transparent #0079c2 #0079c2;
+    border-bottom: 2px solid #0079c2*/
 }
 
 .tabs-below .nav-tabs.tab-color-blue > li.active > a {
@@ -11534,8 +11549,8 @@ textarea.input-transparent:focus {
 
 .nav-tabs.background-blue {
     padding-top: 0px;
-    background-color: #EFF3F8;
-    border: 1px solid #C5D0DC
+    background-color: white;
+    border: 0px white
 }
 
 .tabs-below .nav-tabs.background-blue {
@@ -13907,12 +13922,12 @@ tr.detail-row > td {
 
 .login-layout {
 
-    background-image: url(../images/Picbg1.png);
-    background-position: center center;
+ 	background-image: url(../images/background.png);
+    background-position: 25% 80%;
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-color: #464646;
+    background-attachment: scroll;
+    background-size: 388px 398px;
+    background-color: black;
 }
 
 .login-layout .main-container:before {
@@ -13933,7 +13948,7 @@ tr.detail-row > td {
     z-index: -5;
     box-shadow: none;
     padding: 6px;
-    background-color: #ffffff;
+    background-color: black;
     -moz-transform: scale(0, 1) translate(-150px);
     -webkit-transform: scale(0, 1) translate(-150px);
     -o-transform: scale(0, 1) translate(-150px);
@@ -13960,7 +13975,7 @@ tr.detail-row > td {
 
 .login-layout .widget-box .widget-main {
     padding: 30px 36px 36px;
-    background: #F7F7F7
+    background: black
 }
 
 .login-layout .widget-box .widget-main form {
@@ -21493,9 +21508,7 @@ input.typeahead.scrollable ~ .tt-menu {
 .page-content > .row .col-sm-12,
 .page-content > .row .col-xs-12 {
     float: left;
-    max-width: 100%;
-    padding-right: 1px;
-    padding-left: 2px
+    max-width: 100%
 }
 
 .col-xs-reset {
@@ -21625,7 +21638,7 @@ input.typeahead.scrollable ~ .tt-menu {
 }
 
 .no-skin .sidebar {
-    background-color: #F2F2F2;
+    background-color: white;
     border-style: solid;
     border-color: #CCC;
     border-width: 0 1px 0 0
@@ -22475,7 +22488,7 @@ input.typeahead.scrollable ~ .tt-menu {
 
 /* width */
 ::-webkit-scrollbar {
-    width: 3px;
+    width: 10px;
 }
 
 /* Track */
@@ -22492,28 +22505,18 @@ input.typeahead.scrollable ~ .tt-menu {
 ::-webkit-scrollbar-thumb:hover {
     background: #a2a8ac;
 }
-.p-label {
-	font-family: Roboto;
-	font-size: 16px;
-	text-align: left
+
+.row-label {
+    font-family: serif;
+    font-size: 14px;
+    padding-left: 15px;
+    margin-top: 13px;
+    margin-bottom: 12px;
 }
-.searchLabel {
-	font-family: Roboto;
-	font-size: 14px;
-	margin-bottom: 9px;
-	margin-top: 2px;
-    color: black;
-}
-.searchButton { 
-	font-size: 14px;
-    color: #007dab;
-    font-family: Roboto;
-}
-.Kendo-Label {
-	margin-top:3px;
-	float: left;
-	text-align: left;
-	font-family: serif;
-	font-size: 14px;
-	color:black
+.nav-tabs-flt {
+    border-color: #C5D0DC;
+    margin-bottom: 0!important;
+    position: relative;
+    top: 0px;
+    border-bottom:0px;
 }
