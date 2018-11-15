@@ -1,1 +1,15 @@
- 
+.login-box {
+    padding: 0px;
+    background: black;
+    border-radius: 45px;
+    border-width:1px;
+    border-color:white;
+    width:350px;
+    height:292px
+} 
+
+.form-group input[type=text],
+.form-group input[type=password]
+ {
+    background: black
+}

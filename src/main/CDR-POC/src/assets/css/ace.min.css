@@ -5616,7 +5616,7 @@ body.mob-safari .sidebar.sidebar-fixed {
     color: black;
     text-align: center;
     height: 30px;
-    border-top: 3px solid #074982;
+    border-top: 3px solid #074982
 }
 
 .footer.footer-fixed .footer-inner {
@@ -13924,10 +13924,10 @@ tr.detail-row > td {
 .login-layout {
 
  	background-image: url(../images/background.png);
-    background-position: 25% 80%;
+    background-position: 20% 70%;
     background-repeat: no-repeat;
     background-attachment: scroll;
-    background-size: 388px 398px;
+    background-size: 550px 550px;
     background-color: black;
 }
 
