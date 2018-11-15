@@ -5616,6 +5616,7 @@ body.mob-safari .sidebar.sidebar-fixed {
     color: black;
     text-align: center;
     height: 30px;
+    border-top: 3px solid #074982;
 }
 
 .footer.footer-fixed .footer-inner {
