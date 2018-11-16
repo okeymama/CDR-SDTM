@@ -1,0 +1,84 @@
+
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+ .table>thead>tr>td,
+  .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    text-align: centre;
+    font-family: Open Sans Regular;
+    font-size: 12px;
+    background-color: #074982;
+    color: white
+}
+.table>tbody>tr>td{
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    text-align: centre;
+    font-family: Open Sans Regular;
+    font-size: 12px;
+    background-color: white;
+    color: black
+}
+caption,th{
+    text-align: centre;
+}
+th {
+    text-align: centre;
+}
+body {
+    font-family: "Lato", sans-serif;
+}
+
+
+/* Style the sidenav links and the dropdown button */
+ .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Main content */
+.main {
+    margin-left: 200px; /* Same as the width of the sidenav */
+    font-size: 20px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+    background-color: white;
+    padding-left: 0px;
+
+}
+
+/* Optional: Style the caret down icon */ 
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+/* Some media queries for responsiveness */ 
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+.btn-success,
+.btn-success.focus,
+.btn-success:focus {
+    background-color: #074982!important;
+    border-color: #074982;
+}

@@ -1,142 +1,211 @@
-<style>
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-    padding: 8px;
-    line-height: 1.42857143;
-    vertical-align: top;
-    border-top: 1px solid #ddd;
-    text-align: left;
-}
-</style>
+<body class="no-skin" style="line-height: 0">
 
-<div class="tabbable">
-  <app-header></app-header>
-</div>
-<br>
-<div class="panel panel-default">
-<div>
-  <form name="jobForm"  #f="ngForm" novalidate>
-    <fieldset>
-      <div class="tab-content">
-        <div class="tab-pane in active">
-          <div class="space"></div>
-          <div class="space"></div>
-          <div style='text-align: left'><h6><b>Select input parameters for job execution</b></h6></div>
-          <div class="space"></div>
-          <div class="space"></div>
+ <div id="navbar" class="navbar navbar-default ace-save-state">
+					<h3 class="col-sm-8" style='font-size: 18px;margin-top: 16px;margin-bottom: -2px;width: 100.666%;color:white;text-align:left;font-family: Open Sans Regular'>
+              <span style="color:black;font-size: 20px;">
+                <img class="pull-left" style="margin-top: -6px;width: 35px;" src="assets/images/NewLogoImg.png" alt="Logo" />
+                &nbsp;ClinApps
+              </span>
+              <span style="color:black;font-family:Open Sans Regular;font-weight: 100;font-size: 16px;">- Path to SDTM</span>
+              <span class="input-icon" style="padding-bottom: 6px;margin-left:720px">
+                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                <i class="ace-icon fa fa-search nav-search-icon"></i>
+              </span>
+              <span style="padding-left: 9px;padding-top: 20px; color:#E4E6E9">
+              <i style="font-size:22px" class="ace-icon fa fa-gear"></i>
+              </span>
+              <span style="padding-left: 9px;color:#E4E6E9">
+              <i style="font-size:22px" class="menu-icon fa fa-bell"></i>
+              </span>
+              <span>
+                <img class="pull-right" style="margin-top:-1px;margin-right: 17px;" src="assets/images/avatars/UserImage1.png" alt="User Image" />
+              </span>
+          </h3>
+    </div>
+    
+   <div class="main-container ace-save-state" id="main-container">
+        <div>
+          <ul class="nav nav-tabs padding-6 tab-color-blue background-blue"  id="myTab4">
+            <li [routerLinkActive]="['active']">
+                <a data-toggle="tab" routerLink="/home"  style="background-color: white;font-family: Open Sans Regular;font-size: 12px;padding-left: 84px;width:143px">Home</a>
+            </li>
+            <li [routerLinkActive]="['active']">
+                <a data-toggle="tab" routerLink="/searchModule"  style="background-color: white;font-family: Open Sans Regular;font-size: 12px;width:143px">Study Configuration</a>
+            </li>
 
-            <!-- Job Execution SEARCH -->
-            <div class="row">
-				<div class="col-xs-12 col-sm-1"></div>
-				
-                <div class="col-xs-12 col-sm-3">
-                    <div class="form-group" >
-                        <label for="form-field-8" style="font-size: 13px;padding-bottom: 10px;text-align: left;"><b>Select Study</b></label>
-                          <select class="form-control" id="form-field-select-1" name="study" [(ngModel)]="searchJob.study"
-                          style="border-radius: 4px;border: 1px solid #adadad;padding: 6px 12px; margin-bottom: 0; font-size: 14px;
-                          font-weight: 400;line-height: 1.52857143;text-align: left;vertical-align: middle;" required>
-                              <!-- <option value="Calerie">Calerie</option>
-                              <option value="Camp">Camp</option>
-							  <option value="Digitalis">Digitalis</option>
-							  <option value="Framingham">Framingham</option>
-							  <option value="EDC Study 1">EDC Study 1</option>
-							 --> 
-						    <option value="undefined" disabled selected style="display: none;">Choose</option>
-							 
-							 <option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option> 
-                          </select>
-                         
-                         <div *ngIf="missingFields && !(loading)" class="alert alert-danger alert-dismissible fade in">
-                             <a href="#/job" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                         	Please choose a study!
+            <li [routerLinkActive]="['active']">
+                <a data-toggle="tab" routerLink="/busRules"  style="background-color: white;font-family: Open Sans Regular;font-size: 12px;width:183px">Business Rule Configuration</a>
+            </li>
 
-                             <!--    <div *ngIf="study.errors.required">
-  								</div> -->
-  						</div> 
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-1"></div>
-
-              <div class="col-xs-12 col-sm-3">
-                  <div class="form-group">
-                      <label for="form-field-8" style="font-size: 13px;padding-bottom: 10px;text-align: left;"><b>Select SDTM Domain</b></label>
-                      <!--<select class="form-control" id="form-field-select-1" name="domain" [(ngModel)]="searchJob.domain">
-                          <option value="Demographics">Demographics</option>
-                          <option value="Adverse Events">Adverse Events</option>
-                          <option value="Concomitant Medications">Concomitant Medications</option>
-                      </select>-->
-                      <ng-multiselect-dropdown
-                      [placeholder]="'Choose'"
-                      [data]="dropdownList"
-                      [(ngModel)]="selectedItems"
-                      [settings]="dropdownSettings"
-                      (onSelect)="onItemSelect($event)"
-                      (onSelectAll)="onSelectAll($event)"
-                       name="domain"
-                      >
-                    </ng-multiselect-dropdown>
-                  </div>
-              </div>
-              <div class="col-xs-12 col-sm-1"></div>
-              
-              <div class="col-xs-12 col-sm-3">
-               <div>
-                 <br><br><br><br>
-                 <button  (click)="searchJobExecution(searchJob,selectedItems)" class="btn btn-success" style="font-size: 13px;"><b>Submit</b></button>
-                 &nbsp; &nbsp;
-                 <button  (click)="reset(searchJob,selectedItems,f)" class="btn btn-inverse" style="font-size: 13px;color : black;background-color : #86BC60;"><b>Clear</b></button>
-               </div>
-              </div>
-              
-            </div>
+            <li [routerLinkActive]="['active']">
+                <a data-toggle="tab" routerLink="/job"  style="background-color: white;font-family: Open Sans Regular;font-size: 12px;width:143px">Job Execution</a>
+            </li>
+          </ul>
         </div>
-      </div>
-    </fieldset>
-  </form>
-  <br/>
+        
+     <hr style="margin-top: 1px;margin-bottom: 0px;border-top: 4px solid #074982;"/>
+     
+   <div class="panel panel-default" style="margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 5px;padding-bottom: 3px;background: white;">
+          <h3 class="row-label" style="text-align:left;width:90%;font-family:Open Sans Regular;font-size:14px">
+            <img class="pull-left" style="margin-top: -10px;width: 35px;" src="assets/images/JobExecution.png" alt="Logo" />&nbsp;
+            <b>Job Execution</b>
+            <span>
+              <img class="pull-right" style="margin-top: -3px;width: 30px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Refresh" src="assets/images/Refresh.png" alt="Refresh" />&nbsp;
+            </span>
+			<span>
+              <img class="pull-right" style="margin-top: -3px;width: 30px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Import" src="assets/images/NewNote.png" alt="Import" />&nbsp;
+            </span>
+            <span>
+              <img class="pull-right" style="margin-top: -3px;width: 30px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Download" src="assets/images/studyDownload.png" alt="Download" />&nbsp;
+            </span>
+            <span>
+              <img class="pull-right" style="margin-top: -3px;width: 30px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Add" src="assets/images/AddStudy.png" alt="Add" />&nbsp;
+            </span> 
+ 
+   </h3>
+   </div>
+   
+   <div class="panel panel-default" style="height:395px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
+           <div *ngIf="!(loading)"> 
+         
+          <h3 class="row-label" style="margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;">Select a study to see job execution details<!-- Filtered by -->
+            <!--  <a class="float:right" style="margin-right: -111px;padding-top: 0px;padding-bottom: 5px;float: right;color: #074982;font-family: Open Sans Regular;font-size: 12px;"><b>Clear all Filters</b></a>-->
+          </h3>
+          </div>
+          <div *ngIf="(loading)" class="pull-right" style="margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;"> 
+         
+          <a type="button" (click)="actionOnJobExecution(item,'Run')">
+                <span><img src="../assets/images/Run.png" alt="Run All Selected" style="width: 30px;height:30px;">
+                </span>
+                <span>All Selected</span>
+            </a>
+          </div>
+          <hr style="margin-top: -6px;border-width: 2px;"/>
+        <a href="#" class="menu-toggler invisible" id="menu-toggler" data-target="#sidebar"></a>
+        <div id="sidebar" class="sidebar responsive-min ace-save-state">
+            <ul class="nav nav-list" >
+                <li>
+                    <a href="#" class="dropdown-toggle" style="color: #074982">
+        							<i class="menu-icon fa fa-filter"></i>
+        							<span class="menu-text" >
+        								<a href="" style="font-family:Open Sans Regular;font-size:12px;color:#074982" ><b>Filter</b></a>
+        							</span>
+        							<b class="arrow fa fa-angle-down"></b>
+        						</a>
 
-  <h6 style="text-align: center ; background-color: #007dab;padding : 8px;color:white">&nbsp;&nbsp;<b>Job Status</b></h6>
-  <!--  <div class="space"></div>
-  <div class="space"></div>
-  <div *ngIf="msg" style="text-align: center"> <b>{{msg.data}}</b></div>
-  <button *ngIf="jobStatus && study" class="btn btn-success">Fetching...
-       				<i class="fa fa-spinner fa-spin"></i>
-  </button>
-  <div class="space"></div>
-  <div class="space"></div>-->
+  					<form name="jobForm"  #f="ngForm" novalidate>
+                      <fieldset>
+                        <div class="" style="background-color: white;">
+                          <div tyle="overflow:auto; width:200px;height: 304px;" class="tab-pane in active">
 
-  <div *ngIf="loading"> 
+                              <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
+                                  <ul class="nav  nav-tabs" style="border-bottom: 0px;">
+                                    <li style="border-bottom: 0px;">
+                                        <a data-toggle="tab" (click)="drp()"  style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;border-bottom: 0px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
+                                          Study ID<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
+                                        </a>
+                                    </li>
+                                  </ul>
+                                  <div *ngIf="drpSelected" class="dropdown-container" style="border-bottom: 0px;margin-top: 7px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 76%;height: 65px;" id="form-field-select-1" >
+                                    <select class="form-control" id="form-field-select-1" name="study" [(ngModel)]="searchJob.studyId" >
+                                    <option value="undefined" disabled selected style="display: none;">Choose</option>
+							 		 <option *ngFor="let studyId of studyIds" value="{{studyId}}">{{studyId}}</option> 
+                                    </select>
+                                  
+                                  </div>
+                                </div>
+                                
+                                <!-- Second dropdrown -->
+                                 <div  class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
+                                  <ul class="nav  nav-tabs" style="border-bottom: 0px;">
+                                    <li style="border-bottom: 0px;">
+                                        <a data-toggle="tab" (click)="drp()"  style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;border-bottom: 0px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
+                                          Study Title<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
+                                        </a>
+                                    </li>
+                                  </ul>
+                                    <div *ngIf="drpSelected" class="dropdown-container" style="border-bottom: 0px;margin-top: 7px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 76%;height: 65px;" id="form-field-select-1" >
+                                    <select class="form-control" id="form-field-select-1" name="study" [(ngModel)]="searchJob.study" >
+                                    <option value="undefined" disabled selected style="display: none;">Choose</option>
+							 		 <option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option> 
+                                    </select>
+                                  
+                                     </div>
+                                </div>
 
-  <table class="table">
+								<div>
+								
+                 				<button  (click)="searchJobExecution(searchJob,selectedItems)" class="btn btn-success" 
+                 				style="font-size: 12px;font-family: Open Sans Regular">Apply</button>
+								&nbsp;
+								<button  (click)="reset(searchJob,selectedItems,f)" class="btn btn-success" 
+                 				style="font-size: 12px;font-family: Open Sans Regular">Reset</button>
+							    
+								
+								</div>
+								<div class="space"></div>
+                                                           
+                          </div>
+                        </div>
+                      </fieldset>
+                    </form>
+                </li>
+            </ul>   <!-- /.nav-list -->
+        </div>
+
+        <div class="main-content">
+            <div class="main-content-inner">
+                <div class="page-content">
+                  <div class="row" style="margin-top: -23px;">
+                    <table class="table">
       <thead>
-      <tr>
-       <th>Study Title</th>
-       <td>{{searchJob.study}}</td>
-       <td></td>
-       <td><button  (click)="runForAllDomains(searchJob.study,'Run')" class="btn btn-success" style="font-size: 13px;"><b>Run for all domains</b></button> </td>
-      </tr>
-      <tr>
+       <tr>
+        <th *ngIf="loading"><input type="checkbox" /></th>     
         <th>SDTM Domain</th>
+        <th>Last Run</th>        
         <th>Status</th>
-        <th>Action</th>
+        <th>Message</th>
+        <th>Actions</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of data">
-
-        <td class="text-align: left;">{{item.study}}</td>
+        <td><input type="checkbox" /></td>
         <td class="text-align: left;">{{item.domain}}</td>
-        <td class="text-align: left;">{{item.job_status}}</td>
-        <td><button  (click)="actionOnJobExecution(item,'Run')" class="btn btn-success" style="font-size: 13px;"><b>Start</b></button>
-                 &nbsp; &nbsp;
-             <button  (click)="actionOnJobExecution(item,'Abort')" class="btn btn-success" style="font-size: 13px;"><b>Abort</b></button> </td>
+        <td>{{item.job_end_timestamp}}</td>        
+        <td>{{item.job_status}}</td>
+        <td class="text-align: left;">{{item.message}}</td>
+        <td>
+        	<a type="button" (click)="actionOnJobExecution(item,'Run')">
+                <img src="../assets/images/Run.png" alt="Run" style="width: 30px;height:30px;">
+            </a>
+            &nbsp;
+            <a *ngIf="jobStatus" type="button" (click)="actionOnJobExecution(item,'Abort')">
+                <img src="../assets/images/Abort.png" alt="Abort" style="width: 30px;height:30px;">
+            </a>
         
-      </tr>
+        </tr>
 
     </tbody>
   </table>
-  </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.page-content -->
+            </div>
+        </div>
+      </div>        
+   
+   
+   
+   </div>    
+</body>
 
-  </div>
 
-</div>
+
+
+
+
+
+

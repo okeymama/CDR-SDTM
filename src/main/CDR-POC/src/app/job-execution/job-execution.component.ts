@@ -45,7 +45,9 @@ export class JobExecutionComponent implements OnInit {
   loading = false;
   missingFields = false;
   public studyTitles: any[];
+  public studyIds: any[];
   domainList = [];
+  drpSelected: boolean = false;
   
   public ngOnInit() {
         this.dropdownList = //loadDropdown();
@@ -77,8 +79,15 @@ export class JobExecutionComponent implements OnInit {
         this.fetchStudyTitles().subscribe(data => {
           this.studyTitles = data;
       });
+       this.fetchStudyIds().subscribe(data => {
+          this.studyIds = data;
+      });
    }
     public fetchStudyTitles() {
+        return this.http.get<any[]>(`/api/CDR/study/dropdown`);
+    }
+    public fetchStudyIds() {
+    	//TODO
         return this.http.get<any[]>(`/api/CDR/study/dropdown`);
     }
    onItemSelect (item:any) {
@@ -183,5 +192,10 @@ export class JobExecutionComponent implements OnInit {
 
  	
  }
+ 
+ public drp(): void {
+      console.log("===ddddd====");
+      this.drpSelected = true;
+    }
 
 }
