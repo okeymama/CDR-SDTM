@@ -8,6 +8,7 @@ import { StudyDetails } from '../_models/index';
 import { map } from 'rxjs/operators/map';
 import { EditService } from '../_services/index';
 import { AlertService } from '../_services/index';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-search-module',
@@ -21,22 +22,35 @@ export class SearchModuleComponent implements OnInit {
         skip: 0,
         take: 10
     };
-
+    public userName = '';
     public formGroup: FormGroup;
     public editDataItem: StudyDetails;
     public isNew: boolean;
     public searchStudy: any = {};
     private editService: EditService;
     paramId: string;
-    drpSelected: boolean = false;
-    constructor(private route: ActivatedRoute, @Inject(EditService) editServiceFactory: any) {
+    studyDrpSelected: boolean = false;
+    studyShowOptions: boolean = false;
+    phaseDrpSelected: boolean = false;
+    phaseShowOptions: boolean = false;
+    statusDrpSelected: boolean = false;
+    statusShowOptions: boolean = false;
+    sourceDrpSelected: boolean = false;
+    sourceShowOptions: boolean = false;
+    constructor(private userService: UserService,private route: ActivatedRoute, @Inject(EditService) editServiceFactory: any) {
         this.editService = editServiceFactory();
     }
 
     public ngOnInit(): void {
         this.getModule();
         this.view = this.editService.pipe(map(data => process(data, this.gridState)));
-        //this.editService.read();
+        const userDetails = this.userService.getUser();
+        if (userDetails !== undefined) {
+        const userDetail = userDetails.firstName + ' ' + userDetails.lastName;
+        this.userName = userDetail;
+        } else {
+          this.userName = 'Admin';
+        }
     }
 
     public getModule(): void {
@@ -47,9 +61,44 @@ export class SearchModuleComponent implements OnInit {
       this.editService.read(searchStudy);
     }
 
-    public drp(): void {
-      console.log("===ddddd====");
-      this.drpSelected = true;
+    public studyDrp(): void {
+      if(this.studyDrpSelected == false){
+        this.studyShowOptions = true;
+        this.studyDrpSelected = true;
+      }else{
+        this.studyShowOptions = false;
+        this.studyDrpSelected = false;
+      }
+    }
+
+    public phaseDrp(): void {
+      if(this.phaseDrpSelected == false){
+        this.phaseShowOptions = true;
+        this.phaseDrpSelected = true;
+      }else{
+        this.phaseShowOptions = false;
+        this.phaseDrpSelected = false;
+      }
+    }
+
+    public statusDrp(): void {
+      if(this.statusDrpSelected == false){
+        this.statusShowOptions = true;
+        this.statusDrpSelected = true;
+      }else{
+        this.statusShowOptions = false;
+        this.statusDrpSelected = false;
+      }
+    }
+
+    public sourceDrp(): void {
+      if(this.sourceDrpSelected == false){
+        this.sourceShowOptions = true;
+        this.sourceDrpSelected = true;
+      }else{
+        this.sourceShowOptions = false;
+        this.sourceDrpSelected = false;
+      }
     }
 
     public clear() {

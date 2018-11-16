@@ -5,6 +5,7 @@ import { State, process } from '@progress/kendo-data-query';
 import { Template } from '../_models/index';
 import { BusinessEditService } from '../_services/index';
 import { map } from 'rxjs/operators/map';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-business-rule',
@@ -12,13 +13,17 @@ import { map } from 'rxjs/operators/map';
   styleUrls: ['./business-rule.component.css']
 })
 export class BusinessRuleComponent implements OnInit {
+    public opened = false;
+     public dataSaved = false;
+  public drpSelected = false;
+  userName = '';
   public matrixStudyTitles: any[];
   public studyTitles: any[];
   public studyDomains: any[];
   public searchBRStudy: any = {};
   public view: Observable<GridDataResult>;
    public gridState: State = {
-       sort: [], 
+       sort: [],
        skip: 0,
        take: 10
    };
@@ -27,7 +32,11 @@ export class BusinessRuleComponent implements OnInit {
    public isNew: boolean;
    private businessEditService: BusinessEditService;
 
-  constructor(@Inject(BusinessEditService) businessEditServiceFactory: any) {
+   public drp(): void {
+    this.drpSelected = !this.drpSelected;
+  }
+
+  constructor(private userService: UserService, @Inject(BusinessEditService) businessEditServiceFactory: any) {
         this.businessEditService = businessEditServiceFactory();
   }
   public ngOnInit(): void {
@@ -40,6 +49,13 @@ export class BusinessRuleComponent implements OnInit {
       this.businessEditService.fetchMatrixStudyTitles().subscribe(data => {
         this.matrixStudyTitles = data;
     });
+    const userDetails = this.userService.getUser();
+    if (userDetails !== undefined) {
+    const userDetail = userDetails.firstName + ' ' + userDetails.lastName;
+    this.userName = userDetail;
+    } else {
+      this.userName = 'Admin';
+    }
      }
 
      public fetchTemplate(searchBRStudy): void {
@@ -89,5 +105,26 @@ export class BusinessRuleComponent implements OnInit {
      public clear() {
         this.searchBRStudy = {};
         this.businessEditService.read('clear');
+     }
+
+     public getDomain(): String {
+        if (this.searchBRStudy != null && this.searchBRStudy.brSdtmDomain != null) {
+            return this.searchBRStudy.brSdtmDomain + ' Domain';
+        } else {
+            return 'Select a study and SDTM domain to see business rules';
+        }
+     }
+
+     public close() {
+       this.opened = false;
+     }
+ 
+     public open() {
+       this.opened = true;
+     }
+ 
+     public submit() {
+         this.dataSaved = true;
+         this.close();
      }
  }

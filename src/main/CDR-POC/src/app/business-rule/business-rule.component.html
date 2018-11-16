@@ -1,108 +1,279 @@
-<div>
-    <div class="tabbable">
-        <app-header></app-header>
-      </div>
-  <form name="form"  #f="ngForm" novalidate>
-    <fieldset>
-      <div class="tab-content">
-          <div style='text-align: left'><h6 class="p-label">
-            <b>Select Study info to import Path to SDTM global library - </b></h6></div><br/><br/>
-            <!-- Business Rule SEARCH -->
-            <div class="row">
+<!DOCTYPE html>
+<html lang="en">
 
-              <div class="col-xs-12 col-sm-2">
-                  <div class="form-group">
-                      <label for="form-field-8" class="searchLabel"><b>Select Therapeutic Area</b></label>
-                      <select class="form-control searchLabel" id="form-field-select-1" name="brTherapeuticArea" [(ngModel)]="searchBRStudy.brTherapeuticArea">
-                        <option value="undefined" disabled selected style="display: none;">Select an Option</option>
-                          <option value="TherapeuticArea1">Therapeutic Area 1</option>
-                          <option value="TherapeuticArea2">Therapeutic Area 2</option>
-                          <option value="TherapeuticArea3">Therapeutic Area 3</option>
-                      </select>
-                  </div>
-              </div>
-            <!-- Studies from study table-->
-              <div class="col-xs-12 col-sm-2">
-                  <div class="form-group">
-                      <label for="form-field-8" class="searchLabel"><b>Select Study</b></label>
-                      <select class="form-control searchLabel"  id="form-field-select-1" name="brStudy" [(ngModel)]="searchBRStudy.brStudy">
-                          <option value="undefined" disabled selected style="display: none;">Select an Option</option>
-                          <option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option>
-                      </select>
-                  </div>
-              </div>
-              <!-- Studies from matrix table-->
-              <div class="col-xs-12 col-sm-2">
-                <div class="form-group">
-                    <label for="form-field-8" class="searchLabel"><b>Import From</b></label>
-                    <select class="form-control searchLabel"  id="form-field-select-1" name="brMatrixStudy" [(ngModel)]="searchBRStudy.brMatrixStudy" (change)="filterDomains($event.target.value)">
-                        <option value="undefined" disabled selected style="display: none;">Select an Option</option>
-                        <option *ngFor="let matrixStudy of matrixStudyTitles" value="{{matrixStudy}}">{{matrixStudy}}</option>
-                    </select>
-                </div>
-            </div>
-              <div class="col-xs-12 col-sm-2">
-                  <div class="form-group">
-                    <label for="form-field-8" class="searchLabel"><b>Select SDTM Domain</b></label>
-                    <select class="form-control searchLabel" id="form-field-select-1" name="brSdtmDomain" [(ngModel)]="searchBRStudy.brSdtmDomain">
-                      <option value="undefined" disabled selected style="display: none;">Select an Option</option>
-                      <option *ngFor="let domain of studyDomains" value="{{domain}}">{{domain}}</option>
-                    </select>
-                  </div>
-              </div>
-              <div class="col-xs-12">
-               <div>
-                 <button (click)="fetchTemplate(searchBRStudy)" class="btn btn-success searchButton"><b>Import</b></button> &nbsp;
-                 <button (click)="clear()" class="btn btn-success searchButton" ><b>Clear</b></button> &nbsp;
-                </div>
-              </div>
-            </div>
-      </div>
-    </fieldset>
-  </form>
-  <br/>
-  <div class="panel panel-default">
-    <div>
-        <kendo-grid
-              [data]="view | async"
-              [height]="400" 
-              [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
-              [pageable]="false" [sortable]="false"     
-              (dataStateChange)="onStateChange(searchBRStudy, $event)"
-              (edit)="editHandler($event, searchBRStudy)" (remove)="removeHandler($event)"
-              (add)="addHandler($event)"
-              [style.backgroundColor] = "black"
-            >
-            <ng-template  kendoGridToolbarTemplate >
-              <div style="">
-                <label style="margin-top:3px;float: left;text-align: left;font-family: Roboto;font-size: 14px;color:#007dab"><b>&nbsp;&nbsp;Path to SDTM Matrix </b></label>&nbsp;
-                <button kendoGridAddCommand [primary]="true" style="border-color: white;float: right;color : white;background-color : #007dab;font-size : 16px;font-family: Roboto;"><b>Import Matrix</b></button>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>CDR</title>
 
-              </div>
-            </ng-template>
-            <kendo-grid-column [width]="100"  [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="study" title="Study"></kendo-grid-column>
-            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="domain" title="Domain"></kendo-grid-column>
-            <kendo-grid-column [width]="150"  [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="subDomain" title="Sub Domain"></kendo-grid-column>  
-            <kendo-grid-column [width]="100" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="targetFile" title="Target File"></kendo-grid-column>
-            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="targetField" title="Target Variable"></kendo-grid-column>          
-            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="sourceFile" title="Source File"></kendo-grid-column>
-            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="sourceField"  title="Source Variable"></kendo-grid-column>
-            <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="joinLogic" title="Join Logic"></kendo-grid-column>
-            <kendo-grid-column [width]="160" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="transformation_type" title="Transformation Type"></kendo-grid-column>
-            <kendo-grid-column [width]="160" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" field="transformation_logic" title="Transformation Logic"></kendo-grid-column>
-            <kendo-grid-command-column [width]="140" [headerStyle]="{'font-family': 'Roboto','font-size': '14px','background-color': '#3333','font-weight':'bold','color':'#007dab'}" title="Actions" width="220">
-                <ng-template kendoGridCellTemplate>
-                    <button kendoGridEditCommand [primary]="true" style="color : white;background-color : #007dab;border-color: white;font-family: Roboto;font-size: 14px;"><b>Edit</b></button>
-                    <button kendoGridRemoveCommand style="font-family: Roboto;font-size: 14px;"><b>Delete</b></button>
-                </ng-template>
-            </kendo-grid-command-column>
-          </kendo-grid>
-          <kendo-grid-business-edit-form [model]="editBizDataItem" [isNew]="isNew"
-              (save)="saveHandler($event)"
-              (cancel)="cancelHandler()">
-          </kendo-grid-business-edit-form>
-        </div>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <!-- ace settings handler -->
+    <script src="assets/js/ace-extra.min.js"></script>
+
+<style>
+body {
+    font-family: "Lato", sans-serif;
+}
+
+
+/* Style the sidenav links and the dropdown button */
+ .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Main content */
+.main {
+    margin-left: 200px; /* Same as the width of the sidenav */
+    font-size: 20px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+    background-color: white;
+    padding-left: 0px;
+
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+/* Some media queries for responsiveness */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+.k-image {
+height: 30px;
+width: 30px;
+}
+.k-button {
+    border-radius: 0px;
+    
+}
+.k-button-icon {
+    padding: 0px;
+}
+</style>
+</head>
+<body class="no-skin" style="line-height: 0">
+    <div id="navbar" class="navbar navbar-default ace-save-state">
+					<h3 class="col-sm-8" style='font-size: 18px;margin-top: 16px;margin-bottom: -2px;width: 100.666%;color:white;text-align:left;font-family: Open Sans Regular'>
+              <span style="color:black;font-size: 20px;">
+                <img class="pull-left" style="margin-top: -6px;width: 35px;" src="assets/images/NewLogoImg.png" alt="Logo" />
+                &nbsp;CApps
+              </span>
+              <span style="color:black;font-family:Open Sans Regular;font-weight: 100;font-size: 16px;">– Path to SDTM</span>
+              <span class="input-icon" style="padding-bottom: 6px;margin-left:720px">
+                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                <i class="ace-icon fa fa-search nav-search-icon"></i>
+              </span>
+              <span style="padding-left: 9px;padding-top: 20px; color:#E4E6E9">
+              <i style="font-size:22px" class="ace-icon fa fa-gear"></i>
+              </span>
+              <span style="padding-left: 9px;color:#E4E6E9">
+              <i style="font-size:22px" class="menu-icon fa fa-bell"></i>
+              </span>
+              <span dropdown style="padding-bottom: 3px;margin-top: 5px;padding-top: 20px">
+                <button dropdownToggle type="button" class="dropdown-toggle" style="background-color: white;border-color: white;border-width: 0px">
+                <img class="pull-right" style="width: 25px;margin-left: 6px;margin-bottom: -4px;" src="assets/images/avatars/UserImage1.png" />
+                   </button>
+                <ul *dropdownMenu class="dropdown-menu pull-right" role="menu">
+                <li role="menuitem"><a class="dropdown-item" href="#">{{userName }}</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+                </span>
+              
+          </h3>
     </div>
-</div>
-<div>
-</div>
+
+    <div class="main-container ace-save-state" id="main-container">
+        <div>
+          <ul class="nav nav-tabs padding-6 tab-color-blue background-blue"  id="myTab4">
+            <li [routerLinkActive]="['active']">
+                <a data-toggle="tab" routerLink="/home"  style="background-color: white;font-family: Open Sans Regular;font-size: 12px;padding-left: 84px;width:143px">Home</a>
+            </li>
+            <li [routerLinkActive]="['active']">
+                <a data-toggle="tab" routerLink="/searchModule"  style="background-color: white;font-family: Open Sans Regular;font-size: 12px;width:143px">Study Configuration</a>
+            </li>
+
+            <li [routerLinkActive]="['active']">
+                <a data-toggle="tab" routerLink="/busRules"  style="background-color: white;font-family: Open Sans Regular;font-size: 12px;width:183px">Business Rule Configuration</a>
+            </li>
+
+            <li [routerLinkActive]="['active']">
+                <a data-toggle="tab" routerLink="/job"  style="background-color: white;font-family: Open Sans Regular;font-size: 12px;width:143px">Job Execution</a>
+            </li>
+          </ul>
+        </div>
+        <hr style="margin-top: 1px;margin-bottom: 0px;border-top: 4px solid #074982;"/>
+        <div class="panel panel-default" style="margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 5px;padding-bottom: 3px;background: white;">
+          <h3 class="row-label" style="text-align:left;width:90%;font-family:Open Sans;font-size:13px">
+            <img class="pull-left" style="margin-top: -10px;width: 35px;" src="assets/images/BussRules.png" alt="Logo" />&nbsp;
+            Business Rule Configuration<br>
+            &nbsp;&nbsp;<b>{{searchBRStudy.brMatrixStudy}}</b>
+          </h3>
+           <!-- <button class="pull-right" kendoButton [imageUrl]="'assets/images/RightImage4.png'" *ngIf="!opened" (click)="open()"></button>-->
+            <img class="pull-right" style="width: 32px;margin-top: -30px;" src="assets/images/RightImage4.png" alt="Logo1" />
+            <img class="pull-right" style="width: 32px;margin-top: -30px;" src="assets/images/RightImage3.png" alt="Logo2" />&nbsp;
+            <img class="pull-right" style="width: 32px;margin-top: -30px;" src="assets/images/RightImage2.png" alt="Logo3" />&nbsp;
+            <img class="pull-right" style="width: 32px;margin-top: -30px;" src="assets/images/RightImage1.png" alt="Logo4" />&nbsp;
+        </div>
+        <div class="panel panel-default" style="height:395px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
+          <h3 class="row-label" style="margin-top: 7px;text-align:left;font-family:Open Sans;font-size:10.5px;width:90%;"><b>{{getDomain()}}</b>
+           </h3>
+           
+          <hr style="margin-top: -6px;border-width: 2px;"/>
+          <a href="#" class="menu-toggler invisible" id="menu-toggler" data-target="#sidebar"></a>
+          <div id="sidebar" class="sidebar responsive-min ace-save-state">
+              <ul class="nav nav-list" >
+                  <li>
+                      <a href="#" class="dropdown-toggle" style="color: #074982">
+                                      <i class="menu-icon fa fa-filter"></i>
+                                      <span class="menu-text" >
+                                          <a href="" style="font-family:Open Sans Regular;font-size:12px;color:#074982" ><b>Filter</b></a>
+                                      </span>
+                                      <b class="arrow fa fa-angle-down"></b>
+                                  </a>
+  
+                      <form name="form"  #f="ngForm" novalidate>
+                        <fieldset>
+                          <div class="" style="background-color: white;">
+                            <div ng-if="paramId == studyInfo" style="overflow:auto; width:200px;height: 304px;" id="studyInfo" class="tab-pane in active">
+                                <!-- Study Info SEARCH -->
+  
+                                <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
+                                    <ul class="nav  nav-tabs" style="border-bottom: 0px;">
+                                      <li style="border-bottom: 0px;">
+                                          <a data-toggle="tab" (click)="drp()"  style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;border-bottom: 0px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
+                                            Study ID <span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
+                                          </a>
+                                      </li>
+                                    </ul>
+                                    <div *ngIf="drpSelected" class="dropdown-container" style="border-bottom: 0px;margin-top: 7px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 70%;height: 40px;" id="form-field-select-1" >
+                                      <select class="form-control"  id="form-field-select-1" name="brMatrixStudy" [(ngModel)]="searchBRStudy.brMatrixStudy" (change)="filterDomains($event.target.value);fetchTemplate(searchBRStudy)" style="font-family: Open Sans Regular;font-size:12px;">
+                                          <option value="undefined" disabled selected style="display: none;">Select an Option</option>
+                                          <option *ngFor="let matrixStudy of matrixStudyTitles" value="{{matrixStudy}}">{{matrixStudy}}</option>
+                                      </select>
+                                    </div>
+                                  </div>
+  
+  
+                                  <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
+                                      <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
+                                        <li style="border-bottom: 0px;">
+                                            <a data-toggle="tab" (click)="drp()"  style="margin-left: 10px;margin-bottom:6px;border-bottom: 0px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
+                                              SDTM Domain<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
+                                            </a>
+                                        </li>
+                                      </ul>
+                                      <div *ngIf="drpSelected" class="dropdown-container" style="border-bottom: 0px;margin-top: 7px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 70%;height: 35px;" id="form-field-select-1" >
+                                        <select class="form-control"  id="form-field-select-1" name="brSdtmDomain" [(ngModel)]="searchBRStudy.brSdtmDomain" (ngModelChange)="fetchTemplate(searchBRStudy)" style="font-family: Open Sans Regular;font-size:12px;">
+                                            <option value="undefined" disabled selected style="display: none;">Select an Option</option>
+                                            <option *ngFor="let domain of studyDomains" value="{{domain}}">{{domain}}</option>
+                                        </select>  
+                                    </div>
+                                    </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </form>
+                  </li>
+              </ul>   <!-- /.nav-list -->
+          </div>
+        <div class="main-content">
+            <div class="main-content-inner">
+                <div class="page-content">
+                  <div class="row" style="margin-top: -23px;">
+                    <kendo-grid
+                        [data]="view | async"
+                        [height]="345"
+                        [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
+                        [pageable]="true"
+                        (dataStateChange)="onStateChange(searchBRStudy, $event)"
+                        (edit)="editHandler($event, searchBRStudy)" (remove)="removeHandler($event)"
+                        (add)="addHandler($event)"
+                        style="width: 101%"
+                      >
+                      <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="targetField" title="SDTM Variables"></kendo-grid-column>
+                      <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="sourceFile"  title="Source File"></kendo-grid-column>
+                      <kendo-grid-column [width]="150"[headerStyle]="{'font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="sourceField" title="Source Variable"></kendo-grid-column>
+                      <kendo-grid-column [width]="150" [headerStyle]="{'font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="joinLogic" title="Join Logic"></kendo-grid-column>
+                      <kendo-grid-column [width]="160" [headerStyle]="{'font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="transformation_type" title="Transformation Type"></kendo-grid-column>
+                      <kendo-grid-column [width]="160" [headerStyle]="{'font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="transformation_logic" title="Transformation Logic"></kendo-grid-column>
+                      <kendo-grid-command-column [width]="150" [headerStyle]="{'font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" title="Actions" width="220">
+                          <ng-template kendoGridCellTemplate>
+                              <button kendoGridEditCommand [primary]="true" style="color : white;background-color : #074982;border-color: white;font-family: Open Sans Regular;font-size: 14px;"><b>Edit</b></button>
+                              <button kendoGridRemoveCommand style="font-family: Open Sans Regular;font-size: 12px;"><b>Delete</b></button>
+                          </ng-template>
+                      </kendo-grid-command-column>
+                    </kendo-grid>
+
+                    <kendo-grid-business-edit-form [model]="editBizDataItem" [isNew]="isNew"
+                        (save)="saveHandler($event)"
+                         (cancel)="cancelHandler()">
+                     </kendo-grid-business-edit-form>
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.page-content -->
+            </div>
+        </div>
+      </div>
+        <!-- /.main-content -->
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+    </div>
+    <!-- /.main-container -->
+    <kendo-window title="Please provide additional data" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="450">
+
+        <form class="k-form">
+            <fieldset>
+                <legend>User Details</legend>
+
+                <label class="k-form-field">
+                    <span>First Name</span>
+                    <input class="k-textbox" placeholder="Your Name" />
+                </label>
+                <label class="k-form-field">
+                    <span>Last Name</span>
+                    <input class="k-textbox" placeholder="Your Last Name" />
+                </label>
+            </fieldset>
+
+            <div class="text-right">
+                <button type="button" class="k-button" (click)="close()">Cancel</button>
+                <button type="button" class="k-button k-primary" (click)="submit()">Submit</button>
+            </div>
+        </form>
+
+        </kendo-window>
+</body>
+</html>
