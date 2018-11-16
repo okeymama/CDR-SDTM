@@ -195,11 +195,9 @@ body {
                                     </li>
                                   </ul>
                                   <div *ngIf="studyShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 76%;height: 35px;" id="form-field-select-1" >
-                                    <select class="form-control"  id="form-field-select-1" name="studyID" [(ngModel)]="searchStudy.studyID" (ngModelChange)="fetch(searchStudy.phase)">
+                                    <select class="form-control"  id="form-field-select-1" name="studyID" [(ngModel)]="searchStudy.title" (ngModelChange)="fetch(searchStudy)">
                                         <option value="undefined" disabled selected style="display: none;">Select an Option</option>
-   					                            <option value="Phase1">Phase 1</option>
-                                        <option value="Phase2">Phase 2</option>
-                                        <option value="Phase3">Phase 3</option>
+                                        <option *ngFor="let matrixStudy of studyTitles" value="{{matrixStudy}}">{{matrixStudy}}</option>
                                     </select>
                                       <!--<input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="Phase" [(ngModel)]="searchStudy.phase"> Phase 1<br>
                                       <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="Phase" [(ngModel)]="searchStudy.phase"> Phase 2<br>
