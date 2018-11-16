@@ -7,6 +7,7 @@ import { State, process } from '@progress/kendo-data-query';
 import { map } from 'rxjs/operators/map';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { AlertService, AuthenticationService } from '../_services/index';
+import { UserService } from '../_services/user.service';
 
 
 
@@ -17,14 +18,21 @@ import { AlertService, AuthenticationService } from '../_services/index';
 })
 export class JobExecutionComponent implements OnInit {
 
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private alertService: AlertService,
+    private userService: UserService
+  ){ }
+
   public view: Observable<GridDataResult>;
   data: any[] = [];
   private msg: any;
   jobStatus: boolean = false;
+  isLive: boolean = false;
+  isJobAborted = false;
   isDomain: boolean = false;
-  
-
-   public gridState: State = {
+  public gridState: State = {
       sort: [],
       skip: 0,
     };
@@ -32,12 +40,6 @@ export class JobExecutionComponent implements OnInit {
 
   public formGroup: FormGroup;
   public searchJob: any = {};
-  constructor(
-    private route: ActivatedRoute,
-    private http: HttpClient,
-    private alertService: AlertService,
-  ){ }
-
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
@@ -48,6 +50,7 @@ export class JobExecutionComponent implements OnInit {
   public studyIds: any[];
   domainList = [];
   drpSelected: boolean = false;
+  public userName = '';
   
   public ngOnInit() {
         this.dropdownList = //loadDropdown();
@@ -82,6 +85,14 @@ export class JobExecutionComponent implements OnInit {
        this.fetchStudyIds().subscribe(data => {
           this.studyIds = data;
       });
+      
+       const userDetails = this.userService.getUser();
+        if (userDetails !== undefined) {
+        const userDetail = userDetails.firstName + ' ' + userDetails.lastName;
+        this.userName = userDetail;
+        } else {
+          this.userName = 'Admin';
+        }
    }
     public fetchStudyTitles() {
         return this.http.get<any[]>(`/api/CDR/study/dropdown`);
@@ -167,6 +178,8 @@ export class JobExecutionComponent implements OnInit {
     this.selectedItemsList = [];
     this.jobStatus =  false;
     this.loading = false;
+    this.data = [];
+    this.domainList = [];
     
 
     //this.view = '';
@@ -175,6 +188,12 @@ export class JobExecutionComponent implements OnInit {
   }
 
  public actionOnJobExecution(item,action){
+    if(action=='Run'){
+    	this.isLive = true;
+    }else if (action=='Abort'){
+         this.isJobAborted = true;
+         this.isLive = false;        
+    }
     this.domainList.push(item.domain);
     //domainList.push('Adverse Events');
     let headers = new HttpHeaders();
@@ -185,11 +204,16 @@ export class JobExecutionComponent implements OnInit {
  	
  }
  
- public runForAllDomains(study,action){
- 
- 	return this.http.get<any[]>(`url`)
+ public runForAllDomains(){
+    //action='Run';
+    for (let item of this.data) {
+    this.domainList.push(item.domain);
+     }
+    //null checks for study TODO
+    let headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+ 	return this.http.post(`http://35.171.8.239:3000?Study_name=${this.searchJob.study}&domain_array=${this.domainList}&Action=Run`,{headers: headers})
        .subscribe(data => {this.msg = data });
-
  	
  }
  

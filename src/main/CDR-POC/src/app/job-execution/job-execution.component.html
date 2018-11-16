@@ -7,7 +7,7 @@
                 &nbsp;ClinApps
               </span>
               <span style="color:black;font-family:Open Sans Regular;font-weight: 100;font-size: 16px;">- Path to SDTM</span>
-              <span class="input-icon" style="padding-bottom: 6px;margin-left:720px">
+              <span class="input-icon" style="padding-bottom: 6px;margin-left:709px">
                 <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
                 <i class="ace-icon fa fa-search nav-search-icon"></i>
               </span>
@@ -17,8 +17,14 @@
               <span style="padding-left: 9px;color:#E4E6E9">
               <i style="font-size:22px" class="menu-icon fa fa-bell"></i>
               </span>
-              <span>
-                <img class="pull-right" style="margin-top:-1px;margin-right: 17px;" src="assets/images/avatars/UserImage1.png" alt="User Image" />
+              <span dropdown style="padding-bottom: 3px;margin-top: 5px;padding-top: 20px">
+                <button dropdownToggle type="button" class="dropdown-toggle" style="background-color: white;border-color: white;border-width: 0px">
+                <img class="pull-right" style="width: 30px;margin-left: 5px;margin-bottom: -8px;" src="assets/images/avatars/UserImage1.png" />
+                   </button>
+                <ul *dropdownMenu class="dropdown-menu pull-right" role="menu">
+                <li role="menuitem"><a class="dropdown-item" href="#">{{userName }}</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
               </span>
           </h3>
     </div>
@@ -44,7 +50,22 @@
         </div>
         
      <hr style="margin-top: 1px;margin-bottom: 0px;border-top: 4px solid #074982;"/>
-     
+   
+    <div class="panel panel-default" style="margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 5px;padding-bottom: 3px;background: white;">
+          <h3 class="row-label" style="text-align:left;width:90%;font-family:Open Sans;font-size:13px">
+            <img class="pull-left" style="margin-top: -10px;width: 35px;" src="assets/images/JobExecution.png" alt="Logo" />&nbsp;
+            Job Execution<br>
+            &nbsp;&nbsp;<b>{{searchJob.study}}</b>
+          </h3>
+            <img class="pull-right" style="width: 32px;margin-top: -30px;" data-toggle="tooltip" title="Add" src="assets/images/AddStudy.png" alt="Add"  />
+            <img class="pull-right" style="width: 32px;margin-top: -30px;" data-toggle="tooltip" title="Download" src="assets/images/studyDownload.png" alt="Download"  />&nbsp;
+            <img class="pull-right" style="width: 32px;margin-top: -30px;" data-toggle="tooltip" title="Import" src="assets/images/NewNote.png" alt="Import"  />&nbsp;
+            <img class="pull-right" style="width: 32px;margin-top: -30px;" data-toggle="tooltip" title="Refresh" src="assets/images/Refresh.png" alt="Refresh"  />&nbsp;
+    </div>
+   
+   
+   <!--  
+   
    <div class="panel panel-default" style="margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 5px;padding-bottom: 3px;background: white;">
           <h3 class="row-label" style="text-align:left;width:90%;font-family:Open Sans Regular;font-size:14px">
             <img class="pull-left" style="margin-top: -10px;width: 35px;" src="assets/images/JobExecution.png" alt="Logo" />&nbsp;
@@ -64,7 +85,7 @@
  
    </h3>
    </div>
-   
+   -->
    <div class="panel panel-default" style="height:395px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
            <div *ngIf="!(loading)"> 
          
@@ -72,15 +93,19 @@
             <!--  <a class="float:right" style="margin-right: -111px;padding-top: 0px;padding-bottom: 5px;float: right;color: #074982;font-family: Open Sans Regular;font-size: 12px;"><b>Clear all Filters</b></a>-->
           </h3>
           </div>
-          <div *ngIf="(loading)" class="pull-right" style="margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;"> 
+          <hr *ngIf="!(loading)" style="margin-top: -6px;border-width: 2px;"/>
+          
+          <div *ngIf="(loading)" style="margin-top:5px">
+          <!-- class="pull-right" style="margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;"> -->
          
-          <a type="button" (click)="actionOnJobExecution(item,'Run')">
-                <span><img src="../assets/images/Run.png" alt="Run All Selected" style="width: 30px;height:30px;">
-                </span>
-                <span>All Selected</span>
+          <a type="button" (click)="runForAllDomains()">
+                <img src="../assets/images/Run.png" alt="Run All Selected" data-toggle="tooltip" title="Run All Selected"
+                style="width: 25px;height:25px;margin-left:1135px">&nbsp;
+          <h3 style="font-family:Open Sans Regular;font-size:12px;color:black;padding-right:20px;margin-top:5px" class="pull-right" >All selected</h3>
             </a>
           </div>
-          <hr style="margin-top: -6px;border-width: 2px;"/>
+           <hr *ngIf="(loading)" style="margin-top: 6px;border-width: 2px;"/>
+          
         <a href="#" class="menu-toggler invisible" id="menu-toggler" data-target="#sidebar"></a>
         <div id="sidebar" class="sidebar responsive-min ace-save-state">
             <ul class="nav nav-list" >
@@ -160,13 +185,12 @@
                     <table class="table">
       <thead>
        <tr>
-        <th *ngIf="loading"><input type="checkbox" /></th>     
-        <th>SDTM Domain</th>
-        <th>Last Run</th>        
-        <th>Status</th>
-        <th>Message</th>
-        <th>Actions</th>
-        <th></th>
+        <td *ngIf="loading"><input type="checkbox" /></td>     
+        <td>SDTM Domain</td>
+        <td>Last Run</td>        
+        <td>Status</td>
+        <td>Message</td>
+        <td>Actions</td>
       </tr>
     </thead>
     <tbody>
@@ -177,13 +201,28 @@
         <td>{{item.job_status}}</td>
         <td class="text-align: left;">{{item.message}}</td>
         <td>
-        	<a type="button" (click)="actionOnJobExecution(item,'Run')">
-                <img src="../assets/images/Run.png" alt="Run" style="width: 30px;height:30px;">
+        	<a *ngIf="!(isLive)" type="button" (click)="actionOnJobExecution(item,'Run')">
+                <img src="../assets/images/Run.png" alt="Run" style="width: 25px;height:25px;">
+                 &nbsp;
+             </a>
+             <a *ngIf="isLive" type="button" style="width: 25px;height:25px;" >
+                   <i class="fa fa-spinner fa-spin"></i>
+                 &nbsp;
+             </a>
+             <a *ngIf="isLive=='job is completed'" type="button" (click)="actionOnJobExecution(item,'Run')">
+                <img src="../assets/images/Run.png" alt="Run" style="width: 25px;height:25px;">
+                 &nbsp;
+             </a>
+                              &nbsp;
+             
+            <a *ngIf="isLive" type="button" (click)="actionOnJobExecution(item,'Abort')" >
+                <img src="../assets/images/Abort.png" alt="Abort" style="width: 25px;height:25px;">
             </a>
-            &nbsp;
-            <a *ngIf="jobStatus" type="button" (click)="actionOnJobExecution(item,'Abort')">
-                <img src="../assets/images/Abort.png" alt="Abort" style="width: 30px;height:30px;">
-            </a>
+            <a *ngIf="!isLive && isJobAborted" type="button" style="width: 25px;height:25px;" >
+                   <i class="fa fa-spinner fa-spin"></i>
+                 &nbsp;
+             </a>
+         </td>
         
         </tr>
 
