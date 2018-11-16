@@ -119,4 +119,8 @@ export class EditService extends BehaviorSubject<any[]> {
       }
     }
 
+
+    public fetchStudyTitles() {
+        return this.http.get<any[]>(`/api/CDR/study/dropdown`);
+    }
 }

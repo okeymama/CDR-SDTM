@@ -40,6 +40,7 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 		Optional<PathToSdtmMatrix> _matrixData = findById(id);
 		 if(_matrixData.isPresent()) {
 			 PathToSdtmMatrix _matrix = _matrixData.get();
+			 _matrix.setTargetField(pathToSdtmMatrix.getTargetField());
 			 _matrix.setSourceFile(pathToSdtmMatrix.getSourceFile());
 			 _matrix.setSourceField(pathToSdtmMatrix.getSourceField());
 			 _matrix.setJoinLogic(pathToSdtmMatrix.getJoinLogic());
@@ -129,6 +130,11 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 	@Override
 	public List<String> findDomainByStudy(String study) {
 		return sdtmMatrixRepository.findDomainByStudy(study);
+	}
+
+	@Override
+	public List<String> findDistinctSDTMVariables() {
+		return sdtmMatrixRepository.findDistinctSDTMVariables();
 	}
 
 

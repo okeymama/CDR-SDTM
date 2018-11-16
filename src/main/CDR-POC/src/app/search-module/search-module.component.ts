@@ -23,6 +23,7 @@ export class SearchModuleComponent implements OnInit {
         take: 10
     };
     public userName = '';
+    public studyTitles: any[];
     public formGroup: FormGroup;
     public editDataItem: StudyDetails;
     public isNew: boolean;
@@ -51,6 +52,9 @@ export class SearchModuleComponent implements OnInit {
         } else {
           this.userName = 'Admin';
         }
+        this.editService.fetchStudyTitles().subscribe(data => {
+          this.studyTitles = data;
+      });
     }
 
     public getModule(): void {

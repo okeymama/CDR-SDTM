@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators/map';
 const CREATE_ACTION = 'create';
 const UPDATE_ACTION = 'update';
 const REMOVE_ACTION = 'delete';
+const IMPORT_ACTION = 'import';
 
 @Injectable()
 export class BusinessEditService extends BehaviorSubject<any[]> {
@@ -49,8 +50,23 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
         return this.http.get<any[]>(`/api/CDR/matrix/transformations`);
     }
 
-    public save(data: any, searchBRStudy, isNew?: boolean ) {
-        const action = isNew ? CREATE_ACTION : UPDATE_ACTION;
+    public fetchLookUpData() {
+        return this.http.get<any[]>(`/api/CDR/lookup/sourcetables`);
+    }
+
+    public fetchSDTMVariables() {
+        return this.http.get<any[]>(`/api/CDR/matrix/targetVariables`);
+    }
+
+    public save(data: any, searchBRStudy, isNew?: any ) {
+        let action = '';
+        if (isNew === 'add') {
+            action = CREATE_ACTION;
+        } else if (isNew === 'edit') {
+            action = UPDATE_ACTION;
+        } else if (isNew === 'import') {
+            action = IMPORT_ACTION;
+        }
         this.reset();
         this.fetch(data, action)
           .subscribe(() => this.read(searchBRStudy), () => this.read(searchBRStudy));
@@ -83,11 +99,14 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
 	    } else if (searchBRStudy === 'clear') {
 	        return this.http.get<any[]>(`/api/CDR/matrix/fetchOrInsert/${searchBRStudy}/${searchBRStudy}/${searchBRStudy}`)
 	            .pipe(map(res => <any[]>res));
-    	} else {        
+    	} else if(action === 'import'){        
 	        console.log(JSON.stringify(searchBRStudy)+"=aaa==searchBRStudy=="+searchBRStudy.brStudy);
 	        params =  params.set('domain', 'Invalid');
 	        return this.http.get<any[]>(`/api/CDR/matrix/fetchOrInsert/${searchBRStudy.brStudy}/${searchBRStudy.brMatrixStudy}/${searchBRStudy.brSdtmDomain}`)
 	            .pipe(map(res => <any[]>res));
-    	}
+    	} else {
+            return this.http.get<any[]>(`/api/CDR/matrix/${searchBRStudy.brMatrixStudy}/${searchBRStudy.brSdtmDomain}`)
+	            .pipe(map(res => <any[]>res));
+        } 
 	}
 }

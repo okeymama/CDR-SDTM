@@ -17,5 +17,8 @@ public interface SdtmMatrixRepository extends JpaRepository<PathToSdtmMatrix, Lo
 	
 	@Query("select distinct domain from PathToSdtmMatrix where study=:study")
 	List<String> findDomainByStudy(@Param("study") String study);
+	
+	@Query("select distinct targetField from PathToSdtmMatrix where targetField is not null")
+	List<String> findDistinctSDTMVariables();
 
 }

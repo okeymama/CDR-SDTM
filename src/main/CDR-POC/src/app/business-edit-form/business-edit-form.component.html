@@ -59,16 +59,18 @@ label {
 }
 }
 .k-window-titlebar {
-  border-color: blue;
+  border-color: rgb(7, 73, 130);
 }
 </style>
 <kendo-dialog *ngIf="active" (close)="closeForm()">
 <kendo-dialog-titlebar style="background-color : white">
-  <b style="color : black;font-size: 16px;font-family: serif;">{{ isNew ? 'Import SDTM Matrix' : 'Edit Business Rule' }}</b>
-</kendo-dialog-titlebar>
+  <span *ngIf="(isNew=='add')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Create New Business Rule</b></span>
+  <span *ngIf="(isNew=='edit')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Edit Business Rule</b></span>
+  <span *ngIf="(isNew=='import')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Import Business Rules from Study</b></span>
+</kendo-dialog-titlebar> 
 
-  <form novalidate [formGroup]="editBusinessForm">
-    <div class="container" style="background-color: white">
+  <form novalidate [formGroup]="editBusinessForm" *ngIf="(isNew=='add' || isNew=='edit')">
+    <div class="container" style="background-color: white" >
    <!-- <div class="row">
       <div class="col-25">
         <label for="study" style="font-size:14px;font-family: serif;font-weight:bold;color:black">Study:</label>
@@ -106,7 +108,11 @@ label {
         <label for="targetField">SDTM Variable:</label>
       </div>
       <div class="col-75">
-        <input type="text" placeholder="Select Variable Name" formControlName="targetField"/>&nbsp;&nbsp;
+        <!--<input type="text" placeholder="Select Variable Name" formControlName="targetField"/>&nbsp;&nbsp;-->
+        <select placeholder="Select Variable Name" formControlName="targetField">
+          <option  [ngValue]="null" disabled selected style="display: none;">Select Variable Name</option>
+          <option *ngFor="let variable of sdtmVariables" value="{{variable}}">{{variable}}</option>
+        </select>&nbsp;&nbsp;
       </div>
     </div>
     <div class="row">
@@ -114,7 +120,11 @@ label {
         <label for="sourceFile">Source File:</label>
       </div>
       <div class="col-75">
-        <input type="text" placeholder="Select Source File" formControlName="sourceFile"/>&nbsp;
+        <!--<input type="text" placeholder="Select Source File" formControlName="sourceFile"/>&nbsp;-->
+        <select placeholder="Select Source File" formControlName="sourceFile" (change)="onSelect($event.target.value)">
+          <option  value="null" disabled selected style="display: none;">Select Source Name</option>
+          <option *ngFor="let table of lookupTables" value="{{table}}">{{table}}</option>
+        </select>&nbsp;
       </div>
     </div>
     <div class="row">
@@ -122,7 +132,11 @@ label {
         <label for="sourceField">Source Variable:</label>
       </div>
       <div class="col-75">
-        <input type="text" placeholder="Select Source Variable" formControlName="sourceField" />&nbsp;&nbsp;
+       <!-- <input type="text" placeholder="Select Source Variable" formControlName="sourceField" />&nbsp;&nbsp;-->
+       <select placeholder="Select Source Variable" formControlName="sourceField">
+        <option  value="null" disabled selected style="display: none;">Select Variable Name</option>
+        <option *ngFor="let variable of lookupVariables" value="{{variable}}">{{variable}}</option>
+      </select>&nbsp;
       </div>
     </div>
     <div class="row">
@@ -153,9 +167,46 @@ label {
       </div>
     </div>
 </div>
-
 </form>
-
-  <button kendoButton (click)="onCancel($event)" style="color : white;background-color : #074982;border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;">Cancel</button>&nbsp;&nbsp;
-  <button kendoButton [disabled]="!editBusinessForm.valid" (click)="onSave($event)" style="color : white;background-color : #074982;border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;">Submit</button>
+<form name="form"  #f="ngForm" novalidate  *ngIf="(isNew=='import')">
+<div class="container" style="background-color: white">
+    <div class="row">
+        <div class="col-25">
+          <label for="I want to create a new set of rules for">I want to create a new set of rules for:</label>
+        </div>
+        <div class="col-75">
+          <select placeholder="Select study" name="brStudy" [(ngModel)]="searchBRStudy.brStudy">
+            <option  [ngValue]="null" disabled selected style="display: none;">Study Title</option>
+            <option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option>
+          </select>&nbsp;&nbsp;
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-25">
+            <label for="Using this study as a base">Using this study as a base:</label>
+          </div>
+          <div class="col-75">
+            <select placeholder="Select study" name="brMatrixStudy"  [(ngModel)]="searchBRStudy.brMatrixStudy" (change)="filterDomains($event.target.value);">
+              <option  [ngValue]="null" disabled selected style="display: none;">Study Title</option>
+              <option *ngFor="let matrixStudy of matrixStudyTitles" value="{{matrixStudy}}">{{matrixStudy}}</option>
+            </select>&nbsp;&nbsp;
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+              <label for="I want to create a new set of rules for">I want to create a new set of rules for: </label>
+            </div>
+            <div class="col-75">
+              <select placeholder="Select study" name="brSdtmDomain" [(ngModel)]="searchBRStudy.brSdtmDomain">
+                <option  [ngValue]="null" disabled selected style="display: none;">Domain</option>
+                <option *ngFor="let domain of studyDomains" value="{{domain}}">{{domain}}</option>
+              </select>&nbsp;&nbsp;
+            </div>
+          </div>
+  
+</div>
+</form>
+  <button kendoButton (click)="onCancel($event)" style="color : white;background-color : rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;">Cancel</button>&nbsp;&nbsp;
+  <button *ngIf="(isNew=='add' || isNew=='edit')" kendoButton [disabled]="!editBusinessForm.valid" (click)="onSave($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;">Submit</button>
+  <button *ngIf="(isNew=='import')" kendoButton [disabled]="!editBusinessForm.valid" (click)="fetchTemplate(searchBRStudy)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;">Submit</button>
 </kendo-dialog>
