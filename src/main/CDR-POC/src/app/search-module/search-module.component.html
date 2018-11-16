@@ -68,6 +68,12 @@ body {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
+
+.no-skin .nav-list > li {
+    border-color: #E5E5E5;
+    border-top:0px;
+    border-bottom:0px;
+}
 </style>
 </head>
 <body class="no-skin" style="line-height: 0">
@@ -75,10 +81,10 @@ body {
 					<h3 class="col-sm-8" style='font-size: 18px;margin-top: 16px;margin-bottom: -2px;width: 100.666%;color:white;text-align:left;font-family: Open Sans Regular'>
               <span style="color:black;font-size: 20px;">
                 <img class="pull-left" style="margin-top: -6px;width: 35px;" src="assets/images/NewLogoImg.png" alt="Logo" />
-                &nbsp;CApps
+                &nbsp;ClinApps
               </span>
               <span style="color:black;font-family:Open Sans Regular;font-weight: 100;font-size: 16px;">– Path to SDTM</span>
-              <span class="input-icon" style="padding-bottom: 6px;margin-left:720px">
+              <span class="input-icon" style="padding-bottom: 6px;margin-left:709px">
                 <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
                 <i class="ace-icon fa fa-search nav-search-icon"></i>
               </span>
@@ -115,22 +121,52 @@ body {
         </div>
         <hr style="margin-top: 1px;margin-bottom: 0px;border-top: 4px solid #074982;"/>
         <div class="panel panel-default" style="margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 5px;padding-bottom: 3px;background: white;">
-          <h3 class="row-label" style="text-align:left;width:90%;font-family:Open Sans Regular;font-size:14px">
-            <img class="pull-left" style="margin-top: -10px;width: 35px;" src="assets/images/NewStudyConf.png" alt="Logo" />&nbsp;
+          <h3 class="row-label" style="text-align:left;width:97%;font-family:Open Sans Regular;font-size:14px">
+            <img class="pull-left" style="margin-top: -7px;width: 35px;" src="assets/images/NewStudyConf.png" alt="Logo" />&nbsp;
             <b>Study Configuration</b>
-            <img class="pull-right" style="margin-top: -3px;width: 20px;margin-right: -108px;" src="assets/images/AddStudy.png" alt="Logo" />&nbsp;
+            <span>
+              <img class="pull-right" style="margin-top: -3px;width: 30px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Upload" src="assets/images/NewNote.png" alt="Logo" />&nbsp;
+            </span>
+            <span>
+              <img class="pull-right" style="margin-top: -3px;width: 30px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Download" src="assets/images/studyDownload.png" alt="Logo" />&nbsp;
+            </span>
+            <span>
+              <img class="pull-right" style="margin-top: -3px;width: 30px;margin-right: -90px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Add Study" (click)="addHandler()" src="assets/images/AddStudy.png" alt="Logo" />&nbsp;
+            </span>
           </h3>
         </div>
         <div class="panel panel-default" style="height:395px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
-          <h3 class="row-label" style="margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;"><b>Filtered By: </b>
+          <h3 class="row-label" style="margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;">
+            <b>Filtered By: 
+              <span *ngIf="searchStudy['studyID']">
+                <button class="btn btn-success" style="background-color:#E4E6E9;padding-top:4px;border-radius: 20px;;margin-left:15px">
+                  <span style="color:black;font-family:Open Sans Regular;font-size:10px;">{{searchStudy.studyID}} </span>
+                </button>
+               </span>
+               <span *ngIf="searchStudy['phase']">
+                <button class="btn btn-success" style="background-color:#E4E6E9;padding-top:4px;border-radius: 20px;;margin-left:15px">
+                  <span style="color:black;font-family:Open Sans Regular;font-size:10px;">{{searchStudy.phase}} </span>
+                </button>
+                </span>
+                <span *ngIf="searchStudy['status']">
+                <button class="btn btn-success" style="background-color:#E4E6E9;padding-top:4px;border-radius: 20px;;margin-left:15px">
+                  <span style="color:black;font-family:Open Sans Regular;font-size:10px;">{{searchStudy.status}} </span>
+                </button>
+                </span>
+                <span *ngIf="searchStudy['source']">
+                <button class="btn btn-success" style="background-color:#E4E6E9;padding-top:4px;border-radius: 20px;;margin-left:15px">
+                  <span style="color:black;font-family:Open Sans Regular;font-size:10px;"> {{searchStudy.source}}</span>
+                </button>
+              </span>
+            </b>
             <a class="float:right" style="margin-right: -111px;padding-top: 0px;padding-bottom: 5px;float: right;color: #074982;font-family: Open Sans Regular;font-size: 12px;"><b>Clear all Filters</b></a>
           </h3>
           <hr style="margin-top: -6px;border-width: 2px;"/>
         <a href="#" class="menu-toggler invisible" id="menu-toggler" data-target="#sidebar"></a>
-        <div id="sidebar" class="sidebar responsive-min ace-save-state">
-            <ul class="nav nav-list" >
+        <div id="sidebar" class="col-sm-2" style="margin-left: 15px;border-style: solid;border-width: 1px;border-color: #E5E5E5;margin-left:3px" >
+            <ul class="nav nav-list" style="border-top: 0px;">
                 <li>
-                    <a href="#" class="dropdown-toggle" style="color: #074982">
+                    <a href="#" class="dropdown-toggle" style="border-top: 0px;color: #074982">
         							<i class="menu-icon fa fa-filter"></i>
         							<span class="menu-text" >
         								<a href="" style="font-family:Open Sans Regular;font-size:12px;color:#074982" ><b>Filter</b></a>
@@ -141,19 +177,19 @@ body {
                     <form name="form"  #f="ngForm" novalidate>
                       <fieldset>
                         <div class="" style="background-color: white;">
-                          <div ng-if="paramId == studyInfo" style="overflow:auto; width:200px;height: 304px;" id="studyInfo" class="tab-pane in active">
+                          <div ng-if="paramId == studyInfo" style="overflow:auto; width:200px;height: 285px;" id="studyInfo" class="tab-pane in active">
                               <!-- Study Info SEARCH -->
 
                               <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
                                   <ul class="nav  nav-tabs" style="border-bottom: 0px;">
                                     <li style="border-bottom: 0px;">
-                                        <a data-toggle="tab" (click)="drp()"  style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;border-bottom: 0px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
+                                        <a data-toggle="tab" (click)="studyDrp()"  style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
                                           Study ID <span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
                                         </a>
                                     </li>
                                   </ul>
-                                  <div *ngIf="drpSelected" class="dropdown-container" style="border-bottom: 0px;margin-top: 7px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 76%;height: 65px;" id="form-field-select-1" >
-                                    <select class="form-control"  id="form-field-select-1" name="phase" [(ngModel)]="searchStudy.phase" (ngModelChange)="fetch(searchStudy.phase)">
+                                  <div *ngIf="studyShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 76%;height: 35px;" id="form-field-select-1" >
+                                    <select class="form-control"  id="form-field-select-1" name="studyID" [(ngModel)]="searchStudy.studyID" (ngModelChange)="fetch(searchStudy.phase)">
                                         <option value="undefined" disabled selected style="display: none;">Select an Option</option>
    					                            <option value="Phase1">Phase 1</option>
                                         <option value="Phase2">Phase 2</option>
@@ -170,44 +206,61 @@ body {
                                 <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
                                     <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
                                       <li style="border-bottom: 0px;">
-                                          <a data-toggle="tab" (click)="drp()"  style="margin-left: 10px;margin-bottom:6px;border-bottom: 0px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
+                                          <a data-toggle="tab" (click)="phaseDrp()"  style="margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
                                             Phase<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
                                           </a>
                                       </li>
                                     </ul>
-                                    <div *ngIf="drpSelected" class="dropdown-container" style="border-bottom: 0px;margin-top: 7px;margin-left: 6px;font-family: Open Sans Regular;font-size:12px;width: 50%;height: 65px;" id="form-field-select-1" >
-                                        <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="Phase" [(ngModel)]="searchStudy.phase"> Phase 1<br>
+                                    <div *ngIf="phaseShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 76%;height: 35px;" id="form-field-select-1" >
+                                        <!--<input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="Phase" [(ngModel)]="searchStudy.phase"> Phase 1<br>
                                         <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="Phase" [(ngModel)]="searchStudy.phase"> Phase 2<br>
-                                        <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="Phase" [(ngModel)]="searchStudy.phase"> Phase 3
+                                        <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="Phase" [(ngModel)]="searchStudy.phase"> Phase 3 -->
+                                        <select class="form-control"  id="form-field-select-1" name="phase" [(ngModel)]="searchStudy.phase" (ngModelChange)="fetch(searchStudy.phase)">
+                                            <option value="undefined" disabled selected style="display: none;">Select an Option</option>
+       					                            <option value="Phase 1">Phase 1</option>
+                                            <option value="Phase 2">Phase 2</option>
+                                            <option value="Phase 3">Phase 3</option>
+                                        </select>
                                   </div>
                                   </div>
 
                                   <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
                                       <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
                                         <li style="border-bottom: 0px;">
-                                            <a data-toggle="tab" (click)="drp()"  style="margin-left: 10px;margin-bottom:6px;border-bottom: 0px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
+                                            <a data-toggle="tab" (click)="statusDrp()"  style="margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
                                               Status<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
                                             </a>
                                         </li>
                                       </ul>
-                                      <div *ngIf="drpSelected" class="dropdown-container" style="border-bottom: 0px;margin-top: 7px;margin-left: 6px;font-family: Open Sans Regular;font-size:12px;width: 50%;height: 65px;" id="form-field-select-1" >
-                                          <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="status" [(ngModel)]="searchStudy.status"> Active<br>
-                                          <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="status" [(ngModel)]="searchStudy.status"> In Active
+                                      <div *ngIf="statusShowOptions" style="border-bottom: 0px;margin-top: 2px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 76%;height: 35px;" id="form-field-select-1" >
+                                          <!--<input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="status" [(ngModel)]="searchStudy.status"> Active<br>
+                                          <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="status" [(ngModel)]="searchStudy.status"> In Active-->
+                                          <select class="form-control"  id="form-field-select-1" name="status" [(ngModel)]="searchStudy.status" (ngModelChange)="fetch(searchStudy.status)">
+                                              <option value="undefined" disabled selected style="display: none;">Select an Option</option>
+         					                            <option value="active">Active</option>
+                                              <option value="Inactive">In active</option>
+                                          </select>
                                     </div>
                                     </div>
 
                                     <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
                                         <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
                                           <li style="border-bottom: 0px;">
-                                              <a data-toggle="tab" (click)="drp()"  style="margin-left: 10px;margin-bottom:6px;border-bottom: 0px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
+                                              <a data-toggle="tab" (click)="sourceDrp()"  style="margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
                                                 Select Source<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
                                               </a>
                                           </li>
                                         </ul>
-                                        <div *ngIf="drpSelected" class="dropdown-container" style="border-bottom: 0px;margin-top: 7px;margin-left: 6px;font-family: Open Sans Regular;font-size:12px;width: 50%;height: 65px;" id="form-field-select-1" >
-                                            <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="source" [(ngModel)]="searchStudy.status"> Source 1<br>
+                                        <div *ngIf="sourceShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 76%;height: 35px;" id="form-field-select-1" >
+                                          <!--  <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="source" [(ngModel)]="searchStudy.status"> Source 1<br>
                                             <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="source" [(ngModel)]="searchStudy.status"> Source 2<br>
-                                            <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="source" [(ngModel)]="searchStudy.status"> Source 3
+                                            <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="source" [(ngModel)]="searchStudy.status"> Source 3 -->
+                                            <select class="form-control"  id="form-field-select-1" name="source" [(ngModel)]="searchStudy.source" (ngModelChange)="fetch(searchStudy.source)">
+                                                <option value="undefined" disabled selected style="display: none;">Select an Option</option>
+           					                            <option value="Phase1">Source 1</option>
+                                                <option value="Phase2">Source 2</option>
+                                                <option value="Phase3">Source 3</option>
+                                            </select>
                                       </div>
                                       </div>
                           </div>
@@ -224,32 +277,355 @@ body {
                   <div class="row" style="margin-top: -23px;">
                     <kendo-grid
                         [data]="view | async"
-                        [height]="345"
+                        [height]="330"
                         [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
                         [pageable]="true"
                         (dataStateChange)="onStateChange(searchStudy, $event)"
                         (edit)="editHandler($event, searchStudy)" (remove)="removeHandler($event)"
                         (add)="addHandler($event)"
-                        style="width: 101%"
+                        style="width: 99%;"
                       >
-                      <kendo-grid-column [headerStyle]="{'font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="studyID" title="Study ID"></kendo-grid-column>
-                      <kendo-grid-column [headerStyle]="{'font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="title"  title="Study Title"></kendo-grid-column>
-                      <kendo-grid-column [headerStyle]="{'font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="phase" title="Phase"></kendo-grid-column>
-                      <kendo-grid-column [headerStyle]="{'font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="status" title="Status"></kendo-grid-column>
-                      <kendo-grid-column [headerStyle]="{'font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="therapeuticArea" title="Therapeutic Area"></kendo-grid-column>
-                      <kendo-grid-column [headerStyle]="{'font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="source" title="Source"></kendo-grid-column>
-                      <kendo-grid-command-column [headerStyle]="{'font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" title="Actions" width="220">
+                      <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="studyID" title="Study ID"></kendo-grid-column>
+                      <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="title"  title="Study Title"></kendo-grid-column>
+                      <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="phase" title="Phase"></kendo-grid-column>
+                      <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="status" title="Status"></kendo-grid-column>
+                      <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="therapeuticArea" title="Therapeutic Area"></kendo-grid-column>
+                      <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="source" title="Source"></kendo-grid-column>
+                      <kendo-grid-command-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" title="Actions" width="220">
                           <ng-template kendoGridCellTemplate>
                               <button kendoGridEditCommand [primary]="true" style="color : white;background-color : #074982;border-color: white;font-family: Open Sans Regular;font-size: 14px;"><b>Edit</b></button>
                               <button kendoGridRemoveCommand style="font-family: Open Sans Regular;font-size: 12px;"><b>Delete</b></button>
                           </ng-template>
                       </kendo-grid-command-column>
                     </kendo-grid>
-
+                    <div style="background-color:red">
                     <kendo-grid-edit-form [model]="editDataItem" [isNew]="isNew"
                         (save)="saveHandler($event)"
                         (cancel)="cancelHandler()">
                     </kendo-grid-edit-form>
+                    </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.page-content -->
+            </div>
+        </div>
+      </div>
+        <!-- /.main-content -->
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+    </div>
+    <!-- /.main-container -->
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>CDR</title>
+
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <!-- ace settings handler -->
+    <script src="assets/js/ace-extra.min.js"></script>
+
+<style>
+body {
+    font-family: "Lato", sans-serif;
+}
+
+
+/* Style the sidenav links and the dropdown button */
+ .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Main content */
+.main {
+    margin-left: 200px; /* Same as the width of the sidenav */
+    font-size: 20px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+    background-color: white;
+    padding-left: 0px;
+
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+/* Some media queries for responsiveness */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+.no-skin .nav-list > li {
+    border-color: #E5E5E5;
+    border-top:0px;
+    border-bottom:0px;
+}
+</style>
+</head>
+<body class="no-skin" style="line-height: 0">
+    <div id="navbar" class="navbar navbar-default ace-save-state">
+					<h3 class="col-sm-8" style='font-size: 18px;margin-top: 16px;margin-bottom: -2px;width: 100.666%;color:white;text-align:left;font-family: Open Sans Regular'>
+              <span style="color:black;font-size: 20px;">
+                <img class="pull-left" style="margin-top: -6px;width: 35px;" src="assets/images/NewLogoImg.png" alt="Logo" />
+                &nbsp;ClinApps
+              </span>
+              <span style="color:black;font-family:Open Sans Regular;font-weight: 100;font-size: 16px;">– Path to SDTM</span>
+              <span class="input-icon" style="padding-bottom: 6px;margin-left:709px">
+                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                <i class="ace-icon fa fa-search nav-search-icon"></i>
+              </span>
+              <span style="padding-left: 9px;padding-top: 20px; color:#E4E6E9">
+              <i style="font-size:22px" class="ace-icon fa fa-gear"></i>
+              </span>
+              <span style="padding-left: 9px;color:#E4E6E9">
+              <i style="font-size:22px" class="menu-icon fa fa-bell"></i>
+              </span>
+              <span>
+                <img class="pull-right" style="margin-top:-1px;margin-right: 17px;" src="assets/images/avatars/UserImage1.png" alt="User Image" />
+              </span>
+          </h3>
+    </div>
+
+    <div class="main-container ace-save-state" id="main-container">
+        <div>
+          <ul class="nav nav-tabs padding-6 tab-color-blue background-blue"  id="myTab4">
+            <li [routerLinkActive]="['active']">
+                <a data-toggle="tab" routerLink="/home"  style="background-color: white;font-family: Open Sans Regular;font-size: 12px;padding-left: 84px;width:143px">Home</a>
+            </li>
+            <li [routerLinkActive]="['active']">
+                <a data-toggle="tab" routerLink="/searchModule"  style="background-color: white;font-family: Open Sans Regular;font-size: 12px;width:143px">Study Configuration</a>
+            </li>
+
+            <li [routerLinkActive]="['active']">
+                <a data-toggle="tab" routerLink="/busRules"  style="background-color: white;font-family: Open Sans Regular;font-size: 12px;width:183px">Business Rule Configuration</a>
+            </li>
+
+            <li [routerLinkActive]="['active']">
+                <a data-toggle="tab" routerLink="/job"  style="background-color: white;font-family: Open Sans Regular;font-size: 12px;width:143px">Job Execution</a>
+            </li>
+          </ul>
+        </div>
+        <hr style="margin-top: 1px;margin-bottom: 0px;border-top: 4px solid #074982;"/>
+        <div class="panel panel-default" style="margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 5px;padding-bottom: 3px;background: white;">
+          <h3 class="row-label" style="text-align:left;width:97%;font-family:Open Sans Regular;font-size:14px">
+            <img class="pull-left" style="margin-top: -7px;width: 35px;" src="assets/images/NewStudyConf.png" alt="Logo" />&nbsp;
+            <b>Study Configuration</b>
+            <span>
+              <img class="pull-right" style="margin-top: -3px;width: 30px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Upload" src="assets/images/NewNote.png" alt="Logo" />&nbsp;
+            </span>
+            <span>
+              <img class="pull-right" style="margin-top: -3px;width: 30px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Download" src="assets/images/studyDownload.png" alt="Logo" />&nbsp;
+            </span>
+            <span>
+              <img class="pull-right" style="margin-top: -3px;width: 30px;margin-right: -90px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Add Study" (click)="addHandler()" src="assets/images/AddStudy.png" alt="Logo" />&nbsp;
+            </span>
+          </h3>
+        </div>
+        <div class="panel panel-default" style="height:395px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
+          <h3 class="row-label" style="margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;">
+            <b>Filtered By: 
+              <span *ngIf="searchStudy['studyID']">
+                <button class="btn btn-success" style="background-color:#E4E6E9;padding-top:4px;border-radius: 20px;;margin-left:15px">
+                  <span style="color:black;font-family:Open Sans Regular;font-size:10px;">{{searchStudy.studyID}} </span>
+                </button>
+               </span>
+               <span *ngIf="searchStudy['phase']">
+                <button class="btn btn-success" style="background-color:#E4E6E9;padding-top:4px;border-radius: 20px;;margin-left:15px">
+                  <span style="color:black;font-family:Open Sans Regular;font-size:10px;">{{searchStudy.phase}} </span>
+                </button>
+                </span>
+                <span *ngIf="searchStudy['status']">
+                <button class="btn btn-success" style="background-color:#E4E6E9;padding-top:4px;border-radius: 20px;;margin-left:15px">
+                  <span style="color:black;font-family:Open Sans Regular;font-size:10px;">{{searchStudy.status}} </span>
+                </button>
+                </span>
+                <span *ngIf="searchStudy['source']">
+                <button class="btn btn-success" style="background-color:#E4E6E9;padding-top:4px;border-radius: 20px;;margin-left:15px">
+                  <span style="color:black;font-family:Open Sans Regular;font-size:10px;"> {{searchStudy.source}}</span>
+                </button>
+              </span>
+            </b>
+            <a class="float:right" style="margin-right: -111px;padding-top: 0px;padding-bottom: 5px;float: right;color: #074982;font-family: Open Sans Regular;font-size: 12px;"><b>Clear all Filters</b></a>
+          </h3>
+          <hr style="margin-top: -6px;border-width: 2px;"/>
+        <a href="#" class="menu-toggler invisible" id="menu-toggler" data-target="#sidebar"></a>
+        <div id="sidebar" class="col-sm-2" style="margin-left: 15px;border-style: solid;border-width: 1px;border-color: #E5E5E5;margin-left:3px" >
+            <ul class="nav nav-list" style="border-top: 0px;">
+                <li>
+                    <a href="#" class="dropdown-toggle" style="border-top: 0px;color: #074982">
+        							<i class="menu-icon fa fa-filter"></i>
+        							<span class="menu-text" >
+        								<a href="" style="font-family:Open Sans Regular;font-size:12px;color:#074982" ><b>Filter</b></a>
+        							</span>
+        							<b class="arrow fa fa-angle-down"></b>
+        						</a>
+
+                    <form name="form"  #f="ngForm" novalidate>
+                      <fieldset>
+                        <div class="" style="background-color: white;">
+                          <div ng-if="paramId == studyInfo" style="overflow:auto; width:200px;height: 285px;" id="studyInfo" class="tab-pane in active">
+                              <!-- Study Info SEARCH -->
+
+                              <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
+                                  <ul class="nav  nav-tabs" style="border-bottom: 0px;">
+                                    <li style="border-bottom: 0px;">
+                                        <a data-toggle="tab" (click)="studyDrp()"  style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
+                                          Study ID <span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
+                                        </a>
+                                    </li>
+                                  </ul>
+                                  <div *ngIf="studyShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 76%;height: 35px;" id="form-field-select-1" >
+                                    <select class="form-control"  id="form-field-select-1" name="studyID" [(ngModel)]="searchStudy.studyID" (ngModelChange)="fetch(searchStudy.phase)">
+                                        <option value="undefined" disabled selected style="display: none;">Select an Option</option>
+   					                            <option value="Phase1">Phase 1</option>
+                                        <option value="Phase2">Phase 2</option>
+                                        <option value="Phase3">Phase 3</option>
+                                    </select>
+                                      <!--<input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="Phase" [(ngModel)]="searchStudy.phase"> Phase 1<br>
+                                      <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="Phase" [(ngModel)]="searchStudy.phase"> Phase 2<br>
+                                      <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="Phase" [(ngModel)]="searchStudy.phase"> Phase 3
+                                      -->
+                                  </div>
+                                </div>
+
+
+                                <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
+                                    <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
+                                      <li style="border-bottom: 0px;">
+                                          <a data-toggle="tab" (click)="phaseDrp()"  style="margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
+                                            Phase<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
+                                          </a>
+                                      </li>
+                                    </ul>
+                                    <div *ngIf="phaseShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 76%;height: 35px;" id="form-field-select-1" >
+                                        <!--<input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="Phase" [(ngModel)]="searchStudy.phase"> Phase 1<br>
+                                        <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="Phase" [(ngModel)]="searchStudy.phase"> Phase 2<br>
+                                        <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="Phase" [(ngModel)]="searchStudy.phase"> Phase 3 -->
+                                        <select class="form-control"  id="form-field-select-1" name="phase" [(ngModel)]="searchStudy.phase" (ngModelChange)="fetch(searchStudy.phase)">
+                                            <option value="undefined" disabled selected style="display: none;">Select an Option</option>
+       					                            <option value="Phase 1">Phase 1</option>
+                                            <option value="Phase 2">Phase 2</option>
+                                            <option value="Phase 3">Phase 3</option>
+                                        </select>
+                                  </div>
+                                  </div>
+
+                                  <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
+                                      <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
+                                        <li style="border-bottom: 0px;">
+                                            <a data-toggle="tab" (click)="statusDrp()"  style="margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
+                                              Status<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
+                                            </a>
+                                        </li>
+                                      </ul>
+                                      <div *ngIf="statusShowOptions" style="border-bottom: 0px;margin-top: 2px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 76%;height: 35px;" id="form-field-select-1" >
+                                          <!--<input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="status" [(ngModel)]="searchStudy.status"> Active<br>
+                                          <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="status" [(ngModel)]="searchStudy.status"> In Active-->
+                                          <select class="form-control"  id="form-field-select-1" name="status" [(ngModel)]="searchStudy.status" (ngModelChange)="fetch(searchStudy.status)">
+                                              <option value="undefined" disabled selected style="display: none;">Select an Option</option>
+         					                            <option value="active">Active</option>
+                                              <option value="Inactive">In active</option>
+                                          </select>
+                                    </div>
+                                    </div>
+
+                                    <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
+                                        <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
+                                          <li style="border-bottom: 0px;">
+                                              <a data-toggle="tab" (click)="sourceDrp()"  style="margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
+                                                Select Source<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
+                                              </a>
+                                          </li>
+                                        </ul>
+                                        <div *ngIf="sourceShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 76%;height: 35px;" id="form-field-select-1" >
+                                          <!--  <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="source" [(ngModel)]="searchStudy.status"> Source 1<br>
+                                            <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="source" [(ngModel)]="searchStudy.status"> Source 2<br>
+                                            <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="source" [(ngModel)]="searchStudy.status"> Source 3 -->
+                                            <select class="form-control"  id="form-field-select-1" name="source" [(ngModel)]="searchStudy.source" (ngModelChange)="fetch(searchStudy.source)">
+                                                <option value="undefined" disabled selected style="display: none;">Select an Option</option>
+           					                            <option value="Phase1">Source 1</option>
+                                                <option value="Phase2">Source 2</option>
+                                                <option value="Phase3">Source 3</option>
+                                            </select>
+                                      </div>
+                                      </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </form>
+                </li>
+            </ul>   <!-- /.nav-list -->
+        </div>
+
+        <div class="main-content">
+            <div class="main-content-inner">
+                <div class="page-content">
+                  <div class="row" style="margin-top: -23px;">
+                    <kendo-grid
+                        [data]="view | async"
+                        [height]="330"
+                        [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
+                        [pageable]="true"
+                        (dataStateChange)="onStateChange(searchStudy, $event)"
+                        (edit)="editHandler($event, searchStudy)" (remove)="removeHandler($event)"
+                        (add)="addHandler($event)"
+                        style="width: 99%;"
+                      >
+                      <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="studyID" title="Study ID"></kendo-grid-column>
+                      <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="title"  title="Study Title"></kendo-grid-column>
+                      <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="phase" title="Phase"></kendo-grid-column>
+                      <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="status" title="Status"></kendo-grid-column>
+                      <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="therapeuticArea" title="Therapeutic Area"></kendo-grid-column>
+                      <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="source" title="Source"></kendo-grid-column>
+                      <kendo-grid-command-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" title="Actions" width="220">
+                          <ng-template kendoGridCellTemplate>
+                              <button kendoGridEditCommand [primary]="true" style="color : white;background-color : #074982;border-color: white;font-family: Open Sans Regular;font-size: 14px;"><b>Edit</b></button>
+                              <button kendoGridRemoveCommand style="font-family: Open Sans Regular;font-size: 12px;"><b>Delete</b></button>
+                          </ng-template>
+                      </kendo-grid-command-column>
+                    </kendo-grid>
+                    <div style="background-color:red">
+                    <kendo-grid-edit-form [model]="editDataItem" [isNew]="isNew"
+                        (save)="saveHandler($event)"
+                        (cancel)="cancelHandler()">
+                    </kendo-grid-edit-form>
+                    </div>
                     </div>
                     <!-- /.row -->
                 </div>
