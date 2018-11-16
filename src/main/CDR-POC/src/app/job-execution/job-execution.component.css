@@ -24,9 +24,7 @@
     background-color: white;
     color: black
 }
-caption,th{
-    text-align: centre;
-}
+
 th {
     text-align: centre;
 }
@@ -82,3 +80,10 @@ body {
     background-color: #074982!important;
     border-color: #074982;
 }
+
+
+.main-content {
+    padding-left: 90px;
+    padding-top: 18px;
+}
+
