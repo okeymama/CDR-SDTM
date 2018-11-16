@@ -94,8 +94,14 @@ body {
               <span style="padding-left: 9px;color:#E4E6E9">
               <i style="font-size:22px" class="menu-icon fa fa-bell"></i>
               </span>
-              <span>
-                <img class="pull-right" style="margin-top:-1px;margin-right: 17px;" src="assets/images/avatars/UserImage1.png" alt="User Image" />
+              <span dropdown style="padding-bottom: 3px;margin-top: 5px;padding-top: 20px">
+                <button dropdownToggle type="button" class="dropdown-toggle" style="background-color: white;border-color: white;border-width: 0px">
+                <img class="pull-right" style="width: 30px;margin-left: 5px;margin-bottom: -8px;" src="assets/images/avatars/UserImage1.png" />
+                   </button>
+                <ul *dropdownMenu class="dropdown-menu pull-right" role="menu">
+                <li role="menuitem"><a class="dropdown-item" href="#">{{userName }}</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
               </span>
           </h3>
     </div>
@@ -135,7 +141,7 @@ body {
             </span>
           </h3>
         </div>
-        <div class="panel panel-default" style="height:458px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
+        <div class="panel panel-default" style="height:420px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
           <h3 class="row-label" style="margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;">
             <b>Filtered By:
               <span *ngIf="searchStudy['studyID']">
@@ -177,7 +183,7 @@ body {
                     <form name="form"  #f="ngForm" novalidate>
                       <fieldset>
                         <div class="" style="background-color: white;">
-                          <div ng-if="paramId == studyInfo" style="overflow:auto; width:200px;height: 355px;" id="studyInfo" class="tab-pane in active">
+                          <div ng-if="paramId == studyInfo" style="overflow:auto; width:200px;height: 316px;" id="studyInfo" class="tab-pane in active">
                               <!-- Study Info SEARCH -->
 
                               <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
@@ -277,7 +283,7 @@ body {
                   <div class="row" style="margin-top: -23px;">
                     <kendo-grid
                         [data]="view | async"
-                        [height]="400"
+                        [height]="360"
                         [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
                         [pageable]="true"
                         (dataStateChange)="onStateChange(searchStudy, $event)"

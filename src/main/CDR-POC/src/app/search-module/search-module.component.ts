@@ -8,6 +8,7 @@ import { StudyDetails } from '../_models/index';
 import { map } from 'rxjs/operators/map';
 import { EditService } from '../_services/index';
 import { AlertService } from '../_services/index';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-search-module',
@@ -21,7 +22,7 @@ export class SearchModuleComponent implements OnInit {
         skip: 0,
         take: 10
     };
-
+    public userName = '';
     public formGroup: FormGroup;
     public editDataItem: StudyDetails;
     public isNew: boolean;
@@ -36,14 +37,20 @@ export class SearchModuleComponent implements OnInit {
     statusShowOptions: boolean = false;
     sourceDrpSelected: boolean = false;
     sourceShowOptions: boolean = false;
-    constructor(private route: ActivatedRoute, @Inject(EditService) editServiceFactory: any) {
+    constructor(private userService: UserService,private route: ActivatedRoute, @Inject(EditService) editServiceFactory: any) {
         this.editService = editServiceFactory();
     }
 
     public ngOnInit(): void {
         this.getModule();
         this.view = this.editService.pipe(map(data => process(data, this.gridState)));
-        //this.editService.read();
+        const userDetails = this.userService.getUser();
+        if (userDetails !== undefined) {
+        const userDetail = userDetails.firstName + ' ' + userDetails.lastName;
+        this.userName = userDetail;
+        } else {
+          this.userName = 'Admin';
+        }
     }
 
     public getModule(): void {
