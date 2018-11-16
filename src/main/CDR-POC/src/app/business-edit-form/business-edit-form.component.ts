@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Headers, RequestOptions } from '@angular/http';
 import { tap } from 'rxjs/operators/tap';
 import { map } from 'rxjs/operators/map';
+import { Template } from '../_models/index';
 
 
 @Component({
@@ -156,7 +157,8 @@ export class BusinessEditFormComponent implements OnInit {
     }
 
     public fetchTemplate(searchBRStudy): void {
-        this.businessEditService.read(searchBRStudy);
+        //this.businessEditService.read(searchBRStudy);
+        this.businessEditService.save(searchBRStudy, searchBRStudy, 'import');
         this.active = false;
       }
 }
