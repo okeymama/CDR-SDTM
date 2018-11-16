@@ -13,3 +13,8 @@
  {
     background: black
 }
+
+.btn-primary, .btn-primary.focus, .btn-primary:focus {
+    background-color: #074982 !important;
+    border-color: #074982;
+}

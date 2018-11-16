@@ -15,10 +15,11 @@
                       <div class="position-relative"  style="width: 295px;margin-top: 40%;">
                           <div id="login-box" class="login-box visible widget-box" style="padding: 14px;top:-60px">
                               <div class="widget-body" >
-                                  <div class="widget-main">
+                                  <div class="widget-main" style="margin-top: -2px;padding-bottom:10px">
                                       <div class="center" >
-                                           <h1 style='text-align:left;font-size: 12px;color:white;font-family: Open Sans Regular'>Sign in to start your session</h1>
+                                           <h1 style='text-align:left;font-size: 13px;color:white;font-family: Open Sans Regular'>Sign in to start your session</h1>
                                       </div>
+                                      <div class="space"></div>
                                       <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" >
                                             <fieldset>
                                               <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
@@ -42,10 +43,10 @@
                                               <div class="space"></div>
                                               <div class="clearfix && form-group">
                                                   <label class="inline" >
-													<a class="lbl" style="line-height: 2.2;">Forgot Password?</a>
+													<a class="lbl" style="line-height: 2.2;font-family: Open Sans Regular;color: #074982">Forgot Password?</a>
 												  </label>
-                                                  <button  class="width-35 pull-right btn btn-sm btn-primary">
-													<i class="ace-icon fa fa-key"></i>Login
+                                                  <button  class="width-35 pull-right btn btn-sm btn-primary"  >
+													<i class="ace-icon fa fa-key" style="background-color: #074982"></i>Login
 			  									  </button>
                                               </div>
                                             </fieldset>
