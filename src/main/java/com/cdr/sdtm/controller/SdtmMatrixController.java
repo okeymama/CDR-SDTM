@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cdr.sdtm.model.LookUp;
 import com.cdr.sdtm.model.PathToSdtmMatrix;
-import com.cdr.sdtm.model.PathToSdtmTemplate;
 import com.cdr.sdtm.model.Transformation;
+import com.cdr.sdtm.service.LookUpService;
 import com.cdr.sdtm.service.SdtmMatrixService;
 
 @RestController
@@ -29,6 +30,8 @@ public class SdtmMatrixController {
 	
 	@Autowired
 	SdtmMatrixService sdtmMatrixService;
+	@Autowired
+	LookUpService lookUpService;
 	
 	
 	@PutMapping("/matrix/update/{id}")
@@ -133,5 +136,37 @@ public class SdtmMatrixController {
 			}
 			return insertMatrices;
 		}
+	}
+	
+	
+	/**
+	 * Method fetches available source files and source variables from LOOK UP table
+	 * @return
+	 */
+	@GetMapping("/lookup/sourcetables")
+	public List getAllSourceFiles() {
+		List lookup = new ArrayList<>();
+		List<LookUp> sourceTables = new ArrayList<LookUp>();
+		List<String> tables = new ArrayList<String>();
+		sourceTables = lookUpService.findAll();
+		tables = lookUpService.findDistinctTables();
+		lookup.add(sourceTables);
+		lookup.add(tables);
+		return lookup;
+	}
+	
+	
+	/**
+	 * Method fetches distinct target variables from path_to_sdtm_matrix table 
+	 *       for business rules config screen edit -  SDTM variables dropdown.
+	 * @return
+	 */
+	@RequestMapping(value = "/matrix/targetVariables", method = RequestMethod.GET)
+	public List<String> getDistinctSDTMVariables() {
+		LOGGER.info("Distinct SDTM Variables method - STARTS");
+		List<String> targetVariables = new ArrayList<String>();
+		targetVariables = sdtmMatrixService.findDistinctSDTMVariables();
+		LOGGER.info("Distinct SDTM Variables method - ENDS"); 
+		return targetVariables;
 	}
 }

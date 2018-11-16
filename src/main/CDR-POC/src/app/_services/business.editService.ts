@@ -49,8 +49,21 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
         return this.http.get<any[]>(`/api/CDR/matrix/transformations`);
     }
 
-    public save(data: any, searchBRStudy, isNew?: boolean ) {
-        const action = isNew ? CREATE_ACTION : UPDATE_ACTION;
+    public fetchLookUpData() {
+        return this.http.get<any[]>(`/api/CDR/lookup/sourcetables`);
+    }
+
+    public fetchSDTMVariables() {
+        return this.http.get<any[]>(`/api/CDR/matrix/targetVariables`);
+    }
+
+    public save(data: any, searchBRStudy, isNew?: any ) {
+        let action = '';
+        if (isNew === 'add') {
+            action = CREATE_ACTION;
+        } else if (isNew === 'edit') {
+            action = UPDATE_ACTION;
+        }
         this.reset();
         this.fetch(data, action)
           .subscribe(() => this.read(searchBRStudy), () => this.read(searchBRStudy));

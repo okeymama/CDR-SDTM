@@ -13,8 +13,10 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./business-rule.component.css']
 })
 export class BusinessRuleComponent implements OnInit {
-    public opened = false;
-     public dataSaved = false;
+  studyDrpSelected = false;
+  studyShowOptions = false;
+  phaseDrpSelected = false;
+  phaseShowOptions = false;
   public drpSelected = false;
   userName = '';
   public matrixStudyTitles: any[];
@@ -29,7 +31,7 @@ export class BusinessRuleComponent implements OnInit {
    };
 
    public editBizDataItem: Template;
-   public isNew: boolean;
+   public isNew: any;
    private businessEditService: BusinessEditService;
 
    public drp(): void {
@@ -68,14 +70,14 @@ export class BusinessRuleComponent implements OnInit {
          this.businessEditService.read(searchBRStudy);
      }
 
-     public addHandler() {
+     public addHandler(flag: any) {
          this.editBizDataItem = new Template();
-         this.isNew = true;
+         this.isNew = flag;
      }
 
      public editHandler({dataItem}) {
          this.editBizDataItem = dataItem;
-         this.isNew = false;
+         this.isNew = 'edit';
      }
 
      public cancelHandler() {
@@ -109,22 +111,42 @@ export class BusinessRuleComponent implements OnInit {
 
      public getDomain(): String {
         if (this.searchBRStudy != null && this.searchBRStudy.brSdtmDomain != null) {
-            return this.searchBRStudy.brSdtmDomain + ' Domain';
+            return this.capitalizeFirstLetter(this.searchBRStudy.brSdtmDomain) + ' Domain';
         } else {
             return 'Select a study and SDTM domain to see business rules';
         }
      }
 
-     public close() {
-       this.opened = false;
-     }
- 
-     public open() {
-       this.opened = true;
-     }
- 
-     public submit() {
-         this.dataSaved = true;
-         this.close();
+     public studyDrp(): void {
+        if (this.studyDrpSelected === false) {
+          this.studyShowOptions = true;
+          this.studyDrpSelected = true;
+        } else {
+          this.studyShowOptions = false;
+          this.studyDrpSelected = false;
+        }
+      }
+      public phaseDrp(): void {
+        if (this.phaseDrpSelected === false) {
+          this.phaseShowOptions = true;
+          this.phaseDrpSelected = true;
+        } else {
+          this.phaseShowOptions = false;
+          this.phaseDrpSelected = false;
+        }
+      }
+
+      capitalizeFirstLetter(str) {
+          let temp = str;
+          if (str != null && str.length > 2) {
+            temp = str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+          }
+         return temp;
+      }
+
+      public getStudy(): String {
+        if (this.searchBRStudy != null && this.searchBRStudy.brMatrixStudy != null) {
+            return this.capitalizeFirstLetter(this.searchBRStudy.brMatrixStudy) + ' Study';
+        }
      }
  }

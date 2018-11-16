@@ -18,9 +18,17 @@ import { map } from 'rxjs/operators/map';
     templateUrl: './business-edit-form.component.html'
 })
 export class BusinessEditFormComponent implements OnInit {
+    public matrixStudyTitles: any[];
+    public studyTitles: any[];
+    public studyDomains: any[];
+    public searchBRStudy: any = {};
     public transPlaceHolder = 'Enter Transformation Logic'; 
     private businessEditService: BusinessEditService;
     public transTypes: any[];
+    public lookups: any[];
+    public lookupVariables: any[];
+    public lookupTables: any[];
+    public sdtmVariables: any[];
     public active = false;
     public opened: boolean = false;
     public errorMsg: string;
@@ -49,6 +57,9 @@ export class BusinessEditFormComponent implements OnInit {
         this.active = matrix !== undefined;
         if (this.active && matrix.transformation_type) {
             this.changePlaceholderAndValue(matrix.transformation_type);
+        }
+        if (this.active && matrix.sourceFile) {
+            this.onSelect(matrix.sourceFile);
         }
 
     }
@@ -83,6 +94,19 @@ export class BusinessEditFormComponent implements OnInit {
         this.businessEditService.fetchTransformationTypes().subscribe(data => {
             this.transTypes = data;
         });
+        this.businessEditService.fetchLookUpData().subscribe(data => {
+            this.lookups = data[0];
+            this.lookupTables = data[1];
+        });
+        this.businessEditService.fetchSDTMVariables().subscribe(data => {
+            this.sdtmVariables = data;
+        });
+        this.businessEditService.fetchStudyTitles().subscribe(data => {
+            this.studyTitles = data;
+        });
+        this.businessEditService.fetchMatrixStudyTitles().subscribe(data => {
+          this.matrixStudyTitles = data;
+      });
     }
 
     public changePlaceholderAndValue(value: any) {
@@ -111,4 +135,28 @@ export class BusinessEditFormComponent implements OnInit {
             default: this.transPlaceHolder = 'Enter Transformation';
         }
     }
+
+    public onSelect(table: any) {
+        this.lookupVariables = [];
+        for (let i = 0; i < this.lookups.length; i++) {
+          if (this.lookups[i].lookUpTable === table) {
+            this.lookupVariables.push(this.lookups[i].lookUpVariable);
+          }
+        }
+    }
+
+    filterDomains(studyTitle: any) {
+        if (studyTitle === 'undefined') {
+           this.studyDomains = [];
+        } else {
+           this.businessEditService.fetchDomainsByStudy(studyTitle).subscribe(data => {
+               this.studyDomains = data;
+           });
+        }
+    }
+
+    public fetchTemplate(searchBRStudy): void {
+        this.businessEditService.read(searchBRStudy);
+        this.active = false;
+      }
 }
