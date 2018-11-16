@@ -26,7 +26,6 @@ label {
 .container {
     border-radius: 5px;
     background-color: #f2f2f2;
-    padding: 20px;
 }
 
 .col-25 {
@@ -207,6 +206,6 @@ label {
 </div>
 </form>
   <button kendoButton (click)="onCancel($event)" style="color : white;background-color : rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;">Cancel</button>&nbsp;&nbsp;
-  <button *ngIf="(isNew=='add' || isNew=='edit')" kendoButton [disabled]="!editBusinessForm.valid" (click)="onSave($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;">Submit</button>
-  <button *ngIf="(isNew=='import')" kendoButton [disabled]="!editBusinessForm.valid" (click)="fetchTemplate(searchBRStudy)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;">Submit</button>
+  <button *ngIf="(isNew=='add' || isNew=='edit')" kendoButton [disabled]="!editBusinessForm.valid" (click)="onSave($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -200px;">Submit</button>
+  <button *ngIf="(isNew=='import')" kendoButton [disabled]="!editBusinessForm.valid" (click)="fetchTemplate(searchBRStudy)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -200px;">Submit</button>
 </kendo-dialog>
