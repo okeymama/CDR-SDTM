@@ -112,9 +112,11 @@ export class BusinessRuleComponent implements OnInit {
      public getDomain(): String {
         if (this.searchBRStudy != null && this.searchBRStudy.brSdtmDomain != null) {
             return this.capitalizeFirstLetter(this.searchBRStudy.brSdtmDomain) + ' Domain';
-        } else {
-            return 'Select a study and SDTM domain to see business rules';
         }
+          return null;
+          // else {
+           // return 'Select a study and SDTM domain to see business rules';
+        // }
      }
 
      public studyDrp(): void {
