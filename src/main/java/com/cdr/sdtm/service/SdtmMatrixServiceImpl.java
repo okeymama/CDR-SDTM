@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 
 import com.cdr.sdtm.model.PathToSdtmMatrix;
@@ -46,7 +49,7 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 			 _matrix.setJoinLogic(pathToSdtmMatrix.getJoinLogic());
 			 _matrix.setTransformation_type(pathToSdtmMatrix.getTransformation_type());
 			 _matrix.setTransformation_logic(pathToSdtmMatrix.getTransformation_logic()); 
-			 if(pathToSdtmMatrix.getTransformation_logic() != null && pathToSdtmMatrix.getTransformation_logic() != "") {
+			 if(pathToSdtmMatrix.getTransformation_logic() != null && pathToSdtmMatrix.getTransformation_logic() != "" && pathToSdtmMatrix.getTransformation_type() != null) {
 			 _matrix.setBack_transformation_logic(getTransformationLogic(pathToSdtmMatrix.getTransformation_type(),pathToSdtmMatrix.getTransformation_logic()));
 			 }
 		     sdtmMatrixRepository.save(_matrix);
@@ -135,6 +138,39 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 	@Override
 	public List<String> findDistinctSDTMVariables() {
 		return sdtmMatrixRepository.findDistinctSDTMVariables();
+	}
+
+	@Override
+	public List<PathToSdtmMatrix> findAll(PathToSdtmMatrix matrix) {
+		
+		ExampleMatcher matcher = ExampleMatcher.matching()
+											   .withIgnoreNullValues()
+											   .withStringMatcher(StringMatcher.CONTAINING)
+											   .withIgnorePaths("id")
+											   .withMatcher("study", ExampleMatcher.GenericPropertyMatcher.of(StringMatcher.EXACT))
+											   .withMatcher("domain", ExampleMatcher.GenericPropertyMatcher.of(StringMatcher.EXACT));
+		
+		Example<PathToSdtmMatrix> example = Example.of(matrix, matcher);
+		
+		return sdtmMatrixRepository.findAll(example);
+	}
+
+	@Override
+	public PathToSdtmMatrix createMatrix(PathToSdtmMatrix pathToSdtmMatrix) {
+		 PathToSdtmMatrix _matrix = new PathToSdtmMatrix();
+		 _matrix.setStudy(pathToSdtmMatrix.getStudy());
+		 _matrix.setDomain(pathToSdtmMatrix.getDomain());
+		 _matrix.setSubDomain(pathToSdtmMatrix.getSubDomain());
+		 _matrix.setTargetField(pathToSdtmMatrix.getTargetField());
+		 _matrix.setSourceFile(pathToSdtmMatrix.getSourceFile());
+		 _matrix.setSourceField(pathToSdtmMatrix.getSourceField());
+		 _matrix.setJoinLogic(pathToSdtmMatrix.getJoinLogic());
+		 _matrix.setTransformation_type(pathToSdtmMatrix.getTransformation_type());
+		 _matrix.setTransformation_logic(pathToSdtmMatrix.getTransformation_logic()); 
+		 if(pathToSdtmMatrix.getTransformation_logic() != null && pathToSdtmMatrix.getTransformation_logic() != "" && pathToSdtmMatrix.getTransformation_type() != null) {
+		 _matrix.setBack_transformation_logic(getTransformationLogic(pathToSdtmMatrix.getTransformation_type(),pathToSdtmMatrix.getTransformation_logic()));
+		 }
+		return sdtmMatrixRepository.save(_matrix);
 	}
 
 

@@ -74,6 +74,13 @@ body {
     border-top:0px;
     border-bottom:0px;
 }
+
+.k-button {
+    background-color: white;
+    border-color: white;
+    border-radius: 5px;
+    border: none;
+}
 </style>
 </head>
 <body class="no-skin" style="line-height: 0">
@@ -134,19 +141,20 @@ body {
               <img class="pull-right" style="margin-top: -3px;width: 27.5px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Notes" src="assets/images/RightImage1.png" alt="Logo" />&nbsp;
             </span>
             <span>
-              <img class="pull-right" style="margin-top: -3px;width: 27.5px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Import" (click)="addHandler('import')" src="assets/images/NewNote.png" alt="Logo" />&nbsp;
+              <img class="pull-right" style="margin-top: -3px;width: 27.5px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Import" (click)="addHandler('import',searchBRStudy)" src="assets/images/NewNote.png" alt="Logo" />&nbsp;
             </span>
             <span>
               <img class="pull-right" style="margin-top: -3px;width: 27.5px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Download" src="assets/images/studyDownload.png" alt="Logo" />&nbsp;
             </span>
             <span>
-              <img class="pull-right" style="margin-top: -3px;width: 27.5px;margin-right: -111px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Add Business Rule" (click)="addHandler('add')" src="assets/images/AddStudy.png" alt="Logo" />&nbsp;
+              <img class="pull-right" style="margin-top: -3px;width: 27.5px;margin-right: -111px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Add Business Rule" (click)="addHandler('add',searchBRStudy)" src="assets/images/AddStudy.png" alt="Logo" />&nbsp;
             </span>
           </h3>
         </div>
         <div class="panel panel-default" style="height:420px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
           <h3 class="row-label" style="margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;">
-            <b>{{getDomain()}}</b>
+            <span *ngIf="(getDomain() == null)">Select a study and SDTM domain to see business rules</span>
+            <b><span *ngIf="(getDomain() != null)">{{getDomain()}}</span></b>
           </h3>
           <hr style="margin-top: -6px;border-width: 2px;"/>
         <a href="#" class="menu-toggler invisible" id="menu-toggler" data-target="#sidebar"></a>
@@ -176,9 +184,9 @@ body {
                                     </li>
                                   </ul>
                                   <div *ngIf="studyShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 76%;height: 35px;" id="form-field-select-1" >
-                                    <select class="form-control"  id="form-field-select-1" name="brMatrixStudy" [(ngModel)]="searchBRStudy.brMatrixStudy" (change)="filterDomains($event.target.value);fetchTemplate(searchBRStudy)">
+                                    <select class="form-control"  id="form-field-select-1" name="brStudy" [(ngModel)]="searchBRStudy.brStudy" (change)="filterDomains($event.target.value);fetchTemplate(searchBRStudy)">
                                         <option value="undefined" disabled selected style="display: none;">Select an Option</option>
-                                        <option *ngFor="let matrixStudy of matrixStudyTitles" value="{{matrixStudy}}">{{matrixStudy}}</option>
+                                        <option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option>
                                     </select>
                                     
                                   </div>
@@ -226,13 +234,19 @@ body {
                       <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="sourceFile"  title="Source File"></kendo-grid-column>
                       <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="sourceField" title="Source Variable"></kendo-grid-column>
                       <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="joinLogic" title="Join Logic"></kendo-grid-column>
-                      <kendo-grid-column [width]="160" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="transformation_type" title="Transformation Type"></kendo-grid-column>
-                      <kendo-grid-column [width]="160" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="transformation_logic" title="Transformation Logic"></kendo-grid-column>
-                      <kendo-grid-command-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" title="Actions" [width]="140">
+                      <kendo-grid-column [width]="170" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="transformation_type" title="Transformation Type"></kendo-grid-column>
+                      <kendo-grid-column [width]="170" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="transformation_logic" title="Transformation Logic"></kendo-grid-column>
+                      <kendo-grid-command-column [width]="100" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" title="Actions">
                           <ng-template kendoGridCellTemplate>
-                              <button kendoGridEditCommand [primary]="true" style="color : white;background-color : #074982;border-color: white;font-family: Open Sans Regular;font-size: 14px;"><b>Edit</b></button>
-                              <button kendoGridRemoveCommand style="font-family: Open Sans Regular;font-size: 12px;"><b>Delete</b></button>
-                          </ng-template>
+                                     <button kendoGridEditCommand [look]="outline" >
+                                            <span class="k-icon k-i-pencil"></span>
+                                      </button>
+                                      <button kendoGridRemoveCommand >
+                                                <span class="k-icon k-i-trash"></span>
+                                      </button>
+                                     
+                                         
+                        </ng-template>   
                       </kendo-grid-command-column>
                     </kendo-grid>
                     <div style="background-color:red">

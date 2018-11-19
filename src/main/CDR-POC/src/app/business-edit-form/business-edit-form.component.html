@@ -103,6 +103,11 @@ label {
       </div> 
     </div>-->
     <div class="row">
+        <div>
+            <kendo-popup [offset]="offset" *ngIf="opened" >
+            <div *ngIf="opened" style="color : #f31700;font-size:12px;font-family: Open Sans;"><b> {{errorMsg}} </b></div>
+          </kendo-popup>
+          </div>
       <div class="col-25">
         <label for="targetField">SDTM Variable:</label>
       </div>
@@ -175,7 +180,7 @@ label {
         </div>
         <div class="col-75">
           <select placeholder="Select study" name="brStudy" [(ngModel)]="searchBRStudy.brStudy">
-            <option  [ngValue]="null" disabled selected style="display: none;">Study Title</option>
+            <option  value="undefined" disabled selected style="display: none;">Study Title</option>
             <option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option>
           </select>&nbsp;&nbsp;
         </div>
@@ -186,18 +191,18 @@ label {
           </div>
           <div class="col-75">
             <select placeholder="Select study" name="brMatrixStudy"  [(ngModel)]="searchBRStudy.brMatrixStudy" (change)="filterDomains($event.target.value);">
-              <option  [ngValue]="null" disabled selected style="display: none;">Study Title</option>
+              <option  value="undefined" disabled selected style="display: none;">Study Title</option>
               <option *ngFor="let matrixStudy of matrixStudyTitles" value="{{matrixStudy}}">{{matrixStudy}}</option>
             </select>&nbsp;&nbsp;
           </div>
         </div>
         <div class="row">
             <div class="col-25">
-              <label for="I want to create a new set of rules for">I want to create a new set of rules for: </label>
+              <label for="For this domain">For this domain: </label>
             </div>
             <div class="col-75">
               <select placeholder="Select study" name="brSdtmDomain" [(ngModel)]="searchBRStudy.brSdtmDomain">
-                <option  [ngValue]="null" disabled selected style="display: none;">Domain</option>
+                <option  value="undefined" disabled selected style="display: none;">Domain</option>
                 <option *ngFor="let domain of studyDomains" value="{{domain}}">{{domain}}</option>
               </select>&nbsp;&nbsp;
             </div>
@@ -206,6 +211,6 @@ label {
 </div>
 </form>
   <button kendoButton (click)="onCancel($event)" style="color : white;background-color : rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;">Cancel</button>&nbsp;&nbsp;
-  <button *ngIf="(isNew=='add' || isNew=='edit')" kendoButton [disabled]="!editBusinessForm.valid" (click)="onSave($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -200px;">Submit</button>
+  <button *ngIf="(isNew=='add' || isNew=='edit')" kendoButton [disabled]="!editBusinessForm.valid" (click)="onSave($event,isNew)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -200px;">Submit</button>
   <button *ngIf="(isNew=='import')" kendoButton [disabled]="!editBusinessForm.valid" (click)="fetchTemplate(searchBRStudy)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -200px;">Submit</button>
 </kendo-dialog>

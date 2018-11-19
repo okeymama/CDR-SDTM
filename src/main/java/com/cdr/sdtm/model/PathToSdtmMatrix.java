@@ -135,6 +135,11 @@ public class PathToSdtmMatrix {
 		
 	}
 
+	public PathToSdtmMatrix(String studyID, String domain) {
+		this.study = studyID;
+		this.domain = domain;
+	}
+
 	public Long getId() {
 		return id;
 	}

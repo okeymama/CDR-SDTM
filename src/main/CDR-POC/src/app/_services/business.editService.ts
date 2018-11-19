@@ -83,30 +83,41 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
     }
 
     private fetch(searchBRStudy, action: string = '', data?: any): Observable<any> {
-    	let params = new HttpParams();
-    	if(action == 'update') {
-	        const updateUrl = '/api/CDR/matrix/update';
-	        let url = `${updateUrl}/${searchBRStudy.id}`;
-	        let body = JSON.stringify(searchBRStudy);
-	        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-	          return this.http.put(url, searchBRStudy, {headers: headers});
-      	} else if(action == 'delete') {
-	        const deleteUrl = '/api/CDR/matrix/delete';
-	        let url = `${deleteUrl}/${searchBRStudy.id}`;
-	        let body = JSON.stringify(searchBRStudy);
-	        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-	          return this.http.delete(url, searchBRStudy);
-	    } else if (searchBRStudy === 'clear') {
-	        return this.http.get<any[]>(`/api/CDR/matrix/fetchOrInsert/${searchBRStudy}/${searchBRStudy}/${searchBRStudy}`)
-	            .pipe(map(res => <any[]>res));
-    	} else if(action === 'import'){        
-	        console.log(JSON.stringify(searchBRStudy)+"=aaa==searchBRStudy=="+searchBRStudy.brStudy);
-	        params =  params.set('domain', 'Invalid');
-	        return this.http.get<any[]>(`/api/CDR/matrix/fetchOrInsert/${searchBRStudy.brStudy}/${searchBRStudy.brMatrixStudy}/${searchBRStudy.brSdtmDomain}`)
-	            .pipe(map(res => <any[]>res));
-    	} else {
-            return this.http.get<any[]>(`/api/CDR/matrix/${searchBRStudy.brMatrixStudy}/${searchBRStudy.brSdtmDomain}`)
-	            .pipe(map(res => <any[]>res));
-        } 
-	}
+        let params = new HttpParams();
+        if (action === 'create') {
+            const searchUrl = '/api/CDR/matrix/create';
+            let url = `${searchUrl}`;
+            let headers = new HttpHeaders();
+            headers.append('Content-Type', 'application/json');
+              return this.http.post(url, searchBRStudy, {headers: headers});
+          } else if (action === 'update') {
+                const updateUrl = '/api/CDR/matrix/update';
+                let url = `${updateUrl}/${searchBRStudy.id}`;
+                let body = JSON.stringify(searchBRStudy);
+                let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+                return this.http.put(url, searchBRStudy, {headers: headers});
+        } else if (action === 'delete') {
+                const deleteUrl = '/api/CDR/matrix/delete';
+                let url = `${deleteUrl}/${searchBRStudy.id}`;
+                let body = JSON.stringify(searchBRStudy);
+                let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+                return this.http.delete(url, searchBRStudy);
+        } else if (searchBRStudy === 'clear') {
+                return this.http.get<any[]>(`/api/CDR/matrix/fetchOrInsert/${searchBRStudy}/${searchBRStudy}/${searchBRStudy}`)
+                .pipe(map(res => <any[]>res));
+        } else if (action === 'import') {
+                console.log(JSON.stringify(searchBRStudy)+"=aaa==searchBRStudy=="+searchBRStudy.brStudy);
+                params =  params.set('domain', 'Invalid');
+                return this.http.get<any[]>(`/api/CDR/matrix/fetchOrInsert/${searchBRStudy.brStudy}/${searchBRStudy.brMatrixStudy}/${searchBRStudy.brSdtmDomain}`)
+                .pipe(map(res => <any[]>res));
+        } else {
+                if (searchBRStudy.brStudy) {
+                    params =  params.set('StudId', searchBRStudy.brStudy);
+                    }
+                    if (searchBRStudy.brSdtmDomain) {
+                    params =  params.set('StudDomain', searchBRStudy.brSdtmDomain);
+                    }
+                return this.http.get<any[]>(`/api/CDR/matrix/search`, { params: params })
+                    .pipe(map(res => <any[]>res));
+        }}
 }
