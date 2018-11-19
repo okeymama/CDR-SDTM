@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,18 @@ public class SdtmMatrixController {
 	@Autowired
 	LookUpService lookUpService;
 	
+	
+	@PostMapping("/matrix/create")
+	public ResponseEntity<String> saveMatrix(@RequestBody PathToSdtmMatrix matrix) {
+		PathToSdtmMatrix newMatrix = sdtmMatrixService.createMatrix(matrix);
+		if(newMatrix != null) {
+			LOGGER.info("matrix created successfully.");
+			return new ResponseEntity<>("matrix has been created", HttpStatus.OK);
+		} else {
+			LOGGER.info("Error while creating matrix.");
+			return new ResponseEntity<>("Error while matrix creation",HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 	@PutMapping("/matrix/update/{id}")
 	public ResponseEntity<String> updateMatrix(@PathVariable Long id, @RequestBody PathToSdtmMatrix pathToSdtmMatrix) {

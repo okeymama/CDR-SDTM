@@ -68,11 +68,24 @@ export class BusinessEditFormComponent implements OnInit {
     @Output() cancel: EventEmitter<any> = new EventEmitter();
     @Output() save: EventEmitter<Matrix> = new EventEmitter();
 
-    public onSave(e) {
+    public onSave(e, isNew: any) {
         e.preventDefault();
-        this.save.emit(this.editBusinessForm.value);
-        this.active = false;
-        this.transPlaceHolder = 'Enter Transformation';
+        if (isNew === 'add') {
+            //alert(this.editBusinessForm.value.study);
+            //alert(this.editBusinessForm.value.domain);
+            if (this.editBusinessForm.value.study == null || this.editBusinessForm.value.domain == null) {
+                this.opened = true;
+                this.errorMsg = 'Please select study and domain to add a business rule.';
+            } else {
+                this.save.emit(this.editBusinessForm.value);
+                this.active = false;
+                this.transPlaceHolder = 'Enter Transformation';
+            }
+        } else {
+            this.save.emit(this.editBusinessForm.value);
+            this.active = false;
+            this.transPlaceHolder = 'Enter Transformation';
+        }
     }
 
     public close() {

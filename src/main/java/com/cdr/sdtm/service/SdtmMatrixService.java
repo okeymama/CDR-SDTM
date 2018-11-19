@@ -30,4 +30,6 @@ public interface SdtmMatrixService {
 
 	List<PathToSdtmMatrix> findAll(PathToSdtmMatrix matrix);
 
+	PathToSdtmMatrix createMatrix(PathToSdtmMatrix matrix);
+
 }

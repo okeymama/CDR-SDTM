@@ -103,6 +103,11 @@ label {
       </div> 
     </div>-->
     <div class="row">
+        <div>
+            <kendo-popup [offset]="offset" *ngIf="opened" >
+            <div *ngIf="opened" style="color : #f31700;font-size:12px;font-family: Open Sans;"><b> {{errorMsg}} </b></div>
+          </kendo-popup>
+          </div>
       <div class="col-25">
         <label for="targetField">SDTM Variable:</label>
       </div>
@@ -206,6 +211,6 @@ label {
 </div>
 </form>
   <button kendoButton (click)="onCancel($event)" style="color : white;background-color : rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;">Cancel</button>&nbsp;&nbsp;
-  <button *ngIf="(isNew=='add' || isNew=='edit')" kendoButton [disabled]="!editBusinessForm.valid" (click)="onSave($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -200px;">Submit</button>
+  <button *ngIf="(isNew=='add' || isNew=='edit')" kendoButton [disabled]="!editBusinessForm.valid" (click)="onSave($event,isNew)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -200px;">Submit</button>
   <button *ngIf="(isNew=='import')" kendoButton [disabled]="!editBusinessForm.valid" (click)="fetchTemplate(searchBRStudy)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -200px;">Submit</button>
 </kendo-dialog>

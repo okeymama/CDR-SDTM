@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { State, process } from '@progress/kendo-data-query';
-import { Template } from '../_models/index';
+import { Matrix } from '../_models/index';
 import { BusinessEditService } from '../_services/index';
 import { map } from 'rxjs/operators/map';
 import { UserService } from '../_services/user.service';
@@ -30,7 +30,7 @@ export class BusinessRuleComponent implements OnInit {
        take: 10
    };
 
-   public editBizDataItem: Template;
+   public editBizDataItem: Matrix;
    public isNew: any;
    private businessEditService: BusinessEditService;
 
@@ -70,8 +70,10 @@ export class BusinessRuleComponent implements OnInit {
          this.businessEditService.read(searchBRStudy);
      }
 
-     public addHandler(flag: any) {
-         this.editBizDataItem = new Template();
+     public addHandler(flag: any, searchBRStudy: any) {
+         this.editBizDataItem = new Matrix();
+         this.editBizDataItem.study = searchBRStudy.brStudy;
+         this.editBizDataItem.domain = searchBRStudy.brSdtmDomain;
          this.isNew = flag;
      }
 
@@ -84,7 +86,7 @@ export class BusinessRuleComponent implements OnInit {
          this.editBizDataItem = undefined;
      }
 
-     public saveHandler(template: Template) {
+     public saveHandler(template: Matrix) {
          this.businessEditService.save(template, this.searchBRStudy, this.isNew);
 
          this.editBizDataItem = undefined;
@@ -147,8 +149,8 @@ export class BusinessRuleComponent implements OnInit {
       }
 
       public getStudy(): String {
-        if (this.searchBRStudy != null && this.searchBRStudy.brMatrixStudy != null) {
-            return this.capitalizeFirstLetter(this.searchBRStudy.brMatrixStudy) + ' Study';
+        if (this.searchBRStudy != null && this.searchBRStudy.brStudy != null) {
+            return this.capitalizeFirstLetter(this.searchBRStudy.brStudy) + ' Study';
         }
      }
  }
