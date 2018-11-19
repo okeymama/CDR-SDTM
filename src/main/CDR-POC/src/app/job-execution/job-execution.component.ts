@@ -32,6 +32,7 @@ export class JobExecutionComponent implements OnInit {
   isLive: boolean = false;
   isJobAborted = false;
   isDomain: boolean = false;
+  allDomainsLive: boolean = false;
   public gridState: State = {
       sort: [],
       skip: 0,
@@ -128,7 +129,7 @@ export class JobExecutionComponent implements OnInit {
 
 
   public searchJobExecution(searchJob,selectedItems) {
-    this.jobStatus =  true;
+    //this.jobStatus =  true;
 
     console.log( " searchJobExecution selectedItemsList");
     console.log( this.selectedItemsList);
@@ -180,8 +181,8 @@ export class JobExecutionComponent implements OnInit {
     this.loading = false;
     this.data = [];
     this.domainList = [];
-    
-
+   	this.allDomainsLive = false;
+   
     //this.view = '';
     f.form.reset();
 
@@ -189,27 +190,30 @@ export class JobExecutionComponent implements OnInit {
 
  public actionOnJobExecution(item,action){
     if(action=='Run'){
-    	this.isLive = true;
+    	item.isLive = true;
     }else if (action=='Abort'){
-         this.isJobAborted = true;
-         this.isLive = false;        
+         item.isJobAborted = true;
+         item.isLive = false;        
     }
-    this.domainList.push(item.domain);
+    //this.domainList.push(item.domain);
     //domainList.push('Adverse Events');
     let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
- 	return this.http.post(`http://35.171.8.239:3000?Study_name=${item.study}&domain_array=${this.domainList}&Action=${action}`,{headers: headers})
+ 	return this.http.post(`http://35.171.8.239:3000?Study_name=${item.study}&domain_array=${item.domain}&Action=${action}`,{headers: headers})
        .subscribe(data => {this.msg = data });
 
  	
  }
  
  public runForAllDomains(){
-    //action='Run';
+	this.allDomainsLive = true;
     for (let item of this.data) {
     this.domainList.push(item.domain);
      }
     //null checks for study TODO
+    //reload table to disable run buttons
+     this.searchJobExecution(this.searchJob,this.selectedItems);
+    
     let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
  	return this.http.post(`http://35.171.8.239:3000?Study_name=${this.searchJob.study}&domain_array=${this.domainList}&Action=Run`,{headers: headers})
@@ -221,5 +225,18 @@ export class JobExecutionComponent implements OnInit {
       console.log("===ddddd====");
       this.drpSelected = true;
     }
+    
+   
+   public refresh(searchJob,selectedItems): void {
+    this.jobStatus =  false;
+    this.loading = false;
+    this.data = [];
+    this.domainList = [];
+   	this.allDomainsLive = false;
+    
+    this.searchJobExecution(searchJob,selectedItems);
+
+  }
+   
 
 }
