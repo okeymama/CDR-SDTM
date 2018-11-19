@@ -104,9 +104,15 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
 	        params =  params.set('domain', 'Invalid');
 	        return this.http.get<any[]>(`/api/CDR/matrix/fetchOrInsert/${searchBRStudy.brStudy}/${searchBRStudy.brMatrixStudy}/${searchBRStudy.brSdtmDomain}`)
 	            .pipe(map(res => <any[]>res));
-    	} else {
-            return this.http.get<any[]>(`/api/CDR/matrix/${searchBRStudy.brMatrixStudy}/${searchBRStudy.brSdtmDomain}`)
-	            .pipe(map(res => <any[]>res));
+    	} else {     
+                if (searchBRStudy.brStudy) {
+                    params =  params.set('StudId', searchBRStudy.brStudy);
+                    }
+                    if (searchBRStudy.brSdtmDomain) {
+                    params =  params.set('StudDomain', searchBRStudy.brSdtmDomain);
+                    }
+                return this.http.get<any[]>(`/api/CDR/matrix/search`, { params: params })
+                    .pipe(map(res => <any[]>res));
         } 
 	}
 }

@@ -177,9 +177,9 @@ body {
                                     </li>
                                   </ul>
                                   <div *ngIf="studyShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 76%;height: 35px;" id="form-field-select-1" >
-                                    <select class="form-control"  id="form-field-select-1" name="brMatrixStudy" [(ngModel)]="searchBRStudy.brMatrixStudy" (change)="filterDomains($event.target.value);fetchTemplate(searchBRStudy)">
+                                    <select class="form-control"  id="form-field-select-1" name="brStudy" [(ngModel)]="searchBRStudy.brStudy" (change)="filterDomains($event.target.value);fetchTemplate(searchBRStudy)">
                                         <option value="undefined" disabled selected style="display: none;">Select an Option</option>
-                                        <option *ngFor="let matrixStudy of matrixStudyTitles" value="{{matrixStudy}}">{{matrixStudy}}</option>
+                                        <option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option>
                                     </select>
                                     
                                   </div>
