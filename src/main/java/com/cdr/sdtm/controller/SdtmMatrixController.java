@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cdr.sdtm.model.LookUp;
@@ -70,6 +71,17 @@ public class SdtmMatrixController {
 		LOGGER.info("Method Ends."+ matrices.size());
 		return matrices;
 		
+	}
+	
+	@RequestMapping(value = "/matrix/search", method = RequestMethod.GET)
+	public List<PathToSdtmMatrix> getmatrices(@RequestParam(value="StudId",required=false) String studyID,
+			@RequestParam(value="StudDomain",required=false) String domain) {
+		LOGGER.info("Search matrix method - STARTS");
+		List<PathToSdtmMatrix> matrices = new ArrayList<PathToSdtmMatrix>();
+		PathToSdtmMatrix matrix = new PathToSdtmMatrix(studyID,domain);
+		matrices = sdtmMatrixService.findAll(matrix);
+		LOGGER.info("Search matrix method - ENDS");
+		return matrices;	
 	}
 	
 	/**

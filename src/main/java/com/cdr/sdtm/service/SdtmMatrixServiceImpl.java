@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 
 import com.cdr.sdtm.model.PathToSdtmMatrix;
@@ -135,6 +138,21 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 	@Override
 	public List<String> findDistinctSDTMVariables() {
 		return sdtmMatrixRepository.findDistinctSDTMVariables();
+	}
+
+	@Override
+	public List<PathToSdtmMatrix> findAll(PathToSdtmMatrix matrix) {
+		
+		ExampleMatcher matcher = ExampleMatcher.matching()
+											   .withIgnoreNullValues()
+											   .withStringMatcher(StringMatcher.CONTAINING)
+											   .withIgnorePaths("id")
+											   .withMatcher("study", ExampleMatcher.GenericPropertyMatcher.of(StringMatcher.EXACT))
+											   .withMatcher("domain", ExampleMatcher.GenericPropertyMatcher.of(StringMatcher.EXACT));
+		
+		Example<PathToSdtmMatrix> example = Example.of(matrix, matcher);
+		
+		return sdtmMatrixRepository.findAll(example);
 	}
 
 
