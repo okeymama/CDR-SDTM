@@ -202,7 +202,7 @@ export class JobExecutionComponent implements OnInit {
     //domainList.push('Adverse Events');
     let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
- 	return this.http.post(`http://35.171.8.239:3000?Study_name=${item.study}&domain_array=${item.domain}&Action=${action}`,{headers: headers})
+ 	return this.http.post(`http://10.0.2.254?Study_name=${item.study}&domain_array=${item.domain}&Action=${action}`,{headers: headers})
        .subscribe(data => {this.msg = data });
 
  	
@@ -219,7 +219,7 @@ export class JobExecutionComponent implements OnInit {
     
     let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
- 	return this.http.post(`http://35.171.8.239:3000?Study_name=${this.searchJob.study}&domain_array=${this.domainList}&Action=Run`,{headers: headers})
+ 	return this.http.post(`http://10.0.2.254?Study_name=${this.searchJob.study}&domain_array=${this.domainList}&Action=Run`,{headers: headers})
        .subscribe(data => {this.msg = data });
  	
  }
