@@ -15,7 +15,9 @@ export class HomeComponent implements OnInit {
     const userDetails = this.userService.getUser();
     if (userDetails !== undefined) {
     const userDetail = userDetails.firstName + ' ' + userDetails.lastName;
-    this.userName = userDetail;
+    if (userDetail != null) {
+      this.userName = userDetail.trim();
+    }
     } else {
       this.userName = 'Admin';
     }
