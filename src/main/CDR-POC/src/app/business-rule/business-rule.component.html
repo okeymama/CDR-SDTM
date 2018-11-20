@@ -135,19 +135,20 @@ body {
         <hr style="margin-top: 1px;margin-bottom: 0px;border-top: 4px solid #074982;"/>
         <div class="panel panel-default" style="margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 5px;padding-bottom: 3px;background: white;">
           <h3 class="row-label" style="text-align:left;width:97%;font-family:Open Sans Regular;font-size:14px">
-            <img class="pull-left" style="margin-top: -7px;width: 35px;" src="assets/images/BussRules.png" alt="Logo" />&nbsp;
-            Business Rule Configuration &nbsp;&nbsp;<span style="font-size: 12px;"><b>{{getStudy()}}</b></span>
+            <img class="pull-left" style="margin-top: -4px;width: 40px;" src="assets/images/BussRules.png" alt="Logo" />&nbsp;
+            Business Rule Configuration <br>
+            &nbsp;&nbsp;<b>{{getStudy()}}</b>
             <span>
-              <img class="pull-right" style="margin-top: -3px;width: 27.5px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Notes" src="assets/images/RightImage1.png" alt="Logo" />&nbsp;
+              <img class="pull-right" style="margin-top: -10px;width: 27.5px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Notes" src="assets/images/RightImage1.png" alt="Logo" />&nbsp;
             </span>
             <span>
-              <img class="pull-right" style="margin-top: -3px;width: 27.5px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Import" (click)="addHandler('import',searchBRStudy)" src="assets/images/NewNote.png" alt="Logo" />&nbsp;
+              <img class="pull-right" style="margin-top: -10px;width: 27.5px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Import" (click)="addHandler('import',searchBRStudy)" src="assets/images/NewNote.png" alt="Logo" />&nbsp;
             </span>
             <span>
-              <img class="pull-right" style="margin-top: -3px;width: 27.5px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Download" src="assets/images/studyDownload.png" alt="Logo" />&nbsp;
+              <img class="pull-right" style="margin-top: -10px;width: 27.5px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Download" src="assets/images/studyDownload.png" alt="Logo" />&nbsp;
             </span>
             <span>
-              <img class="pull-right" style="margin-top: -3px;width: 27.5px;margin-right: -111px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Add Business Rule" (click)="addHandler('add',searchBRStudy)" src="assets/images/AddStudy.png" alt="Logo" />&nbsp;
+              <img class="pull-right" style="margin-top: -10px;width: 27.5px;margin-right: -111px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Add Business Rule" (click)="addHandler('add',searchBRStudy)" src="assets/images/AddStudy.png" alt="Logo" />&nbsp;
             </span>
           </h3>
         </div>
@@ -208,13 +209,15 @@ body {
                                         </select>
                                   </div>
                                   </div>
-                          </div>
+                                  <!--<button (click)="clear()" style="color : white;background-color : rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-top: 10px;">Clear</button>-->
+                                  <button (click)="clear()" style="height:24px;width: 50px;border-radius: 3px;font-size: 12px; font-family: Open Sans Regular;color : white;background-color : rgb(7, 73, 130);border-color: #074982;font-weight: 400;">Clear</button>
+                                </div>
                         </div>
                       </fieldset>
                     </form>
                 </li>
             </ul>   <!-- /.nav-list -->
-        </div>
+             </div>
 
         <div class="main-content">
             <div class="main-content-inner">
