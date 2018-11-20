@@ -72,7 +72,7 @@
 				style="text-align: left; width: 90%; font-family: Open Sans; font-size: 13px">
 				<img class="pull-left" style="margin-top: -10px; width: 35px;"
 					src="assets/images/JobExecution.png" alt="Logo" />&nbsp; Job
-				Execution<br> &nbsp;&nbsp;<b>{{searchJob.study}}</b>
+				Execution<br> &nbsp;&nbsp;<b *ngIf="(loading)">{{studyInHeader}}</b>
 			</h3>
 			<img class="pull-right" style="width: 32px; margin-top: -30px;"
 				data-toggle="tooltip" title="Add" src="assets/images/AddStudy.png"
@@ -118,7 +118,7 @@
    -->
 		<div class="panel panel-default"
 			style="height: 395px; margin-left: 6px; border-radius: 10px; border-width: 1px; width: 99%; margin-top: 2px; padding-bottom: 3px; background: white;">
-			<div *ngIf="!(loading)">
+			<div *ngIf="!(loading) && !(hideInstructions)">
 
 				<h3 class="row-label"
 					style="margin-top: 7px; text-align: left; font-family: Open Sans Regular; font-size: 12px; width: 90%;">
@@ -207,7 +207,7 @@
 												style="border-bottom: 0px; margin-top: 7px; margin-left: 23px; font-family: Open Sans Regular; font-size: 12px; width: 76%; height: 65px;"
 												id="form-field-select-1">
 												<select class="form-control" id="form-field-select-1"
-													name="study" [(ngModel)]="searchJob.study">
+													name="study" [(ngModel)]="searchJob.study" (ngModelChange)="hideHeader()">
 													<option value="undefined" disabled selected
 														style="display: none;">Choose</option>
 													<option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option>
@@ -245,7 +245,7 @@
 							<table class="table">
 								<thead>
 									<tr>
-										<td *ngIf="loading"><input type="checkbox" /></td>
+										<td> <!-- *ngIf="loading"--><input type="checkbox" /></td>
 										<td>SDTM Domain</td>
 										<td>Last Run</td>
 										<td>Status</td>
@@ -261,12 +261,12 @@
 										<td>{{item.job_status}}</td>
 										<td class="text-align: left;">{{item.message}}</td>
 										<td>
-										<a *ngIf="!(item['isLive']) || (item['isLive'] && item['jobStatus']=='job is completed')" type="button"
-											(click)="actionOnJobExecution(item,'Run')" [ngClass]="{disabled : allDomainsLive}"> <img
+										<a *ngIf="(!item['isLive'] && !allDomainsLive) || (item['isLive'] && item['jobStatus']=='job is completed')" type="button"
+											(click)="actionOnJobExecution(item,'Run')" > <img
 												src="../assets/images/Run.png" alt="Run"
 												style="width: 25px; height: 25px;"> &nbsp;
 										</a> 
-										<a *ngIf="item['isLive']" type="button"
+										<a *ngIf="item['isLive'] || (!item['isLive'] && allDomainsLive)" type="button"
 											style="width: 25px; height: 25px;"> <i
 												class="fa fa-spinner fa-spin"></i> &nbsp;
 										</a> 
@@ -275,14 +275,14 @@
 												src="../assets/images/Run.png" alt="Run"
 												style="width: 25px; height: 25px;"> &nbsp;
 										</a> &nbsp; --> 
-										<a *ngIf="item['isLive']" type="button"
+										<a *ngIf="item['isLive'] || (!item['isLive'] && allDomainsLive)" type="button"
 											(click)="actionOnJobExecution(item,'Abort')"> <img
 												src="../assets/images/Abort.png" alt="Abort"
 												style="width: 25px; height: 25px;">
-										</a> <a *ngIf="!item['isLive'] && item['isJobAborted']" type="button"
+										</a> <!-- <a *ngIf="!item['isLive'] && item['isJobAborted']" type="button"
 											style="width: 25px; height: 25px;"> <i
 												class="fa fa-spinner fa-spin"></i> &nbsp;
-										</a></td>
+										</a> --></td>
 
 									</tr>
 

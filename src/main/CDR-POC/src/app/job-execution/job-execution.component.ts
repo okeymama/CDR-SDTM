@@ -52,6 +52,8 @@ export class JobExecutionComponent implements OnInit {
   domainList = [];
   drpSelected: boolean = false;
   public userName = '';
+  studyInHeader = '';
+  hideInstructions: boolean = false;
   
   public ngOnInit() {
         this.dropdownList = //loadDropdown();
@@ -130,7 +132,7 @@ export class JobExecutionComponent implements OnInit {
 
   public searchJobExecution(searchJob,selectedItems) {
     //this.jobStatus =  true;
-
+    this.hideInstructions=true;
     console.log( " searchJobExecution selectedItemsList");
     console.log( this.selectedItemsList);
 
@@ -150,6 +152,7 @@ export class JobExecutionComponent implements OnInit {
     
     if(searchJob.study) {
       this.loading = true;
+      this.studyInHeader = searchJob.study;
     
       console.log( "params4");
     if(this.isDomain){
@@ -182,7 +185,7 @@ export class JobExecutionComponent implements OnInit {
     this.data = [];
     this.domainList = [];
    	this.allDomainsLive = false;
-   
+    this.hideInstructions = false;
     //this.view = '';
     f.form.reset();
 
@@ -238,5 +241,8 @@ export class JobExecutionComponent implements OnInit {
 
   }
    
+   public hideHeader(){
+   this.hideInstructions = true;
+   }
 
 }
