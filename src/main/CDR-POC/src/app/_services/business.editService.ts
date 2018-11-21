@@ -58,6 +58,16 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
         return this.http.get<any[]>(`/api/CDR/matrix/targetVariables`);
     }
 
+    public fetchTherapeuticAreas() {
+        return this.http.get<any[]>(`/api/CDR/matrix/therapeutics`);
+    }
+
+    public fetchStudiessBytherapeuticArea(therapeuticArea: any) {
+        let params = new HttpParams();
+        params =  params.set('therapeuticArea', therapeuticArea);
+        return this.http.get<any[]>(`/api/CDR/study/ByTherapeuticArea`, {params: params});
+    }
+
     public save(data: any, searchBRStudy, isNew?: any ) {
         let action = '';
         if (isNew === 'add') {

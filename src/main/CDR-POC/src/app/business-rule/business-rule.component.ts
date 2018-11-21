@@ -17,9 +17,12 @@ export class BusinessRuleComponent implements OnInit {
   studyShowOptions = false;
   phaseDrpSelected = false;
   phaseShowOptions = false;
+  statusDrpSelected = false;
+  statusShowOptions = false;
   public drpSelected = false;
   userName = '';
   public matrixStudyTitles: any[];
+  public therapeuticAreas: any[];
   public studyTitles: any[];
   public studyDomains: any[];
   public searchBRStudy: any = {};
@@ -48,9 +51,12 @@ export class BusinessRuleComponent implements OnInit {
       this.businessEditService.fetchStudyTitles().subscribe(data => {
           this.studyTitles = data;
       });
-      this.businessEditService.fetchMatrixStudyTitles().subscribe(data => {
-        this.matrixStudyTitles = data;
+      this.businessEditService.fetchTherapeuticAreas().subscribe(data => {
+        this.therapeuticAreas = data;
     });
+     /* this.businessEditService.fetchMatrixStudyTitles().subscribe(data => {
+        this.matrixStudyTitles = data;
+    });*/
     const userDetails = this.userService.getUser();
     if (userDetails !== undefined) {
     const userDetail = userDetails.firstName + ' ' + userDetails.lastName;
@@ -106,8 +112,29 @@ export class BusinessRuleComponent implements OnInit {
          }
      }
 
+     filterStudies(therapeuticArea: any) {
+        if (therapeuticArea === 'undefined') {
+            // do nothing
+        } else if (therapeuticArea === 'all') {
+            this.businessEditService.fetchStudyTitles().subscribe(data => {
+                this.studyTitles = data;
+            });
+        } else {
+           this.businessEditService.fetchStudiessBytherapeuticArea(therapeuticArea).subscribe(data => {
+               this.studyTitles = data;
+           });
+        }
+    }
+
      public clear() {
         this.searchBRStudy = {};
+        this.studyDomains = [];
+        this.studyShowOptions = false;
+        this.studyDrpSelected = false;
+        this.phaseShowOptions = false;
+        this.phaseDrpSelected = false;
+        this.statusShowOptions = false;
+        this.statusDrpSelected = false;
         this.businessEditService.read('clear');
      }
 
@@ -137,6 +164,16 @@ export class BusinessRuleComponent implements OnInit {
         } else {
           this.phaseShowOptions = false;
           this.phaseDrpSelected = false;
+        }
+      }
+
+      public statusDrp(): void {
+        if (this.statusDrpSelected === false) {
+          this.statusShowOptions = true;
+          this.statusDrpSelected = true;
+        } else {
+          this.statusShowOptions = false;
+          this.statusDrpSelected = false;
         }
       }
 

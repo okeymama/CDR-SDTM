@@ -136,8 +136,8 @@ body {
         <div class="panel panel-default" style="margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 5px;padding-bottom: 3px;background: white;">
           <h3 class="row-label" style="text-align:left;width:97%;font-family:Open Sans Regular;font-size:14px">
             <img class="pull-left" style="margin-top: -4px;width: 40px;" src="assets/images/BussRules.png" alt="Logo" />&nbsp;
-            Business Rule Configuration <br>
-            &nbsp;&nbsp;<b>{{getStudy()}}</b>
+            <span>Business Rule Configuration</span><br>
+            &nbsp;&nbsp;<b><span style="font-size:15px" *ngIf="(getDomain() != null)">{{getStudy()}}</span></b>
             <span>
               <img class="pull-right" style="margin-top: -10px;width: 27.5px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Notes" src="assets/images/RightImage1.png" alt="Logo" />&nbsp;
             </span>
@@ -152,7 +152,7 @@ body {
             </span>
           </h3>
         </div>
-        <div class="panel panel-default" style="height:420px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
+        <div class="panel panel-default" style="height:400px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
           <h3 class="row-label" style="margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;">
             <span *ngIf="(getDomain() == null)">Select a study and SDTM domain to see business rules</span>
             <b><span *ngIf="(getDomain() != null)">{{getDomain()}}</span></b>
@@ -173,19 +173,35 @@ body {
                     <form name="form"  #f="ngForm" novalidate>
                       <fieldset>
                         <div class="" style="background-color: white;">
-                          <div ng-if="paramId == studyInfo" style="overflow:auto; width:200px;height: 316px;" id="studyInfo" class="tab-pane in active">
+                          <div ng-if="paramId == studyInfo" style="overflow:auto; width:200px;height: 295px;" id="studyInfo" class="tab-pane in active">
                               <!-- Study Info SEARCH -->
+                              <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
+                                    <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
+                                      <li style="border-bottom: 0px;">
+                                          <a data-toggle="tab" (click)="statusDrp()"  style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
+                                           Therapeutic Area<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
+                                          </a>
+                                      </li>
+                                    </ul>
+                                    <div *ngIf="statusShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 76%;height: 35px;" id="form-field-select-1" >
+                                       <select class="form-control"  id="form-field-select-1" name="brTherapeuticArea" [(ngModel)]="searchBRStudy.brTherapeuticArea" (change)="filterStudies($event.target.value);"> 
+                                            <option value="undefined" selected disabled style="display: none;">Select an Option</option>
+                                            <option value="all">--All--</option>
+                                            <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticArea}}">{{area.therapeuticArea}}</option>
+                                        </select>
+                                  </div>
+                                  </div>
 
                               <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
                                   <ul class="nav  nav-tabs" style="border-bottom: 0px;">
                                     <li style="border-bottom: 0px;">
-                                        <a data-toggle="tab" (click)="studyDrp()"  style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
+                                        <a data-toggle="tab" (click)="studyDrp()"  style="margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 10px;">
                                           Study ID <span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
                                         </a>
                                     </li>
                                   </ul>
                                   <div *ngIf="studyShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 23px;font-family: Open Sans Regular;font-size:12px;width: 76%;height: 35px;" id="form-field-select-1" >
-                                    <select class="form-control"  id="form-field-select-1" name="brStudy" [(ngModel)]="searchBRStudy.brStudy" (change)="filterDomains($event.target.value);fetchTemplate(searchBRStudy)">
+                                    <select class="form-control"  id="form-field-select-1" name="brStudy" [(ngModel)]="searchBRStudy.brStudy" (change)="filterDomains($event.target.value);">
                                         <option value="undefined" disabled selected style="display: none;">Select an Option</option>
                                         <option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option>
                                     </select>
@@ -225,7 +241,7 @@ body {
                   <div class="row" style="margin-top: -23px;">
                     <kendo-grid
                         [data]="view | async"
-                        [height]="360"
+                        [height]="340"
                         [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
                         [pageable]="true"
                         (dataStateChange)="onStateChange(searchBRStudy, $event)"
@@ -249,7 +265,10 @@ body {
                                       </button>
                                      
                                          
-                        </ng-template>   
+                        </ng-template>
+                        <ng-template kendoGridNoRecordsTemplate>
+                                <span *ngIf="searchBRStudy != null && searchBRStudy.brSdtmDomain != null && searchBRStudy.brStudy != null">No records available.</span>
+                        </ng-template>                    
                       </kendo-grid-command-column>
                     </kendo-grid>
                     <div style="background-color:red">
