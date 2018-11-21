@@ -97,6 +97,11 @@ public class StudyServiceImpl implements StudyService {
 	public List<String> findStudyIds() {
 		return studyRepository.findStudyIds(); 
 	}
+
+	@Override
+	public List<String> findStudiesBytherapeuticArea(String therapeuticArea) {
+		return studyRepository.findStudiesBytherapeuticArea(therapeuticArea);
+	}
 	
 	
 	

@@ -108,5 +108,13 @@ public class StudyController {
 		LOGGER.info("getStudyIds method - ENDS");
 		return studies;
 	}
+	
+	
+	@RequestMapping(value = "/study/ByTherapeuticArea", method = RequestMethod.GET)
+	public List<String> fetchStudiesBytherapeuticArea(@RequestParam(value="therapeuticArea",required=false) String therapeuticArea) {
+		List<String> studies = new ArrayList<String>();
+		studies = studyService.findStudiesBytherapeuticArea(therapeuticArea);
+		return studies;	
+	}
 
 }

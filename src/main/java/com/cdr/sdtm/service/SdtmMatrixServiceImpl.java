@@ -10,8 +10,10 @@ import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 
 import com.cdr.sdtm.model.PathToSdtmMatrix;
+import com.cdr.sdtm.model.TherapeuticAreas;
 import com.cdr.sdtm.model.Transformation;
 import com.cdr.sdtm.repository.SdtmMatrixRepository;
+import com.cdr.sdtm.repository.TherapeuticRepository;
 import com.cdr.sdtm.repository.TransRepository;
 
 @Service
@@ -22,6 +24,9 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 	
 	@Autowired
 	TransRepository transRepository;
+	
+	@Autowired
+	TherapeuticRepository therapeuticRepository;
 
 	@Override
 	public PathToSdtmMatrix saveMatrix(PathToSdtmMatrix pathToSdtmMatrix) {
@@ -77,6 +82,11 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 	@Override
 	public List<Transformation> getTransTypes() {
 		return transRepository.findAll();
+	}
+	
+	@Override
+	public List<TherapeuticAreas> getAllTherapeuticAreas() {
+		return therapeuticRepository.findAll();
 	}
 	
 	public String getTransformationLogic(String type, String logic) {

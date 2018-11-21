@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cdr.sdtm.model.LookUp;
 import com.cdr.sdtm.model.PathToSdtmMatrix;
+import com.cdr.sdtm.model.TherapeuticAreas;
 import com.cdr.sdtm.model.Transformation;
 import com.cdr.sdtm.service.LookUpService;
 import com.cdr.sdtm.service.SdtmMatrixService;
@@ -107,6 +108,18 @@ public class SdtmMatrixController {
 		List<Transformation> transTypes = new ArrayList<Transformation>();
 		transTypes = sdtmMatrixService.getTransTypes();
 		return transTypes;
+	}
+	
+	/**
+	 * Method fetches available transformation types for business rules config 
+	 *        screen from Transformation table
+	 * @return
+	 */
+	@GetMapping("/matrix/therapeutics")
+	public List<TherapeuticAreas> getAllTherapeuticAreas() {
+		List<TherapeuticAreas> therapeuticAreas = new ArrayList<TherapeuticAreas>();
+		therapeuticAreas = sdtmMatrixService.getAllTherapeuticAreas();
+		return therapeuticAreas;
 	}
 	
 	/**

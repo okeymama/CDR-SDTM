@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.cdr.sdtm.model.PathToSdtmMatrix;
+import com.cdr.sdtm.model.TherapeuticAreas;
 import com.cdr.sdtm.model.Transformation;
 
 public interface SdtmMatrixService {
@@ -31,5 +32,7 @@ public interface SdtmMatrixService {
 	List<PathToSdtmMatrix> findAll(PathToSdtmMatrix matrix);
 
 	PathToSdtmMatrix createMatrix(PathToSdtmMatrix matrix);
+	
+	List<TherapeuticAreas> getAllTherapeuticAreas();
 
 }
