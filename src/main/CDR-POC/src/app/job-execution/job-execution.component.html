@@ -188,13 +188,12 @@
 												font-family: Open Sans Regular;
 												 font-size: 12px; width: 76%; height: 35px;"
 												id="form-field-select-1">
-												<select class="form-control" id="form-field-select-1"
-													name="study" [(ngModel)]="searchJob.studyId">
-													<option value="undefined" disabled selected
-														style="display: none;">Choose</option>
-													<option *ngFor="let studyId of studyIds"
-														value="{{studyId}}">{{studyId}}</option>
-												</select>
+												 <select class="form-control"  id="form-field-select-1" 
+												 name="therapeuticArea" [(ngModel)]="searchJob.therapeuticArea" (change)="filterStudyIds($event.target.value);"> 
+                                            <option value="undefined" selected disabled style="display: none;">Choose</option>
+                                            <option value="all">--All--</option>
+                                            <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticArea}}">{{area.therapeuticArea}}</option>
+                                        </select>
 
 											</div>
 										</div>
@@ -213,8 +212,9 @@
 												style="border-bottom: 0px; margin-top: 7px; margin-left: 23px; 
 												font-family: Open Sans Regular; font-size: 12px; width: 76%; height: 35px;"
 												id="form-field-select-1">
+												 
 												<select class="form-control" id="form-field-select-1"
-													name="study" [(ngModel)]="searchJob.studyId">
+													name="study" [(ngModel)]="searchJob.studyId" >
 													<option value="undefined" disabled selected
 														style="display: none;">Choose</option>
 													<option *ngFor="let studyId of studyIds"

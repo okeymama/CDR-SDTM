@@ -49,6 +49,7 @@ export class JobExecutionComponent implements OnInit {
   missingFields = false;
   public studyTitles: any[];
   public studyIds: any[];
+  public therapeuticAreas: any[];
   domainList = [];
   drpSelected: boolean = false;
   public userName = '';
@@ -88,6 +89,9 @@ export class JobExecutionComponent implements OnInit {
        this.fetchStudyIds().subscribe(data => {
           this.studyIds = data;
       });
+        this.fetchTherapeuticAreas().subscribe(data => {
+        this.therapeuticAreas = data;
+    });
       
        const userDetails = this.userService.getUser();
         if (userDetails !== undefined) {
@@ -101,8 +105,30 @@ export class JobExecutionComponent implements OnInit {
         return this.http.get<any[]>(`/api/CDR/study/dropdown`);
     }
     public fetchStudyIds() {
-    	//TODO
-        return this.http.get<any[]>(`/api/CDR/study/dropdown`);
+        return this.http.get<any[]>(`/api/CDR/matrix/therapeutics`);
+    }
+     public fetchTherapeuticAreas() {
+        return this.http.get<any[]>(`/api/CDR/matrix/therapeutics`);
+    }
+
+    public fetchStudiessBytherapeuticArea(therapeuticArea: any) {
+        let params = new HttpParams();
+        params =  params.set('therapeuticArea', therapeuticArea);
+        return this.http.get<any[]>(`/api/CDR/study/ByTherapeuticArea`, {params: params});
+    }
+    
+      filterStudyIds(therapeuticArea: any) {
+        if (therapeuticArea === 'undefined') {
+            // do nothing
+        } else if (therapeuticArea === 'all') {
+            this.fetchStudyTitles().subscribe(data => {
+                this.studyIds = data;
+            });
+        } else {
+           this.fetchStudiessBytherapeuticArea(therapeuticArea).subscribe(data => {
+               this.studyIds = data;
+           });
+        }
     }
    onItemSelect (item:any) {
     // if(typeof item!= 'undefined' && item!= null && item.length>0){
