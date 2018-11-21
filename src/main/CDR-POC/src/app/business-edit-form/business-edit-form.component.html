@@ -132,7 +132,7 @@ label {
         <select placeholder="Select Source File" formControlName="sourceFile" (change)="onSelect($event.target.value)">
           <option  value="null" disabled selected style="display: none;">Select Source Name</option>
           <option *ngFor="let table of lookupTables" value="{{table}}">{{table}}</option>
-        </select>&nbsp;
+        </select>&nbsp;&nbsp;
       </div>
     </div>
     <div class="row">
@@ -144,7 +144,7 @@ label {
        <select placeholder="Select Source Variable" formControlName="sourceField">
         <option  value="null" disabled selected style="display: none;">Select Variable Name</option>
         <option *ngFor="let variable of lookupVariables" value="{{variable}}">{{variable}}</option>
-      </select>&nbsp;
+      </select>&nbsp;&nbsp;
       </div>
     </div>
     <div class="row">
