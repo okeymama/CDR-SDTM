@@ -70,22 +70,25 @@
 			style="margin-left: 6px; border-radius: 10px; border-width: 1px; width: 99%; margin-top: 5px; padding-bottom: 3px; background: white;">
 			<h3 class="row-label"
 				style="text-align: left; width: 90%; font-family: Open Sans; font-size: 13px">
-				<img class="pull-left" style="margin-top: -10px; width: 35px;"
+				<img class="pull-left" style="margin-top: -5px; width: 35px;"
 					src="assets/images/JobExecution.png" alt="Logo" />&nbsp; Job
-				Execution<br> &nbsp;&nbsp;<b *ngIf="(loading)">{{studyInHeader}}</b>
+				Execution<br> &nbsp;&nbsp;
+				<b *ngIf="(loading)" 
+				style="text-align: left; width: 90%; font-family: Open Sans; font-size: 14px">
+				{{studyInHeader}}</b>
 			</h3>
-			<img class="pull-right" style="width: 32px; margin-top: -30px;"
+			<img class="pull-right" style="width: 32px; margin-top: -40px;"
 				data-toggle="tooltip" title="Add" src="assets/images/AddStudy.png"
 				alt="Add" /> 
 			<img class="pull-right"
-				style="width: 32px; margin-top: -30px;" data-toggle="tooltip"
+				style="width: 32px; margin-top: -40px;margin-right:30px" data-toggle="tooltip"
 				title="Download" src="assets/images/studyDownload.png"
 				alt="Download" />&nbsp; 
 			<img class="pull-right"
-				style="width: 32px; margin-top: -30px;" data-toggle="tooltip"
+				style="width: 32px; margin-top: -40px;margin-right:60px" data-toggle="tooltip"
 				title="Import" src="assets/images/NewNote.png" alt="Import" />&nbsp;
 		    <a type="button" (click)="refresh(searchJob,selectedItems)">
-			<img class="pull-right" style="width: 32px; margin-top: -30px;"
+			<img class="pull-right" style="width: 32px; margin-top: -40px;margin-right:90px"
 				data-toggle="tooltip" title="Refresh"
 				src="assets/images/Refresh.png" alt="Refresh" />
 			</a>
@@ -167,6 +170,34 @@
 								<div class="" style="background-color: white;">
 									<div tyle="overflow:auto; width:200px;height: 304px;"
 										class="tab-pane in active">
+										
+										<div class="nav nav-tabs-flt padding-6"
+											sytle="border-bottom: 0px;">
+											<ul class="nav  nav-tabs" style="border-bottom: 0px;">
+												<li style="border-bottom: 0px;"><a data-toggle="tab"
+													(click)="drp()"
+													style="margin-top: 9px; margin-left: 10px; margin-bottom: 6px; border-bottom: 0px; padding-top: 3px;
+													color: black; width: 178px; background-color: #E4E6E9; height: 24px; text-align: left; 
+													font-family: Open Sans Regular; font-size: 10px;">
+														Therapeutic Area<span class="pull-right"><i
+															class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
+												</a></li>
+											</ul>
+											<div *ngIf="drpSelected" class="dropdown-container"
+												style="border-bottom: 0px; margin-top: 7px; margin-left: 23px; 
+												font-family: Open Sans Regular;
+												 font-size: 12px; width: 76%; height: 35px;"
+												id="form-field-select-1">
+												<select class="form-control" id="form-field-select-1"
+													name="study" [(ngModel)]="searchJob.studyId">
+													<option value="undefined" disabled selected
+														style="display: none;">Choose</option>
+													<option *ngFor="let studyId of studyIds"
+														value="{{studyId}}">{{studyId}}</option>
+												</select>
+
+											</div>
+										</div>
 
 										<div class="nav nav-tabs-flt padding-6"
 											sytle="border-bottom: 0px;">
@@ -179,7 +210,8 @@
 												</a></li>
 											</ul>
 											<div *ngIf="drpSelected" class="dropdown-container"
-												style="border-bottom: 0px; margin-top: 7px; margin-left: 23px; font-family: Open Sans Regular; font-size: 12px; width: 76%; height: 65px;"
+												style="border-bottom: 0px; margin-top: 7px; margin-left: 23px; 
+												font-family: Open Sans Regular; font-size: 12px; width: 76%; height: 35px;"
 												id="form-field-select-1">
 												<select class="form-control" id="form-field-select-1"
 													name="study" [(ngModel)]="searchJob.studyId">
@@ -204,10 +236,11 @@
 												</a></li>
 											</ul>
 											<div *ngIf="drpSelected" class="dropdown-container"
-												style="border-bottom: 0px; margin-top: 7px; margin-left: 23px; font-family: Open Sans Regular; font-size: 12px; width: 76%; height: 65px;"
+												style="border-bottom: 0px; margin-top: 7px; margin-left: 23px; 
+												font-family: Open Sans Regular; font-size: 12px; width: 76%; height: 35px;"
 												id="form-field-select-1">
 												<select class="form-control" id="form-field-select-1"
-													name="study" [(ngModel)]="searchJob.study" (ngModelChange)="hideHeader()">
+													name="study" [(ngModel)]="searchJob.study" (ngModelChange)="searchJobExecution(searchJob,selectedItems)">
 													<option value="undefined" disabled selected
 														style="display: none;">Choose</option>
 													<option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option>
@@ -218,13 +251,13 @@
 
 										<div>
 
-											<button (click)="searchJobExecution(searchJob,selectedItems)"
+											<!-- <button (click)="searchJobExecution(searchJob,selectedItems)"
 												class="btn btn-success"
 												style="font-size: 12px; font-family: Open Sans Regular">Apply</button>
-											&nbsp;
+											&nbsp; -->
 											<button (click)="reset(searchJob,selectedItems,f)"
 												class="btn btn-success"
-												style="font-size: 12px; font-family: Open Sans Regular">Reset</button>
+												style="margin-top: 7px;font-size: 12px; font-family: Open Sans Regular">Clear</button>
 
 
 										</div>
@@ -256,10 +289,10 @@
 								<tbody>
 									<tr *ngFor="let item of data">
 										<td><input type="checkbox" /></td>
-										<td class="text-align: left;">{{item.domain}}</td>
+										<td style="text-align: left;">{{item.domain}}</td>
 										<td>{{item.job_end_timestamp}}</td>
 										<td>{{item.job_status}}</td>
-										<td class="text-align: left;">{{item.message}}</td>
+										<td style="text-align: left;">{{item.message}}</td>
 										<td>
 										<a *ngIf="(!item['isLive'] && !allDomainsLive) || (item['isLive'] && item['jobStatus']=='job is completed')" type="button"
 											(click)="actionOnJobExecution(item,'Run')" > <img
