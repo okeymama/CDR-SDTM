@@ -234,11 +234,13 @@ body {
                                         <!--<input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="Phase" [(ngModel)]="searchStudy.phase"> Phase 1<br>
                                         <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="Phase" [(ngModel)]="searchStudy.phase"> Phase 2<br>
                                         <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="Phase" [(ngModel)]="searchStudy.phase"> Phase 3 -->
-                                        <select class="form-control"  id="form-field-select-1" name="phase" [(ngModel)]="searchStudy.phase" (ngModelChange)="fetch(searchStudy.phase)">
+                                        <select class="form-control"  id="form-field-select-1" name="phase" [(ngModel)]="searchStudy.phase" (ngModelChange)="fetch(searchStudy)">
                                             <option value="undefined" disabled selected style="display: none;">Select an Option</option>
-       					                            <option value="Phase 1">Phase 1</option>
+                                            <option value="Phase 0">Phase 0</option> 
+                                            <option value="Phase 1">Phase 1</option>
                                             <option value="Phase 2">Phase 2</option>
                                             <option value="Phase 3">Phase 3</option>
+                                            <option value="Phase 4">Phase 4</option>
                                         </select>
                                   </div>
                                   </div>
@@ -254,7 +256,7 @@ body {
                                       <div *ngIf="statusShowOptions" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;" id="form-field-select-1" >
                                           <!--<input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="status" [(ngModel)]="searchStudy.status"> Active<br>
                                           <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="status" [(ngModel)]="searchStudy.status"> In Active-->
-                                          <select class="form-control"  id="form-field-select-1" name="status" [(ngModel)]="searchStudy.status" (ngModelChange)="fetch(searchStudy.status)">
+                                          <select class="form-control"  id="form-field-select-1" name="status" [(ngModel)]="searchStudy.status" (ngModelChange)="fetch(searchStudy)">
                                               <option value="undefined" disabled selected style="display: none;">Select an Option</option>
          					                            <option value="active">Active</option>
                                               <option value="Inactive">In active</option>
@@ -274,11 +276,11 @@ body {
                                           <!--  <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="source" [(ngModel)]="searchStudy.status"> Source 1<br>
                                             <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="source" [(ngModel)]="searchStudy.status"> Source 2<br>
                                             <input type="radio" style="width:10px;font-family:Open Sans Regular;font-size:12px" name="source" [(ngModel)]="searchStudy.status"> Source 3 -->
-                                            <select class="form-control"  id="form-field-select-1" name="source" [(ngModel)]="searchStudy.source" (ngModelChange)="fetch(searchStudy.source)">
+                                            <select class="form-control"  id="form-field-select-1" name="source" [(ngModel)]="searchStudy.source" (ngModelChange)="fetch(searchStudy)">
                                                 <option value="undefined" disabled selected style="display: none;">Select an Option</option>
-           					                            <option value="Phase1">Source 1</option>
-                                                <option value="Phase2">Source 2</option>
-                                                <option value="Phase3">Source 3</option>
+           					                            <option value="Source 1">Source 1</option>
+                                                <option value="Source 2">Source 2</option>
+                                                <option value="Source 3">Source 3</option>
                                             </select>
                                       </div>
                                       </div>
