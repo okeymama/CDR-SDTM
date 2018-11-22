@@ -30,7 +30,7 @@ export class BusinessRuleComponent implements OnInit {
    public gridState: State = {
        sort: [],
        skip: 0,
-       take: 10
+       take: 50
    };
 
    public editBizDataItem: Matrix;
