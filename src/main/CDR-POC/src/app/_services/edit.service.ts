@@ -123,4 +123,14 @@ export class EditService extends BehaviorSubject<any[]> {
     public fetchStudyTitles() {
         return this.http.get<any[]>(`/api/CDR/study/dropdown`);
     }
+
+    public fetchTherapeuticAreas() {
+        return this.http.get<any[]>(`/api/CDR/matrix/therapeutics`);
+    }
+
+    public fetchStudiessBytherapeuticArea(therapeuticArea: any) {
+        let params = new HttpParams();
+        params =  params.set('therapeuticArea', therapeuticArea);
+        return this.http.get<any[]>(`/api/CDR/study/ByTherapeuticArea`, {params: params});
+    }
 }

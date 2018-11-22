@@ -30,6 +30,8 @@ export class SearchModuleComponent implements OnInit {
     public searchStudy: any = {};
     private editService: EditService;
     paramId: string;
+    therapeuticAreaDrpSelected: boolean = false;
+    therapeuticAreasShowOptions: boolean = false;
     studyDrpSelected: boolean = false;
     studyShowOptions: boolean = false;
     phaseDrpSelected: boolean = false;
@@ -38,6 +40,7 @@ export class SearchModuleComponent implements OnInit {
     statusShowOptions: boolean = false;
     sourceDrpSelected: boolean = false;
     sourceShowOptions: boolean = false;
+    public therapeuticAreas: any[];
     constructor(private userService: UserService,private route: ActivatedRoute, @Inject(EditService) editServiceFactory: any) {
         this.editService = editServiceFactory();
     }
@@ -55,6 +58,9 @@ export class SearchModuleComponent implements OnInit {
         this.editService.fetchStudyTitles().subscribe(data => {
           this.studyTitles = data;
       });
+      this.editService.fetchTherapeuticAreas().subscribe(data => {
+        this.therapeuticAreas = data;
+    });
     }
 
     public getModule(): void {
@@ -105,8 +111,28 @@ export class SearchModuleComponent implements OnInit {
       }
     }
 
+    public therapeuticAreaDrp(): void {
+      if (this.therapeuticAreaDrpSelected === false) {
+        this.therapeuticAreasShowOptions = true;
+        this.therapeuticAreaDrpSelected = true;
+      } else {
+        this.therapeuticAreasShowOptions = false;
+        this.therapeuticAreaDrpSelected = false;
+      }
+    }
+
     public clear() {
        this.searchStudy = {};
+       this.studyShowOptions = false;
+       this.studyDrpSelected = false;
+       this.phaseShowOptions = false;
+       this.phaseDrpSelected = false;
+       this.statusShowOptions = false;
+       this.statusDrpSelected = false;
+       this.sourceShowOptions = false;
+       this.sourceDrpSelected = false;
+       this.therapeuticAreasShowOptions = false;
+       this.therapeuticAreaDrpSelected = false;
        this.editService.read("clear");
     }
     public onStateChange(searchStudy,state: State) {
@@ -136,4 +162,18 @@ export class SearchModuleComponent implements OnInit {
     public removeHandler({dataItem}) {
         this.editService.remove(dataItem, this.searchStudy);
     }
+
+    filterStudies(therapeuticArea: any) {
+      if (therapeuticArea === 'undefined') {
+          // do nothing
+      } else if (therapeuticArea === 'all') {
+          this.editService.fetchStudyTitles().subscribe(data => {
+              this.studyTitles = data;
+          });
+      } else {
+         this.editService.fetchStudiessBytherapeuticArea(therapeuticArea).subscribe(data => {
+             this.studyTitles = data;
+         });
+      }
+  }
 }
