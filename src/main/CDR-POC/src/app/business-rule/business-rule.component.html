@@ -166,8 +166,8 @@ body {
           <h3 class="row-label" style="height: 4%;margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;">
             <span *ngIf="(getDomain() == null)">Select a study and SDTM domain to see business rules</span>
             <b><span *ngIf="(getDomain() != null)" style="font-size: 13px;">{{getDomain()}}</span></b>
-            <span>
-                <img class="pull-right" style="margin-top: -4px;width: 26px;margin-right: -111px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Job Execution for this study" src="assets/images/JobExeGrey.png" alt="Logo" />&nbsp;
+            <span *ngIf="(searchBRStudy != null && searchBRStudy.brStudy != undefined && searchBRStudy.brStudy != 'undefined' && searchBRStudy.brSdtmDomain != null && searchBRStudy.brSdtmDomain != 'undefined')">
+                <img [routerLink]="['/job', searchBRStudy.brStudy]" class="pull-right" style="margin-top: -4px;width: 26px;margin-right: -111px;font-family:Open Sans Regular;font-size:10px" data-toggle="tooltip" title="Job Execution for this study" src="assets/images/JobExeGrey.png" alt="Logo" />&nbsp;
             </span>
         </h3>
           <hr style="margin-top: -6px;border-width: 2px;"/>

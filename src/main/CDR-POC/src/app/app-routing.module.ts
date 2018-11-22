@@ -41,6 +41,13 @@ const routes: Routes = [
        }
     },
     {
+      path: 'job/:studyTitle',
+      component: JobExecutionComponent,
+      data: {
+       breadcrumb: 'Job Execution'
+      }
+   },
+    {
       path: 'dataQuality',
       component: DataQualityComponent,
       data: {

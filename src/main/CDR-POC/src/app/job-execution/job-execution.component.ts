@@ -100,6 +100,12 @@ export class JobExecutionComponent implements OnInit {
         } else {
           this.userName = 'Admin';
         }
+        // Code added  when we come from business rules screen
+        const title = this.route.snapshot.paramMap.get('studyTitle');
+        if (title != null && title !== undefined && title !== 'undefined') {
+          this.searchJob.study = title;
+          this.searchJobExecution(this.searchJob, undefined);
+        }
    }
     public fetchStudyTitles() {
         return this.http.get<any[]>(`/api/CDR/study/dropdown`);
