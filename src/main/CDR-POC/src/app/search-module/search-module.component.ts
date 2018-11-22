@@ -61,6 +61,7 @@ export class SearchModuleComponent implements OnInit {
       this.editService.fetchTherapeuticAreas().subscribe(data => {
         this.therapeuticAreas = data;
     });
+     this.fetch('onLoad');
     }
 
     public getModule(): void {
@@ -72,40 +73,40 @@ export class SearchModuleComponent implements OnInit {
     }
 
     public studyDrp(): void {
-      if(this.studyDrpSelected == false){
+      if (this.studyDrpSelected === false) {
         this.studyShowOptions = true;
         this.studyDrpSelected = true;
-      }else{
+      } else {
         this.studyShowOptions = false;
         this.studyDrpSelected = false;
       }
     }
 
     public phaseDrp(): void {
-      if(this.phaseDrpSelected == false){
+      if (this.phaseDrpSelected === false) {
         this.phaseShowOptions = true;
         this.phaseDrpSelected = true;
-      }else{
+      } else {
         this.phaseShowOptions = false;
         this.phaseDrpSelected = false;
       }
     }
 
     public statusDrp(): void {
-      if(this.statusDrpSelected == false){
+      if (this.statusDrpSelected === false) {
         this.statusShowOptions = true;
         this.statusDrpSelected = true;
-      }else{
+      } else {
         this.statusShowOptions = false;
         this.statusDrpSelected = false;
       }
     }
 
     public sourceDrp(): void {
-      if(this.sourceDrpSelected == false){
+      if (this.sourceDrpSelected === false) {
         this.sourceShowOptions = true;
         this.sourceDrpSelected = true;
-      }else{
+      } else {
         this.sourceShowOptions = false;
         this.sourceDrpSelected = false;
       }
@@ -133,9 +134,9 @@ export class SearchModuleComponent implements OnInit {
        this.sourceDrpSelected = false;
        this.therapeuticAreasShowOptions = false;
        this.therapeuticAreaDrpSelected = false;
-       this.editService.read("clear");
+       this.editService.read('onLoad');
     }
-    public onStateChange(searchStudy,state: State) {
+    public onStateChange(searchStudy, state: State) {
         this.gridState = state;
         this.editService.read(searchStudy);
     }
