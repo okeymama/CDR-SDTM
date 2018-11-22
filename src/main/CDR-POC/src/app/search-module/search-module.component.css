@@ -3,3 +3,6 @@
     color: #656565;
     background-color: #f6f6f6;
   }
+.nav-tabs.tab-color-blue > li > a, .nav-tabs.tab-color-blue > li > a:focus{
+	min-width:40px;
+}
