@@ -72,9 +72,9 @@ h6 {
 
 .main-content {
     margin-left: 0;
-    padding-left: 21%;
+    padding-left: 90px;
     padding-right: 85px;
-    padding-top: 22px;
+    padding-top: 18px;
 }
 
 .main-content:after,
@@ -5616,7 +5616,7 @@ body.mob-safari .sidebar.sidebar-fixed {
     color: black;
     text-align: center;
     height: 30px;
-    border-top: 3px solid #074982;
+    border-top: 3px solid #074982
 }
 
 .footer.footer-fixed .footer-inner {
@@ -9545,20 +9545,19 @@ input:-ms-input-placeholder {
 
 .form-control,
 select {
-    border-radius: 5;
+    border-radius: 0;
     -webkit-box-shadow: none!important;
     box-shadow: none!important;
     color: #858585;
     background-color: #FFF;
     font-size: 12px;
-    border: 1px solid #D5D5D5;
-    height: 26px;
+    border: 1px solid #D5D5D5
 }
 
 .form-control:focus,
 select:focus {
     color: #696969;
-    border-color: #074982;
+    border-color: #F59942;
     background-color: #FFF;
     outline: 0
 }
@@ -11518,7 +11517,7 @@ textarea.input-transparent:focus {
 .nav-tabs.tab-color-blue > li > a,
 .nav-tabs.tab-color-blue > li > a:focus {
     background-color: #33333;
-    min-width: 145px;
+    min-width: 40px;
     text-align: center;
 }
 
@@ -13925,10 +13924,10 @@ tr.detail-row > td {
 .login-layout {
 
  	background-image: url(../images/background.png);
-    background-position: 25% 80%;
+    background-position: 20% 70%;
     background-repeat: no-repeat;
     background-attachment: scroll;
-    background-size: 388px 398px;
+    background-size: 550px 550px;
     background-color: black;
 }
 
@@ -21658,8 +21657,7 @@ input.typeahead.scrollable ~ .tt-menu {
 
 .no-skin .nav-list > li > a {
     background-color: #F8F8F8;
-    color: #585858;
-    border-bottom: 3px solid #074982;
+    color: #585858
 }
 
 .no-skin .nav-list > li > a:focus {
