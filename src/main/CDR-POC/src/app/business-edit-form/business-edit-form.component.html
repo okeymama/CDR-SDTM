@@ -176,15 +176,15 @@ label {
     </div>
 </div>
 </form>
-<form name="form"  #f="ngForm" novalidate  *ngIf="(isNew=='import')">
+<form name="form"  [formGroup]="editBusinessForm" novalidate  *ngIf="(isNew=='import')">
 <div class="container" style="background-color: white;">
     <div class="row">
         <div class="col-25">
           <label style="padding-bottom: 0px;" for="I want to create a new set of rules for">I want to create a new set of rules for:</label>
         </div>
         <div class="col-75">
-          <select placeholder="Select study" name="brStudy" [(ngModel)]="searchBRStudy.brStudy">
-            <option  value="undefined" disabled selected style="display: none;">Study Title</option>
+          <select placeholder="Select study" formControlName="study">
+            <option  [ngValue]="null" disabled selected style="display: none;">Study Title</option>
             <option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option>
           </select>&nbsp;
         </div>
@@ -194,19 +194,19 @@ label {
             <label style="padding-bottom: 0px;" for="Using this library/study as a template">Using this library/study as a template:</label>
           </div>
           <div class="col-75">
-            <select placeholder="Select study" name="brMatrixStudy"  [(ngModel)]="searchBRStudy.brMatrixStudy" (change)="filterDomains($event.target.value);">
-              <option  value="undefined" disabled selected style="display: none;">Study Title</option>
+            <select placeholder="Select study" formControlName="matrixStudy" (change)="filterDomains($event.target.value);">
+              <option  [ngValue]="null" disabled selected style="display: none;">Study Title</option>
               <option *ngFor="let matrixStudy of matrixStudyTitles" value="{{matrixStudy}}">{{matrixStudy}}</option>
             </select>&nbsp;
           </div>
         </div>
         <div class="row">
             <div class="col-25">
-              <label for="For this domain">For this domain: </label>
+              <label for="For this domain">For these domains: </label>
             </div>
             <div class="col-75">
-              <select placeholder="Select study" name="brSdtmDomain" [(ngModel)]="searchBRStudy.brSdtmDomain">
-                <option  value="undefined" disabled selected style="display: none;">Domain</option>
+              <select placeholder="Select study" formControlName="domain">
+                <option  [ngValue]="null" disabled selected style="display: none;">Domain</option>
                 <option *ngFor="let domain of studyDomains" value="{{domain}}">{{domain}}</option>
               </select>&nbsp;
             </div>
@@ -216,5 +216,5 @@ label {
 </form>
   <button kendoButton (click)="onCancel($event)" style="color : white;background-color : rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-top: 10px;">Cancel</button>&nbsp;&nbsp;
   <button *ngIf="(isNew=='add' || isNew=='edit')" kendoButton [disabled]="!editBusinessForm.valid" (click)="onSave($event,isNew)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -150px;margin-top: 10px;">Submit</button>
-  <button *ngIf="(isNew=='import')" kendoButton [disabled]="!editBusinessForm.valid" (click)="fetchTemplate(searchBRStudy)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -180px; margin-top: 10px;">Submit</button>
+  <button *ngIf="(isNew=='import')" kendoButton [disabled]="!editBusinessForm.valid" (click)="fetchTemplate()" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -180px; margin-top: 10px;">Submit</button>
 </kendo-dialog>

@@ -23,6 +23,7 @@ export class BusinessEditFormComponent implements OnInit {
     public studyTitles: any[];
     public studyDomains: any[];
     public searchBRStudy: any = {};
+    public importTemplate: any = {};
     public transPlaceHolder = 'Enter Transformation Logic'; 
     private businessEditService: BusinessEditService;
     public transTypes: any[];
@@ -36,6 +37,7 @@ export class BusinessEditFormComponent implements OnInit {
     public editBusinessForm: FormGroup = new FormGroup({
         'id': new FormControl(),
         'study': new FormControl(),
+        'matrixStudy': new FormControl(),
         'domain': new FormControl(),
         'subDomain': new FormControl(),
         'targetFile': new FormControl(),
@@ -169,9 +171,12 @@ export class BusinessEditFormComponent implements OnInit {
         }
     }
 
-    public fetchTemplate(searchBRStudy): void {
+    public fetchTemplate(): void {
         //this.businessEditService.read(searchBRStudy);
-        this.businessEditService.save(searchBRStudy, searchBRStudy, 'import');
+        this.importTemplate.study = this.editBusinessForm.value.study;
+        this.importTemplate.domain = this.editBusinessForm.value.domain;
+        this.importTemplate.matrixStudy = this.editBusinessForm.value.matrixStudy;
+        this.businessEditService.save(this.importTemplate, this.searchBRStudy, 'import');
         this.active = false;
       }
 }

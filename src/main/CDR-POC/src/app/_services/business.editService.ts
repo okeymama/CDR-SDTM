@@ -116,9 +116,9 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
                 return this.http.get<any[]>(`/api/CDR/matrix/fetchOrInsert/${searchBRStudy}/${searchBRStudy}/${searchBRStudy}`)
                 .pipe(map(res => <any[]>res));
         } else if (action === 'import') {
-                console.log(JSON.stringify(searchBRStudy)+"=aaa==searchBRStudy=="+searchBRStudy.brStudy);
+                console.log(JSON.stringify(searchBRStudy)+"=aaa==searchBRStudy=="+searchBRStudy.study);
                 params =  params.set('domain', 'Invalid');
-                return this.http.get<any[]>(`/api/CDR/matrix/fetchOrInsert/${searchBRStudy.brStudy}/${searchBRStudy.brMatrixStudy}/${searchBRStudy.brSdtmDomain}`)
+                return this.http.get<any[]>(`/api/CDR/matrix/fetchOrInsert/${searchBRStudy.study}/${searchBRStudy.matrixStudy}/${searchBRStudy.domain}`)
                 .pipe(map(res => <any[]>res));
         } else {
                 if (searchBRStudy.brStudy) {

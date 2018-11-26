@@ -6,6 +6,7 @@ import { Matrix } from '../_models/index';
 import { BusinessEditService } from '../_services/index';
 import { map } from 'rxjs/operators/map';
 import { UserService } from '../_services/user.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-business-rule',
@@ -26,6 +27,7 @@ export class BusinessRuleComponent implements OnInit {
   public studyTitles: any[];
   public studyDomains: any[];
   public searchBRStudy: any = {};
+  public importTemplate: any = {};
   public view: Observable<GridDataResult>;
    public gridState: State = {
        sort: [],
@@ -41,7 +43,8 @@ export class BusinessRuleComponent implements OnInit {
     this.drpSelected = !this.drpSelected;
   }
 
-  constructor(private userService: UserService, @Inject(BusinessEditService) businessEditServiceFactory: any) {
+  constructor(private route: ActivatedRoute,
+    private userService: UserService, @Inject(BusinessEditService) businessEditServiceFactory: any) {
         this.businessEditService = businessEditServiceFactory();
   }
   public ngOnInit(): void {
@@ -64,6 +67,13 @@ export class BusinessRuleComponent implements OnInit {
     } else {
       this.userName = 'Admin';
     }
+    const title = this.route.snapshot.paramMap.get('studyTitle');
+    const therapeuticArea = this.route.snapshot.paramMap.get('therapeuticArea');
+       if (title != null && therapeuticArea != null) {
+             this.importTemplate.brStudy = title;
+             this.importTemplate.therapeuticArea = therapeuticArea;
+             this.addHandler('import', this.importTemplate);
+       }
      }
 
      public fetchTemplate(searchBRStudy): void {
@@ -79,7 +89,9 @@ export class BusinessRuleComponent implements OnInit {
      public addHandler(flag: any, searchBRStudy: any) {
          this.editBizDataItem = new Matrix();
          this.editBizDataItem.study = searchBRStudy.brStudy;
+         if (flag === 'add') {
          this.editBizDataItem.domain = searchBRStudy.brSdtmDomain;
+         }
          this.isNew = flag;
      }
 
@@ -128,6 +140,7 @@ export class BusinessRuleComponent implements OnInit {
 
      public clear() {
         this.searchBRStudy = {};
+        this.importTemplate = {};
         this.studyDomains = [];
         this.studyShowOptions = false;
         this.studyDrpSelected = false;

@@ -34,6 +34,13 @@ const routes: Routes = [
       }
     },
     {
+           path: 'busRules/:studyTitle/:therapeuticArea',
+           component: BusinessRuleComponent,
+            data: {
+             breadcrumb: 'Business Rule Configuration'
+            }
+    },
+    {
        path: 'job',
        component: JobExecutionComponent,
        data: {

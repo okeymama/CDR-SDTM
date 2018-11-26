@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject  } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { GridDataResult } from '@progress/kendo-angular-grid';
@@ -41,7 +41,9 @@ export class SearchModuleComponent implements OnInit {
     sourceDrpSelected: boolean = false;
     sourceShowOptions: boolean = false;
     public therapeuticAreas: any[];
-    constructor(private userService: UserService,private route: ActivatedRoute, @Inject(EditService) editServiceFactory: any) {
+    constructor(private userService: UserService,
+      private router: Router,
+      private route: ActivatedRoute, @Inject(EditService) editServiceFactory: any) {
         this.editService = editServiceFactory();
     }
 
@@ -176,5 +178,9 @@ export class SearchModuleComponent implements OnInit {
              this.studyTitles = data;
          });
       }
+  }
+
+  public navigateBusinessImport(dataItem: any) {
+       this.router.navigate(['/busRules', {studyTitle: dataItem.title, therapeuticArea: dataItem.therapeuticArea}]);
   }
 }

@@ -7,6 +7,7 @@ export class Matrix {
     public domain: string;
     public subDomain: string;
     public study: string;
+    public matrixStudy: string;
     public transformation_type: string;
     public transformation_logic: string;
     public id: number;

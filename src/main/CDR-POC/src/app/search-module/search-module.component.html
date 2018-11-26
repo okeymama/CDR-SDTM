@@ -323,13 +323,16 @@ body {
                               <button kendoGridEditCommand [primary]="true" style="color : white;background-color : #074982;border-color: white;font-family: Open Sans Regular;font-size: 14px;"><b>Edit</b></button>
                               <button kendoGridRemoveCommand style="font-family: Open Sans Regular;font-size: 12px;"><b>Delete</b></button>
                           </ng-template>-->
-                          <ng-template kendoGridCellTemplate>
+                          <ng-template kendoGridCellTemplate let-dataItem>
                             <button kendoGridEditCommand [look]="outline" >
                                    <span class="k-icon k-i-pencil"></span>
                              </button>
                              <button kendoGridRemoveCommand >
                                     <span class="k-icon k-i-trash"></span>
                              </button> 
+                             <button class="k-button k-grid-edit-command">
+                                    <img class="k-icon" data-toggle="tooltip" title="Set Up Business Rules"  src="assets/images/BussRulesGrey.png" alt="Logo" (click)="navigateBusinessImport(dataItem)"/>
+                            </button>
                            </ng-template>
                       </kendo-grid-command-column>
                     </kendo-grid>
