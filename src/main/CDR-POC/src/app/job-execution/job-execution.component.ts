@@ -55,6 +55,11 @@ export class JobExecutionComponent implements OnInit {
   public userName = '';
   studyInHeader = '';
   hideInstructions: boolean = false;
+  studyTitleShowOptions = false;
+  therapeuticAreaShowOptions = false;
+  
+  studyTitleDropdownSelected: boolean = false;
+  therapeuticAreaDropdownSelected: boolean = false;
   
   public ngOnInit() {
         this.dropdownList = //loadDropdown();
@@ -277,4 +282,24 @@ export class JobExecutionComponent implements OnInit {
    this.hideInstructions = true;
    }
 
+  public studyTitleDropdown(): void {
+        if (this.studyTitleDropdownSelected === false) {
+          this.studyTitleShowOptions = true;
+          this.studyTitleDropdownSelected = true;
+        } else {
+          this.studyTitleShowOptions = false;
+          this.studyTitleDropdownSelected = false;
+        }
+    }
+    
+    public therapeuticAreaDropdown(): void {
+   
+        if (this.studyTitleDropdownSelected === false) {
+          this.therapeuticAreaShowOptions = true;
+          this.therapeuticAreaDropdownSelected = true;
+        } else {
+          this.therapeuticAreaShowOptions = false;
+          this.therapeuticAreaDropdownSelected = false;
+        }
+    }
 }

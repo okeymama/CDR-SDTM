@@ -175,7 +175,7 @@
 											sytle="border-bottom: 0px;">
 											<ul class="nav  nav-tabs" style="border-bottom: 0px;">
 												<li style="border-bottom: 0px;"><a data-toggle="tab"
-													(click)="drp()"
+													(click)="therapeuticAreaDropdown()"
 													style="margin-top: 9px; margin-left: 10px; margin-bottom: 6px; border-bottom: 0px; padding-top: 3px;
 													color: black; width: 178px; background-color: #E4E6E9; height: 24px; text-align: left; 
 													font-family: Open Sans Regular; font-size: 12px;">
@@ -183,7 +183,7 @@
 															class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
 												</a></li>
 											</ul>
-											<div *ngIf="drpSelected" class="dropdown-container"
+											<div *ngIf="therapeuticAreaShowOptions" class="dropdown-container"
 												style="border-bottom: 0px; margin-top: 7px; margin-left: 10px; 
 												font-family: Open Sans Regular;
 												 font-size: 12px; width: 89%; height: 35px;"
@@ -229,7 +229,7 @@
 											sytle="border-bottom: 0px;">
 											<ul class="nav  nav-tabs" style="border-bottom: 0px;">
 												<li style="border-bottom: 0px;"><a data-toggle="tab"
-													(click)="drp()"
+													(click)="studyTitleDropdown()"
 													style="margin-top: 9px; margin-left: 10px; margin-bottom: 6px; border-bottom: 0px;
 													 padding-top: 3px; color: black; width: 178px; background-color: #E4E6E9; height: 24px;
 													  text-align: left; font-family: Open Sans Regular; font-size: 12px;">
@@ -237,7 +237,7 @@
 															class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
 												</a></li>
 											</ul>
-											<div *ngIf="drpSelected" class="dropdown-container"
+											<div *ngIf="studyTitleShowOptions" class="dropdown-container"
 												style="border-bottom: 0px; margin-top: 7px; margin-left: 10px; 
 												font-family: Open Sans Regular; font-size: 12px; width: 89%; height: 35px;"
 												id="form-field-select-1">
