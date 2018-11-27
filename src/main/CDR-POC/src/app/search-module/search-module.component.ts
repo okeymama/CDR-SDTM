@@ -137,7 +137,7 @@ export class SearchModuleComponent implements OnInit {
        this.sourceDrpSelected = false;
        this.therapeuticAreasShowOptions = false;
        this.therapeuticAreaDrpSelected = false;
-       this.filterStudies('all');
+       this.filterStudies('all'); 
        this.editService.read('onLoad');
     }
     public onStateChange(searchStudy, state: State) {

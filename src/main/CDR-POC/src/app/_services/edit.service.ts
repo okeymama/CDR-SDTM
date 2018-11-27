@@ -111,7 +111,7 @@ export class EditService extends BehaviorSubject<any[]> {
             params =  params.set('StudSource', searchStudy.source);
             }
             if (searchStudy.brTherapeuticArea) {
-                params =  params.set('therapeuticArea', searchStudy.brTherapeuticArea);
+                params =  params.set('therapeuticArea', searchStudy.brTherapeuticArea); 
             }
         return this.http.get<any[]>(`/api/CDR/study/search`, { params: params })
             .pipe(map(res => <any[]>res));
