@@ -28,12 +28,13 @@ public class Study {
 	public Study() {
 	}
 
-	public Study(String studyID, String title, String phase, String status, String source) {
+	public Study(String studyID, String title, String phase, String status, String source, String therapeuticArea) {
 		this.studyID = studyID;
 		this.title = title;
 		this.phase = phase;
 		this.status = status;
 		this.source = source;
+		this.therapeuticArea = therapeuticArea;
 	}
 	
 	public int getId() {

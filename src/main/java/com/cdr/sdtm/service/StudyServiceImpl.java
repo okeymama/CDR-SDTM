@@ -15,6 +15,8 @@ import com.cdr.sdtm.repository.StudyRepository;
 @Service
 public class StudyServiceImpl implements StudyService {
 	
+	public static final String ALL = "all";
+	
 	@Autowired
 	StudyRepository studyRepository;
 
@@ -74,6 +76,22 @@ public class StudyServiceImpl implements StudyService {
 	}
 	
 	public List<Study> findAll(Study study) {
+		
+		if(ALL.equalsIgnoreCase(study.getTherapeuticArea())) {
+			study.setTherapeuticArea(null);
+		}
+		if(ALL.equalsIgnoreCase(study.getTitle())) {
+			study.setTitle(null);
+		}
+		if(ALL.equalsIgnoreCase(study.getPhase())) {
+			study.setPhase(null);
+		}
+		if(ALL.equalsIgnoreCase(study.getStatus())) {
+			study.setStatus(null);
+		}
+		if(ALL.equalsIgnoreCase(study.getSource())) {
+			study.setSource(null);
+		}
 		
 		ExampleMatcher matcher = ExampleMatcher.matching()
 											   .withIgnoreNullValues()
