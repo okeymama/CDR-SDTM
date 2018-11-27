@@ -69,6 +69,7 @@ export class BusinessEditFormComponent implements OnInit {
 
     @Output() cancel: EventEmitter<any> = new EventEmitter();
     @Output() save: EventEmitter<Matrix> = new EventEmitter();
+    @Output() delete: EventEmitter<Matrix> = new EventEmitter();
 
     public onSave(e, isNew: any) {
         e.preventDefault();
@@ -105,6 +106,12 @@ export class BusinessEditFormComponent implements OnInit {
         this.cancel.emit();
         this.transPlaceHolder = 'Enter Transformation';
     }
+
+    public onDelete(e): void {
+        e.preventDefault();
+        this.delete.emit(this.editBusinessForm.value);
+        this.active = false;
+      }
 
     public ngOnInit(): void {
         this.businessEditService.fetchTransformationTypes().subscribe(data => {

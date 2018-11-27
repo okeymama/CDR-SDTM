@@ -1,12 +1,22 @@
+<style>
+  * {
+    box-sizing: border-box;
+    width: 100%;
+}
+    .k-window-titlebar {
+      border-color: rgb(7, 73, 130);
+    }
+</style>
 <kendo-dialog *ngIf="active" (close)="closeForm()">
   <kendo-dialog-titlebar style="background-color : white;border-radius: 30px 30px 0 0">
     <b style="color : black;font-size: 14px;font-family: Open Sans;">Delete</b>
   </kendo-dialog-titlebar>
-  <p style="margin: 30px; text-align: center;">Are you sure you want to delete this study</p>
+  <!--<p style="margin: 30px; text-align: center;">Are you sure you want to delete this study</p>-->
   <form novalidate [formGroup]="editForm"> 
+      Are you sure you want to delete this study &nbsp;&nbsp;
   </form>
 
-    <button kendoButton (click)="onCancel($event)" style="color : white;background-color : rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;border-radius: 6px;">Cancel</button>&nbsp;
-    <button kendoButton primary=[true] (click)="onDelete($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;border-radius: 6px;">Delete</button>
+    <button kendoButton (click)="onCancel($event)" style="color : white;background-color : rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;border-radius: 6px;margin-top: 10px;width: 70px;">Cancel</button>&nbsp;
+    <button kendoButton primary=[true] (click)="onDelete($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;border-radius: 6px;margin-top: 10px;margin-right: -130px;width: 70px;">Delete</button>
 
 </kendo-dialog>
