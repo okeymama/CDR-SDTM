@@ -86,7 +86,7 @@
 				alt="Download" />&nbsp; 
 			<img class="pull-right"
 				style="width: 32px; margin-top: -40px;margin-right:60px" data-toggle="tooltip"
-				title="Import" src="assets/images/NewNote.png" alt="Import" />&nbsp;
+				title="Upload" src="assets/images/NewNote.png" alt="Import" />&nbsp;
 		    <a type="button" (click)="refresh(searchJob,selectedItems)">
 			<img class="pull-right" style="width: 32px; margin-top: -40px;margin-right:90px"
 				data-toggle="tooltip" title="Refresh"
@@ -160,9 +160,10 @@
 				<ul class="nav nav-list">
 					<li><a href="#" class="dropdown-toggle" style="color: #074982" onclick="return false">
 							<i class="menu-icon fa fa-filter"></i> <span class="menu-text">
-								<a href=""
-								style="font-family: Open Sans Regular; font-size: 12px; color: #074982"><b>Filter</b></a>
-						</span> <b class="arrow fa fa-angle-down"></b>
+								<!-- <a href=""
+								style="font-family: Open Sans Regular; font-size: 12px; color: #074982"><b>Filter</b></a> -->
+								<span style="font-family:Open Sans Regular;font-size:12px;color:#074982" ><b>Filter</b></span>
+						</span> <!-- <b class="arrow fa fa-angle-down"></b> -->
 					</a>
 
 						<form name="jobForm" #f="ngForm" novalidate>
