@@ -34,10 +34,11 @@ export class EditFormComponent {
     constructor(private http: HttpClient) {}
     private res: any[] = [];
     @Input() public isNew = false;
+    @Input() public isDelete = false;
 
     @Input() public set model(studyDetails: StudyDetails) {
         this.editForm.reset(studyDetails);
-        this.active = studyDetails !== undefined;
+        this.active = studyDetails !== undefined && this.isDelete === false;
     }
 
     @Output() cancel: EventEmitter<any> = new EventEmitter();

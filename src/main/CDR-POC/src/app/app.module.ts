@@ -26,6 +26,7 @@ import { FooterComponent } from './footer/footer.component';
 import {BreadcrumbsModule} from 'ng6-breadcrumbs';
 import { BusinessEditFormComponent } from './business-edit-form/business-edit-form.component';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { KendoGridDeleteConfirmComponent } from './kendo-grid-delete-confirm/kendo-grid-delete-confirm.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { BsDropdownModule } from 'ngx-bootstrap';
     AnalyticsComponent,
     HeaderComponent,
     FooterComponent,
-    BusinessEditFormComponent
+    BusinessEditFormComponent,
+    KendoGridDeleteConfirmComponent
   ],
   imports: [
     AppRoutingModule,

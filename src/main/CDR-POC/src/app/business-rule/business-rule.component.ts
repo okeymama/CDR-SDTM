@@ -111,8 +111,14 @@ export class BusinessRuleComponent implements OnInit {
      }
 
      public removeHandler({dataItem}) {
-         this.businessEditService.remove(dataItem, this.searchBRStudy);
+        this.editBizDataItem = dataItem;
+        this.isNew = 'delete';
      }
+
+     public deleteHandler(template: Matrix) {
+        this.businessEditService.remove(template, this.searchBRStudy);
+        this.editBizDataItem = undefined;
+      }
 
      filterDomains(studyTitle: any) {
          if (studyTitle === 'undefined') {

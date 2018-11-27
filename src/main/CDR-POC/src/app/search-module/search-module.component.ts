@@ -27,6 +27,7 @@ export class SearchModuleComponent implements OnInit {
     public formGroup: FormGroup;
     public editDataItem: StudyDetails;
     public isNew: boolean;
+    public isDelete: boolean;
     public searchStudy: any = {};
     private editService: EditService;
     paramId: string;
@@ -146,11 +147,13 @@ export class SearchModuleComponent implements OnInit {
     public addHandler() {
         this.editDataItem = new StudyDetails();
         this.isNew = true;
+        this.isDelete = false;
     }
 
     public editHandler({dataItem}, searchStudy) {
         this.editDataItem = dataItem;
         this.isNew = false;
+        this.isDelete = false;
     }
 
     public cancelHandler() {
@@ -163,7 +166,13 @@ export class SearchModuleComponent implements OnInit {
     }
 
     public removeHandler({dataItem}) {
-        this.editService.remove(dataItem, this.searchStudy);
+      this.editDataItem = dataItem;
+      this.isDelete = true;
+    }
+
+    public deleteHandler(studyDetails: StudyDetails) {
+      this.editService.remove(studyDetails, this.searchStudy);
+      this.editDataItem = undefined;
     }
 
     filterStudies(therapeuticArea: any) {
