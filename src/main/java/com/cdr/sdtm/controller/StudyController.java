@@ -67,10 +67,11 @@ public class StudyController {
 			@RequestParam(value="StudTitle",required=false) String title,
 			@RequestParam(value="StudPhase",required=false) String phase,
 			@RequestParam(value="StudStatus",required=false) String status,
-			@RequestParam(value="StudSource",required=false) String source) {
+			@RequestParam(value="StudSource",required=false) String source,
+			@RequestParam(value="therapeuticArea",required=false) String therapeuticArea) {
 		LOGGER.info("Search Study method - STARTS");
 		List<Study> studies = new ArrayList<Study>();
-		Study localStudy = new Study(studyID,title,phase,status,source);
+		Study localStudy = new Study(studyID,title,phase,status,source,therapeuticArea);
 		studies = studyService.findAll(localStudy);
 		LOGGER.info("Search Study method - ENDS");
 		return studies;	
