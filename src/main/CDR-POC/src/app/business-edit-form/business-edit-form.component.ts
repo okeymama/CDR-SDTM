@@ -39,6 +39,7 @@ export class BusinessEditFormComponent implements OnInit {
         'study': new FormControl(),
         'matrixStudy': new FormControl(),
         'domain': new FormControl(),
+        'importDomain': new FormControl(),
         'subDomain': new FormControl(),
         'targetFile': new FormControl(),
         'targetField': new FormControl(),
@@ -104,6 +105,7 @@ export class BusinessEditFormComponent implements OnInit {
     private closeForm(): void {
         this.active = false;
         this.cancel.emit();
+        this.studyDomains = [];
         this.transPlaceHolder = 'Enter Transformation';
     }
 
@@ -181,7 +183,7 @@ export class BusinessEditFormComponent implements OnInit {
     public fetchTemplate(): void {
         //this.businessEditService.read(searchBRStudy);
         this.importTemplate.study = this.editBusinessForm.value.study;
-        this.importTemplate.domain = this.editBusinessForm.value.domain;
+        this.importTemplate.domain = this.editBusinessForm.value.importDomain;
         this.importTemplate.matrixStudy = this.editBusinessForm.value.matrixStudy;
         this.businessEditService.save(this.importTemplate, this.searchBRStudy, 'import');
         this.active = false;

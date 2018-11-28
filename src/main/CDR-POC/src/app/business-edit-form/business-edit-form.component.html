@@ -206,10 +206,20 @@ label {
               <label for="For this domain">For these domains: </label>
             </div>
             <div class="col-75">
-              <select placeholder="Select study" formControlName="domain">
+              <!--<select placeholder="Select study" formControlName="domain">
                 <option  [ngValue]="null" disabled selected style="display: none;">Domain</option>
                 <option *ngFor="let domain of studyDomains" value="{{domain}}">{{domain}}</option>
-              </select>&nbsp;
+              </select>-->
+              <kendo-multiselect style="width: 80%;height: 30px;font-size:11px;font-family: Open Sans;border-color: #ccc"
+                [data]="studyDomains"
+                formControlName="importDomain"
+                [autoClose]="true"
+                placeholder="Domain">
+              <ng-template kendoMultiSelectSummaryTag let-dataItem>
+                <label>{{ dataItem }}</label>
+              </ng-template>
+              </kendo-multiselect>
+              &nbsp;
             </div>
           </div>
   
