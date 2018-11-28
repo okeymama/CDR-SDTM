@@ -135,9 +135,9 @@
 			<div *ngIf="(loading)" style="margin-top: 5px">
 				<!-- class="pull-right" style="margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;"> -->
 
-				<a type="button" (click)="runForAllDomains()"> 
+				<a type="button" (click)="runForAllSelectedDomains()"> 
 				
-				<img *ngIf="!(allDomainsLive) || (allDomainsLive && jobStatus == 'job is completed')" 
+				<img *ngIf="!(allDomainsLive) || (allDomainsLive && jobStatus == 'job completed')" 
 					src="../assets/images/Run.png" alt="Run All Selected"
 					data-toggle="tooltip" title="Run All Selected"
 					style="width: 25px; height: 25px; margin-left: 1135px">
@@ -280,7 +280,8 @@
 							<table class="table">
 								<thead>
 									<tr>
-										<td> <!-- *ngIf="loading"--><input type="checkbox" /></td>
+										<td> <!-- *ngIf="loading"--><input type="checkbox" 
+										name="all" (change)="isCheckboxSelected = !isCheckboxSelected"/></td>
 										<td>SDTM Domain</td>
 										<td>Last Run</td>
 										<td>Status</td>
@@ -290,18 +291,19 @@
 								</thead>
 								<tbody>
 									<tr *ngFor="let item of data">
-										<td><input type="checkbox" /></td>
+										<td><input type="checkbox" [checked]="isCheckboxSelected"
+										(change)="onItemSelect(item)"/></td>
 										<td style="text-align: left;">{{item.domain}}</td>
 										<td>{{item.job_end_timestamp}}</td>
 										<td>{{item.job_status}}</td>
 										<td style="text-align: left;">{{item.message}}</td>
 										<td>
-										<a *ngIf="(!item['isLive'] && !allDomainsLive) || (item['isLive'] && item['jobStatus']=='job is completed')" type="button"
+										<a *ngIf="(!item['isLive']) || (item['isLive'] && item['jobStatus']=='job completed')" type="button"
 											(click)="actionOnJobExecution(item,'Run')" > <img
 												src="../assets/images/Run.png" alt="Run"
 												style="width: 25px; height: 25px;"> &nbsp;
 										</a> 
-										<a *ngIf="item['isLive'] || (!item['isLive'] && allDomainsLive)" type="button"
+										<a *ngIf="item['isLive']" type="button"
 											style="width: 25px; height: 25px;"> <i
 												class="fa fa-spinner fa-spin"></i> &nbsp;
 										</a> 
@@ -310,7 +312,7 @@
 												src="../assets/images/Run.png" alt="Run"
 												style="width: 25px; height: 25px;"> &nbsp;
 										</a> &nbsp; --> 
-										<a *ngIf="item['isLive'] || (!item['isLive'] && allDomainsLive)" type="button"
+										<a *ngIf="item['isLive']" type="button"
 											(click)="actionOnJobExecution(item,'Abort')"> <img
 												src="../assets/images/Abort.png" alt="Abort"
 												style="width: 25px; height: 25px;">

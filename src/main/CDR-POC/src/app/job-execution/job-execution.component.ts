@@ -57,9 +57,12 @@ export class JobExecutionComponent implements OnInit {
   hideInstructions: boolean = false;
   studyTitleShowOptions = false;
   therapeuticAreaShowOptions = false;
+  isCheckboxSelected = false;
   
   studyTitleDropdownSelected: boolean = false;
   therapeuticAreaDropdownSelected: boolean = false;
+  index = 0;
+  itemDuplicate :any;
   
   public ngOnInit() {
         this.dropdownList = //loadDropdown();
@@ -145,7 +148,7 @@ export class JobExecutionComponent implements OnInit {
     // if(typeof item!= 'undefined' && item!= null && item.length>0){
    // console.log(this.item+item+" on select before setting"+this.selectedItemsList);
 
-    this.selectedItemsList.push(item.itemName);
+    this.selectedItemsList.push(item.domain);
 
      }
   // }
@@ -170,18 +173,18 @@ export class JobExecutionComponent implements OnInit {
   public searchJobExecution(searchJob,selectedItems) {
     //this.jobStatus =  true;
     this.hideInstructions=true;
-    console.log( " searchJobExecution selectedItemsList");
-    console.log( this.selectedItemsList);
+    //console.log( " searchJobExecution selectedItemsList");
+    //console.log( this.selectedItemsList);
 
     let params = new HttpParams();
     console.log( "params1");
   //  params = {key: 'domain', array:  this.selectedItemsList};
 
-  if(typeof this.selectedItemsList!= 'undefined' && this.selectedItemsList!= null && this.selectedItemsList.length>0){
-   console.log("inside domain looop"+this.selectedItemsList);
-   this.isDomain = true;
-    params = params.append('domain', this.selectedItemsList.toString());
-    }
+  //if(typeof this.selectedItemsList!= 'undefined' && this.selectedItemsList!= null && this.selectedItemsList.length>0){
+  // console.log("inside domain looop"+this.selectedItemsList);
+  // this.isDomain = true;
+  //  params = params.append('domain', this.selectedItemsList.toString());
+  //  }
     console.log( "params2");
     params = params.append('study', searchJob.study);
     console.log( "params3");
@@ -192,13 +195,13 @@ export class JobExecutionComponent implements OnInit {
       this.studyInHeader = searchJob.study;
     
       console.log( "params4");
-    if(this.isDomain){
-    	return this.http.get<any[]>(`/api/CDR/jobStatus/${searchJob.study}/${this.selectedItemsList}`)
-       .subscribe(data => {this.data = data });
-    }else{
+    //if(this.isDomain){
+    //	return this.http.get<any[]>(`/api/CDR/jobStatus/${searchJob.study}/${this.selectedItemsList}`)
+    //   .subscribe(data => {this.data = data });
+    //}else{
     	return this.http.get<any[]>(`/api/CDR/jobsForStudy/${searchJob.study}`)
        .subscribe(data => {this.data = data });
-    }
+    //}
 
     }else{
      this.missingFields = true;
@@ -223,6 +226,8 @@ export class JobExecutionComponent implements OnInit {
     this.domainList = [];
    	this.allDomainsLive = false;
     this.hideInstructions = false;
+    this.isCheckboxSelected = false;
+    
     //this.view = '';
     f.form.reset();
 
@@ -245,35 +250,48 @@ export class JobExecutionComponent implements OnInit {
  	
  }
  
- public runForAllDomains(){
+ public runForAllSelectedDomains(){
+    console.log("selected items run all"+this.selectedItemsList);
 	this.allDomainsLive = true;
-    for (let item of this.data) {
-    this.domainList.push(item.domain);
-     }
+	 
     //null checks for study TODO
     //reload table to disable run buttons
-     this.searchJobExecution(this.searchJob,this.selectedItems);
+     //this.searchJobExecution(this.searchJob,this.selectedItems);
+         this.hideInstructions=true;
+         this.loading= true;
+     
+    for (let item of this.data) {
+    //this.domainList.push(item.domain);
+    //above line is not reqd instead setting isLive status to true
+    console.log("printing...domain..."+ item.domain + "... "+this.selectedItemsList.includes(item.domain))
+    	if(this.selectedItemsList.includes(item.domain)){
+    	 console.log("match found");
+    	 this.index = this.data.indexOf(item); 
+    	 console.log("index found "+this.index);
+    	 console.log("printing data at index "+JSON.stringify(this.data[this.index]));
+    	 this.data[this.index].isLive = true;
+    	 console.log("printing data at index after setting property"+JSON.stringify(this.data[this.index]));
+    	 
+   		 }
+    }
     
     let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
- 	return this.http.post(`http://10.0.2.254?Study_name=${this.searchJob.study}&domain_array=${this.domainList}&Action=Run`,{headers: headers})
+ 	return this.http.post(`http://10.0.2.254?Study_name=${this.searchJob.study}&domain_array=${this.selectedItemsList}&Action=Run`,{headers: headers})
        .subscribe(data => {this.msg = data });
  	
  }
- 
- public drp(): void {
-      console.log("===ddddd====");
-      this.drpSelected = true;
-    }
-    
+  
    
    public refresh(searchJob,selectedItems): void {
+   
     this.jobStatus =  false;
     this.loading = false;
     this.data = [];
     this.domainList = [];
    	this.allDomainsLive = false;
-    
+    this.isCheckboxSelected = false;
+    this.selectedItemsList = [];
     this.searchJobExecution(searchJob,selectedItems);
 
   }
