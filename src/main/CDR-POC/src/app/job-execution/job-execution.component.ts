@@ -156,6 +156,8 @@ export class JobExecutionComponent implements OnInit {
    //console.log(" on select"+ item.itemName);
 
    //this.selectedItems = item;
+   
+   
 
   loadDropdown(){
         let params = new HttpParams();
@@ -268,8 +270,18 @@ export class JobExecutionComponent implements OnInit {
  }
  
  public runForAllSelectedDomains(){
+     console.log("checkbox"+this.checkbox);
+     console.log("chkbox sel value"+this.isCheckboxSelected);
+ 
     console.log("selected items run all"+this.selectedItemsList);
 	this.allDomainsLive = true;
+	
+	if(this.checkbox && this.isCheckboxSelected){
+	// header checkbox has been clicked so push all domains into selectedItemsList
+	    for (let item of this.data) {
+	    this.selectedItemsList.push(item.domain);
+		}
+	}
 	 
     //null checks for study TODO
     //reload table to disable run buttons
@@ -281,15 +293,16 @@ export class JobExecutionComponent implements OnInit {
     //this.domainList.push(item.domain);
     //above line is not reqd instead setting isLive status to true
     console.log("printing...domain..."+ item.domain + "... "+this.selectedItemsList.includes(item.domain))
-    //	if(this.selectedItemsList.includes(item.domain)){
+    	if(this.selectedItemsList.includes(item.domain)){
     	 console.log("match found");
     	 this.index = this.data.indexOf(item); 
     	 console.log("index found "+this.index);
     	 console.log("printing data at index "+JSON.stringify(this.data[this.index]));
     	 this.data[this.index].isLive = true;
+    	 this.data[this.index].isDisabled = false;
     	 console.log("printing data at index after setting property"+JSON.stringify(this.data[this.index]));
     	 
-   	//	 }
+   	 }
     }
     
     let headers = new HttpHeaders();
