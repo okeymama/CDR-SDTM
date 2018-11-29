@@ -251,12 +251,12 @@ export class JobExecutionComponent implements OnInit {
     	 }else{
     		if(action=='Run'){
     			item.isLive = true;
-    			item.isDisabled = false;
+    			//item.isDisabled = false;
     			
     		}else if (action=='Abort'){
          		item.isJobAborted = true;
          		item.isLive = false;  
-         		item.isDisabled = false;
+         		//item.isDisabled = false;
          		      
     		}
    			//this.domainList.push(item.domain);
@@ -279,7 +279,9 @@ export class JobExecutionComponent implements OnInit {
 	if(this.checkbox && this.isCheckboxSelected){
 	// header checkbox has been clicked so push all domains into selectedItemsList
 	    for (let item of this.data) {
-	    this.selectedItemsList.push(item.domain);
+	    if (!item.isDisabled){
+	     this.selectedItemsList.push(item.domain);
+	     }
 		}
 	}
 	 
