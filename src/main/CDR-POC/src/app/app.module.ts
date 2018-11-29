@@ -26,6 +26,7 @@ import { FooterComponent } from './footer/footer.component';
 import {BreadcrumbsModule} from 'ng6-breadcrumbs';
 import { BusinessEditFormComponent } from './business-edit-form/business-edit-form.component';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { KendoGridDeleteConfirmComponent } from './kendo-grid-delete-confirm/kendo-grid-delete-confirm.component';
 
 @NgModule({
@@ -59,8 +60,8 @@ import { KendoGridDeleteConfirmComponent } from './kendo-grid-delete-confirm/ken
     DialogsModule,
     BreadcrumbsModule,
     NgMultiSelectDropDownModule.forRoot(),
-    BsDropdownModule.forRoot()
-    
+    BsDropdownModule.forRoot(),
+    DropDownsModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA],
   providers: [

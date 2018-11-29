@@ -282,7 +282,7 @@
 								<thead>
 									<tr>
 										<td> <!-- *ngIf="loading"--><input type="checkbox" 
-										name="all" (change)="isCheckboxSelected = !isCheckboxSelected"/></td>
+										name="all" [(ngModel)]='checkbox' (change)="isCheckboxSelected = !isCheckboxSelected"/></td>
 										<td>SDTM Domain</td>
 										<td>Last Run</td>
 										<td>Status</td>

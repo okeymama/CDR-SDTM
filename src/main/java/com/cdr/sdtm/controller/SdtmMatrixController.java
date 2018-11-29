@@ -145,35 +145,40 @@ public class SdtmMatrixController {
 	}
 
 	
-	@GetMapping("/matrix/fetchOrInsert/{newStudy}/{study}/{domain}")
-	public List<PathToSdtmMatrix> importData(@PathVariable String newStudy, @PathVariable String study, @PathVariable String domain) {
-		List<PathToSdtmMatrix> matrices,insertMatrices = new ArrayList<PathToSdtmMatrix>();;
+	@GetMapping("/matrix/fetchOrInsert/{newStudy}/{study}/{domains}")
+	public List<PathToSdtmMatrix> importData(@PathVariable String newStudy, @PathVariable String study, @PathVariable List<String> domains) {
+		List<PathToSdtmMatrix> matrices,insertMatrices = null;
+		List<PathToSdtmMatrix> allMatrices = new ArrayList<PathToSdtmMatrix>();
 		PathToSdtmMatrix matrix = null;
-		matrices = sdtmMatrixService.findByStudyAndDomain(newStudy,domain);
-		if(matrices != null && matrices.size() > 0) {
-			return matrices;
-		} else {
-			matrices = sdtmMatrixService.findByStudyAndDomain(study,domain);
-			if(matrices != null && matrices.size() > 0) {
-			for(PathToSdtmMatrix template : matrices) {
-				matrix = new PathToSdtmMatrix();
-				matrix.setStudy(newStudy);
-				matrix.setDomain(template.getDomain());
-				matrix.setSubDomain(template.getSubDomain());
-				matrix.setTargetField(template.getTargetField());
-				matrix.setTargetFile(template.getTargetFile());
-				matrix.setSourceFile(template.getSourceFile());
-				matrix.setSourceField(template.getSourceField());
-				matrix.setJoinLogic(template.getJoinLogic());
-				matrix.setTransformation_type(template.getTransformation_type());
-				matrix.setTransformation_logic(template.getTransformation_logic());
-				matrix.setBack_transformation_logic(template.getBack_transformation_logic());
-				insertMatrices.add(matrix);
-			}
-			insertMatrices = sdtmMatrixService.saveMatrixForDomain(insertMatrices);
-			}
-			return insertMatrices;
+		
+		for(String domain : domains) {
+				matrices = sdtmMatrixService.findByStudyAndDomain(newStudy,domain);
+					if(matrices != null && matrices.size() > 0) {
+						   allMatrices.addAll(matrices);
+					} else {
+							matrices = sdtmMatrixService.findByStudyAndDomain(study,domain);
+							if(matrices != null && matrices.size() > 0) {
+									insertMatrices = new ArrayList<PathToSdtmMatrix>();
+									for(PathToSdtmMatrix template : matrices) {
+										matrix = new PathToSdtmMatrix();
+										matrix.setStudy(newStudy);
+										matrix.setDomain(template.getDomain());
+										matrix.setSubDomain(template.getSubDomain());
+										matrix.setTargetField(template.getTargetField());
+										matrix.setTargetFile(template.getTargetFile());
+										matrix.setSourceFile(template.getSourceFile());
+										matrix.setSourceField(template.getSourceField());
+										matrix.setJoinLogic(template.getJoinLogic());
+										matrix.setTransformation_type(template.getTransformation_type());
+										matrix.setTransformation_logic(template.getTransformation_logic());
+										matrix.setBack_transformation_logic(template.getBack_transformation_logic());
+										insertMatrices.add(matrix);
+									}
+									allMatrices.addAll(sdtmMatrixService.saveMatrixForDomain(insertMatrices));
+							}
+				   }
 		}
+		return allMatrices;
 	}
 	
 	

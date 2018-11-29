@@ -58,6 +58,7 @@ export class JobExecutionComponent implements OnInit {
   studyTitleShowOptions = false;
   therapeuticAreaShowOptions = false;
   isCheckboxSelected = false;
+  checkbox: boolean;
   
   studyTitleDropdownSelected: boolean = false;
   therapeuticAreaDropdownSelected: boolean = false;
@@ -173,6 +174,7 @@ export class JobExecutionComponent implements OnInit {
   public searchJobExecution(searchJob,selectedItems) {
     //this.jobStatus =  true;
     this.hideInstructions=true;
+    this.isCheckboxSelected = false;
     //console.log( " searchJobExecution selectedItemsList");
     //console.log( this.selectedItemsList);
 
@@ -226,7 +228,8 @@ export class JobExecutionComponent implements OnInit {
     this.domainList = [];
    	this.allDomainsLive = false;
     this.hideInstructions = false;
-    this.isCheckboxSelected = false;
+    this.checkbox = false;
+    this.isCheckboxSelected = !this.isCheckboxSelected;
     
     //this.view = '';
     f.form.reset();
@@ -264,7 +267,7 @@ export class JobExecutionComponent implements OnInit {
     //this.domainList.push(item.domain);
     //above line is not reqd instead setting isLive status to true
     console.log("printing...domain..."+ item.domain + "... "+this.selectedItemsList.includes(item.domain))
-    	if(this.selectedItemsList.includes(item.domain)){
+    //	if(this.selectedItemsList.includes(item.domain)){
     	 console.log("match found");
     	 this.index = this.data.indexOf(item); 
     	 console.log("index found "+this.index);
@@ -272,7 +275,7 @@ export class JobExecutionComponent implements OnInit {
     	 this.data[this.index].isLive = true;
     	 console.log("printing data at index after setting property"+JSON.stringify(this.data[this.index]));
     	 
-   		 }
+   	//	 }
     }
     
     let headers = new HttpHeaders();
@@ -291,6 +294,7 @@ export class JobExecutionComponent implements OnInit {
     this.domainList = [];
    	this.allDomainsLive = false;
     this.isCheckboxSelected = false;
+    this.checkbox = false;
     this.selectedItemsList = [];
     this.searchJobExecution(searchJob,selectedItems);
 
