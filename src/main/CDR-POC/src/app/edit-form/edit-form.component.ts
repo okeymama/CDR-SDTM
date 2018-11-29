@@ -50,7 +50,7 @@ export class EditFormComponent implements OnInit {
 
     public ngOnInit(): void {
       this.editService.fetchTherapeuticAreas().subscribe(data => {
-        this.therapeuticAreas = data;
+        this.therapeuticAreas = data; 
     });
     }
 
