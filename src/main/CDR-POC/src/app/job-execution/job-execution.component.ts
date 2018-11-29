@@ -237,20 +237,34 @@ export class JobExecutionComponent implements OnInit {
   }
 
  public actionOnJobExecution(item,action){
-    if(action=='Run'){
-    	item.isLive = true;
-    }else if (action=='Abort'){
-         item.isJobAborted = true;
-         item.isLive = false;        
-    }
-    //this.domainList.push(item.domain);
-    //domainList.push('Adverse Events');
-    let headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/json');
- 	return this.http.post(`http://10.0.2.254?Study_name=${item.study}&domain_array=${item.domain}&Action=${action}`,{headers: headers})
-       .subscribe(data => {this.msg = data });
-
- 	
+    if(action=='Disable'){
+       item.isDisabled = true;
+     
+    }else{
+    
+    	//Need to proceed only if action is not 'Disable'
+    	
+    	 if (action == 'Enable'){
+    	    item.isDisabled = false;
+    	 }else{
+    		if(action=='Run'){
+    			item.isLive = true;
+    			item.isDisabled = false;
+    			
+    		}else if (action=='Abort'){
+         		item.isJobAborted = true;
+         		item.isLive = false;  
+         		item.isDisabled = false;
+         		      
+    		}
+   			//this.domainList.push(item.domain);
+    		//domainList.push('Adverse Events');
+    		let headers = new HttpHeaders();
+        	headers.append('Content-Type', 'application/json');
+ 			return this.http.post(`http://10.0.2.254?Study_name=${item.study}&domain_array=${item.domain}&Action=${action}`,{headers: headers})
+       	.subscribe(data => {this.msg = data });
+		}	
+ 	  }
  }
  
  public runForAllSelectedDomains(){
