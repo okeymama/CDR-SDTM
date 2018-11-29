@@ -66,11 +66,13 @@ label {
 </style>
 
 <kendo-dialog *ngIf="active" (close)="closeForm()">
-<kendo-dialog-titlebar style="background-color : white;border-radius: 30px 30px 0 0">
+<kendo-dialog-titlebar style="background-color : white;border-radius: 30px 30px 0 0" *ngIf="(isNew=='add' || isNew=='edit' || isNew=='import')"> 
   <span *ngIf="(isNew=='add')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Create New Business Rule</b></span>
   <span *ngIf="(isNew=='edit')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Edit Business Rule</b></span>
   <span *ngIf="(isNew=='import')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Import Business Rules</b></span>
-  <span *ngIf="(isNew=='delete')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Delete</b></span>
+</kendo-dialog-titlebar> 
+<kendo-dialog-titlebar style="background-color : white;border-radius: 30px 30px 0 0;padding: 5px;" *ngIf="(isNew=='delete')">
+  <b style="color : black;font-size: 14px;font-family: Open Sans;">Confirm Delete</b>
 </kendo-dialog-titlebar> 
 
   <form novalidate [formGroup]="editBusinessForm" *ngIf="(isNew=='add' || isNew=='edit')">
@@ -226,7 +228,7 @@ label {
 </div>
 </form>
   <form novalidate [formGroup]="editBusinessForm" *ngIf="(isNew=='delete')"> 
-    Are you sure you want to delete this business rule
+    Are you sure you want to delete this business rule?
   </form>
   <button kendoButton (click)="onCancel($event)" style="color : white;background-color : rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-top: 10px;">Cancel</button>&nbsp;&nbsp;
   <button *ngIf="(isNew=='add' || isNew=='edit')" kendoButton [disabled]="!editBusinessForm.valid" (click)="onSave($event,isNew)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -150px;margin-top: 10px;">Submit</button>
