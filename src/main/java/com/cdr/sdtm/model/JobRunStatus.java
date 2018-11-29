@@ -35,6 +35,18 @@ public class JobRunStatus {
 	
 	@Column(name="MESSAGE")
 	private String message;
+	
+	@Column(name="JOB_DISABLED")
+	private String jobDisabled;
+
+	
+	public String getJobDisabled() {
+		return jobDisabled;
+	}
+
+	public void setJobDisabled(String jobDisabled) {
+		this.jobDisabled = jobDisabled;
+	}
 
 	public Long getJob_id() {
 		return job_id;

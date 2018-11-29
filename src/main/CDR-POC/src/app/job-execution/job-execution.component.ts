@@ -66,6 +66,7 @@ export class JobExecutionComponent implements OnInit {
   itemDuplicate :any;
   
   public ngOnInit() {
+    
         this.dropdownList = //loadDropdown();
         					[
                               {"id":1,"itemName":"Demographics"},
