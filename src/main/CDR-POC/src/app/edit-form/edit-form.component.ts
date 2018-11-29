@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit , Inject} from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { StudyDetails } from '../_models/index';
 import { EditService } from '../_services/index';
@@ -17,10 +17,12 @@ import { map } from 'rxjs/operators/map';
     ],
   templateUrl: './edit-form.component.html'
 })
-export class EditFormComponent {
+export class EditFormComponent implements OnInit {
     public active = false;
     public opened: boolean = false;
     public errorMsg: string;
+    public therapeuticAreas: any[];
+    private editService: EditService;
     public editForm: FormGroup = new FormGroup({
       'id': new FormControl(),
       'studyID': new FormControl(),
@@ -31,7 +33,9 @@ export class EditFormComponent {
       'source': new FormControl()
     });
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, @Inject(EditService) editServiceFactory: any) {
+      this.editService = editServiceFactory();
+    }
     private res: any[] = [];
     @Input() public isNew = false;
     @Input() public isDelete = false;
@@ -43,6 +47,12 @@ export class EditFormComponent {
 
     @Output() cancel: EventEmitter<any> = new EventEmitter();
     @Output() save: EventEmitter<StudyDetails> = new EventEmitter();
+
+    public ngOnInit(): void {
+      this.editService.fetchTherapeuticAreas().subscribe(data => {
+        this.therapeuticAreas = data;
+    });
+    }
 
     public onSave(e) {
         e.preventDefault();
@@ -92,4 +102,5 @@ export class EditFormComponent {
         this.active = false;
         this.cancel.emit();
     }
+
 }
