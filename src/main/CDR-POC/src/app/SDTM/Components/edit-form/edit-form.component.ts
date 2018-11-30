@@ -18,6 +18,9 @@ import { StudyDetails } from '../../Models';
   templateUrl: './edit-form.component.html'
 })
 export class EditFormComponent implements OnInit {
+     public studyPhases: any[];
+     public studySources: any[];
+     public studyStatuses: any[];
     public active = false;
     public opened: boolean = false;
     public errorMsg: string;
@@ -49,9 +52,18 @@ export class EditFormComponent implements OnInit {
     @Output() save: EventEmitter<StudyDetails> = new EventEmitter();
 
     public ngOnInit(): void {
-      this.editService.fetchTherapeuticAreas().subscribe(data => {
-        this.therapeuticAreas = data; 
-    });
+          this.editService.fetchTherapeuticAreas().subscribe(data => {
+            this.therapeuticAreas = data;
+          });
+        this.editService.fetchStudyPhases().subscribe(data => {
+          this.studyPhases = data;
+        });
+        this.editService.fetchStudySources().subscribe(data => {
+          this.studySources = data;
+        });
+        this.editService.fetchStudyStatuses().subscribe(data => {
+          this.studyStatuses = data;
+        });
     }
 
     public onSave(e) {

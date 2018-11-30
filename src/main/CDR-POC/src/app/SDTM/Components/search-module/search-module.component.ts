@@ -15,6 +15,9 @@ import { EditService, UserService } from '../../Services';
   styleUrls: ['./search-module.component.css']
 })
 export class SearchModuleComponent implements OnInit {
+    public studyPhases: any[];
+    public studySources: any[];
+    public studyStatuses: any[];
     public view: Observable<GridDataResult>;
     public gridState: State = {
         sort: [],
@@ -63,6 +66,16 @@ export class SearchModuleComponent implements OnInit {
       this.editService.fetchTherapeuticAreas().subscribe(data => {
         this.therapeuticAreas = data;
     });
+
+          this.editService.fetchStudyPhases().subscribe(data => {
+            this.studyPhases = data;
+        });
+        this.editService.fetchStudySources().subscribe(data => {
+          this.studySources = data;
+      });
+      this.editService.fetchStudyStatuses().subscribe(data => {
+        this.studyStatuses = data;
+      });
      this.fetch('onLoad');
     }
 

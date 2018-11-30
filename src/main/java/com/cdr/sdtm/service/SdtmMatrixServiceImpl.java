@@ -1,6 +1,8 @@
 package com.cdr.sdtm.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -141,8 +143,13 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 	}
 
 	@Override
-	public List<String> findDomainByStudy(String study) {
-		return sdtmMatrixRepository.findDomainByStudy(study);
+	public Map<String, String> findDomainByStudy(String study) {
+		List<Object[]> values = sdtmMatrixRepository.findDomainByStudy(study);
+		Map<String, String> results = new HashMap<String, String>();
+		for(Object[] value : values) {
+			results.put((String)value[0], (String)value[1]);
+		}
+		return results;
 	}
 
 	@Override

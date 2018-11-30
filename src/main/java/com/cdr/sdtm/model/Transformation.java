@@ -2,33 +2,23 @@ package com.cdr.sdtm.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name="Transformation")
-@Table(name="Transformation")
+@Entity(name="SDTM_Transformation_Metadata")
+@Table(name="SDTM_Transformation_Metadata")
 public class Transformation {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="TRANS_ID")
-	private Long trans_id;
-	
-	@Column(name="TRANS_TYPE")
+	@Column(name="Transformation_Type")
 	private String transType;
 	
-	@Column(name="TRANS_LOGIC")
+	@Column(name="Transformation_Logic")
 	private String transLogic;
+	
+	@Column(name="Actual_Backend_Transformation_Logic")
+	private String backTransLogic;
 
-	public Long getTrans_id() {
-		return trans_id;
-	}
-
-	public void setTrans_id(Long trans_id) {
-		this.trans_id = trans_id;
-	}
 
 	public String getTransType() {
 		return transType;
@@ -45,5 +35,15 @@ public class Transformation {
 	public void setTransLogic(String transLogic) {
 		this.transLogic = transLogic;
 	}
+
+	public String getBackTransLogic() {
+		return backTransLogic;
+	}
+
+	public void setBackTransLogic(String backTransLogic) {
+		this.backTransLogic = backTransLogic;
+	}
+	
+	
 	
 }

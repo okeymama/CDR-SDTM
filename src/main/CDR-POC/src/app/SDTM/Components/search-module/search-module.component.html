@@ -203,7 +203,7 @@ body {
                                    <select class="form-control"  id="form-field-select-1" name="brTherapeuticArea" [(ngModel)]="searchStudy.brTherapeuticArea" (change)="filterStudies($event.target.value);fetch(searchStudy);"> 
                                         <option value="undefined" selected disabled style="display: none;">Select an Option</option>
                                         <option value="all">--All--</option>
-                                        <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticArea}}">{{area.therapeuticArea}}</option>
+                                        <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticCode}}">{{area.therapeuticDescription}}</option>
                                     </select>
                               </div>
                               </div>
@@ -244,11 +244,7 @@ body {
                                         <select class="form-control"  id="form-field-select-1" name="phase" [(ngModel)]="searchStudy.phase" (ngModelChange)="fetch(searchStudy)">
                                             <option value="undefined" disabled selected style="display: none;">Select an Option</option>
                                             <option value="all">--All--</option>
-                                            <option value="Phase 0">Phase 0</option> 
-                                            <option value="Phase 1">Phase 1</option>
-                                            <option value="Phase 2">Phase 2</option>
-                                            <option value="Phase 3">Phase 3</option>
-                                            <option value="Phase 4">Phase 4</option>
+                                            <option *ngFor="let phase of studyPhases" value="{{phase.phase}}">{{phase.phaseDescription}}</option>
                                         </select>
                                   </div>
                                   </div>
@@ -267,8 +263,7 @@ body {
                                           <select class="form-control"  id="form-field-select-1" name="status" [(ngModel)]="searchStudy.status" (ngModelChange)="fetch(searchStudy)">
                                               <option value="undefined" disabled selected style="display: none;">Select an Option</option>
                                               <option value="all">--All--</option> 
-                                              <option value="active">Active</option>
-                                              <option value="Inactive">In active</option>
+                                              <option *ngFor="let status of studyStatuses" value="{{status.status}}">{{status.statusDescription}}</option>
                                           </select>
                                     </div>
                                     </div>
@@ -288,9 +283,7 @@ body {
                                             <select class="form-control"  id="form-field-select-1" name="source" [(ngModel)]="searchStudy.source" (ngModelChange)="fetch(searchStudy)">
                                                 <option value="undefined" disabled selected style="display: none;">Select an Option</option>
                                                 <option value="all">--All--</option> 
-                                                <option value="Source 1">Source 1</option>
-                                                <option value="Source 2">Source 2</option>
-                                                <option value="Source 3">Source 3</option>
+                                                <option *ngFor="let source of studySources" value="{{source.source}}">{{source.sourceDescription}}</option>
                                             </select> 
                                       </div>
                                       </div>

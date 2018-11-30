@@ -2,26 +2,37 @@ package com.cdr.sdtm.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name="STUDY")
-@Table(name="STUDY") 
+@Entity(name="Study_Metadata")
+@Table(name="Study_Metadata") 
 public class Study {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	@Column(name="Study_ID")
     private String studyID;
     
-    @Column(name="TITLE")
+    @Column(name="Study_Title")
     private String title;
+    
+    @Column(name="Study_Description")
+    private String description;
+    
+    @Column(name="Study_Phase")
     private String phase;
+    
+    @Column(name="Study_Status")
     private String status;
+    
+    @Column(name="Therapeutic_Area")
     private String therapeuticArea;
+    
+    @Column(name="Study_Source")
     private String source;
+    
+    @Column(name="Study_Type")
+    private String type;
     
     
     
@@ -37,12 +48,7 @@ public class Study {
 		this.therapeuticArea = therapeuticArea;
 	}
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public String getStudyID() {
 		return studyID;
 	}
@@ -78,6 +84,22 @@ public class Study {
 	}
 	public void setSource(String source) {
 		this.source = source;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
     
     

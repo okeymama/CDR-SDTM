@@ -102,11 +102,7 @@
       <div class="col-75">
         <select id="phase" class="searchLabel"  formControlName="phase" name="phase">
           <option [ngValue]="null" style="display: none;">Select an Option</option>
-          <option value="Phase 0">Phase 0</option>
-          <option value="Phase 1">Phase 1</option>
-          <option value="Phase 2">Phase 2</option>
-          <option value="Phase 3">Phase 3</option>
-          <option value="Phase 4">Phase 4</option>
+          <option *ngFor="let phase of studyPhases" value="{{phase.phase}}">{{phase.phaseDescription}}</option>
         </select><span style="color: red">*</span>
       </div>
     </div>
@@ -117,8 +113,7 @@
       <div class="col-75">
         <select id="status" class="searchLabel" formControlName="status" name="status" >
           <option [ngValue]="null" style="display: none;">Select an Option</option>
-          <option value="active">Active</option>
-          <option value="Inactive">Inactive</option>
+          <option *ngFor="let status of studyStatuses" value="{{status.status}}">{{status.statusDescription}}</option>
         </select><span style="color: red">*</span> 
       </div>
     </div>
@@ -130,7 +125,7 @@
         <!--<input type="text" class="searchLabel" placeholder="Enter Therapeutic Area" formControlName="therapeuticArea" />-->
         <select placeholder="Therapeutic Area" formControlName="therapeuticArea">
             <option  [ngValue]="null" disabled selected style="display: none;">Select an Option</option>
-            <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticArea}}">{{area.therapeuticArea}}</option>
+            <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticCode}}">{{area.therapeuticDescription}}</option>
         </select>&nbsp;&nbsp; 
       </div>
     </div>
@@ -139,7 +134,11 @@
         <label for="source">Source:</label>
       </div>
       <div class="col-75">
-        <input type="text" placeholder="Enter Source" class="searchLabel" formControlName="source" />&nbsp;&nbsp;
+        <!--<input type="text" placeholder="Enter Source" class="searchLabel" formControlName="source" />&nbsp;&nbsp;-->
+        <select placeholder="Source" formControlName="source">
+          <option  [ngValue]="null" disabled selected style="display: none;">Select an Option</option>
+          <option *ngFor="let source of studySources" value="{{source.source}}">{{source.sourceDescription}}</option>
+          </select>&nbsp;&nbsp; 
       </div>
     </div>
 </div>

@@ -66,14 +66,13 @@ label {
 </style>
 
 <kendo-dialog *ngIf="active" (close)="closeForm()">
-<kendo-dialog-titlebar style="background-color : white;border-radius: 30px 30px 0 0" *ngIf="(isNew=='add' || isNew=='edit' || isNew=='import')"> 
+<kendo-dialog-titlebar style="background-color : white;border-radius: 30px 30px 0 0"> 
   <span *ngIf="(isNew=='add')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Create New Business Rule</b></span>
   <span *ngIf="(isNew=='edit')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Edit Business Rule</b></span>
   <span *ngIf="(isNew=='import')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Import Business Rules</b></span>
+  <span *ngIf="(isNew=='delete')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Confirm Delete</b></span>
 </kendo-dialog-titlebar> 
-<kendo-dialog-titlebar style="background-color : white;border-radius: 30px 30px 0 0;padding: 5px;" *ngIf="(isNew=='delete')">
-  <b style="color : black;font-size: 14px;font-family: Open Sans;">Confirm Delete</b>
-</kendo-dialog-titlebar> 
+ 
 
   <form novalidate [formGroup]="editBusinessForm" *ngIf="(isNew=='add' || isNew=='edit')">
     <div class="container" style="background-color: white" >
@@ -213,10 +212,12 @@ label {
                 <option *ngFor="let domain of studyDomains" value="{{domain}}">{{domain}}</option>
               </select>-->
               <kendo-multiselect style="width: 80%;height: 30px;font-size:11px;font-family: Open Sans;border-color: #ccc"
-                [data]="studyDomains"
+                [data]="studyDomains | keyvalue"
                 formControlName="importDomain"
                 [autoClose]="true"
-                placeholder="Domain">
+                placeholder="Domain"
+                [textField]="'value'"
+                [valueField]="'key'">
               <ng-template kendoMultiSelectSummaryTag let-dataItem>
                 <label>{{ dataItem }}</label>
               </ng-template>

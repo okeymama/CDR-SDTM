@@ -196,7 +196,7 @@ body {
                                        <select class="form-control"  id="form-field-select-1" name="brTherapeuticArea" [(ngModel)]="searchBRStudy.brTherapeuticArea" (change)="filterStudies($event.target.value);"> 
                                             <option value="undefined" selected disabled style="display: none;">Select an Option</option>
                                             <option value="all">--All--</option>
-                                            <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticArea}}">{{area.therapeuticArea}}</option>
+                                            <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticCode}}">{{area.therapeuticDescription}}</option>
                                         </select>
                                   </div>
                                   </div>
@@ -230,7 +230,7 @@ body {
                                     <div *ngIf="phaseShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;" id="form-field-select-1" >
                                        <select class="form-control"  id="form-field-select-1" name="brSdtmDomain" [(ngModel)]="searchBRStudy.brSdtmDomain" (ngModelChange)="fetchTemplate(searchBRStudy)">
                                             <option value="undefined" disabled selected style="display: none;">Select an Option</option>
-                                            <option *ngFor="let domain of studyDomains" value="{{domain}}">{{domain}}</option>
+                                            <option *ngFor="let domain of studyDomains | keyvalue" value="{{domain.key}}">{{domain.value}}</option>
                                         </select>
                                   </div>
                                   </div>
@@ -255,7 +255,7 @@ body {
                         [pageable]="true"
                         (dataStateChange)="onStateChange(searchBRStudy, $event)"
                         (edit)="editHandler($event, searchBRStudy)" (remove)="removeHandler($event)"
-                        (add)="addHandler($event)"
+                        (add)="addHandler('add',$event)"
                         style="width: 99.5%;"
                       >
                       <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="targetField" title="SDTM Variables"></kendo-grid-column>

@@ -1,7 +1,9 @@
 package com.cdr.sdtm.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -137,11 +139,10 @@ public class SdtmMatrixController {
 	}
 	
 	@GetMapping("/busRules/domains/{study}")
-	public List<String> findDomainByStudy(@PathVariable String study) {
-		List<String> domains = new ArrayList<String>();
+	public Map<String,String> findDomainByStudy(@PathVariable String study) {
+		Map<String,String> domains = new HashMap<String,String>();
 		domains = sdtmMatrixService.findDomainByStudy(study);
 		return domains;
-		
 	}
 
 	

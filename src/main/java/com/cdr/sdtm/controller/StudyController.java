@@ -44,7 +44,7 @@ public class StudyController {
 	}
 	
 	@PutMapping("/study/update/{id}")
-	public ResponseEntity<String> updateStudy(@PathVariable int id, @RequestBody Study study) {
+	public ResponseEntity<String> updateStudy(@PathVariable String id, @RequestBody Study study) {
 		boolean isUpdated = studyService.updateStudy(study, id);
 		if(isUpdated) {
 			LOGGER.info("Study updated successfully.");
@@ -79,7 +79,7 @@ public class StudyController {
 	
 	
 	@RequestMapping(value = "/study/delete/{studyID}", method = RequestMethod.DELETE)
-	public ResponseEntity<String> deleteStudy(@PathVariable int studyID) {
+	public ResponseEntity<String> deleteStudy(@PathVariable String studyID) {
 		boolean isDeleted = studyService.deleteById(studyID);
 		if(isDeleted) {
 			LOGGER.info("Study deleted successfully.");
