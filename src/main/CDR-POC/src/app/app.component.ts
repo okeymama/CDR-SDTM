@@ -3,7 +3,8 @@ import { ActivatedRoute, Router} from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 import { Location } from '@angular/common';
-import { UserService } from './_services/index';
+import { UserService } from './SDTM/Services';
+
 
 @Component({
   selector: 'app-root',

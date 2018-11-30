@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent }   from './login/login.component';
-import { SearchModuleComponent } from './search-module/search-module.component';
-import { StudyInfoComponent } from './study-info/study-info.component';
-import { HomeComponent } from './home/home.component';
-import { BusinessRuleComponent } from './business-rule/business-rule.component';
-import { JobExecutionComponent } from './job-execution/job-execution.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
-import { DataQualityComponent } from './data-quality/data-quality.component';
+import { LoginComponent } from './Shared/login/login.component';
+import { HomeComponent } from './SDTM/Components/home/home.component';
+import { SearchModuleComponent } from './SDTM/Components/search-module/search-module.component';
+import { BusinessRuleComponent } from './SDTM/Components/business-rule/business-rule.component';
+import { JobExecutionComponent } from './SDTM/Components/job-execution/job-execution.component';
+import { DataQualityComponent } from './DataQuality/data-quality/data-quality.component';
+
 
 const routes: Routes = [
   { path: '', component: LoginComponent } ,
