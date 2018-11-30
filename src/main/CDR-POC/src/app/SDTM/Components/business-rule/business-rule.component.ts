@@ -2,11 +2,10 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { State, process } from '@progress/kendo-data-query';
-import { Matrix } from '../_models/index';
-import { BusinessEditService } from '../_services/index';
 import { map } from 'rxjs/operators/map';
-import { UserService } from '../_services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { Matrix } from '../../Models';
+import { BusinessEditService, UserService } from '../../Services';
 
 @Component({
   selector: 'app-business-rule',

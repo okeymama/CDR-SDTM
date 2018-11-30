@@ -6,8 +6,9 @@ import { GridDataResult } from '@progress/kendo-angular-grid';
 import { State, process } from '@progress/kendo-data-query';
 import { map } from 'rxjs/operators/map';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { AlertService, AuthenticationService } from '../_services/index';
-import { UserService } from '../_services/user.service';
+
+import { UserService, AlertService } from '../../Services';
+
 
 
 

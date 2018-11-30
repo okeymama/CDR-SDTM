@@ -1,6 +1,6 @@
 import { Component, OnInit,  Output, EventEmitter, Input } from '@angular/core';
-import { StudyDetails } from '../_models/index';
 import { FormGroup, FormControl } from '@angular/forms';
+import { StudyDetails } from 'src/app/SDTM/Models';
 
 @Component({
   selector: 'kendo-grid-remove-form',

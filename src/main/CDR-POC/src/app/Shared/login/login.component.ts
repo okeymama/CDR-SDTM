@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Http, Headers, Response } from '@angular/http';
-import { AlertService, AuthenticationService } from '../_services/index';
-import { User } from '../_models/index';
-import { UserService } from '../_services/index';
+import { AlertService, AuthenticationService, UserService } from 'src/app/SDTM/Services';
+import { User } from 'src/app/SDTM/Models';
+
 
 
 @Component({

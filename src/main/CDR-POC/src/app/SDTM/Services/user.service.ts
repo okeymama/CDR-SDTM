@@ -1,11 +1,11 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { User } from '../_models/index';
 import * as FileSaver from 'file-saver';
 import { RequestMethod, ResponseContentType} from "@angular/http";
 import 'rxjs/Rx';
 import { Observable, Subject, ReplaySubject, from, of, range } from 'rxjs';
 import { map, filter, switchMap } from 'rxjs/operators';
+import { User } from '../Models';
 
 @Injectable()
 export class UserService {

@@ -1,7 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit , Inject} from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
-import { StudyDetails } from '../_models/index';
-import { EditService } from '../_services/index';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -9,6 +7,8 @@ import { Headers, RequestOptions } from '@angular/http';
 
 import { tap } from 'rxjs/operators/tap';
 import { map } from 'rxjs/operators/map';
+import { EditService } from '../../Services';
+import { StudyDetails } from '../../Models';
 
 @Component({
   selector: 'kendo-grid-edit-form',

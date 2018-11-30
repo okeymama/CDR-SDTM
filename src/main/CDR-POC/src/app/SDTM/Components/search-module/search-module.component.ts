@@ -4,11 +4,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { State, process } from '@progress/kendo-data-query';
-import { StudyDetails } from '../_models/index';
 import { map } from 'rxjs/operators/map';
-import { EditService } from '../_services/index';
-import { AlertService } from '../_services/index';
-import { UserService } from '../_services/user.service';
+import { StudyDetails } from '../../Models';
+import { EditService, UserService } from '../../Services';
+
 
 @Component({
   selector: 'app-search-module',
