@@ -310,21 +310,28 @@
 												style="width: 25px; height: 25px;"> &nbsp;
 										</a> -->
 
-										<a *ngIf="item.jobDisabled =='N'; else jobDisabled" type="button"
+										<a *ngIf="(item.jobDisabled =='N' && 
+												  (!item['isLive']
+										          || (item['isLive'] && item['jobStatus']=='job completed'))
+										          );else jobDisabled"
+										type="button"
 										(click)="actionOnJobExecution(item,'Run')" > <img
 											src="../assets/images/Run.png" alt="Run"
 											data-toggle="tooltip"
 											alt="Run"
 											style="width: 25px; height: 25px;"> &nbsp;
 									</a> 
-									<ng-template #jobDisabled>
+									 <ng-template #jobDisabled>
+									 	<a *ngIf = "item.jobDisabled =='Y' ">
+									 
 										<img
 											src="../assets/images/Run_Disable.png" alt="Run"
 											data-toggle="tooltip"
 											alt="Run"
 											style="width: 25px; height: 25px;"> &nbsp;
-									
-									  </ng-template>
+									     </a>
+									  </ng-template> 
+									 
 
 										<a *ngIf="item['isLive'] " type="button"
 											style="width: 25px; height: 25px;"> <i
