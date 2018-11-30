@@ -242,14 +242,19 @@ export class JobExecutionComponent implements OnInit {
 
  public actionOnJobExecution(item,action){
     if(action=='Disable'){
-       item.isDisabled = true;
-     
+       //item.isDisabled = true;
+       item.jobDisabled = 'Y';
+       //call update service here
+       
     }else{
     
     	//Need to proceed only if action is not 'Disable'
     	
     	 if (action == 'Enable'){
-    	    item.isDisabled = false;
+    	    //item.isDisabled = false;
+    	    item.jobDisabled = 'N';
+    	    // call update service here    	    
+       
     	 }else{
     		if(action=='Run'){
     			item.isLive = true;
@@ -281,7 +286,8 @@ export class JobExecutionComponent implements OnInit {
 	if(this.checkbox && this.isCheckboxSelected){
 	// header checkbox has been clicked so push all domains into selectedItemsList
 	    for (let item of this.data) {
-	    if (!item.isDisabled){
+	    //if (!item.isDisabled){
+	    if (item.jobDisabled!='Y'){	    
 	     this.selectedItemsList.push(item.domain);
 	     }
 		}
@@ -303,7 +309,7 @@ export class JobExecutionComponent implements OnInit {
     	 console.log("index found "+this.index);
     	 console.log("printing data at index "+JSON.stringify(this.data[this.index]));
     	 this.data[this.index].isLive = true;
-    	 this.data[this.index].isDisabled = false;
+    	 //this.data[this.index].isDisabled = false;
     	 console.log("printing data at index after setting property"+JSON.stringify(this.data[this.index]));
     	 
    	 }

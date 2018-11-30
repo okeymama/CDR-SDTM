@@ -339,7 +339,7 @@
 										</a> 
 
 										<a *ngIf="item.jobDisabled =='N'" type="button"
-											(click)="item.jobDisabled = 'Y'" > <img
+											(click)="actionOnJobExecution(item,'Disable')" > <img
 												src="../assets/images/Disable_Inactive.png"
 												data-toggle="tooltip"
 												alt="Disable"
@@ -348,7 +348,7 @@
 										</a>
 										
 										<a *ngIf="item.jobDisabled =='Y'" type="button"
-											(click)="item.jobDisabled = 'N'" > <img
+											(click)="actionOnJobExecution(item,'Enable')" > <img
 												src="../assets/images/Disable_Active.png"
 												data-toggle="tooltip"
 												alt="Enable"
