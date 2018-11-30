@@ -244,7 +244,8 @@ export class JobExecutionComponent implements OnInit {
     if(action=='Disable'){
        //item.isDisabled = true;
        item.jobDisabled = 'Y';
-       //call update service here
+       //this.callUpdateService(item.job_id,item.jobDisabled);
+       
        
     }else{
     
@@ -253,8 +254,8 @@ export class JobExecutionComponent implements OnInit {
     	 if (action == 'Enable'){
     	    //item.isDisabled = false;
     	    item.jobDisabled = 'N';
-    	    // call update service here    	    
-       
+       		//this.callUpdateService(item.job_id,item.jobDisabled);
+            
     	 }else{
     		if(action=='Run'){
     			item.isLive = true;
@@ -361,4 +362,13 @@ export class JobExecutionComponent implements OnInit {
           this.therapeuticAreaDropdownSelected = false;
         }
     }
+    
+     public callUpdateService(uniqueId,jobDisabled){
+        console.log("uniqueId "+ uniqueId + "jobDisabled "+jobDisabled)
+      	const searchUrl = '/api/CDR/updateJobs/';
+        let url = `${searchUrl}/${uniqueId}/${jobDisabled}`;
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+          return this.http.put(url,{headers: headers});
+     }
+    
 }
