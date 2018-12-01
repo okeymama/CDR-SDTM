@@ -14,45 +14,41 @@ import { AnalyticsComponent } from './analytics/analytics.component';
 import {BreadcrumbsModule} from 'ng6-breadcrumbs';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { SearchModuleComponent } from './SDTM/Components/search-module/search-module.component';
 import { AlertComponent } from './Directives';
-import { StudyInfoComponent } from './SDTM/Components/study-info/study-info.component';
 import { HomeComponent } from './SDTM/Components/home/home.component';
-import { EditFormComponent } from './SDTM/Components/edit-form/edit-form.component';
 import { JobExecutionComponent } from './SDTM/Components/job-execution/job-execution.component';
-import { BusinessRuleComponent } from './SDTM/Components/business-rule/business-rule.component';
-import { DataQualityComponent } from './DataQuality/data-quality/data-quality.component';
 import { HeaderComponent } from './Shared/header/header.component';
 import { FooterComponent } from './Shared/footer/footer.component';
-import { BusinessEditFormComponent } from './SDTM/Components/business-edit-form/business-edit-form.component';
 import { KendoGridDeleteConfirmComponent } from './Shared/kendo-grid-delete-confirm/kendo-grid-delete-confirm.component';
 import { LoginComponent } from './Shared/login/login.component';
 import { EditService, BusinessEditService, AlertService, AuthenticationService, UserService } from './SDTM/Services';
+import { DataQualityModule } from './DataQuality/data-quality.module';
+import { NavBarComponent } from './Shared/nav-bar/nav-bar.component';
+import { HeaderIconsComponent } from './Shared/header-icons/header-icons.component';
+import { StudySetupComponent } from './SDTM/Components/study-setup/study-setup.component';
+import { StudySetupEditComponent } from './SDTM/Components/study-setup-edit/study-setup-edit.component';
+import { BusinessRuleConfigComponent } from './SDTM/Components/business-rule-config/business-rule-config.component';
+import { BusinessRuleConfigEditComponent } from './SDTM/Components/business-rule-config-edit/business-rule-config-edit.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SearchModuleComponent,
     AlertComponent,
-    StudyInfoComponent,
     HomeComponent,
-    EditFormComponent,
     JobExecutionComponent,
-    BusinessRuleComponent,
-    DataQualityComponent,
     AnalyticsComponent,
     HeaderComponent,
     FooterComponent,
-    BusinessEditFormComponent,
     KendoGridDeleteConfirmComponent,
-    SearchModuleComponent,
-    StudyInfoComponent,
     HomeComponent,
-    EditFormComponent,
-    BusinessEditFormComponent,
-    BusinessRuleComponent
+    NavBarComponent,
+    HeaderIconsComponent,
+    StudySetupComponent,
+    StudySetupEditComponent,
+    BusinessRuleConfigComponent,
+    BusinessRuleConfigEditComponent
   ],
   imports: [
     AppRoutingModule,
@@ -68,7 +64,8 @@ import { EditService, BusinessEditService, AlertService, AuthenticationService, 
     BreadcrumbsModule,
     NgMultiSelectDropDownModule.forRoot(),
     BsDropdownModule.forRoot(),
-    DropDownsModule
+    DropDownsModule,
+    DataQualityModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA],
   providers: [

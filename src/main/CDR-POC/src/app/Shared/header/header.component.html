@@ -1,77 +1,30 @@
-<style>
-  .pull-right {
-    float: right;
-    padding-right:12px;
-}
-.navbar {
-    margin: -10px;
-    padding-left: 0;
-    padding-right: 0;
-    border-width: 2px;
-    border-radius: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    min-height: 5px;
-    background: #F2F2F2;
-    border-bottom-color: #074982;
-    margin-left:-1px
-}
-</style>
-<div id="navbar" class="navbar navbar-default ace-save-state" style="background:white">
-        <div class="" id="navbar-container">
-           <h3 class="col-sm-8" style='font-size: 18px;margin-top: 7px;margin-bottom: 1px;
-           width: 102%;color:white;font-family: Open Sans'>
-                <span style="color:black;font-size: 16px;margin-left: -20px;">
-                  <img class="pull-left" style="margin-top: -6px;width: 40px;padding:3px" src="assets/images/NewLogoImg.png" />
-                  ClinApps
-                </span>
-                <span class="input-icon" style="padding-bottom: 6px;margin-left:840px">
-                  <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-                  <i class="ace-icon fa fa-search nav-search-icon"></i>
-                </span>
-                <span style="padding-left: 12px;padding-bottom: 3px; color:#3333">
-                <i style="font-size:22px" class="ace-icon fa fa-gear"></i>
-                </span>
-                <span style="padding-left: 12px;color:#3333;padding-bottom: 3px">
-                <i style="font-size:22px" class="menu-icon fa fa-bell"></i>
-                </span>
-                <span dropdown style="padding-bottom: 3px;margin-top: 5px;padding-top: 20px">
-                                <button dropdownToggle type="button" class="dropdown-toggle" style="background-color: white;border-color: white;border-width: 0px">
-                                <img class="pull-right" style="width: 36px;margin-left: 6px;margin-bottom: -4px;" src="assets/images/avatars/UserImage1.png" />
-                                   </button>
-                                <ul *dropdownMenu class="dropdown-menu pull-right" role="menu">
-                                <li role="menuitem"><a class="dropdown-item" href="#">{{userName }}</a></li>
-                                <li role="menuitem"><a class="dropdown-item" href="#">Logout</a></li>
-                                </ul>
-             </span>
 
+  <div id="navbar" class="navbar navbar-default ace-save-state">
+        <h3 class="col-sm-8" style='font-size: 18px;margin-top: 16px;margin-bottom: -2px;width: 100.666%;color:white;text-align:left;font-family: Open Sans Regular'>
+  <span style="color:black;font-size: 20px;">
+    <img class="pull-left" style="margin-top: -6px;width: 35px;" src="assets/images/NewLogoImg.png" alt="Logo" />
+    &nbsp;ClinApps
+  </span>
+  <span style="color:black;font-family:Open Sans Regular;font-weight: 100;font-size: 16px;">– Path to SDTM</span>
+  <span class="input-icon" style="padding-bottom: 6px;margin-left:709px">
+    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+    <i class="ace-icon fa fa-search nav-search-icon"></i>
+  </span>
+  <span style="padding-left: 9px;padding-top: 20px; color:#E4E6E9">
+  <i style="font-size:22px" class="ace-icon fa fa-gear"></i>
+  </span>
+  <span style="padding-left: 9px;color:#E4E6E9">
+  <i style="font-size:22px" class="menu-icon fa fa-bell"></i>
+  </span>
+  <span dropdown style="padding-bottom: 3px;margin-top: 5px;padding-top: 20px">
+    <button dropdownToggle type="button" class="dropdown-toggle" style="background-color: white;border-color: white;border-width: 0px">
+    <img class="pull-right" style="width: 30px;margin-left: 5px;margin-bottom: -8px;" src="assets/images/avatars/UserImage1.png" />
+       </button>
+    <ul *dropdownMenu class="dropdown-menu pull-right" role="menu">
+    <li role="menuitem"><a class="dropdown-item" href="#">{{userName }}</a></li>
+    <li role="menuitem"><a class="dropdown-item" href="#">Logout</a></li>
+    </ul>
+  </span>
+</h3>
+</div>
 
-
-            </h3>
-        </div>
-      </div>
-<ul class="nav nav-tabs padding-6 tab-color-blue background-blue"  id="myTab4" *ngIf="!(location=='/home')">
-  <li>
-      <a data-toggle="tab" [routerLink]="['/home']" style="font-family: serif;font-size: 14px;width:90px"><b><!--i class="ace-icon fa fa-home home-icon" style="color:black"></i-->Home</b></a>
-  </li>
-  <li [routerLinkActive]="['active']">
-      <a data-toggle="tab" routerLink="/searchModule"  style="font-family: serif;font-size: 14px;width:200px"><b><!--img src="../assets/images/Study_sm.png" style="margin-top: -2px;width: 15px;height:10px;color:black;"-->Study Configuration</b></a>
-  </li>
-
-  <li [routerLinkActive]="['active']">
-      <a data-toggle="tab" routerLink="/busRules"  style="font-family: serif;font-size: 14px;width:260px"><b><!--img src="../assets/images/BizRulz-sm.png" style="margin-top: -2px;width: 15px;height:10px;color:black;"-->Business Rule Configuration</b></a>
-  </li>
-
-  <li [routerLinkActive]="['active']">
-      <a data-toggle="tab" routerLink="/job"  style="font-family: serif;font-size: 14px;width:210px"><b><!--i class="ace-icon fa fa-tasks" style="color:black"></i-->Job Execution</b></a>
-  </li>
-
-  <li [routerLinkActive]="['active']">
-      <a data-toggle="tab" routerLink="/dataQuality"  style="font-family: serif;font-size: 14px;width:180px"><b><!--i class="ace-icon fa fa-check-square" style="color:black"></i-->Data Quality Workbench</b></a>
-  </li>
-
-  <!-- <li [routerLinkActive]="['active']">
-      <a data-toggle="tab" routerLink="/analytics"  style="font-family: serif;font-size: 14px;width:172px"><b>i class="ace-icon fa fa-connectdevelop" style="color:black"></iAnalytics</b></a>
-  </li>
- -->
-</ul>

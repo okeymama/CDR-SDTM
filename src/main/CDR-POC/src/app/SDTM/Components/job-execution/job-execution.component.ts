@@ -65,8 +65,21 @@ export class JobExecutionComponent implements OnInit {
   therapeuticAreaDropdownSelected: boolean = false;
   index = 0;
   itemDuplicate :any;
+   configTypeIcons: Object[];
+  configTypeImage: string;
+  configTypeTitle: string;
+
   
   public ngOnInit() {
+
+    this.configTypeIcons = [
+      {"icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "":"","inputParam":""},
+      {"icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png", "action":"","inputParam":""},
+      {"icontitle": "Refresh", "iconImageSrc": "assets/images/Refresh.png", "action":this.searchJob,"inputParam":this.selectedItems}
+     
+    ];
+  this.configTypeImage = "assets/images/JobExecution.png";
+  this.configTypeTitle= "Job Execution";
     
         this.dropdownList = //loadDropdown();
         					[
@@ -118,6 +131,11 @@ export class JobExecutionComponent implements OnInit {
           this.searchJobExecution(this.searchJob, undefined);
         }
    }
+
+   addHandlerIconClick(data){
+    if(!data.flag) return; 
+   this.refresh(data.flag, data.inputParam);
+}
     public fetchStudyTitles() {
         return this.http.get<any[]>(`/api/CDR/study/dropdown`);
     }
