@@ -8,13 +8,12 @@ import { map } from 'rxjs/operators/map';
 import { StudyDetails } from '../../Models';
 import { EditService, UserService } from '../../Services';
 
-
 @Component({
-  selector: 'app-search-module',
-  templateUrl: './search-module.component.html',
-  styleUrls: ['./search-module.component.css']
+  selector: 'study-setup',
+  templateUrl: './study-setup.component.html',
+  styleUrls: ['./study-setup.component.css']
 })
-export class SearchModuleComponent implements OnInit {
+export class StudySetupComponent implements OnInit {
     public view: Observable<GridDataResult>;
     public gridState: State = {
         sort: [],
@@ -45,6 +44,8 @@ export class SearchModuleComponent implements OnInit {
     configTypeIcons: Object[];
     configTypeImage: string;
     configTypeTitle: string;
+
+
     constructor(private userService: UserService,
       private router: Router,
       private route: ActivatedRoute, @Inject(EditService) editServiceFactory: any) {
@@ -52,6 +53,7 @@ export class SearchModuleComponent implements OnInit {
     }
 
     public ngOnInit(): void {
+     
       this.configTypeIcons = [
         {"icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png"},
         {"icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png"},
@@ -205,3 +207,4 @@ export class SearchModuleComponent implements OnInit {
        this.router.navigate(['/busRules', {studyTitle: dataItem.title, therapeuticArea: dataItem.therapeuticArea}]);
   }
 }
+

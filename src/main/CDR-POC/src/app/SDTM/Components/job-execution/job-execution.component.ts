@@ -65,8 +65,21 @@ export class JobExecutionComponent implements OnInit {
   therapeuticAreaDropdownSelected: boolean = false;
   index = 0;
   itemDuplicate :any;
+   configTypeIcons: Object[];
+  configTypeImage: string;
+  configTypeTitle: string;
+
   
   public ngOnInit() {
+
+    this.configTypeIcons = [
+      {"icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png"},
+      {"icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png"},
+      {"icontitle": "Refresh", "iconImageSrc": "assets/images/Refresh.png"}
+     
+    ];
+  this.configTypeImage = "assets/images/JobExecution.png";
+  this.configTypeTitle= "Job Execution";
     
         this.dropdownList = //loadDropdown();
         					[

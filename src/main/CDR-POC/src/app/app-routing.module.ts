@@ -7,7 +7,10 @@ import { HomeComponent } from './SDTM/Components/home/home.component';
 import { SearchModuleComponent } from './SDTM/Components/search-module/search-module.component';
 import { BusinessRuleComponent } from './SDTM/Components/business-rule/business-rule.component';
 import { JobExecutionComponent } from './SDTM/Components/job-execution/job-execution.component';
-import { DataQualityComponent } from './DataQuality/data-quality/data-quality.component';
+import { CheckConfigurationComponent } from './DataQuality/Components/check-configuration/check-configuration.component';
+import { BusinessRuleConfigComponent } from './SDTM/Components/business-rule-config/business-rule-config.component';
+import { StudySetupComponent } from './SDTM/Components/study-setup/study-setup.component';
+
 
 
 const routes: Routes = [
@@ -21,21 +24,21 @@ const routes: Routes = [
     },
     {
       path: 'searchModule',
-      component: SearchModuleComponent,
+      component: StudySetupComponent,
       data: {
             breadcrumb: 'Study'
         }
     },
     {
       path: 'busRules',
-      component: BusinessRuleComponent,
+      component: BusinessRuleConfigComponent,
       data: {
         breadcrumb: 'Business Rule Configuration'
       }
     },
     {
            path: 'busRules/:studyTitle/:therapeuticArea',
-           component: BusinessRuleComponent,
+           component: BusinessRuleConfigComponent,
             data: {
              breadcrumb: 'Business Rule Configuration'
             }
@@ -56,7 +59,7 @@ const routes: Routes = [
    },
     {
       path: 'dataQuality',
-      component: DataQualityComponent,
+      component: CheckConfigurationComponent,
       data: {
       breadcrumb: 'Data Quality Workbench'
       }

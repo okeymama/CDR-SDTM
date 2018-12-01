@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
     }
     login() {
-      this.loading = true;
+      /*this.loading = true;
       return this.http.get(`/api/CDR/login?login.username=${this.model.username}&login.password=${this.model.password}`)
    .subscribe(
        data => {
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
    error => {
        this.alertService.error("Username or Password is Invalid");
        this.loading = false;
-   });
-
+   });*/
+   this.router.navigate([this.returnUrl]);
         }
 }

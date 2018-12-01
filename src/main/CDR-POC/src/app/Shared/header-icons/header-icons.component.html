@@ -1,0 +1,17 @@
+<hr style="margin-top: 1px;margin-bottom: 0px;border-top: 4px solid #074982;" />
+        <div class="panel panel-default" style="margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 5px;padding-bottom: 3px;background: white;">
+          <h3 class="row-label" style="text-align:left;width:97%;font-family:Open Sans Regular;font-size:14px">
+            <img class="pull-left" style="margin-top: -9px;width: 40px;" src="{{configTypeImage}}" alt="Logo" />&nbsp;
+           <!-- <div *ngIf="(getDomain() != null)" style="margin-top: -24px;margin-bottom: -21px;">
+           <label style="margin-top: 2px;font-family:Open Sans Regular;font-size:12px;margin-bottom: 0px;">{{configTypeTitle}}</label><br>
+                      <b><span style="font-size:17px" *ngIf="(getDomain() != null)">{{getStudy()}}</span></b>
+            </div>-->
+            <div style="margin-top: -13px;margin-bottom: -13px;">
+              {{configTypeTitle}}
+            </div>
+           <span *ngFor="let icon of configTypeIcons">
+              <img class="pull-right" style="margin-top: -6px;width: 27.5px;font-family:Open Sans Regular;font-size:10px"
+                data-toggle="tooltip" title={{icon.icontitle}} src={{icon.iconImageSrc}} alt="Logo" (click)="addHandler(icon.action,icon.inputParam)" />&nbsp;
+            </span>
+         </h3>
+        </div>

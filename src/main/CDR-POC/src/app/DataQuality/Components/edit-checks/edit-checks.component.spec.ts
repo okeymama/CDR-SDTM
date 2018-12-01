@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DataQualityComponent } from './data-quality.component';
+import { EditChecksComponent } from './edit-checks.component';
 
-describe('DataQualityComponent', () => {
-  let component: DataQualityComponent;
-  let fixture: ComponentFixture<DataQualityComponent>;
+describe('EditChecksComponent', () => {
+  let component: EditChecksComponent;
+  let fixture: ComponentFixture<EditChecksComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DataQualityComponent ]
+      declarations: [ EditChecksComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DataQualityComponent);
+    fixture = TestBed.createComponent(EditChecksComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -13,6 +13,9 @@ import { BusinessEditService, UserService } from '../../Services';
   styleUrls: ['./business-rule.component.css']
 })
 export class BusinessRuleComponent implements OnInit {
+    configTypeImage:string;
+    configTypeTitle: string;
+    configTypeIcons: Object[];
   studyDrpSelected = false;
   studyShowOptions = false;
   phaseDrpSelected = false;
@@ -47,6 +50,14 @@ export class BusinessRuleComponent implements OnInit {
         this.businessEditService = businessEditServiceFactory();
   }
   public ngOnInit(): void {
+      this.configTypeIcons = [
+        {"icontitle": "Notes", "iconImageSrc": "assets/images/RightImage1.png",  "action":"","inputParam":""},
+        {"icontitle": "Import", "iconImageSrc": "assets/images/NewNote.png", "action":"import","inputParam":this.importTemplate},
+        {"icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "action":"","inputParam":""},
+        {"icontitle": "Add Business Rule", "iconImageSrc": "assets/images/AddStudy.png","action":"add","inputParam":this.searchBRStudy}
+      ];
+    this.configTypeImage = "../../../assets/images/BussRules.png";
+    this.configTypeTitle= "Business Rule Configuration";
          this.view = this.businessEditService.pipe(map(data => process(data, this.gridState)));
 
       //   this.businessEditService.read();
@@ -85,6 +96,9 @@ export class BusinessRuleComponent implements OnInit {
          this.businessEditService.read(searchBRStudy);
      }
 
+     addHandlerIconClick(data){
+        this.addHandler(data.flag, data.inputParam);
+    }
      public addHandler(flag: any, searchBRStudy: any) {
          this.editBizDataItem = new Matrix();
          this.editBizDataItem.study = searchBRStudy.brStudy;
