@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckConfigurationComponent implements OnInit {
 
+  appName: string;
   constructor() { }
 
   ngOnInit() {
+    this.appName = "Data Quality";
   }
 
 }

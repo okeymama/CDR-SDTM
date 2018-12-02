@@ -14,6 +14,7 @@ import { EditService, UserService } from '../../Services';
   styleUrls: ['./study-setup.component.css']
 })
 export class StudySetupComponent implements OnInit {
+  appName: string;
     public view: Observable<GridDataResult>;
     public gridState: State = {
         sort: [],
@@ -53,7 +54,7 @@ export class StudySetupComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-     
+      this.appName = "Path to SDTM";
       this.configTypeIcons = [
         {"icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png", "action":"","inputParam":""},
         {"icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "action":"","inputParam":""},

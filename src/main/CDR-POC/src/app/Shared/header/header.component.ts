@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {Router} from '@angular/router';
 import { UserService } from 'src/app/SDTM/Services';
 
@@ -9,6 +9,8 @@ import { UserService } from 'src/app/SDTM/Services';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  @Input() appName: string;
+
   userName = '';
   public location = '' ;
   constructor(private userService: UserService, private  _router: Router) {

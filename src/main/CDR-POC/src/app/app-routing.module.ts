@@ -8,6 +8,8 @@ import { JobExecutionComponent } from './SDTM/Components/job-execution/job-execu
 import { CheckConfigurationComponent } from './DataQuality/Components/check-configuration/check-configuration.component';
 import { BusinessRuleConfigComponent } from './SDTM/Components/business-rule-config/business-rule-config.component';
 import { StudySetupComponent } from './SDTM/Components/study-setup/study-setup.component';
+import { SharedModule } from './Shared/shared.module';
+import { SdtmModule } from './SDTM/sdtm.module';
 
 
 
@@ -68,7 +70,9 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes, {useHash: true})
+    RouterModule.forRoot(routes, {useHash: true}),
+    SharedModule,
+    SdtmModule
   ],
   exports: [ RouterModule ],
   declarations: []

@@ -1,89 +1,52 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HttpClient, HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { AlertComponent } from './Directives';
+import { AnalyticsComponent } from './analytics/analytics.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
-import { HttpModule } from '@angular/http';
+import { BreadcrumbsModule} from 'ng6-breadcrumbs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { BsDropdownModule } from 'ngx-bootstrap';
+import { DataQualityModule } from './DataQuality/data-quality.module';
+import { DialogsModule } from '@progress/kendo-angular-dialog';
+import { DropDownsModule} from '@progress/kendo-angular-dropdowns';
 import { FormsModule } from '@angular/forms';
 import { GridModule } from '@progress/kendo-angular-grid';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
-import { DialogsModule } from '@progress/kendo-angular-dialog';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { AnalyticsComponent } from './analytics/analytics.component';
-import {BreadcrumbsModule} from 'ng6-breadcrumbs';
-import { BsDropdownModule } from 'ngx-bootstrap';
-import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { AlertComponent } from './Directives';
-import { HomeComponent } from './SDTM/Components/home/home.component';
-import { JobExecutionComponent } from './SDTM/Components/job-execution/job-execution.component';
-import { HeaderComponent } from './Shared/header/header.component';
-import { FooterComponent } from './Shared/footer/footer.component';
-import { KendoGridDeleteConfirmComponent } from './Shared/kendo-grid-delete-confirm/kendo-grid-delete-confirm.component';
-import { LoginComponent } from './Shared/login/login.component';
-import { EditService, BusinessEditService, AlertService, AuthenticationService, UserService } from './SDTM/Services';
-import { DataQualityModule } from './DataQuality/data-quality.module';
-import { NavBarComponent } from './Shared/nav-bar/nav-bar.component';
-import { HeaderIconsComponent } from './Shared/header-icons/header-icons.component';
-import { StudySetupComponent } from './SDTM/Components/study-setup/study-setup.component';
-import { StudySetupEditComponent } from './SDTM/Components/study-setup-edit/study-setup-edit.component';
-import { BusinessRuleConfigComponent } from './SDTM/Components/business-rule-config/business-rule-config.component';
-import { BusinessRuleConfigEditComponent } from './SDTM/Components/business-rule-config-edit/business-rule-config-edit.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { SdtmModule } from './SDTM/sdtm.module';
+import { SharedModule } from './Shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
     AlertComponent,
-    HomeComponent,
-    JobExecutionComponent,
     AnalyticsComponent,
-    HeaderComponent,
-    FooterComponent,
-    KendoGridDeleteConfirmComponent,
-    HomeComponent,
-    NavBarComponent,
-    HeaderIconsComponent,
-    StudySetupComponent,
-    StudySetupEditComponent,
-    BusinessRuleConfigComponent,
-    BusinessRuleConfigEditComponent
+    AppComponent
   ],
   imports: [
     AppRoutingModule,
-    BrowserModule,
-    HttpModule,
-    FormsModule,
-    HttpClientModule,
-    HttpClientJsonpModule,
-    BrowserAnimationsModule,
-    GridModule,
-    ReactiveFormsModule,
-    DialogsModule,
     BreadcrumbsModule,
-    NgMultiSelectDropDownModule.forRoot(),
+    BrowserAnimationsModule,
+    BrowserModule,
     BsDropdownModule.forRoot(),
+    DataQualityModule,
+    DialogsModule,
     DropDownsModule,
-    DataQualityModule
+    FormsModule,
+    GridModule,
+    HttpClientJsonpModule,
+    HttpClientModule,
+    HttpModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    ReactiveFormsModule,
+    SdtmModule,
+    SharedModule
   ],
+  
   schemas: [ CUSTOM_ELEMENTS_SCHEMA],
-  providers: [
-    {
-      deps: [HttpClient],
-      provide: EditService,
-      useFactory: (jsonp: HttpClient) => () => new EditService(jsonp)
-    },
-    {
-      deps: [HttpClient],
-      provide: BusinessEditService,
-      useFactory: (jsonp: HttpClient) => () => new BusinessEditService(jsonp)
-    },
-    AlertService,
-    AuthenticationService,
-    UserService
-
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
