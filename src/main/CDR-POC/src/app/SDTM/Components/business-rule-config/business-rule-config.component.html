@@ -1,9 +1,11 @@
-<app-header></app-header>
 
-    <div class="main-container ace-save-state" id="main-container">
-        <nav-bar></nav-bar>
-      <header-icons [configTypeImage]="configTypeImage" [configTypeTitle]="configTypeTitle"
-       [configTypeIcons] ="configTypeIcons" (iconClick)="addHandlerIconClick($event)"></header-icons>
+
+ <div class="main-container ace-save-state" id="main-container">
+
+      <header-icons [configTypeImage]="configTypeImage"
+      [configTypeTitle]="configTypeTitle"
+      [configTypeIcons]="configTypeIcons"
+      (iconClick)="addHandlerIconClick($event)"></header-icons>
         <div class="panel panel-default" style="height:410px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
           <h3 class="row-label" style="height: 4%;margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;">
             <span *ngIf="(getDomain() == null)">Select a study and SDTM domain to see business rules</span>
@@ -40,7 +42,7 @@
                                        <select class="form-control"  id="form-field-select-1" name="brTherapeuticArea" [(ngModel)]="searchBRStudy.brTherapeuticArea" (change)="filterStudies($event.target.value);"> 
                                             <option value="undefined" selected disabled style="display: none;">Select an Option</option>
                                             <option value="all">--All--</option>
-                                            <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticArea}}">{{area.therapeuticArea}}</option>
+                                            <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticCode}}">{{area.therapeuticDescription}}</option>
                                         </select>
                                   </div>
                                   </div>
@@ -74,7 +76,7 @@
                                     <div *ngIf="phaseShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;" id="form-field-select-1" >
                                        <select class="form-control"  id="form-field-select-1" name="brSdtmDomain" [(ngModel)]="searchBRStudy.brSdtmDomain" (ngModelChange)="fetchTemplate(searchBRStudy)">
                                             <option value="undefined" disabled selected style="display: none;">Select an Option</option>
-                                            <option *ngFor="let domain of studyDomains" value="{{domain}}">{{domain}}</option>
+                                            <option *ngFor="let domain of studyDomains" value="{{domain.domain}}">{{domain.domainLabel}}</option>
                                         </select>
                                   </div>
                                   </div>
@@ -99,9 +101,10 @@
                         [pageable]="true"
                         (dataStateChange)="onStateChange(searchBRStudy, $event)"
                         (edit)="editHandler($event, searchBRStudy)" (remove)="removeHandler($event)"
-                        (add)="addHandler($event)"
+                        (add)="addHandler('add',$event)"
                         style="width: 99.5%;"
-                      >
+                        [sortable]="true"
+                        >
                       <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="targetField" title="SDTM Variables"></kendo-grid-column>
                       <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="sourceFile"  title="Source File"></kendo-grid-column>
                       <kendo-grid-column [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="sourceField" title="Source Variable"></kendo-grid-column>
@@ -110,12 +113,12 @@
                       <kendo-grid-column [width]="170" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" field="transformation_logic" title="Transformation Logic"></kendo-grid-column>
                       <kendo-grid-command-column [style]="{'text-align':'center'}" [width]="110" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}" title="Actions">
                           <ng-template kendoGridCellTemplate>
-                                     <button kendoGridEditCommand [look]="outline" >
-                                            <span class="k-icon k-i-pencil"></span>
-                                      </button>
-                                      <button kendoGridRemoveCommand >
-                                                <span class="k-icon k-i-trash"></span>
-                                      </button>
+                              <button kendoGridEditCommand [look]="outline" >
+                                    <span class="k-icon k-i-pencil"></span>
+                              </button>
+                              <button kendoGridRemoveCommand >
+                                        <span class="k-icon k-i-trash"></span>
+                              </button>
                                      
                                          
                         </ng-template>
@@ -142,6 +145,6 @@
         <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 			</a>
-    </div>
+ 
     <!-- /.main-container -->
-
+</div>

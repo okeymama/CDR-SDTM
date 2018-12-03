@@ -10,71 +10,79 @@ import { BusinessRuleConfigComponent } from './SDTM/Components/business-rule-con
 import { StudySetupComponent } from './SDTM/Components/study-setup/study-setup.component';
 import { SharedModule } from './Shared/shared.module';
 import { SdtmModule } from './SDTM/sdtm.module';
+import { SdtmHomeComponent } from './SDTM/Components/sdtm-home/sdtm-home.component';
+import { DataqualityHomeComponent } from './DataQuality/Components/dataquality-home/dataquality-home.component';
+import { DataQualityModule } from './DataQuality/data-quality.module';
 
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent } ,
+  { path: '', component: LoginComponent },
   {
-      path: 'home',
-      component: HomeComponent,
-      data: {
-          breadcrumb: 'Home'
+    path: 'sdtmHome',
+    component: SdtmHomeComponent,
+
+    children: [
+      {
+        path: 'sdtmHome',
+        component: SdtmHomeComponent
+
+      },
+      {
+        path: 'studySetup',
+        component: StudySetupComponent
+
+      },
+      {
+        path: 'businessRules',
+        component: BusinessRuleConfigComponent
+
+      },
+      {
+        path: 'businessRules/:studyTitle/:therapeuticArea',
+        component: BusinessRuleConfigComponent
+
+      },
+      {
+        path: 'jobExecution',
+        component: JobExecutionComponent
+
+      },
+      {
+        path: 'jobExecution/:studyTitle',
+        component: JobExecutionComponent
+
       }
-    },
-    {
-      path: 'searchModule',
-      component: StudySetupComponent,
-      data: {
-            breadcrumb: 'Study'
-        }
-    },
-    {
-      path: 'busRules',
-      component: BusinessRuleConfigComponent,
-      data: {
-        breadcrumb: 'Business Rule Configuration'
-      }
-    },
-    {
-           path: 'busRules/:studyTitle/:therapeuticArea',
-           component: BusinessRuleConfigComponent,
-            data: {
-             breadcrumb: 'Business Rule Configuration'
-            }
-    },
-    {
-       path: 'job',
-       component: JobExecutionComponent,
-       data: {
-        breadcrumb: 'Job Execution'
-       }
-    },
-    {
-      path: 'job/:studyTitle',
-      component: JobExecutionComponent,
-      data: {
-       breadcrumb: 'Job Execution'
-      }
-   },
-    {
-      path: 'dataQuality',
-      component: CheckConfigurationComponent,
-      data: {
-      breadcrumb: 'Data Quality Workbench'
-      }
+    ]
   },
-    { path: 'analytics', component: AnalyticsComponent}
-  ];
+  {
+    path: 'home',
+    component: HomeComponent
+
+  },
+  {
+    path: 'dataQuality',
+    component: DataqualityHomeComponent,
+    children: [
+      {
+        path: 'checkConfig',
+        component: CheckConfigurationComponent
+
+      }
+    ]
+  },
+  { path: 'analytics', component: AnalyticsComponent }
+];
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes, {useHash: true}),
+    RouterModule.forRoot(routes, { useHash: true }),
     SharedModule,
-    SdtmModule
+    SdtmModule,
+    DataQualityModule
   ],
-  exports: [ RouterModule ],
+  exports: [RouterModule],
   declarations: []
 })
 export class AppRoutingModule { }

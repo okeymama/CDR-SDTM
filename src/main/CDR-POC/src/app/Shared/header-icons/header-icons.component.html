@@ -11,7 +11,7 @@
             </div>
            <span *ngFor="let icon of configTypeIcons">
       
-              <img class="pull-right" style="margin-top: -6px;width: 27.5px;font-family:Open Sans Regular;font-size:10px"
+              <img class="pull-right" style="margin-top: -6px;width: 27.5px;font-family:Open Sans Regular;font-size:10px; cursor: pointer"
                 data-toggle="tooltip" title={{icon.icontitle}} src={{icon.iconImageSrc}} alt="Logo" (click)="addHandler(icon.action,icon.inputParam)" />&nbsp;
             </span>
          </h3>

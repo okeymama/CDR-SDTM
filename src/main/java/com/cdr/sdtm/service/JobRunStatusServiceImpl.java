@@ -28,10 +28,5 @@ public class JobRunStatusServiceImpl implements JobRunStatusService {
 	public List<JobRunStatus> findByStudy(String study) {
 		return jobRunStatusRepository.findByStudy(study);
 	}
-	
-	@Override
-	public void updateJobs(Long uniqueId,String jobDisabled) {
-		jobRunStatusRepository.updateJobs(uniqueId,jobDisabled);
-	}
 
 }

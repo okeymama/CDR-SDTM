@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.cdr.sdtm.model.TherapeuticAreas;
 
-public interface TherapeuticRepository  extends JpaRepository<TherapeuticAreas, Long>{
+public interface TherapeuticRepository  extends JpaRepository<TherapeuticAreas, String>{
 
 }

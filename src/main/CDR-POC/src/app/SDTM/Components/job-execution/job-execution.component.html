@@ -1,7 +1,7 @@
-<app-header></app-header>
 
-<div class="main-container ace-save-state" id="main-container">
-	<nav-bar></nav-bar>
+
+
+ <div class="main-container ace-save-state" id="main-container">
 	<header-icons [configTypeImage]="configTypeImage"
 		[configTypeTitle]="configTypeTitle"
 		[configTypeIcons]="configTypeIcons"
@@ -79,7 +79,7 @@
 													style="display: none;">Choose</option>
 												<option value="all">--All--</option>
 												<option *ngFor="let area of therapeuticAreas"
-													value="{{area.therapeuticArea}}">{{area.therapeuticArea}}</option>
+													value="{{area.therapeuticCode}}">{{area.therapeuticDescription}}</option>
 											</select>
 
 										</div>
@@ -243,4 +243,4 @@
 			</div>
 		</div>
 	</div>
-</div>
+	</div>

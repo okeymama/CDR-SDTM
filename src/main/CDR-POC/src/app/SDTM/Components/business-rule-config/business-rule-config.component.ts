@@ -18,6 +18,7 @@ export class BusinessRuleConfigComponent implements OnInit {
     configTypeImage:string;
     configTypeTitle: string;
     configTypeIcons: Object[];
+    navBarItems: Object[];
   studyDrpSelected = false;
   studyShowOptions = false;
   phaseDrpSelected = false;
@@ -61,6 +62,11 @@ export class BusinessRuleConfigComponent implements OnInit {
         {"icontitle": "Add Business Rule", "iconImageSrc": "assets/images/AddStudy.png","action":"add","inputParam":this.searchBRStudy}
        
       ];
+      this.navBarItems = [
+        {"navBarTitle": "Home", "navBarLink": "/sdtmHome"},
+        {"navBarTitle": "Study Configuration", "navBarLink": "studySetup"},
+        {"navBarTitle": "Business Rule Configuration", "navBarLink": "businessRules"},
+        {"navBarTitle": "Job Execution", "navBarLink": "jobExecution"}
     this.configTypeImage = "../../../assets/images/BussRules.png";
     this.configTypeTitle= "Business Rule Configuration";
          this.view = this.businessEditService.pipe(map(data => process(data, this.gridState)));

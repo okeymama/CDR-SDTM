@@ -68,6 +68,7 @@ export class JobExecutionComponent implements OnInit {
    configTypeIcons: Object[];
   configTypeImage: string;
   configTypeTitle: string;
+  navBarItems: Object[];
 
   
   public ngOnInit() {
@@ -78,6 +79,11 @@ export class JobExecutionComponent implements OnInit {
       {"icontitle": "Refresh", "iconImageSrc": "assets/images/Refresh.png", "action":this.searchJob,"inputParam":this.selectedItems}
      
     ];
+    this.navBarItems = [
+      {"navBarTitle": "Home", "navBarLink": "/sdtmHome"},
+      {"navBarTitle": "Study Configuration", "navBarLink": "studySetup"},
+      {"navBarTitle": "Business Rule Configuration", "navBarLink": "businessRules"},
+      {"navBarTitle": "Job Execution", "navBarLink": "jobExecution"}]
   this.configTypeImage = "assets/images/JobExecution.png";
   this.configTypeTitle= "Job Execution";
     

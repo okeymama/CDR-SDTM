@@ -5,50 +5,63 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="PATH_TO_SDTM_MATRIX")
+@Entity(name="path_to_sdtm_matrix")
+@Table(name="path_to_sdtm_matrix")
 public class PathToSdtmMatrix {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "matrix_Sequence")
-    @SequenceGenerator(name = "matrix_Sequence", sequenceName = "MATRIX_SEQ")
-	@Column(name="ID")
-	private Long id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="Matrix_ID")
+	private Long id; 
 	
-	@Column(name="STUDY")
+	@Column(name="Study_Title")
 	private String study;
 	
-	@Column(name="DOMAIN")
+	@Column(name="Domain_Name")
 	private String domain;
+	
+	@Column(name="Domain_Label")
+	private String domainLabel;
+	
+	@Column(name="Domain_Name_Extension")
+	private String domainNameExt;
 
-	@Column(name="SUB_DOMAIN")
+	@Column(name="Sub_Domain_Label")
 	private String subDomain;
 	
-	@Column(name="TARGET_FILE")
-	private String targetFile;
+	@Column(name="Form_Name")
+	private String formName;
 	
-	@Column(name="TARGET_FIELD")
-	private String targetField;
+	@Column(name="Form_Label")
+	private String formLable;
 	
-	@Column(name="SOURCE_FILE")
+	@Column(name="Form_Name_Extension")
+	private String formExt;
+	
+	@Column(name="Form_Variable_Name")
 	private String sourceFile;
 	
-	@Column(name="SOURCE_FIELD")
+	@Column(name="Form_Variable_Label")
 	private String sourceField;
 	
-	@Column(name="JOIN_LOGIC")
+	@Column(name="SDTM_Variable_Name")
+	private String targetFile;
+	
+	@Column(name="SDTM_Variable_Label")
+	private String targetField;
+	
+	@Column(name="Join_Criteria")
 	private String joinLogic;
 	
-	@Column(name="TRANSFORMATION_TYPE")
+	@Column(name="Transformation_Type")
 	private String transformation_type;
 	
-	@Column(name="TRANSFORMATION_LOGIC")
+	@Column(name="Transformation_Pseudo_Code")
 	private String transformation_logic;
 	
-	@Column(name="BACK_TRANSFORMATION_LOGIC")
+	@Column(name="Transformation_Code")
 	private String back_transformation_logic;
 
 	public String getStudy() {
@@ -155,5 +168,47 @@ public class PathToSdtmMatrix {
 	public void setBack_transformation_logic(String back_transformation_logic) {
 		this.back_transformation_logic = back_transformation_logic;
 	}
+
+	public String getDomainLabel() {
+		return domainLabel;
+	}
+
+	public void setDomainLabel(String domainLabel) {
+		this.domainLabel = domainLabel;
+	}
+
+	public String getDomainNameExt() {
+		return domainNameExt;
+	}
+
+	public void setDomainNameExt(String domainNameExt) {
+		this.domainNameExt = domainNameExt;
+	}
+
+	public String getFormName() {
+		return formName;
+	}
+
+	public void setFormName(String formName) {
+		this.formName = formName;
+	}
+
+	public String getFormLable() {
+		return formLable;
+	}
+
+	public void setFormLable(String formLable) {
+		this.formLable = formLable;
+	}
+
+	public String getFormExt() {
+		return formExt;
+	}
+
+	public void setFormExt(String formExt) {
+		this.formExt = formExt;
+	}
+	
+	
 	
 }

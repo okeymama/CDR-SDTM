@@ -38,11 +38,5 @@ public class JobRunStatusController {
 		LOGGER.info("Jobs requested for study: " + study);
 		return jobRunStatusService.findByStudy(study);
 	}
-	
-	@GetMapping("/updateJobs/{uniqueId}/{jobDisabled}")
-	public void updateJobs(@PathVariable Long uniqueId,@PathVariable String jobDisabled) {
-		LOGGER.info("Jobs to be updated for uniqueId " + uniqueId + " and jobDisabled "+ jobDisabled);
-		jobRunStatusService.updateJobs(uniqueId,jobDisabled);
-	}
 
 }

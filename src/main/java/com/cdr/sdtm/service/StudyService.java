@@ -11,13 +11,13 @@ public interface StudyService {
 	
 	Study createStudy(Study study);
 	
-	boolean updateStudy(Study study, int id);
+	boolean updateStudy(Study study, String id);
 	
 	List<Study> getStudies();
 	
-	boolean deleteById(int id);
+	boolean deleteById(String id);
 	
-	Optional<Study> findById(int id);
+	Optional<Study> findById(String id);
 	
 	List<Study> findAll(Study study);
 

@@ -9,8 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name="JOB_RUN_STATUS")
-@Table(name="JOB_RUN_STATUS")
+@Entity(name="Job_Run_Statistics")
+@Table(name="Job_Run_Statistics")
 public class JobRunStatus {
 	
 	@Id

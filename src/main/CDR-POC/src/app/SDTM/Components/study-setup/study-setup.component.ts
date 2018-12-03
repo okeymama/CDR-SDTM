@@ -45,6 +45,7 @@ export class StudySetupComponent implements OnInit {
     configTypeIcons: Object[];
     configTypeImage: string;
     configTypeTitle: string;
+    navBarItems: Object[];
 
 
     constructor(private userService: UserService,
@@ -59,6 +60,14 @@ export class StudySetupComponent implements OnInit {
         {"icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png", "action":"","inputParam":""},
         {"icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "action":"","inputParam":""},
         {"icontitle": "Add Study", "iconImageSrc": "assets/images/AddStudy.png", "action":"add","inputParam":""}
+       
+      ];
+      this.navBarItems = [
+        {"navBarTitle": "Home", "navBarLink": "/sdtmHome"},
+        {"navBarTitle": "Study Configuration", "navBarLink": "studySetup"},
+        {"navBarTitle": "Business Rule Configuration", "navBarLink": "businessRules"},
+        {"navBarTitle": "Job Execution", "navBarLink": "jobExecution"}
+       
        
       ];
     this.configTypeImage = "assets/images/NewStudyConf.png";

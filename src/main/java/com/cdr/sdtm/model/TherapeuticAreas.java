@@ -2,38 +2,38 @@ package com.cdr.sdtm.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name="TherapeuticAreas")
-@Table(name="TherapeuticAreas")
+@Entity(name="TA_Metadata")
+@Table(name="TA_Metadata")
 public class TherapeuticAreas {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="THERAPEUTIC_ID")
-	private Long therapeutic_id;
+	@Column(name="Therapeutic_Area_Code")
+	private String therapeuticCode;
 	
-	@Column(name="THERAPEUTIC_AREA")
-	private String therapeuticArea;
+	@Column(name="Therapeutic_Area_Description")
+	private String therapeuticDescription;
 
-	public Long getTherapeutic_id() {
-		return therapeutic_id;
+	public String getTherapeuticCode() {
+		return therapeuticCode;
 	}
 
-	public void setTherapeutic_id(Long therapeutic_id) {
-		this.therapeutic_id = therapeutic_id;
+	public void setTherapeuticCode(String therapeuticCode) {
+		this.therapeuticCode = therapeuticCode;
 	}
 
-	public String getTherapeuticArea() {
-		return therapeuticArea;
+	public String getTherapeuticDescription() {
+		return therapeuticDescription;
 	}
 
-	public void setTherapeuticArea(String therapeuticArea) {
-		this.therapeuticArea = therapeuticArea;
+	public void setTherapeuticDescription(String therapeuticDescription) {
+		this.therapeuticDescription = therapeuticDescription;
 	}
+
+	
+	
 	
 	
 

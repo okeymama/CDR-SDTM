@@ -3,6 +3,7 @@ package com.cdr.sdtm.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.cdr.sdtm.model.Domain;
 import com.cdr.sdtm.model.PathToSdtmMatrix;
 import com.cdr.sdtm.model.TherapeuticAreas;
 import com.cdr.sdtm.model.Transformation;
@@ -25,7 +26,7 @@ public interface SdtmMatrixService {
 	
 	List<String> findDistinctStudies();
 	
-	List<String> findDomainByStudy(String study);
+	List<Domain> findDomainByStudy(String study); 
 	
 	List<String> findDistinctSDTMVariables();
 

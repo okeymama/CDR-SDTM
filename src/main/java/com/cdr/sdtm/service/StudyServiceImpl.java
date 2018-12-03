@@ -40,7 +40,7 @@ public class StudyServiceImpl implements StudyService {
 	}
 
 	@Override
-	public boolean updateStudy(Study study, int id) {
+	public boolean updateStudy(Study study, String id) {
 		 Optional<Study> _studyData = findById(id);
 		 if(_studyData.isPresent()) {
 		 Study _study = _studyData.get();
@@ -61,7 +61,7 @@ public class StudyServiceImpl implements StudyService {
 	}
 
 	@Override
-	public boolean deleteById(int id) {
+	public boolean deleteById(String id) {
 		Optional<Study> _studyData = findById(id);
 		if(_studyData.isPresent()) {
 			studyRepository.deleteById(id);
@@ -71,7 +71,7 @@ public class StudyServiceImpl implements StudyService {
 	}
 
 	@Override
-	public Optional<Study> findById(int id) {
+	public Optional<Study> findById(String id) {
 		return studyRepository.findById(id);
 	}
 	
