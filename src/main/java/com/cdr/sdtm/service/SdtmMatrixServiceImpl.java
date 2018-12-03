@@ -1,5 +1,6 @@
 package com.cdr.sdtm.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 
+import com.cdr.sdtm.model.Domain;
 import com.cdr.sdtm.model.PathToSdtmMatrix;
 import com.cdr.sdtm.model.TherapeuticAreas;
 import com.cdr.sdtm.model.Transformation;
@@ -143,11 +145,13 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 	}
 
 	@Override
-	public Map<String, String> findDomainByStudy(String study) {
+	public List<Domain> findDomainByStudy(String study) {
 		List<Object[]> values = sdtmMatrixRepository.findDomainByStudy(study);
-		Map<String, String> results = new HashMap<String, String>();
+		Domain domain = null;
+		List<Domain> results = new ArrayList<Domain>();
 		for(Object[] value : values) {
-			results.put((String)value[0], (String)value[1]);
+			domain = new Domain((String)value[0],(String)value[1]);
+			results.add(domain);
 		}
 		return results;
 	}

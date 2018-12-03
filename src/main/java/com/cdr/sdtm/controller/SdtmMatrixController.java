@@ -3,7 +3,6 @@ package com.cdr.sdtm.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cdr.sdtm.model.Domain;
 import com.cdr.sdtm.model.LookUp;
 import com.cdr.sdtm.model.PathToSdtmMatrix;
 import com.cdr.sdtm.model.TherapeuticAreas;
@@ -139,8 +139,8 @@ public class SdtmMatrixController {
 	}
 	
 	@GetMapping("/busRules/domains/{study}")
-	public Map<String,String> findDomainByStudy(@PathVariable String study) {
-		Map<String,String> domains = new HashMap<String,String>();
+	public List<Domain> findDomainByStudy(@PathVariable String study) {
+		List<Domain> domains = new ArrayList<Domain>();
 		domains = sdtmMatrixService.findDomainByStudy(study);
 		return domains;
 	}
@@ -164,7 +164,12 @@ public class SdtmMatrixController {
 										matrix = new PathToSdtmMatrix();
 										matrix.setStudy(newStudy);
 										matrix.setDomain(template.getDomain());
+										matrix.setDomainLabel(template.getDomainLabel());
+										matrix.setDomainNameExt(template.getDomainNameExt());
 										matrix.setSubDomain(template.getSubDomain());
+										matrix.setFormName(template.getFormName());
+										matrix.setFormLable(template.getFormLable());
+										matrix.setFormExt(template.getFormExt());
 										matrix.setTargetField(template.getTargetField());
 										matrix.setTargetFile(template.getTargetFile());
 										matrix.setSourceFile(template.getSourceFile());
