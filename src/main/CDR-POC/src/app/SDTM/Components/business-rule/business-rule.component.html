@@ -230,7 +230,7 @@ body {
                                     <div *ngIf="phaseShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;" id="form-field-select-1" >
                                        <select class="form-control"  id="form-field-select-1" name="brSdtmDomain" [(ngModel)]="searchBRStudy.brSdtmDomain" (ngModelChange)="fetchTemplate(searchBRStudy)">
                                             <option value="undefined" disabled selected style="display: none;">Select an Option</option>
-                                            <option *ngFor="let domain of studyDomains | keyvalue" value="{{domain.key}}">{{domain.value}}</option>
+                                            <option *ngFor="let domain of studyDomains" value="{{domain.domain}}">{{domain.domainLabel}}</option>
                                         </select>
                                   </div>
                                   </div>

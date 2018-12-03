@@ -24,6 +24,7 @@ export class BusinessEditFormComponent implements OnInit {
     public matrixStudyTitles: any[];
     public studyTitles: any[];
     public studyDomains: any[];
+    public selectedDomains: any[];
     public searchBRStudy: any = {};
     public importTemplate: any = {};
     public transPlaceHolder = 'Enter Transformation Logic'; 
@@ -184,8 +185,13 @@ export class BusinessEditFormComponent implements OnInit {
 
     public fetchTemplate(): void {
         //this.businessEditService.read(searchBRStudy);
+        let domains = [];
         this.importTemplate.study = this.editBusinessForm.value.study;
-        this.importTemplate.domain = this.editBusinessForm.value.importDomain;
+        this.selectedDomains = this.editBusinessForm.value.importDomain;
+        for (let i = 0; i < this.selectedDomains.length; i++) {
+            domains.push(this.selectedDomains[i].domain);
+        }
+        this.importTemplate.domain = domains;
         this.importTemplate.matrixStudy = this.editBusinessForm.value.matrixStudy;
         this.businessEditService.save(this.importTemplate, this.searchBRStudy, 'import');
         this.active = false;

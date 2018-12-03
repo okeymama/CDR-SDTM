@@ -212,12 +212,12 @@ label {
                 <option *ngFor="let domain of studyDomains" value="{{domain}}">{{domain}}</option>
               </select>-->
               <kendo-multiselect style="width: 80%;height: 30px;font-size:11px;font-family: Open Sans;border-color: #ccc"
-                [data]="studyDomains | keyvalue"
+                [data]="studyDomains"
                 formControlName="importDomain"
                 [autoClose]="true"
                 placeholder="Domain"
-                [textField]="'value'"
-                [valueField]="'key'">
+                [textField]="'domainLabel'"
+                [valueField]="'domain'">
               <ng-template kendoMultiSelectSummaryTag let-dataItem>
                 <label>{{ dataItem }}</label>
               </ng-template>
