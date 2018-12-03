@@ -2,7 +2,7 @@ package com.cdr.sdtm.model;
 
 public class Domain {
 	
-	private String domain;
+	private String domain; 
 	
 	private String domainLabel;
 

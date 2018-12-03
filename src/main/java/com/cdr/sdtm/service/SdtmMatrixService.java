@@ -26,7 +26,7 @@ public interface SdtmMatrixService {
 	
 	List<String> findDistinctStudies();
 	
-	List<Domain> findDomainByStudy(String study);
+	List<Domain> findDomainByStudy(String study); 
 	
 	List<String> findDistinctSDTMVariables();
 

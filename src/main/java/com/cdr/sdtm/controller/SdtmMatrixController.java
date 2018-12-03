@@ -36,7 +36,7 @@ public class SdtmMatrixController {
 	@Autowired
 	SdtmMatrixService sdtmMatrixService;
 	@Autowired
-	LookUpService lookUpService;
+	LookUpService lookUpService; 
 	
 	
 	@PostMapping("/matrix/create")

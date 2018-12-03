@@ -14,7 +14,7 @@ public class PathToSdtmMatrix {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="Matrix_ID")
-	private Long id;
+	private Long id; 
 	
 	@Column(name="Study_Title")
 	private String study;

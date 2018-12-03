@@ -151,7 +151,7 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 		List<Domain> results = new ArrayList<Domain>();
 		for(Object[] value : values) {
 			domain = new Domain((String)value[0],(String)value[1]);
-			results.add(domain);
+			results.add(domain); 
 		}
 		return results;
 	}
