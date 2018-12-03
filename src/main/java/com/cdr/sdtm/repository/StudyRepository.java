@@ -18,13 +18,13 @@ public interface StudyRepository extends JpaRepository<Study, String>, QueryByEx
 	
 	List<Study> findAll(Example exp);
 	
-	@Query("select distinct title from Study_Metadata where title is not null")
+	@Query(nativeQuery=true,value="select distinct Study_Title from study_metadata where Study_Title is not null")
 	List<String> findDistinctTitles();
 	
-	@Query("select distinct studyID from Study_Metadata where studyID is not null")
+	@Query(nativeQuery=true,value="select distinct Study_ID from study_metadata where Study_ID is not null")
 	List<String> findStudyIds(); 
 	
-	@Query("select distinct title from Study_Metadata where therapeuticArea=:therapeuticArea")
+	@Query(nativeQuery=true,value="select distinct Study_Title from study_metadata where Therapeutic_Area=:therapeuticArea")
 	List<String> findStudiesBytherapeuticArea(@Param("therapeuticArea") String therapeuticArea);
 	
 }
