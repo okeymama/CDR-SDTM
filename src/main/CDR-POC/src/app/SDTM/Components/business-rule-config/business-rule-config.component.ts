@@ -8,6 +8,7 @@ import { Matrix } from '../../Models';
 import { BusinessEditService, UserService } from '../../Services';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'business-rule-config',
   templateUrl: './business-rule-config.component.html',
@@ -186,6 +187,11 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.statusShowOptions = false;
         this.statusDrpSelected = false;
         this.businessEditService.read('clear');
+        alert("size ..."+this.configTypeIcons.length);
+        this.configTypeIcons.splice(5, 1);
+        alert("size new..."+this.configTypeIcons.length);
+     
+    
      }
 
      public getDomain(): String {

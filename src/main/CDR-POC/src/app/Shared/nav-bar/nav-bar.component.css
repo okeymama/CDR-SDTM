@@ -12,7 +12,7 @@
 }
 
 .navigation li {
-	border-left: 0px solid #666;
+	border-top: 0px solid #074982;
 	float: left;
 	cursor: pointer;
     list-style-type: none;
@@ -20,7 +20,7 @@
 .navigation li a{
     font-family: Open Sans Regular;
     font-size: 12px;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     letter-spacing: .2px;
 	
 }
@@ -35,10 +35,13 @@
 }
 
 
+.navibation li:routerLinkActive{
+    box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.2);
+}
 
 .navigation li:hover {
 	background: rgb(20, 20, 20);
-	border-left: 4px solid #000;
+	border-top: 4px solid #074982;
 }
 
 
