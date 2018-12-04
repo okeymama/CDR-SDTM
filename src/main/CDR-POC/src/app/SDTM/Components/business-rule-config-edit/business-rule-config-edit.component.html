@@ -149,7 +149,9 @@
                   [data]="studyDomains"
                   formControlName="importDomain"
                   [autoClose]="true"
-                  placeholder="Domain">
+                  placeholder="Domain"
+                  [textField]="'domainLabel'"
+                  [valueField]="'domain'">
                 <ng-template kendoMultiSelectSummaryTag let-dataItem>
                   <label>{{ dataItem }}</label>
                 </ng-template>
