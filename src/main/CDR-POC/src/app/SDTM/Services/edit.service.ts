@@ -81,14 +81,14 @@ export class EditService extends BehaviorSubject<any[]> {
 
       } else if(action == 'update') {
         const searchUrl = '/api/CDR/study/update';
-        let url = `${searchUrl}/${searchStudy.id}`;
+        let url = `${searchUrl}/${searchStudy.studyID}`;
         let body = JSON.stringify(searchStudy);
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
           return this.http.put(url, searchStudy, {headers: headers});
 
       } else if(action == 'destroy') {
         const searchUrl = '/api/CDR/study/delete';
-        let url = `${searchUrl}/${searchStudy.id}`;
+        let url = `${searchUrl}/${searchStudy.studyID}`;
         let body = JSON.stringify(searchStudy);
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
           return this.http.delete(url, searchStudy);
@@ -135,5 +135,17 @@ export class EditService extends BehaviorSubject<any[]> {
         let params = new HttpParams();
         params =  params.set('therapeuticArea', therapeuticArea);
         return this.http.get<any[]>(`/api/CDR/study/ByTherapeuticArea`, {params: params});
+    }
+
+    public fetchStudyPhases() {
+        return this.http.get<any[]>(`/api/CDR/study/phases`);
+    }
+
+    public fetchStudyStatuses() {
+        return this.http.get<any[]>(`/api/CDR/study/statuses`);
+    }
+
+    public fetchStudySources() {
+        return this.http.get<any[]>(`/api/CDR/study/sources`);
     }
 }

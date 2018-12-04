@@ -17,6 +17,9 @@ import { StudyDetails } from '../../Models';
   styleUrls: ['./study-setup-edit.component.css']
 })
 export class StudySetupEditComponent implements OnInit {
+     public studyPhases: any[];
+     public studySources: any[];
+     public studyStatuses: any[];
     public active = false;
     public opened: boolean = false;
     public errorMsg: string;
@@ -49,8 +52,17 @@ export class StudySetupEditComponent implements OnInit {
 
     public ngOnInit(): void {
       this.editService.fetchTherapeuticAreas().subscribe(data => {
-        this.therapeuticAreas = data; 
-    });
+        this.therapeuticAreas = data;
+       });
+       this.editService.fetchStudyPhases().subscribe(data => {
+        this.studyPhases = data;
+      });
+      this.editService.fetchStudySources().subscribe(data => {
+        this.studySources = data;
+      });
+      this.editService.fetchStudyStatuses().subscribe(data => {
+        this.studyStatuses = data;
+      });
     }
 
     public onSave(e) {

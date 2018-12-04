@@ -60,7 +60,6 @@ export class BusinessRuleConfigComponent implements OnInit {
         {"icontitle": "Import", "iconImageSrc": "assets/images/NewNote.png", "action":"import","inputParam":this.importTemplate},
         {"icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "action":"","inputParam":""},
         {"icontitle": "Add Business Rule", "iconImageSrc": "assets/images/AddStudy.png","action":"add","inputParam":this.searchBRStudy}
-       
       ];
       this.navBarItems = [
         {"navBarTitle": "Home", "navBarLink": "/sdtmHome"},
@@ -113,7 +112,7 @@ export class BusinessRuleConfigComponent implements OnInit {
      addHandlerIconClick(data) {
          if (!data.flag) return; 
          else if (data.flag === 'job') {
-            this.router.navigate(['/job', this.searchBRStudy.brStudy]);
+            this.router.navigate(['/sdtmHome/jobExecution', this.searchBRStudy.brStudy]);
          } else {
              this.addHandler(data.flag, data.inputParam);
          }
