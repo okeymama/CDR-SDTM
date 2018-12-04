@@ -1,0 +1,17 @@
+<app-header [appName] = "appName"></app-header>
+<div>
+        <ul class="nav nav-tabs padding-6 tab-color-blue background-blue"
+          id="myTab4">
+          <li [routerLinkActive]="['active']"><a data-toggle="tab"
+            routerLink="/dataQuality"
+            style="background-color: white; font-family: Open Sans Regular; font-size: 12px; width:60px;cursor: pointer">Home</a>
+          </li>
+          <li [routerLinkActive]="['active']"><a data-toggle="tab"
+            routerLink="checkConfig"
+            style="background-color: white; font-family: Open Sans Regular; font-size: 12px; width: 143px">Check
+              Configuration</a></li>
+            </ul>
+      </div>
+
+      
+      <router-outlet></router-outlet>

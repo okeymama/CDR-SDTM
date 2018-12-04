@@ -1,18 +1,11 @@
+<div class="main-container ace-save-state" id="main-container">
+	<header-icons [configTypeImage]="configTypeImage" [configTypeTitle]="configTypeTitle" [configTypeIcons]="configTypeIcons"
+	 (iconClick)="addHandlerIconClick($event)"></header-icons>
 
-
-
- <div class="main-container ace-save-state" id="main-container">
-	<header-icons [configTypeImage]="configTypeImage"
-		[configTypeTitle]="configTypeTitle"
-		[configTypeIcons]="configTypeIcons"
-		(iconClick)="addHandlerIconClick($event)"></header-icons>
-
-	<div class="panel panel-default"
-		style="height: 395px; margin-left: 6px; border-radius: 10px; border-width: 1px; width: 99%; margin-top: 2px; padding-bottom: 3px; background: white;">
+	<div class="panel panel-default" style="height: 395px; margin-left: 6px; border-radius: 10px; border-width: 1px; width: 99%; margin-top: 2px; padding-bottom: 3px; background: white;">
 		<div *ngIf="!(loading) && !(hideInstructions)">
 
-			<h3 class="row-label"
-				style="margin-top: 7px; text-align: left; font-family: Open Sans Regular; font-size: 12px; width: 90%;">
+			<h3 class="row-label" style="margin-top: 7px; text-align: left; font-family: Open Sans Regular; font-size: 12px; width: 90%;">
 				Select a study to see job execution details
 				<!-- Filtered by -->
 				<!--  <a class="float:right" style="margin-right: -111px;padding-top: 0px;padding-bottom: 5px;float: right;color: #074982;font-family: Open Sans Regular;font-size: 12px;"><b>Clear all Filters</b></a>-->
@@ -23,141 +16,106 @@
 		<div *ngIf="(loading)" style="margin-top: 5px">
 			<!-- class="pull-right" style="margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;"> -->
 
-			<a type="button" (click)="runForAllSelectedDomains()"> <img
-				*ngIf="!(allDomainsLive) || (allDomainsLive && jobStatus == 'job completed')"
-				src="../assets/images/Run.png" alt="Run All Selected"
-				data-toggle="tooltip" title="Run All Selected"
-				style="width: 25px; height: 25px; margin-left: 1135px">
-			</a> <a *ngIf="allDomainsLive" style="width: 25px; height: 25px;"> <i
-				class="fa fa-spinner fa-spin " style="margin-left: 1135px"></i>
+			<a type="button" (click)="runForAllSelectedDomains()"> <img *ngIf="!(allDomainsLive) || (allDomainsLive && jobStatus == 'job completed')"
+				 src="../assets/images/Run.png" alt="Run All Selected" data-toggle="tooltip" title="Run All Selected" style="width: 25px; height: 25px; margin-left: 1135px">
+			</a> <a *ngIf="allDomainsLive" style="width: 25px; height: 25px;"> <i class="fa fa-spinner fa-spin " style="margin-left: 1135px"></i>
 
 			</a> &nbsp;
-			<h3
-				style="font-family: Open Sans Regular; font-size: 12px; color: black; padding-right: 15px; margin-top: 5px"
-				class="pull-right">All selected</h3>
+			<h3 style="font-family: Open Sans Regular; font-size: 12px; color: black; padding-right: 15px; margin-top: 5px"
+			 class="pull-right">All selected</h3>
 		</div>
 		<hr *ngIf="(loading)" style="margin-top: 6px; border-width: 2px;" />
 
-		<a href="#" class="menu-toggler invisible" id="menu-toggler"
-			data-target="#sidebar"></a>
-		<div id="sidebar" class="sidebar responsive-min ace-save-state">
-			<ul class="nav nav-list">
-				<li><a href="#" class="dropdown-toggle" style="color: #074982"
-					onclick="return false"> <i class="menu-icon fa fa-filter"></i>
-						<span class="menu-text"> <!-- <a href=""
-								style="font-family: Open Sans Regular; font-size: 12px; color: #074982"><b>Filter</b></a> -->
-							<span
-							style="font-family: Open Sans Regular; font-size: 12px; color: #074982"><b>Filter</b></span>
-					</span> <!-- <b class="arrow fa fa-angle-down"></b> -->
-				</a>
+		<div id="sidebar" class="col-sm-2" style="width: 214px;border-style: solid;border-width: 1px;border-color: #E5E5E5;margin-left:3px">
+			<filter-icon-heading></filter-icon-heading>
+			<div ng-if="paramId == studyInfo" style="background-color: white;overflow:auto; width:200px;height: 316px;" id="studyInfo"
+			 class="tab-pane in active">
+				<form name="jobForm" #f="ngForm" novalidate>
+					<fieldset>
 
-					<form name="jobForm" #f="ngForm" novalidate>
-						<fieldset>
-							<div class="" style="background-color: white;">
-								<div tyle="overflow:auto; width:200px;height: 304px;"
-									class="tab-pane in active">
+						<div tyle="overflow:auto; width:200px;height: 304px;" class="tab-pane in active">
 
-									<div class="nav nav-tabs-flt padding-6"
-										sytle="border-bottom: 0px;">
-										<ul class="nav  nav-tabs" style="border-bottom: 0px;">
-											<li style="border-bottom: 0px;"><a data-toggle="tab"
-												(click)="therapeuticAreaDropdown()"
-												style="margin-top: 9px; margin-left: 10px; margin-bottom: 6px; border-bottom: 0px; padding-top: 3px; color: black; width: 178px; background-color: #E4E6E9; height: 24px; text-align: left; font-family: Open Sans Regular; font-size: 12px;">
-													Therapeutic Area<span class="pull-right"><i
-														class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
-											</a></li>
-										</ul>
-										<div *ngIf="therapeuticAreaShowOptions"
-											class="dropdown-container"
-											style="border-bottom: 0px; margin-top: 7px; margin-left: 10px; font-family: Open Sans Regular; font-size: 12px; width: 89%; height: 35px;"
-											id="form-field-select-1">
-											<select class="form-control" id="form-field-select-1"
-												name="therapeuticArea"
-												[(ngModel)]="searchJob.therapeuticArea">
-												<!--(change)="filterStudyIds($event.target.value);">  -->
-												<option value="undefined" selected disabled
-													style="display: none;">Choose</option>
-												<option value="all">--All--</option>
-												<option *ngFor="let area of therapeuticAreas"
-													value="{{area.therapeuticCode}}">{{area.therapeuticDescription}}</option>
-											</select>
-
-										</div>
-									</div>
-									<!-- CODE FOR STUDY ID DROPDOWN 
-										<div class="nav nav-tabs-flt padding-6"
-											sytle="border-bottom: 0px;">
-											<ul class="nav  nav-tabs" style="border-bottom: 0px;">
-												<li style="border-bottom: 0px;"><a data-toggle="tab"
-													(click)="drp()"
-													style="margin-top: 9px; margin-left: 10px; margin-bottom: 6px; border-bottom: 0px; padding-top: 3px; color: black; width: 178px; background-color: #E4E6E9; height: 24px; text-align: left; font-family: Open Sans Regular; font-size: 10px;">
-														Study ID<span class="pull-right"><i
-															class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
-												</a></li>
-											</ul>
-											<div *ngIf="drpSelected" class="dropdown-container"
-												style="border-bottom: 0px; margin-top: 7px; margin-left: 23px; 
-												font-family: Open Sans Regular; font-size: 12px; width: 76%; height: 35px;"
-												id="form-field-select-1">
-												 
-												<select class="form-control" id="form-field-select-1"
-													name="study" [(ngModel)]="searchJob.studyId" >
-													<option value="undefined" disabled selected
-														style="display: none;">Choose</option>
-													<option *ngFor="let studyId of studyIds"
-														value="{{studyId}}">{{studyId}}</option>
-												</select>
-
-											</div>
-										</div> -->
-
-									<!-- Second dropdrown -->
-									<div class="nav nav-tabs-flt padding-6"
-										sytle="border-bottom: 0px;">
-										<ul class="nav  nav-tabs" style="border-bottom: 0px;">
-											<li style="border-bottom: 0px;"><a data-toggle="tab"
-												(click)="studyTitleDropdown()"
-												style="margin-top: 9px; margin-left: 10px; margin-bottom: 6px; border-bottom: 0px; padding-top: 3px; color: black; width: 178px; background-color: #E4E6E9; height: 24px; text-align: left; font-family: Open Sans Regular; font-size: 12px;">
-													Study Title <b style="color: red">&nbsp;*</b><span
-													class="pull-right"><i class="fa fa-angle-down"
-														style="padding-top: 3px;"></i></span>
-											</a></li>
-										</ul>
-										<div *ngIf="studyTitleShowOptions" class="dropdown-container"
-											style="border-bottom: 0px; margin-top: 7px; margin-left: 10px; font-family: Open Sans Regular; font-size: 12px; width: 89%; height: 35px;"
-											id="form-field-select-1">
-											<select class="form-control" id="form-field-select-1"
-												name="study" [(ngModel)]="searchJob.study"
-												(ngModelChange)="searchJobExecution(searchJob,selectedItems)">
-												<option value="undefined" disabled selected
-													style="display: none;">Choose</option>
-												<option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option>
-											</select>
-
-										</div>
-									</div>
-
-									<div>
-
-										<!-- <button (click)="searchJobExecution(searchJob,selectedItems)"
-												class="btn btn-success"
-												style="font-size: 12px; font-family: Open Sans Regular">Apply</button>
-											&nbsp; -->
-										<button (click)="reset(searchJob,selectedItems,f)"
-											class="btn btn-success"
-											style="margin-top: 7px; font-size: 12px; font-family: Open Sans Regular">Clear</button>
-
-
-									</div>
-									<div class="space"></div>
+							<div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
+								<ul class="nav  nav-tabs" style="border-bottom: 0px;">
+									<li style="border-bottom: 0px;"><a data-toggle="tab" (click)="therapeuticAreaDropdown()" style="margin-top: 9px; margin-left: 10px; margin-bottom: 6px; border-bottom: 0px; padding-top: 3px; color: black; width: 178px; background-color: #E4E6E9; height: 24px; text-align: left; font-family: Open Sans Regular; font-size: 12px;">
+											Therapeutic Area<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
+										</a></li>
+								</ul>
+								<div *ngIf="therapeuticAreaShowOptions" class="dropdown-container" style="border-bottom: 0px; margin-top: 7px; margin-left: 10px; font-family: Open Sans Regular; font-size: 12px; width: 89%; height: 35px;"
+								 id="form-field-select-1">
+									<select class="form-control" id="form-field-select-1" name="therapeuticArea" [(ngModel)]="searchJob.therapeuticArea">
+										<!--(change)="filterStudyIds($event.target.value);">  -->
+										<option value="undefined" selected disabled style="display: none;">Choose</option>
+										<option value="all">--All--</option>
+										<option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticCode}}">{{area.therapeuticDescription}}</option>
+									</select>
 
 								</div>
 							</div>
-						</fieldset>
-					</form></li>
-			</ul>
-			<!-- /.nav-list -->
+							<!-- CODE FOR STUDY ID DROPDOWN 
+													<div class="nav nav-tabs-flt padding-6"
+														sytle="border-bottom: 0px;">
+														<ul class="nav  nav-tabs" style="border-bottom: 0px;">
+															<li style="border-bottom: 0px;"><a data-toggle="tab"
+																(click)="drp()"
+																style="margin-top: 9px; margin-left: 10px; margin-bottom: 6px; border-bottom: 0px; padding-top: 3px; color: black; width: 178px; background-color: #E4E6E9; height: 24px; text-align: left; font-family: Open Sans Regular; font-size: 10px;">
+																	Study ID<span class="pull-right"><i
+																		class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
+															</a></li>
+														</ul>
+														<div *ngIf="drpSelected" class="dropdown-container"
+															style="border-bottom: 0px; margin-top: 7px; margin-left: 23px; 
+															font-family: Open Sans Regular; font-size: 12px; width: 76%; height: 35px;"
+															id="form-field-select-1">
+															 
+															<select class="form-control" id="form-field-select-1"
+																name="study" [(ngModel)]="searchJob.studyId" >
+																<option value="undefined" disabled selected
+																	style="display: none;">Choose</option>
+																<option *ngFor="let studyId of studyIds"
+																	value="{{studyId}}">{{studyId}}</option>
+															</select>
+			
+														</div>
+													</div> -->
+
+							<!-- Second dropdrown -->
+							<div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
+								<ul class="nav  nav-tabs" style="border-bottom: 0px;">
+									<li style="border-bottom: 0px;"><a data-toggle="tab" (click)="studyTitleDropdown()" style="margin-top: 9px; margin-left: 10px; margin-bottom: 6px; border-bottom: 0px; padding-top: 3px; color: black; width: 178px; background-color: #E4E6E9; height: 24px; text-align: left; font-family: Open Sans Regular; font-size: 12px;">
+											Study Title <b style="color: red">&nbsp;*</b><span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
+										</a></li>
+								</ul>
+								<div *ngIf="studyTitleShowOptions" class="dropdown-container" style="border-bottom: 0px; margin-top: 7px; margin-left: 10px; font-family: Open Sans Regular; font-size: 12px; width: 89%; height: 35px;"
+								 id="form-field-select-1">
+									<select class="form-control" id="form-field-select-1" name="study" [(ngModel)]="searchJob.study"
+									 (ngModelChange)="searchJobExecution(searchJob,selectedItems)">
+										<option value="undefined" disabled selected style="display: none;">Choose</option>
+										<option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option>
+									</select>
+
+								</div>
+							</div>
+
+							<div>
+
+								<!-- <button (click)="searchJobExecution(searchJob,selectedItems)"
+															class="btn btn-success"
+															style="font-size: 12px; font-family: Open Sans Regular">Apply</button>
+														&nbsp; -->
+								<button (click)="reset(searchJob,selectedItems,f)" class="btn btn-success" style="margin-top: 7px; font-size: 12px; font-family: Open Sans Regular">Clear</button>
+
+
+							</div>
+							<div class="space"></div>
+
+						</div>
+
+					</fieldset>
+				</form>
+			</div>
 		</div>
+
 
 		<div class="main-content">
 			<div class="main-content-inner">
@@ -168,8 +126,7 @@
 								<tr>
 									<td>
 										<!-- *ngIf="loading"-->
-										<input type="checkbox" name="all" [(ngModel)]='checkbox'
-										(change)="isCheckboxSelected = !isCheckboxSelected;" />
+										<input type="checkbox" name="all" [(ngModel)]='checkbox' (change)="isCheckboxSelected = !isCheckboxSelected;" />
 									</td>
 									<td>SDTM Domain</td>
 									<td>Last Run</td>
@@ -180,9 +137,7 @@
 							</thead>
 							<tbody>
 								<tr *ngFor="let item of data">
-									<td><input type="checkbox" [checked]="isCheckboxSelected"
-										[disabled]="item.jobDisabled =='Y'"
-										(change)="onItemSelect(item)" /></td>
+									<td><input type="checkbox" [checked]="isCheckboxSelected" [disabled]="item.jobDisabled =='Y'" (change)="onItemSelect(item)" /></td>
 									<td style="text-align: left;">{{item.domain}}</td>
 									<td>{{item.job_end_timestamp}}</td>
 									<td>{{item.job_status}}</td>
@@ -196,37 +151,25 @@
 												data-toggle="tooltip"
 												alt="Run"
 												style="width: 25px; height: 25px;"> &nbsp;
-										</a> --> <a *ngIf="item.jobDisabled =='N'; else jobDisabled"
-										type="button" (click)="actionOnJobExecution(item,'Run')">
-											<img src="../assets/images/Run.png" alt="Run"
-											data-toggle="tooltip" alt="Run"
-											style="width: 25px; height: 25px;"> &nbsp;
-									</a> <ng-template #jobDisabled> <img
-											src="../assets/images/Run_Disable.png" alt="Run"
-											data-toggle="tooltip" alt="Run"
-											style="width: 25px; height: 25px;"> &nbsp; </ng-template> <a
-										*ngIf="item['isLive'] " type="button"
-										style="width: 25px; height: 25px;"> <i
-											class="fa fa-spinner fa-spin"></i> &nbsp;
-									</a> <a *ngIf="item.jobDisabled =='N'" type="button"
-										(click)="item.jobDisabled = 'Y'"> <img
-											src="../assets/images/Disable_Inactive.png"
-											data-toggle="tooltip" alt="Disable"
-											title="Click to disable the execution of this job"
-											style="width: 23px; height: 23px;"> &nbsp;
-									</a> <a *ngIf="item.jobDisabled =='Y'" type="button"
-										(click)="item.jobDisabled = 'N'"> <img
-											src="../assets/images/Disable_Active.png"
-											data-toggle="tooltip" alt="Enable"
-											title="Job Execution is disabled.Click to re-enable"
-											style="width: 23px; height: 23px;"> &nbsp;
-									</a> 
-									<a *ngIf="item['isLive']" type="button"
-										(click)="actionOnJobExecution(item,'Abort')"> <img
-											src="../assets/images/Abort.png" alt="Abort"
-											data-toggle="tooltip" alt="Abort"
-											style="width: 25px; height: 25px;">
-									</a> <!-- <a *ngIf="!item['isLive'] && item['isJobAborted']" type="button"
+										</a> -->
+										<a *ngIf="item.jobDisabled =='N'; else jobDisabled" type="button" (click)="actionOnJobExecution(item,'Run')">
+											<img src="../assets/images/Run.png" alt="Run" data-toggle="tooltip" alt="Run" style="width: 25px; height: 25px;">
+											&nbsp;
+										</a>
+										<ng-template #jobDisabled> <img src="../assets/images/Run_Disable.png" alt="Run" data-toggle="tooltip" alt="Run"
+											 style="width: 25px; height: 25px;"> &nbsp; </ng-template> <a *ngIf="item['isLive'] " type="button" style="width: 25px; height: 25px;">
+											<i class="fa fa-spinner fa-spin"></i> &nbsp;
+										</a> <a *ngIf="item.jobDisabled =='N'" type="button" (click)="item.jobDisabled = 'Y'"> <img src="../assets/images/Disable_Inactive.png"
+											 data-toggle="tooltip" alt="Disable" title="Click to disable the execution of this job" style="width: 23px; height: 23px;">
+											&nbsp;
+										</a> <a *ngIf="item.jobDisabled =='Y'" type="button" (click)="item.jobDisabled = 'N'"> <img src="../assets/images/Disable_Active.png"
+											 data-toggle="tooltip" alt="Enable" title="Job Execution is disabled.Click to re-enable" style="width: 23px; height: 23px;">
+											&nbsp;
+										</a>
+										<a *ngIf="item['isLive']" type="button" (click)="actionOnJobExecution(item,'Abort')"> <img src="../assets/images/Abort.png"
+											 alt="Abort" data-toggle="tooltip" alt="Abort" style="width: 25px; height: 25px;">
+										</a>
+										<!-- <a *ngIf="!item['isLive'] && item['isJobAborted']" type="button"
 											style="width: 25px; height: 25px;"> <i
 												class="fa fa-spinner fa-spin"></i> &nbsp;
 										</a> -->
@@ -243,4 +186,4 @@
 			</div>
 		</div>
 	</div>
-	</div>
+</div>

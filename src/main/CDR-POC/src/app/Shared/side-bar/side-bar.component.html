@@ -1,0 +1,16 @@
+<div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
+    <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
+    <li style="border-bottom: 0px;">
+        <a data-toggle="tab" (click)="therapeuticAreaDrp()"  style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
+        Therapeutic Area<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
+        </a>
+    </li>
+    </ul>
+    <div *ngIf="therapeuticAreasShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;" id="form-field-select-1" >
+    <select class="form-control"  id="form-field-select-1" name="brTherapeuticArea" [(ngModel)]="searchStudy.brTherapeuticArea" (change)="filterStudies($event.target.value);fetch(searchStudy);"> 
+            <option value="undefined" selected disabled style="display: none;">Select an Option</option>
+            <option value="all">--All--</option>
+            <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticArea}}">{{area.therapeuticArea}}</option>
+        </select>
+</div>
+</div>
