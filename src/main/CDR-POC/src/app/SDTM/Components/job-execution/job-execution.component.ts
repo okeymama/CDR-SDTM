@@ -268,7 +268,7 @@ export class JobExecutionComponent implements OnInit {
     if(action=='Disable'){
        //item.isDisabled = true;
        item.jobDisabled = 'Y';
-       //this.callUpdateService(item.job_id,item.jobDisabled);
+       this.callUpdateService(item.job_id,item.jobDisabled);
        
        
     }else{
@@ -278,7 +278,7 @@ export class JobExecutionComponent implements OnInit {
     	 if (action == 'Enable'){
     	    //item.isDisabled = false;
     	    item.jobDisabled = 'N';
-       		//this.callUpdateService(item.job_id,item.jobDisabled);
+       		this.callUpdateService(item.job_id,item.jobDisabled);
             
     	 }else{
     		if(action=='Run'){

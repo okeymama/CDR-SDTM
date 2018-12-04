@@ -26,7 +26,7 @@
 		</div>
 		<hr *ngIf="(loading)" style="margin-top: 6px; border-width: 2px;" />
 
-		<div id="sidebar" class="col-sm-2" style="width: 214px;border-style: solid;border-width: 1px;border-color: #E5E5E5;margin-left:3px">
+		<div id="sidebar" class="col-sm-2 col-md-3" style="width: 214px;border-style: solid;border-width: 1px;border-color: #E5E5E5;margin-left:3px">
 			<filter-icon-heading></filter-icon-heading>
 			<div ng-if="paramId == studyInfo" style="background-color: white;overflow:auto; width:200px;height: 316px;" id="studyInfo"
 			 class="tab-pane in active">
@@ -82,11 +82,12 @@
 							<!-- Second dropdrown -->
 							<div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
 								<ul class="nav  nav-tabs" style="border-bottom: 0px;">
-									<li style="border-bottom: 0px;"><a data-toggle="tab" (click)="studyTitleDropdown()" style="margin-top: 9px; margin-left: 10px; margin-bottom: 6px; border-bottom: 0px; padding-top: 3px; color: black; width: 178px; background-color: #E4E6E9; height: 24px; text-align: left; font-family: Open Sans Regular; font-size: 12px;">
+									<li style="border-bottom: 0px;"><a data-toggle="tab" (click)="studyTitleDropdown()" style=" margin-left: 10px; margin-bottom: 6px; border-bottom: 0px; padding-top: 3px; color: black; width: 178px; background-color: #E4E6E9; height: 24px; text-align: left; font-family: Open Sans Regular; font-size: 12px;">
 											Study Title <b style="color: red">&nbsp;*</b><span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
 										</a></li>
 								</ul>
-								<div *ngIf="studyTitleShowOptions" class="dropdown-container" style="border-bottom: 0px; margin-top: 7px; margin-left: 10px; font-family: Open Sans Regular; font-size: 12px; width: 89%; height: 35px;"
+								<div *ngIf="studyTitleShowOptions" class="dropdown-container" 
+								style="border-bottom: 0px; margin-top: 7px; margin-left: 10px; font-family: Open Sans Regular; font-size: 12px; width: 89%; height: 35px;"
 								 id="form-field-select-1">
 									<select class="form-control" id="form-field-select-1" name="study" [(ngModel)]="searchJob.study"
 									 (ngModelChange)="searchJobExecution(searchJob,selectedItems)">
@@ -117,7 +118,7 @@
 		</div>
 
 
-		<div class="main-content">
+		<div class="main-content col-sm-10 col-md-9">
 			<div class="main-content-inner">
 				<div class="page-content">
 					<div class="row" style="margin-top: -23px;">
@@ -152,17 +153,27 @@
 												alt="Run"
 												style="width: 25px; height: 25px;"> &nbsp;
 										</a> -->
-										<a *ngIf="item.jobDisabled =='N'; else jobDisabled" type="button" (click)="actionOnJobExecution(item,'Run')">
+									   <a *ngIf="(item.jobDisabled =='N' && 
+												  (!item['isLive']
+										          || (item['isLive'] && item['jobStatus']=='job completed'))
+										          );else jobDisabled"
+										type="button"
+										(click)="actionOnJobExecution(item,'Run')">
 											<img src="../assets/images/Run.png" alt="Run" data-toggle="tooltip" alt="Run" style="width: 25px; height: 25px;">
 											&nbsp;
 										</a>
-										<ng-template #jobDisabled> <img src="../assets/images/Run_Disable.png" alt="Run" data-toggle="tooltip" alt="Run"
-											 style="width: 25px; height: 25px;"> &nbsp; </ng-template> <a *ngIf="item['isLive'] " type="button" style="width: 25px; height: 25px;">
+									   <ng-template #jobDisabled>
+									 	<a *ngIf = "item.jobDisabled =='Y' "> <img src="../assets/images/Run_Disable.png" alt="Run" data-toggle="tooltip" alt="Run"
+											 style="width: 25px; height: 25px;"> &nbsp; 
+										</a>						 
+											 </ng-template> <a *ngIf="item['isLive'] " type="button" style="width: 25px; height: 25px;">
 											<i class="fa fa-spinner fa-spin"></i> &nbsp;
-										</a> <a *ngIf="item.jobDisabled =='N'" type="button" (click)="item.jobDisabled = 'Y'"> <img src="../assets/images/Disable_Inactive.png"
+										</a> <a *ngIf="item.jobDisabled =='N'" type="button" 
+										(click)="actionOnJobExecution(item,'Disable')"> <img src="../assets/images/Disable_Inactive.png"
 											 data-toggle="tooltip" alt="Disable" title="Click to disable the execution of this job" style="width: 23px; height: 23px;">
 											&nbsp;
-										</a> <a *ngIf="item.jobDisabled =='Y'" type="button" (click)="item.jobDisabled = 'N'"> <img src="../assets/images/Disable_Active.png"
+										</a> <a *ngIf="item.jobDisabled =='Y'" type="button" 
+											(click)="actionOnJobExecution(item,'Enable')" > <img src="../assets/images/Disable_Active.png"
 											 data-toggle="tooltip" alt="Enable" title="Job Execution is disabled.Click to re-enable" style="width: 23px; height: 23px;">
 											&nbsp;
 										</a>
