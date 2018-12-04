@@ -389,8 +389,9 @@ export class JobExecutionComponent implements OnInit {
     
      public callUpdateService(uniqueId,jobDisabled){
         console.log("uniqueId "+ uniqueId + "jobDisabled "+jobDisabled)
-      	const searchUrl = '/api/CDR/updateJobs/';
+      	const searchUrl = '/api/CDR/updateJobs';
         let url = `${searchUrl}/${uniqueId}/${jobDisabled}`;
+        console.log("url  "+url)        
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
           return this.http.put(url,{headers: headers});
      }
