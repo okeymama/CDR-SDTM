@@ -66,9 +66,9 @@ export class BusinessRuleConfigComponent implements OnInit {
         {"navBarTitle": "Home", "navBarLink": "/sdtmHome"},
         {"navBarTitle": "Study Configuration", "navBarLink": "studySetup"},
         {"navBarTitle": "Business Rule Configuration", "navBarLink": "businessRules"},
-        {"navBarTitle": "Job Execution", "navBarLink": "jobExecution"}
-    this.configTypeImage = "../../../assets/images/BussRules.png";
-    this.configTypeTitle= "Business Rule Configuration";
+        {"navBarTitle": "Job Execution", "navBarLink": "jobExecution"}];
+    this.configTypeImage = '../../../assets/images/BussRules.png';
+    this.configTypeTitle = 'Business Rule Configuration';
          this.view = this.businessEditService.pipe(map(data => process(data, this.gridState)));
 
       //   this.businessEditService.read();
@@ -98,7 +98,7 @@ export class BusinessRuleConfigComponent implements OnInit {
      }
 
      public fetchTemplate(searchBRStudy): void {
-        if(searchBRStudy.brSdtmDomain){
+        if (searchBRStudy.brSdtmDomain) {
             this.configTypeIcons.unshift( {"icontitle": "Job Execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png","action":"job","inputParam":this.searchBRStudy});
         }
        this.businessEditService.read(searchBRStudy);
@@ -110,11 +110,11 @@ export class BusinessRuleConfigComponent implements OnInit {
          this.businessEditService.read(searchBRStudy);
      }
 
-     addHandlerIconClick(data){
-         if(!data.flag) return; 
-         else if(data.flag === 'job'){
+     addHandlerIconClick(data) {
+         if (!data.flag) return; 
+         else if (data.flag === 'job') {
             this.router.navigate(['/job', this.searchBRStudy.brStudy]);
-         }else{
+         } else {
              this.addHandler(data.flag, data.inputParam);
          }
     }

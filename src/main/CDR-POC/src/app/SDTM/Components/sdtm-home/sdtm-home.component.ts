@@ -17,7 +17,7 @@ export class SdtmHomeComponent implements OnInit {
       {"navBarTitle": "Home", "navBarLink": "/sdtmHome"},
       {"navBarTitle": "Study Configuration", "navBarLink": "studySetup"},
       {"navBarTitle": "Business Rule Configuration", "navBarLink": "businessRules"},
-      {"navBarTitle": "Job Execution", "navBarLink": "jobExecution"}
+      {"navBarTitle": "Job Execution", "navBarLink": "jobExecution"}];
   }
 
 }
