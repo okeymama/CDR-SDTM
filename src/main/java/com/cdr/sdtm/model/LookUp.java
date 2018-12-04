@@ -7,8 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name="LookUp")
-@Table(name="LookUp")
+@Entity(name="look_up")
+@Table(name="look_up")
 public class LookUp {
 	
 	@Id
