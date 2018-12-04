@@ -18,6 +18,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SideBarComponent } from './side-bar/side-bar.component';
+import { FilterIconHeadingComponent } from './filter-icon-heading/filter-icon-heading.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     KendoGridDeleteConfirmComponent,
     LoginComponent,
     NavBarComponent,
-    SideBarComponent
+    SideBarComponent,
+    FilterIconHeadingComponent
   ],
   exports:[
     FooterComponent,
@@ -47,7 +49,8 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     HeaderIconsComponent,
     KendoGridDeleteConfirmComponent,
     LoginComponent,
-    NavBarComponent
+    NavBarComponent,
+    FilterIconHeadingComponent
   ],
   providers: [
     AlertService,
