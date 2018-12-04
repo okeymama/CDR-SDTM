@@ -9,7 +9,7 @@ import com.cdr.sdtm.model.LookUp;
 
 public interface LookUpRepository extends JpaRepository<LookUp, Long> {
 	
-	@Query(nativeQuery=true,value="select distinct LOOK_UP_TABLE from Look_Up where LOOK_UP_TABLE is not null")
+	@Query(nativeQuery=true,value="select distinct look_up_table from look_up where look_up_table is not null")
 	List<String> findDistinctTables();
 
 }

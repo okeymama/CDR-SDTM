@@ -23,7 +23,7 @@ public interface JobRunStatusRepository extends JpaRepository<JobRunStatus, Long
 	
 	@Transactional
 	@Modifying
-	@Query(nativeQuery=true,value="update job_run_status set job_disabled=:jobDisabled where unique_id=:uniqueId")
+	@Query(nativeQuery=true,value="update Job_Run_Statistics set job_disabled=:jobDisabled where unique_id=:uniqueId")
 	void updateJobs(@Param("uniqueId") Long uniqueId,@Param("jobDisabled") String jobDisabled);
 
 }
