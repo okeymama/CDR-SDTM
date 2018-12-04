@@ -11285,7 +11285,7 @@ textarea.input-transparent:focus {
     color: #8b8989;
     margin-right: -1px;
     line-height: 18px;
-    width: 222px;
+   /*  width: 222px; */
     text-align: center;
     position: relative
 }
