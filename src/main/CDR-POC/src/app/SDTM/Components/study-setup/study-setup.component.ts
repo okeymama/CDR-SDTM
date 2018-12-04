@@ -14,7 +14,10 @@ import { EditService, UserService } from '../../Services';
   styleUrls: ['./study-setup.component.css']
 })
 export class StudySetupComponent implements OnInit {
-  appName: string;
+    public studyPhases: any[];
+    public studySources: any[];
+    public studyStatuses: any[];
+    appName: string;
     public view: Observable<GridDataResult>;
     public gridState: State = {
         sort: [],
@@ -86,7 +89,16 @@ export class StudySetupComponent implements OnInit {
       });
       this.editService.fetchTherapeuticAreas().subscribe(data => {
         this.therapeuticAreas = data;
-    });
+       });
+      this.editService.fetchStudyPhases().subscribe(data => {
+          this.studyPhases = data;
+      });
+     this.editService.fetchStudySources().subscribe(data => {
+          this.studySources = data;
+      });
+      this.editService.fetchStudyStatuses().subscribe(data => {
+          this.studyStatuses = data;
+      });
      this.fetch('onLoad');
     }
 
@@ -219,7 +231,7 @@ export class StudySetupComponent implements OnInit {
   }
 
   public navigateBusinessImport(dataItem: any) {
-       this.router.navigate(['/busRules', {studyTitle: dataItem.title, therapeuticArea: dataItem.therapeuticArea}]);
+       this.router.navigate(['/sdtmHome/businessRules', {studyTitle: dataItem.title, therapeuticArea: dataItem.therapeuticArea}]);
   }
 }
 

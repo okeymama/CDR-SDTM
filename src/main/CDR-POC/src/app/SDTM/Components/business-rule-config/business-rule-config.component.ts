@@ -60,7 +60,6 @@ export class BusinessRuleConfigComponent implements OnInit {
         {"icontitle": "Import", "iconImageSrc": "assets/images/NewNote.png", "action":"import","inputParam":this.importTemplate},
         {"icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "action":"","inputParam":""},
         {"icontitle": "Add Business Rule", "iconImageSrc": "assets/images/AddStudy.png","action":"add","inputParam":this.searchBRStudy}
-       
       ];
       this.navBarItems = [
         {"navBarTitle": "Home", "navBarLink": "/sdtmHome"},
