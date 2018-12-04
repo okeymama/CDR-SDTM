@@ -1,23 +1,43 @@
+<style>
+
+  .nav-tabs.tab-color-blue > li.active > a, .nav-tabs.tab-color-blue > li.active > a:focus, .nav-tabs.tab-color-blue > li.active > a:hover {
+    background: rgb(216, 214, 214);
+      color: black;
+      min-width: 70px;
+      text-align: center;
+      font-family: 'Open Sans Regular';
+      border-top: 4px solid #074982;
+  }
+
+  .nav-tabs > li > a, .nav-tabs > li > a:focus {
+ 
+    background-color: white;
+   
+}
+  
+  </style>
+
+
 <div>
   <ul class="nav nav-tabs padding-6 tab-color-blue background-blue navigation"
     id="myTab4">
-    <li><a data-toggle="tab"
+    <li ><a data-toggle="tab"
       routerLink="/sdtmHome"
-      style="background-color: white;width: 70px;padding-left: 20px">Home</a>
+      style="width: 70px;padding-left: 20px">Home</a>
     </li>
     <li [routerLinkActive]="['active']"><a data-toggle="tab"
       routerLink="studySetup"
-      style="background-color: white;padding-left: 20px ">Study
+      style="padding-left: 20px ">Study
         Setup</a></li>
 
     <li [routerLinkActive]="['active']"><a data-toggle="tab"
       routerLink="businessRules"
-      style="background-color: white; ">Business
+      style=" padding-left: 20px">Business
         Rule Configuration</a></li>
 
     <li [routerLinkActive]="['active']"><a data-toggle="tab"
       routerLink="jobExecution"
-      style="background-color: white;padding-left: 20px ">Job
+      style="padding-left: 20px ">Job
         Execution</a></li>
   </ul>
 </div>

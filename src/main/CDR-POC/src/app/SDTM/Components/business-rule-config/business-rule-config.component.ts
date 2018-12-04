@@ -101,6 +101,7 @@ export class BusinessRuleConfigComponent implements OnInit {
         if (searchBRStudy.brSdtmDomain) {
             this.configTypeIcons.unshift( {"icontitle": "Job Execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png","action":"job","inputParam":this.searchBRStudy});
         }
+       
        this.businessEditService.read(searchBRStudy);
      }
 
@@ -187,9 +188,7 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.statusShowOptions = false;
         this.statusDrpSelected = false;
         this.businessEditService.read('clear');
-        alert("size ..."+this.configTypeIcons.length);
-        this.configTypeIcons.splice(5, 1);
-        alert("size new..."+this.configTypeIcons.length);
+        this.configTypeIcons.shift();
      
     
      }
