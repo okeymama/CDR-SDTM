@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class BusinessRuleConfigComponent implements OnInit {
 
-    configTypeImage:string;
+    configTypeImage: string;
     configTypeTitle: string;
     configTypeIcons: Object[];
     navBarItems: Object[];
@@ -50,15 +50,15 @@ export class BusinessRuleConfigComponent implements OnInit {
   }
 
   constructor(private route: ActivatedRoute,
-    private userService: UserService, 
+    private userService: UserService,
     @Inject(BusinessEditService) businessEditServiceFactory: any,
     private router: Router) {
         this.businessEditService = businessEditServiceFactory();
   }
   public ngOnInit(): void {
       this.configTypeIcons = [
-        {"icontitle": "Notes", "iconImageSrc": "assets/images/RightImage1.png",  "action":"","inputParam":""},
-        {"icontitle": "Import", "iconImageSrc": "assets/images/NewNote.png", "action":"import","inputParam":this.importTemplate},
+        {"icontitle": "Import from Template or Library", "iconImageSrc": "assets/images/RightImage1.png",  "action":"import","inputParam":this.importTemplate},
+        {"icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png", "action":"","inputParam":""},
         {"icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "action":"","inputParam":""},
         {"icontitle": "Add Business Rule", "iconImageSrc": "assets/images/AddStudy.png","action":"add","inputParam":this.searchBRStudy}
       ];
@@ -99,7 +99,7 @@ export class BusinessRuleConfigComponent implements OnInit {
 
      public fetchTemplate(searchBRStudy): void {
         if (searchBRStudy.brSdtmDomain) {
-            this.configTypeIcons.unshift( {"icontitle": "Job Execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png","action":"job","inputParam":this.searchBRStudy});
+            this.configTypeIcons.unshift( {"icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png","action":"job","inputParam":this.searchBRStudy});
         }
        
        this.businessEditService.read(searchBRStudy);
@@ -189,13 +189,19 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.statusDrpSelected = false;
         this.businessEditService.read('clear');
         this.configTypeIcons.shift();
-     
-    
      }
 
      public getDomain(): String {
-        if (this.searchBRStudy != null && this.searchBRStudy.brSdtmDomain != null) {
-            return this.capitalizeFirstLetter(this.searchBRStudy.brSdtmDomain) + ' Domain';
+        let selectedDomain = '';
+        if (this.searchBRStudy != null && this.searchBRStudy.brSdtmDomain != null
+             && this.studyDomains != null && this.studyDomains.length > 0) {
+            for (let i = 0; i < this.studyDomains.length; i++) {
+                if (this.studyDomains[i].domain === this.searchBRStudy.brSdtmDomain) {
+                    selectedDomain = this.studyDomains[i].domainLabel;
+                    break;
+                }
+            }
+            return this.capitalizeFirstLetter(selectedDomain) + ' Domain';
         }
           return null;
           // else {
