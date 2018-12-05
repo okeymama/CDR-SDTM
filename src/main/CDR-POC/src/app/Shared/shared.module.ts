@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { FilterIconHeadingComponent } from './filter-icon-heading/filter-icon-heading.component';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
@@ -31,7 +32,9 @@ import { FilterIconHeadingComponent } from './filter-icon-heading/filter-icon-he
     GridModule,
     NgMultiSelectDropDownModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    BsDropdownModule.forRoot()
+    
 ],
   declarations: [
     FooterComponent,

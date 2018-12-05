@@ -5,7 +5,6 @@ import { AppRoutingModule } from './/app-routing.module';
 import { BreadcrumbsModule} from 'ng6-breadcrumbs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { BsDropdownModule } from 'ngx-bootstrap';
 import { DataQualityModule } from './DataQuality/data-quality.module';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { DropDownsModule} from '@progress/kendo-angular-dropdowns';
@@ -30,7 +29,6 @@ import { SharedModule } from './Shared/shared.module';
     BreadcrumbsModule,
     BrowserAnimationsModule,
     BrowserModule,
-    BsDropdownModule.forRoot(),
     DataQualityModule,
     DialogsModule,
     DropDownsModule,
