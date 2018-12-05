@@ -229,7 +229,9 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.statusShowOptions = false;
         this.statusDrpSelected = false;
         this.businessEditService.read('clear');
-        this.configTypeIcons.shift();
+        if(this.configTypeIcons.length === 5){
+                 this.configTypeIcons.shift();
+        }
      }
 
      public getDomain(): String {
