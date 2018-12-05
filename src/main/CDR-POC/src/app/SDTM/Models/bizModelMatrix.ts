@@ -5,6 +5,7 @@ export class Matrix {
     public target_File: string;
     public target_Field: string;
     public domain: string;
+    public importDomain: string[];
     public subDomain: string;
     public study: string;
     public matrixStudy: string;

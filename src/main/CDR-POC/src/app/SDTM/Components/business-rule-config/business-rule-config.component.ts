@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class BusinessRuleConfigComponent implements OnInit {
 
-    configTypeImage:string;
+    configTypeImage: string;
     configTypeTitle: string;
     configTypeIcons: Object[];
     navBarItems: Object[];
@@ -34,6 +34,7 @@ export class BusinessRuleConfigComponent implements OnInit {
   public studyDomains: any[];
   public searchBRStudy: any = {};
   public importTemplate: any = {};
+  public selectedDomains: any[];
   public view: Observable<GridDataResult>;
    public gridState: State = {
        sort: [],
@@ -50,15 +51,15 @@ export class BusinessRuleConfigComponent implements OnInit {
   }
 
   constructor(private route: ActivatedRoute,
-    private userService: UserService, 
+    private userService: UserService,
     @Inject(BusinessEditService) businessEditServiceFactory: any,
     private router: Router) {
         this.businessEditService = businessEditServiceFactory();
   }
   public ngOnInit(): void {
       this.configTypeIcons = [
-        {"icontitle": "Notes", "iconImageSrc": "assets/images/RightImage1.png",  "action":"","inputParam":""},
-        {"icontitle": "Import", "iconImageSrc": "assets/images/NewNote.png", "action":"import","inputParam":this.importTemplate},
+        {"icontitle": "Import from Template or Library", "iconImageSrc": "assets/images/RightImage1.png",  "action":"import","inputParam":this.importTemplate},
+        {"icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png", "action":"","inputParam":""},
         {"icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "action":"","inputParam":""},
         {"icontitle": "Add Business Rule", "iconImageSrc": "assets/images/AddStudy.png","action":"add","inputParam":this.searchBRStudy}
       ];
@@ -81,25 +82,27 @@ export class BusinessRuleConfigComponent implements OnInit {
      /* this.businessEditService.fetchMatrixStudyTitles().subscribe(data => {
         this.matrixStudyTitles = data;
     });*/
-    const userDetails = this.userService.getUser();
-    if (userDetails !== undefined) {
-    const userDetail = userDetails.firstName + ' ' + userDetails.lastName;
-    this.userName = userDetail;
-    } else {
-      this.userName = 'Admin';
-    }
     const title = this.route.snapshot.paramMap.get('studyTitle');
     const therapeuticArea = this.route.snapshot.paramMap.get('therapeuticArea');
        if (title != null && therapeuticArea != null) {
+            /*this.businessEditService.fetchDomainsByStudy(title).subscribe(data => {
+                this.studyDomains = data;
+            });
+            if (this.studyDomains != null && this.studyDomains.length > 0) {
+                this.searchBRStudy.brStudy = title;
+                this.searchBRStudy.brSdtmDomain = this.studyDomains[0];
+                this.businessEditService.read(this.searchBRStudy);
+            } else {*/
              this.importTemplate.brStudy = title;
              this.importTemplate.therapeuticArea = therapeuticArea;
              this.addHandler('import', this.importTemplate);
+           // }
        }
      }
 
      public fetchTemplate(searchBRStudy): void {
         if (searchBRStudy.brSdtmDomain) {
-            this.configTypeIcons.unshift( {"icontitle": "Job Execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png","action":"job","inputParam":this.searchBRStudy});
+            this.configTypeIcons.unshift( {"icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png","action":"job","inputParam":this.searchBRStudy});
         }
        
        this.businessEditService.read(searchBRStudy);
@@ -153,10 +156,41 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.editBizDataItem = undefined;
       }
 
+      public fetchHandler(template: Matrix) {
+        let domains = [];
+        this.importTemplate.study = template.study;
+        this.selectedDomains = template.importDomain;
+
+        this.selectedDomains.sort(function(a, b) {
+            const nameA = a.domainLabel.toLowerCase();
+            const nameB = b.domainLabel.toLowerCase();
+            if (nameA < nameB) {
+                return -1;
+            } else if (nameA > nameB) {
+                return 1;
+            }
+            return 0;
+        });
+
+        for (let i = 0; i < this.selectedDomains.length; i++) {
+            domains.push(this.selectedDomains[i].domain);
+        }
+        this.importTemplate.domain = domains;
+        this.importTemplate.matrixStudy = template.matrixStudy;
+        this.searchBRStudy.brStudy = template.study;
+        this.searchBRStudy.brSdtmDomain = domains[0];
+        this.businessEditService.save(this.importTemplate, this.searchBRStudy, 'import');
+        this.businessEditService.fetchDomainsByStudy(this.searchBRStudy.brStudy).subscribe(data => {
+            this.studyDomains = data;
+        });
+        this.editBizDataItem = undefined;
+      }
+
      filterDomains(studyTitle: any) {
-         if (studyTitle === 'undefined') {
-            this.studyDomains = [];
-         } else {
+        this.searchBRStudy.brSdtmDomain = undefined;
+        this.businessEditService.read('clear');
+        this.studyDomains = [];
+         if (studyTitle !== 'undefined') {
             this.businessEditService.fetchDomainsByStudy(studyTitle).subscribe(data => {
                 this.studyDomains = data;
             });
@@ -164,6 +198,10 @@ export class BusinessRuleConfigComponent implements OnInit {
      }
 
      filterStudies(therapeuticArea: any) {
+        this.businessEditService.read('clear');
+        this.studyDomains = [];
+        this.searchBRStudy.brSdtmDomain = undefined;
+        this.searchBRStudy.brStudy = undefined;
         if (therapeuticArea === 'undefined') {
             // do nothing
         } else if (therapeuticArea === 'all') {
@@ -178,6 +216,9 @@ export class BusinessRuleConfigComponent implements OnInit {
     }
 
      public clear() {
+        this.businessEditService.fetchStudyTitles().subscribe(data => {
+            this.studyTitles = data;
+        });
         this.searchBRStudy = {};
         this.importTemplate = {};
         this.studyDomains = [];
@@ -189,13 +230,19 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.statusDrpSelected = false;
         this.businessEditService.read('clear');
         this.configTypeIcons.shift();
-     
-    
      }
 
      public getDomain(): String {
-        if (this.searchBRStudy != null && this.searchBRStudy.brSdtmDomain != null) {
-            return this.capitalizeFirstLetter(this.searchBRStudy.brSdtmDomain) + ' Domain';
+        let selectedDomain = '';
+        if (this.searchBRStudy != null && this.searchBRStudy.brSdtmDomain != null
+             && this.studyDomains != null && this.studyDomains.length > 0) {
+            for (let i = 0; i < this.studyDomains.length; i++) {
+                if (this.studyDomains[i].domain === this.searchBRStudy.brSdtmDomain) {
+                    selectedDomain = this.studyDomains[i].domainLabel;
+                    break;
+                }
+            }
+            return this.capitalizeFirstLetter(selectedDomain) + ' Domain';
         }
           return null;
           // else {

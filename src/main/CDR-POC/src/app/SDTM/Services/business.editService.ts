@@ -18,7 +18,7 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
     }
 
     private data: any[] = [];
-    public searchStudy: any = {};
+    public searchBRStudy: any = {};
     private res: any[] = [];
 
     public read(searchBRStudy) {
