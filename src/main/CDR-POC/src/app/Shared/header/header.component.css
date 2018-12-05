@@ -1,0 +1,9 @@
+.dropdown-menu {
+	min-width: 100px;
+	margin-right: 3%;
+}
+.dropdown-menu > li:hover > a, .dropdown-menu > li > a:active,
+.dropdown-menu > li > a:focus {
+    background: #E4E6E9;
+    color : black;
+}
