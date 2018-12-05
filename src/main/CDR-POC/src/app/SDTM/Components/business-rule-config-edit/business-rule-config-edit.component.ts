@@ -23,9 +23,7 @@ export class BusinessRuleConfigEditComponent implements OnInit {
   public matrixStudyTitles: any[];
   public studyTitles: any[];
   public studyDomains: any[];
-  public selectedDomains: any[];
   public searchBRStudy: any = {};
-  public importTemplate: any = {};
   public transPlaceHolder = 'Enter Transformation Logic';
   private businessEditService: BusinessEditService;
   public transTypes: any[];
@@ -73,6 +71,7 @@ export class BusinessRuleConfigEditComponent implements OnInit {
   @Output() cancel: EventEmitter<any> = new EventEmitter();
   @Output() save: EventEmitter<Matrix> = new EventEmitter();
   @Output() delete: EventEmitter<Matrix> = new EventEmitter();
+  @Output() fetch: EventEmitter<Matrix> = new EventEmitter();
 
   public onSave(e, isNew: any) {
       e.preventDefault();
@@ -183,16 +182,7 @@ export class BusinessRuleConfigEditComponent implements OnInit {
   }
 
   public fetchTemplate(): void {
-    //this.businessEditService.read(searchBRStudy);
-    let domains = [];
-    this.importTemplate.study = this.editBusinessForm.value.study;
-    this.selectedDomains = this.editBusinessForm.value.importDomain;
-    for (let i = 0; i < this.selectedDomains.length; i++) {
-        domains.push(this.selectedDomains[i].domain);
-    }
-    this.importTemplate.domain = domains;
-    this.importTemplate.matrixStudy = this.editBusinessForm.value.matrixStudy;
-    this.businessEditService.save(this.importTemplate, this.searchBRStudy, 'import');
+    this.fetch.emit(this.editBusinessForm.value);
     this.active = false;
   }
 }

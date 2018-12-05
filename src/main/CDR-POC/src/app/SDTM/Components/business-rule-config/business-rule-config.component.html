@@ -119,7 +119,7 @@
             </kendo-grid>
             <div style="background-color:red">
               <business-rule-config-edit [model]="editBizDataItem" [isNew]="isNew" (save)="saveHandler($event)"
-                (cancel)="cancelHandler()" (delete)="deleteHandler($event)">
+                (cancel)="cancelHandler()" (delete)="deleteHandler($event)" (fetch)="fetchHandler($event)">
               </business-rule-config-edit>
             </div>
           </div>
