@@ -3,17 +3,17 @@
 	 (iconClick)="addHandlerIconClick($event)"></header-icons>
 
 	<div class="panel panel-default" style="height: 395px; margin-left: 6px; border-radius: 10px; border-width: 1px; width: 99%; margin-top: 2px; padding-bottom: 3px; background: white;">
-		<div *ngIf="!(loading) && !(hideInstructions)">
-
+		
+		<div *ngIf="(data?.length==0)">
 			<h3 class="row-label" style="margin-top: 7px; text-align: left; font-family: Open Sans Regular; font-size: 12px; width: 90%;">
 				Select a study to see job execution details
 				<!-- Filtered by -->
 				<!--  <a class="float:right" style="margin-right: -111px;padding-top: 0px;padding-bottom: 5px;float: right;color: #074982;font-family: Open Sans Regular;font-size: 12px;"><b>Clear all Filters</b></a>-->
 			</h3>
 		</div>
-		<hr *ngIf="!(loading)" style="margin-top: -6px; border-width: 2px;" />
+		<hr *ngIf="data?.length==0" style="margin-top: -6px; border-width: 2px;" />
 
-		<div *ngIf="(loading)" style="margin-top: 5px">
+		<div *ngIf="data?.length>0" style="margin-top: 5px">
 			<!-- class="pull-right" style="margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;"> -->
 
 			<a type="button" (click)="runForAllSelectedDomains()"> <img *ngIf="!(allDomainsLive) || (allDomainsLive && jobStatus == 'job completed')"
@@ -24,7 +24,7 @@
 			<h3 style="font-family: Open Sans Regular; font-size: 12px; color: black; padding-right: 15px; margin-top: 5px"
 			 class="pull-right">All selected</h3>
 		</div>
-		<hr *ngIf="(loading)" style="margin-top: 6px; border-width: 2px;" />
+		<hr *ngIf="data?.length>0" style="margin-top: 6px; border-width: 2px;" />
 
 		<div id="sidebar" class="col-sm-2 col-md-3" style="width: 214px;border-style: solid;border-width: 1px;border-color: #E5E5E5;margin-left:3px">
 			<filter-icon-heading></filter-icon-heading>
@@ -33,7 +33,7 @@
 				<form name="jobForm" #f="ngForm" novalidate>
 					<fieldset>
 
-						<div tyle="overflow:auto; width:200px;height: 304px;" class="tab-pane in active">
+						<div style="overflow:auto; width:200px;height: 304px;" class="tab-pane in active">
 
 							<div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
 								<ul class="nav  nav-tabs" style="border-bottom: 0px;">
@@ -43,8 +43,9 @@
 								</ul>
 								<div *ngIf="therapeuticAreaShowOptions" class="dropdown-container" style="border-bottom: 0px; margin-top: 7px; margin-left: 10px; font-family: Open Sans Regular; font-size: 12px; width: 89%; height: 35px;"
 								 id="form-field-select-1">
-									<select class="form-control" id="form-field-select-1" name="therapeuticArea" [(ngModel)]="searchJob.therapeuticArea">
-										<!--(change)="filterStudyIds($event.target.value);">  -->
+									<select class="form-control" id="form-field-select-1" name="therapeuticArea"
+									 [(ngModel)]="searchJob.therapeuticArea"
+										(change)="filterStudyIds($event.target.value);">  
 										<option value="undefined" selected disabled style="display: none;">Choose</option>
 										<option value="all">--All--</option>
 										<option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticCode}}">{{area.therapeuticDescription}}</option>
@@ -52,33 +53,6 @@
 
 								</div>
 							</div>
-							<!-- CODE FOR STUDY ID DROPDOWN 
-													<div class="nav nav-tabs-flt padding-6"
-														sytle="border-bottom: 0px;">
-														<ul class="nav  nav-tabs" style="border-bottom: 0px;">
-															<li style="border-bottom: 0px;"><a data-toggle="tab"
-																(click)="drp()"
-																style="margin-top: 9px; margin-left: 10px; margin-bottom: 6px; border-bottom: 0px; padding-top: 3px; color: black; width: 178px; background-color: #E4E6E9; height: 24px; text-align: left; font-family: Open Sans Regular; font-size: 10px;">
-																	Study ID<span class="pull-right"><i
-																		class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
-															</a></li>
-														</ul>
-														<div *ngIf="drpSelected" class="dropdown-container"
-															style="border-bottom: 0px; margin-top: 7px; margin-left: 23px; 
-															font-family: Open Sans Regular; font-size: 12px; width: 76%; height: 35px;"
-															id="form-field-select-1">
-															 
-															<select class="form-control" id="form-field-select-1"
-																name="study" [(ngModel)]="searchJob.studyId" >
-																<option value="undefined" disabled selected
-																	style="display: none;">Choose</option>
-																<option *ngFor="let studyId of studyIds"
-																	value="{{studyId}}">{{studyId}}</option>
-															</select>
-			
-														</div>
-													</div> -->
-
 							<!-- Second dropdrown -->
 							<div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
 								<ul class="nav  nav-tabs" style="border-bottom: 0px;">
@@ -87,7 +61,7 @@
 										</a></li>
 								</ul>
 								<div *ngIf="studyTitleShowOptions" class="dropdown-container" 
-								style="border-bottom: 0px; margin-top: 7px; margin-left: 10px; font-family: Open Sans Regular; font-size: 12px; width: 89%; height: 35px;"
+								style="border-bottom: 0px; margin-top: 2px; margin-left: 10px; font-family: Open Sans Regular; font-size: 12px; width: 89%; height: 35px;"
 								 id="form-field-select-1">
 									<select class="form-control" id="form-field-select-1" name="study" [(ngModel)]="searchJob.study"
 									 (ngModelChange)="searchJobExecution(searchJob,selectedItems)">
@@ -116,12 +90,12 @@
 				</form>
 			</div>
 		</div>
+		
 
-
-		<div class="main-content col-sm-10 col-md-9">
+			<div class="main-content col-sm-10 col-md-9">
 			<div class="main-content-inner">
 				<div class="page-content">
-					<div class="row" style="margin-top: -23px;">
+					<div class="row" style="margin-top: -19px;">
 						<table class="table">
 							<thead>
 								<tr>

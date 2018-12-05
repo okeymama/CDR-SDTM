@@ -56,6 +56,7 @@ export class JobExecutionComponent implements OnInit {
   public userName = '';
   studyInHeader = '';
   hideInstructions: boolean = false;
+  hideDropdowns: boolean = false;
   studyTitleShowOptions = false;
   therapeuticAreaShowOptions = false;
   isCheckboxSelected = false;
@@ -247,6 +248,7 @@ export class JobExecutionComponent implements OnInit {
   }
 
   public reset(searchJob,selectedItems,f): void {
+    this.hideDropdowns = true;
     this.searchJob.domain = "";
     this.searchJob.study = "";
     this.selectedItemsList = [];
@@ -258,6 +260,8 @@ export class JobExecutionComponent implements OnInit {
     this.hideInstructions = false;
     this.checkbox = false;
     this.isCheckboxSelected = !this.isCheckboxSelected;
+    this.studyTitleShowOptions = false;
+    this.therapeuticAreaShowOptions = false;
     
     //this.view = '';
     f.form.reset();
@@ -362,9 +366,10 @@ export class JobExecutionComponent implements OnInit {
 
   }
    
-   public hideHeader(){
-   this.hideInstructions = true;
-   }
+  /* public hideHeader(){
+   		this.hideInstructions = true;
+    
+   }*/
 
   public studyTitleDropdown(): void {
         if (this.studyTitleDropdownSelected === false) {
@@ -395,5 +400,7 @@ export class JobExecutionComponent implements OnInit {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
           return this.http.put(url,{headers: headers});
      }
+     
+    
     
 }
