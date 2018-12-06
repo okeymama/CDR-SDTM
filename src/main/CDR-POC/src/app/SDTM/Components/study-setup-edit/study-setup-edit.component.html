@@ -4,7 +4,7 @@
 <b style="color : black;font-size: 14px;font-family: Open Sans;">{{ isNew ? 'Add New Study Details' : 'Edit Study Details' }}</b>
 </kendo-dialog-titlebar>
 
-<form novalidate [formGroup]="editForm">
+<form novalidate [formGroup]="editForm"> 
   <!--kendo-dialog title=""  (close)="close1()">
        <p style="margin: 30px; text-align: center;">Message</p>
   </kendo-dialog-->
@@ -76,8 +76,7 @@
      <select placeholder="Source" formControlName="source">
       <option  [ngValue]="null" disabled selected style="display: none;">Select an Option</option>
       <option *ngFor="let source of studySources" value="{{source.source}}">{{source.sourceDescription}}</option>
-      </select>
-      <span style="color: red">*</span>
+      </select><span style="color: red">*</span>
     </div>
   </div>
 </div>

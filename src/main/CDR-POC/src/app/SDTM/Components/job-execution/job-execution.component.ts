@@ -160,11 +160,11 @@ export class JobExecutionComponent implements OnInit {
             // do nothing
         } else if (therapeuticArea === 'all') {
             this.fetchStudyTitles().subscribe(data => {
-                this.studyIds = data;
+                this.studyTitles = data;
             });
         } else {
            this.fetchStudiessBytherapeuticArea(therapeuticArea).subscribe(data => {
-               this.studyIds = data;
+               this.studyTitles = data;
            });
         }
     }
@@ -236,6 +236,8 @@ export class JobExecutionComponent implements OnInit {
     this.isCheckboxSelected = !this.isCheckboxSelected;
     this.studyTitleShowOptions = false;
     this.therapeuticAreaShowOptions = false;
+    this.studyTitleDropdownSelected = false;
+    this.therapeuticAreaDropdownSelected = false;
     this.studyInHeader = '';
     
     
