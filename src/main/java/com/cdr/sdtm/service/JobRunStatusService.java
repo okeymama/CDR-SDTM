@@ -12,7 +12,7 @@ public interface JobRunStatusService {
 
 	List<JobRunStatus> findByStudy(String study);
 	
-	int updateJobs(Long uniqueId, String jobDisabled);
+	int updateJobs(Long uniqueId, String jobDisabled); 
 
 
 }

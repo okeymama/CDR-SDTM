@@ -53,7 +53,7 @@ public class JobRunStatusController {
 		}
 		else {
 			LOGGER.info("Error while updating job.");
-			return new ResponseEntity<>("Job not found", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Job not found", HttpStatus.NOT_FOUND); 
 		}
 	}
 

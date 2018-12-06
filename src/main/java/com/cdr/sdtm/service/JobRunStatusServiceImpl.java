@@ -31,7 +31,7 @@ public class JobRunStatusServiceImpl implements JobRunStatusService {
 	
 	@Override
 	public int updateJobs(Long uniqueId,String jobDisabled) {
-		return jobRunStatusRepository.updateJobs(uniqueId,jobDisabled);
+		return jobRunStatusRepository.updateJobs(uniqueId,jobDisabled); 
 	}
 
 }
