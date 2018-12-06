@@ -247,7 +247,7 @@ export class JobExecutionComponent implements OnInit {
  public actionOnJobExecution(item,action){
     if(action=='Disable'){
        item.jobDisabled = 'Y';
-       this.callUpdateService(item.job_id,item.jobDisabled);
+       this.callUpdateService(item);
        
        
     }else{
@@ -256,7 +256,7 @@ export class JobExecutionComponent implements OnInit {
     	
     	 if (action == 'Enable'){
     	    item.jobDisabled = 'N';
-       		this.callUpdateService(item.job_id,item.jobDisabled);
+       		this.callUpdateService(item);
             
     	 }else{
     		if(action=='Run'){
@@ -361,16 +361,14 @@ export class JobExecutionComponent implements OnInit {
           this.therapeuticAreaDropdownSelected = false;
         }
     }
-    
-     public callUpdateService(uniqueId,jobDisabled){
-        console.log("uniqueId "+ uniqueId + "jobDisabled "+jobDisabled)
-      	const searchUrl = '/api/CDR/updateJobs';
-        let url = `${searchUrl}/${uniqueId}/${jobDisabled}`;
-        console.log("url  "+url)        
-        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-          return this.http.put(url,{headers: headers});
-     }
-     
-    
-    
+    public callUpdateService(item) {
+      console.log('uniqueId ' + item.job_id + 'jobDisabled ' + item.jobDisabled);
+      const searchUrl = '/api/CDR/updateJobs';
+      const url = `${searchUrl}/${item.job_id}/${item.jobDisabled}`;
+      console.log('url  ' + url);
+      let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+      return this.http.put(url, item , {headers: headers}).subscribe(data => {
+        console.log('Job Status:' + data);
+      });
+   }
 }
