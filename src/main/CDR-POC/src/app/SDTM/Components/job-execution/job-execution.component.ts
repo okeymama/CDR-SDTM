@@ -88,7 +88,7 @@ export class JobExecutionComponent implements OnInit {
   this.configTypeImage = "assets/images/JobExecution.png";
   this.configTypeTitle= "Job Execution";
     
-        this.dropdownList = //loadDropdown();
+        this.dropdownList = 
         					[
                               {"id":1,"itemName":"Demographics"},
                               {"id":2,"itemName":"Adverse Events"},
@@ -99,11 +99,7 @@ export class JobExecutionComponent implements OnInit {
                               {"id":7,"itemName":"Domain4"}
                             ];
 
-      /*  this.selectedItems = [
-                              //  {"id":1,"itemName":"Demographics"},
-                              //  {"id":3,"itemName":"Concomitant Medications"}
-
-                            ];*/
+     
         this.dropdownSettings = {
                             singleSelection: false,
                             idField: 'id',
@@ -172,19 +168,12 @@ export class JobExecutionComponent implements OnInit {
            });
         }
     }
+   
    onItemSelect (item:any) {
-    // if(typeof item!= 'undefined' && item!= null && item.length>0){
-   // console.log(this.item+item+" on select before setting"+this.selectedItemsList);
+      this.selectedItemsList.push(item.domain);
 
-    this.selectedItemsList.push(item.domain);
-
-     }
-  // }
-   //console.log(" on select"+ item.itemName);
-
-   //this.selectedItems = item;
-   
-   
+   }
+  
 
   loadDropdown(){
         let params = new HttpParams();
@@ -201,21 +190,12 @@ export class JobExecutionComponent implements OnInit {
 
 
   public searchJobExecution(searchJob,selectedItems) {
-    //this.jobStatus =  true;
     this.hideInstructions=true;
     this.isCheckboxSelected = false;
-    //console.log( " searchJobExecution selectedItemsList");
-    //console.log( this.selectedItemsList);
-
     let params = new HttpParams();
     console.log( "params1");
-  //  params = {key: 'domain', array:  this.selectedItemsList};
 
-  //if(typeof this.selectedItemsList!= 'undefined' && this.selectedItemsList!= null && this.selectedItemsList.length>0){
-  // console.log("inside domain looop"+this.selectedItemsList);
-  // this.isDomain = true;
-  //  params = params.append('domain', this.selectedItemsList.toString());
-  //  }
+  
     console.log( "params2");
     params = params.append('study', searchJob.study);
     console.log( "params3");
@@ -226,25 +206,19 @@ export class JobExecutionComponent implements OnInit {
       this.studyInHeader = searchJob.study;
     
       console.log( "params4");
-    //if(this.isDomain){
-    //	return this.http.get<any[]>(`/api/CDR/jobStatus/${searchJob.study}/${this.selectedItemsList}`)
-    //   .subscribe(data => {this.data = data });
-    //}else{
+    
     	return this.http.get<any[]>(`/api/CDR/jobsForStudy/${searchJob.study}`)
        .subscribe(data => {this.data = data });
-    //}
 
     }else{
      this.missingFields = true;
     }
 
-//    this.jobExecutionService.read(searchJob);
 
   }
 
   public onStateChange(state: State) {
       this.gridState = state;
-  //    this.jobExecutionService.read();
   }
 
   public reset(searchJob,selectedItems,f): void {
@@ -272,7 +246,6 @@ export class JobExecutionComponent implements OnInit {
 
  public actionOnJobExecution(item,action){
     if(action=='Disable'){
-       //item.isDisabled = true;
        item.jobDisabled = 'Y';
        this.callUpdateService(item.job_id,item.jobDisabled);
        
@@ -282,23 +255,19 @@ export class JobExecutionComponent implements OnInit {
     	//Need to proceed only if action is not 'Disable'
     	
     	 if (action == 'Enable'){
-    	    //item.isDisabled = false;
     	    item.jobDisabled = 'N';
        		this.callUpdateService(item.job_id,item.jobDisabled);
             
     	 }else{
     		if(action=='Run'){
     			item.isLive = true;
-    			//item.isDisabled = false;
     			
     		}else if (action=='Abort'){
          		item.isJobAborted = true;
          		item.isLive = false;  
-         		//item.isDisabled = false;
          		      
     		}
-   			//this.domainList.push(item.domain);
-    		//domainList.push('Adverse Events');
+   		
     		let headers = new HttpHeaders();
         	headers.append('Content-Type', 'application/json');
  			return this.http.post(`http://10.0.2.254?Study_name=${item.study}&domain_array=${item.domain}&Action=${action}`,{headers: headers})
@@ -326,7 +295,6 @@ export class JobExecutionComponent implements OnInit {
 	 
     //null checks for study TODO
     //reload table to disable run buttons
-     //this.searchJobExecution(this.searchJob,this.selectedItems);
          this.hideInstructions=true;
          this.loading= true;
      
