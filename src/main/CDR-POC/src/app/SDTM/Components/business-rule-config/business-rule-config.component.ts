@@ -83,20 +83,19 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.matrixStudyTitles = data;
     });*/
     const title = this.route.snapshot.paramMap.get('studyTitle');
-    const therapeuticArea = this.route.snapshot.paramMap.get('therapeuticArea');
+    let therapeuticArea = this.route.snapshot.paramMap.get('therapeuticArea');
+    therapeuticArea = therapeuticArea.replace(new RegExp(/-/g), '/');
        if (title != null && therapeuticArea != null) {
-            /*this.businessEditService.fetchDomainsByStudy(title).subscribe(data => {
-                this.studyDomains = data;
-            });
+        this.studyDomains = this.route.snapshot.data['reqDomains'];
             if (this.studyDomains != null && this.studyDomains.length > 0) {
                 this.searchBRStudy.brStudy = title;
-                this.searchBRStudy.brSdtmDomain = this.studyDomains[0];
+                this.searchBRStudy.brSdtmDomain = this.studyDomains[0].domain;
                 this.businessEditService.read(this.searchBRStudy);
-            } else {*/
+            } else {
              this.importTemplate.brStudy = title;
              this.importTemplate.therapeuticArea = therapeuticArea;
              this.addHandler('import', this.importTemplate);
-           // }
+           }
        }
      }
 

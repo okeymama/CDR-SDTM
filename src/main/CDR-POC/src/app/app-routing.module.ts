@@ -13,6 +13,7 @@ import { SdtmModule } from './SDTM/sdtm.module';
 import { SdtmHomeComponent } from './SDTM/Components/sdtm-home/sdtm-home.component';
 import { DataqualityHomeComponent } from './DataQuality/Components/dataquality-home/dataquality-home.component';
 import { DataQualityModule } from './DataQuality/data-quality.module';
+import { BusinessResolverService } from './SDTM/Services/business-resolver.service';
 
 
 
@@ -40,7 +41,10 @@ const routes: Routes = [
       },
       {
         path: 'businessRules/:studyTitle/:therapeuticArea',
-        component: BusinessRuleConfigComponent
+        component: BusinessRuleConfigComponent,
+        resolve: {
+          reqDomains: BusinessResolverService
+        }
 
       },
       {
@@ -83,6 +87,7 @@ const routes: Routes = [
     DataQualityModule
   ],
   exports: [RouterModule],
-  declarations: []
+  declarations: [],
+  providers: [BusinessResolverService]
 })
 export class AppRoutingModule { }
