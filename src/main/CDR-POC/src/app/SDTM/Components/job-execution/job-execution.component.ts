@@ -262,6 +262,8 @@ export class JobExecutionComponent implements OnInit {
     this.isCheckboxSelected = !this.isCheckboxSelected;
     this.studyTitleShowOptions = false;
     this.therapeuticAreaShowOptions = false;
+    this.studyInHeader = '';
+    
     
     //this.view = '';
     f.form.reset();
