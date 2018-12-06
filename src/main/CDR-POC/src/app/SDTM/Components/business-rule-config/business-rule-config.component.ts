@@ -61,7 +61,8 @@ export class BusinessRuleConfigComponent implements OnInit {
         {"icontitle": "Import from Template or Library", "iconImageSrc": "assets/images/RightImage1.png",  "action":"import","inputParam":this.importTemplate},
         {"icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png", "action":"","inputParam":""},
         {"icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "action":"","inputParam":""},
-        {"icontitle": "Add Business Rule", "iconImageSrc": "assets/images/AddStudy.png","action":"add","inputParam":this.searchBRStudy}
+        {"icontitle": "Add Business Rule", "iconImageSrc": "assets/images/AddStudy.png","action":"add","inputParam":this.searchBRStudy},
+        {"icontitle": "Data Lineage", "iconImageSrc": "assets/images/BussRulesGrey.png","action":"lineage","inputParam":""}
       ];
       this.navBarItems = [
         {"navBarTitle": "Home", "navBarLink": "/sdtmHome"},
@@ -101,7 +102,9 @@ export class BusinessRuleConfigComponent implements OnInit {
 
      public fetchTemplate(searchBRStudy): void {
         if (searchBRStudy.brSdtmDomain) {
+           if(this.configTypeIcons.length === 5){
             this.configTypeIcons.unshift( {"icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png","action":"job","inputParam":this.searchBRStudy});
+            }
         }
        this.businessEditService.read(searchBRStudy);
      }
@@ -113,10 +116,13 @@ export class BusinessRuleConfigComponent implements OnInit {
      }
 
      addHandlerIconClick(data) {
+        
          if (!data.flag) return; 
          else if (data.flag === 'job') {
             this.router.navigate(['/sdtmHome/jobExecution', this.searchBRStudy.brStudy]);
-         } else {
+         } else if(data.flag === 'lineage'){
+            window.open("https://portal.graphgist.org/", '_blank');
+         }else {
              this.addHandler(data.flag, data.inputParam);
          }
     }
@@ -227,7 +233,7 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.statusShowOptions = false;
         this.statusDrpSelected = false;
         this.businessEditService.read('clear');
-        if (this.configTypeIcons.length === 5) {
+        if (this.configTypeIcons.length === 6) {
                  this.configTypeIcons.shift();
         }
      }
