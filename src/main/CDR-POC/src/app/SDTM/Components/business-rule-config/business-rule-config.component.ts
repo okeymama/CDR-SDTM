@@ -84,8 +84,8 @@ export class BusinessRuleConfigComponent implements OnInit {
     });*/
     const title = this.route.snapshot.paramMap.get('studyTitle');
     let therapeuticArea = this.route.snapshot.paramMap.get('therapeuticArea');
-    therapeuticArea = therapeuticArea.replace(new RegExp(/-/g), '/');
        if (title != null && therapeuticArea != null) {
+        therapeuticArea = therapeuticArea.replace(new RegExp(/-/g), '/');
         this.studyDomains = this.route.snapshot.data['reqDomains'];
             if (this.studyDomains != null && this.studyDomains.length > 0) {
                 this.searchBRStudy.brStudy = title;
