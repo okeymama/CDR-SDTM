@@ -11,7 +11,8 @@ export class HeaderIconsComponent implements OnInit {
   @Input() configTypeImage: string;
   @Input() configTypeTitle: string;
   @Input() configTypeIcons: Object[];
-  @Input() studyInHeader: string;
+  @Input() studyInHeader: string; 
+  @Input() domainInHeader: string;
   @Output() iconClick = new EventEmitter();
   public editBizDataItem: Matrix;
 
