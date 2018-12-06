@@ -26,6 +26,11 @@
     color: black
 }
 
+.table>tbody {
+    border: 1px solid;
+    border-color: #ddd;
+}
+
 th {
     text-align: centre;
 }
