@@ -103,7 +103,6 @@ export class BusinessRuleConfigComponent implements OnInit {
         if (searchBRStudy.brSdtmDomain) {
             this.configTypeIcons.unshift( {"icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png","action":"job","inputParam":this.searchBRStudy});
         }
-       
        this.businessEditService.read(searchBRStudy);
      }
 
@@ -228,7 +227,7 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.statusShowOptions = false;
         this.statusDrpSelected = false;
         this.businessEditService.read('clear');
-        if(this.configTypeIcons.length === 5){
+        if (this.configTypeIcons.length === 5) {
                  this.configTypeIcons.shift();
         }
      }
@@ -289,7 +288,7 @@ export class BusinessRuleConfigComponent implements OnInit {
       }
 
       public getStudy(): String {
-        if (this.searchBRStudy != null && this.searchBRStudy.brStudy != null) {
+        if (this.searchBRStudy != null && this.searchBRStudy.brStudy != null && this.searchBRStudy.brSdtmDomain != null) {
             return this.capitalizeFirstLetter(this.searchBRStudy.brStudy) + ' Study';
         }
      }
