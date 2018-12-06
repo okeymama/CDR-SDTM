@@ -101,7 +101,9 @@ export class BusinessRuleConfigComponent implements OnInit {
 
      public fetchTemplate(searchBRStudy): void {
         if (searchBRStudy.brSdtmDomain) {
+           if(this.configTypeIcons.length === 4){
             this.configTypeIcons.unshift( {"icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png","action":"job","inputParam":this.searchBRStudy});
+            }
         }
        this.businessEditService.read(searchBRStudy);
      }
