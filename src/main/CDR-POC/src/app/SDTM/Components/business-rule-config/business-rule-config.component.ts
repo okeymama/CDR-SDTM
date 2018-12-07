@@ -28,6 +28,7 @@ export class BusinessRuleConfigComponent implements OnInit {
   statusShowOptions = false;
   public drpSelected = false;
   userName = '';
+  results: any[];
   public matrixStudyTitles: any[];
   public therapeuticAreas: any[];
   public studyTitles: any[];
@@ -41,7 +42,7 @@ export class BusinessRuleConfigComponent implements OnInit {
        skip: 0,
        take: 50
    };
-
+   public sortable= false; 
    public editBizDataItem: Matrix;
    public isNew: any;
    private businessEditService: BusinessEditService;
@@ -72,7 +73,11 @@ export class BusinessRuleConfigComponent implements OnInit {
     this.configTypeImage = '../../../assets/images/BussRules.png';
     this.configTypeTitle = 'Business Rule Configuration';
          this.view = this.businessEditService.pipe(map(data => process(data, this.gridState)));
-
+         console.log("view: "+this.view.length);
+         if (this.view.length!=undefined){
+                  console.log("sortable ngOnit: "+this.sortable);
+                 this.sortable=true;
+         }
       //   this.businessEditService.read();
       this.businessEditService.fetchStudyTitles().subscribe(data => {
           this.studyTitles = data;
@@ -106,13 +111,19 @@ export class BusinessRuleConfigComponent implements OnInit {
             this.configTypeIcons.unshift( {"icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png","action":"job","inputParam":this.searchBRStudy});
             }
         }
+       this.sortable=true;
+       console.log("sortable in fetch template");
        this.businessEditService.read(searchBRStudy);
+       
      }
 
      public onStateChange(searchBRStudy, state: State) {
          this.gridState = state;
-
-         this.businessEditService.read(searchBRStudy);
+         console.log("sortable value: "+this.sortable);
+         if(this.sortable == true){
+         	this.businessEditService.read(searchBRStudy);
+         }
+         
      }
 
      addHandlerIconClick(data) {
@@ -236,6 +247,7 @@ export class BusinessRuleConfigComponent implements OnInit {
         if (this.configTypeIcons.length === 6) {
                  this.configTypeIcons.shift();
         }
+        this.sortable=false;
      }
 
      public getDomain(): String {
