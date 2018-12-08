@@ -112,7 +112,7 @@
 							</thead>
 							<tbody>
 								<tr *ngFor="let item of data">
-									<td><input type="checkbox" [checked]="isCheckboxSelected" [disabled]="item.jobDisabled =='Y'" (change)="onItemSelect(item)" /></td>
+									<td><input type="checkbox" [checked]="isCheckboxSelected && item.jobDisabled==='N'" [disabled]="item.jobDisabled =='Y'" (change)="onItemSelect(item)" /></td>
 									<td style="text-align: left;">{{item.domain}}</td>
 									<td>{{item.job_end_timestamp}}</td>
 									<td>{{item.job_status}}</td>
@@ -142,7 +142,7 @@
 										</a>						 
 											 </ng-template> <a *ngIf="item['isLive'] " type="button" style="width: 25px; height: 25px;">
 											<i class="fa fa-spinner fa-spin"></i> &nbsp;
-										</a> <a *ngIf="item.jobDisabled =='N'" type="button" 
+										</a> <a *ngIf="item.jobDisabled =='N' &&  !item.isLive" type="button" 
 										(click)="actionOnJobExecution(item,'Disable')"> <img src="../assets/images/Disable_Inactive.png"
 											 data-toggle="tooltip" alt="Disable" title="Click to disable the execution of this job" style="width: 23px; height: 23px;">
 											&nbsp;

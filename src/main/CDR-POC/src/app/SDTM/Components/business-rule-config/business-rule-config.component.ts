@@ -59,11 +59,12 @@ export class BusinessRuleConfigComponent implements OnInit {
   }
   public ngOnInit(): void {
       this.configTypeIcons = [
+        {"icontitle": "Data Lineage", "iconImageSrc": "assets/images/DataLineage.png","action":"lineage","inputParam":""},
         {"icontitle": "Import from Template or Library", "iconImageSrc": "assets/images/RightImage1.png",  "action":"import","inputParam":this.importTemplate},
         {"icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png", "action":"","inputParam":""},
         {"icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "action":"","inputParam":""},
-        {"icontitle": "Add Business Rule", "iconImageSrc": "assets/images/AddStudy.png","action":"add","inputParam":this.searchBRStudy},
-        {"icontitle": "Data Lineage", "iconImageSrc": "assets/images/BussRulesGrey.png","action":"lineage","inputParam":""}
+        {"icontitle": "Add Business Rule", "iconImageSrc": "assets/images/AddStudy.png","action":"add","inputParam":this.searchBRStudy}
+       
       ];
       this.navBarItems = [
         {"navBarTitle": "Home", "navBarLink": "/sdtmHome"},
@@ -73,11 +74,11 @@ export class BusinessRuleConfigComponent implements OnInit {
     this.configTypeImage = '../../../assets/images/BussRules.png';
     this.configTypeTitle = 'Business Rule Configuration';
          this.view = this.businessEditService.pipe(map(data => process(data, this.gridState)));
-         console.log("view: "+this.view.length);
+        /* console.log("view: "+this.view.length);
          if (this.view.length!=undefined){
                   console.log("sortable ngOnit: "+this.sortable);
                  this.sortable=true;
-         }
+         } */
       //   this.businessEditService.read();
       this.businessEditService.fetchStudyTitles().subscribe(data => {
           this.studyTitles = data;

@@ -76,7 +76,7 @@ export class JobExecutionComponent implements OnInit {
 
     this.configTypeIcons = [
       {"icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "":"","inputParam":""},
-      {"icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png", "action":"","inputParam":""},
+      //{"icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png", "action":"","inputParam":""},
       {"icontitle": "Refresh", "iconImageSrc": "assets/images/Refresh.png", "action":this.searchJob,"inputParam":this.selectedItems}
      
     ];

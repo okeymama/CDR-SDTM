@@ -139,17 +139,17 @@
                             [sort]="gridState.sort" [pageable]="true" (dataStateChange)="onStateChange(searchStudy, $event)"
                             (edit)="editHandler($event, searchStudy)" (remove)="removeHandler($event)" (add)="addHandler($event)"
                             style="width: 99.5%;" [sortable]="true"  [resizable]="true">
-                            <kendo-grid-column [width]="180" [style]="{'text-align':'center'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
+                            <kendo-grid-column [width]="180" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                             field="therapeuticArea" title="Therapeutic Area"></kendo-grid-column>
-                        <kendo-grid-column [width]="120" [style]="{'text-align':'center'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
+                        <kendo-grid-column [width]="120" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                             field="studyID" title="Study ID"></kendo-grid-column>
-                        <kendo-grid-column [width]="120" [style]="{'text-align':'center'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
+                        <kendo-grid-column [width]="120" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                             field="title" title="Study Title"></kendo-grid-column>
-                        <kendo-grid-column [width]="100" [style]="{'text-align':'center'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
+                        <kendo-grid-column [width]="100" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                             field="phase" title="Phase"></kendo-grid-column>
-                        <kendo-grid-column [width]="100" [style]="{'text-align':'center'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
+                        <kendo-grid-column [width]="100" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                             field="status" title="Status"></kendo-grid-column>
-                        <kendo-grid-column [width]="150" [style]="{'text-align':'center'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
+                        <kendo-grid-column [width]="150" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                             field="source" title="Source"></kendo-grid-column>
                         <kendo-grid-command-column [style]="{'text-align':'center'}" [width]="150" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                             title="Actions">
@@ -158,10 +158,10 @@
                               <button kendoGridRemoveCommand style="font-family: Open Sans Regular;font-size: 12px;"><b>Delete</b></button>
                           </ng-template>-->
                                 <ng-template kendoGridCellTemplate let-dataItem>
-                                    <button kendoGridEditCommand [look]="outline">
+                                    <button kendoGridEditCommand [look]="outline" title="Edit Study">
                                         <span class="k-icon k-i-pencil"></span>
                                     </button>
-                                    <button kendoGridRemoveCommand>
+                                    <button kendoGridRemoveCommand title="Delete Study">
                                         <span class="k-icon k-i-trash"></span>
                                     </button>
                                     <button class="k-button k-grid-edit-command">

@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity(name="Job_Run_Statistics")
 @Table(name="Job_Run_Statistics")
 public class JobRunStatus {
@@ -27,9 +29,11 @@ public class JobRunStatus {
 	@Column(name="JOB_STATUS")
 	private String job_status;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name="JOB_START_TIMESTAMP")
 	private Timestamp job_start_timestamp;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name="JOB_END_TIMESTAMP")
 	private Timestamp job_end_timestamp;
 	
