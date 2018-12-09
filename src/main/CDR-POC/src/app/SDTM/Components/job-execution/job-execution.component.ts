@@ -272,7 +272,8 @@ export class JobExecutionComponent implements OnInit {
    		
     		let headers = new HttpHeaders();
         	headers.append('Content-Type', 'application/json');
- 			return this.http.post(`http://10.0.2.254?Study_name=${item.study}&domain_array=${item.domain}&Action=${action}`,{headers: headers})
+     //	return this.http.post(`http://10.0.2.254?Study_name=${item.study}&domain_array=${item.domain}&Action=${action}`,{headers: headers})
+     return this.http.post(`http://10.0.2.156?Study_name=${item.study}&domain_array=${item.domain}&Action=${action}`,{headers: headers})
        	.subscribe(data => {this.msg = data });
 		}	
  	  }

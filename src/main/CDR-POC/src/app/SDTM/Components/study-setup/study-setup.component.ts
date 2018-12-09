@@ -66,7 +66,7 @@ export class StudySetupComponent implements OnInit {
        
       ];
       this.navBarItems = [
-        {"navBarTitle": "Home", "navBarLink": "/sdtmHome"},
+        {"navBarTitle": "Home", "navBarLink": "sdtmHome"},
         {"navBarTitle": "Study Configuration", "navBarLink": "studySetup"},
         {"navBarTitle": "Business Rule Configuration", "navBarLink": "businessRules"},
         {"navBarTitle": "Job Execution", "navBarLink": "jobExecution"}

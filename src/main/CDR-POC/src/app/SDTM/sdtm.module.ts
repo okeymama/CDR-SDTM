@@ -21,6 +21,7 @@ import { StudySetupComponent } from './Components/study-setup/study-setup.compon
 import { StudySetupEditComponent } from './Components/study-setup-edit/study-setup-edit.component';
 import { SdtmHomeComponent } from './Components/sdtm-home/sdtm-home.component';
 import { AppPropertiesComponent } from './Components/app-properties/app-properties.component';
+import { SdtmComponent } from './Components/sdtm/sdtm.component';
 
 @NgModule({
   imports: [
@@ -47,7 +48,8 @@ import { AppPropertiesComponent } from './Components/app-properties/app-properti
     StudySetupComponent,
     StudySetupEditComponent,
     SdtmHomeComponent,
-    AppPropertiesComponent
+    AppPropertiesComponent,
+    SdtmComponent
   ],
   exports: [],
  providers: [

@@ -14,30 +14,29 @@ import { SdtmHomeComponent } from './SDTM/Components/sdtm-home/sdtm-home.compone
 import { DataqualityHomeComponent } from './DataQuality/Components/dataquality-home/dataquality-home.component';
 import { DataQualityModule } from './DataQuality/data-quality.module';
 import { BusinessResolverService } from './SDTM/Services/business-resolver.service';
+import { SdtmComponent } from './SDTM/Components/sdtm/sdtm.component';
 
 
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   {
-    path: 'sdtmHome',
-    component: SdtmHomeComponent,
-
+    path: 'sdtm',
+    component: SdtmComponent,
     children: [
       {
-        path: 'sdtmHome',
+        path: '',
         component: SdtmHomeComponent
-
-      },
-      {
+    },
+{
         path: 'studySetup',
         component: StudySetupComponent
-
+    
       },
       {
         path: 'businessRules',
         component: BusinessRuleConfigComponent
-
+    
       },
       {
         path: 'businessRules/:studyTitle/:therapeuticArea',
@@ -45,20 +44,24 @@ const routes: Routes = [
         resolve: {
           reqDomains: BusinessResolverService
         }
-
+    
       },
       {
         path: 'jobExecution',
         component: JobExecutionComponent
-
+    
       },
       {
         path: 'jobExecution/:studyTitle',
         component: JobExecutionComponent
-
+    
       }
+       
+
     ]
   },
+
+
   {
     path: 'home',
     component: HomeComponent
