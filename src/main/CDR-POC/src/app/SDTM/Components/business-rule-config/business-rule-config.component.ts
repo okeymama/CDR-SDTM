@@ -131,7 +131,7 @@ export class BusinessRuleConfigComponent implements OnInit {
         
          if (!data.flag) return; 
          else if (data.flag === 'job') {
-            this.router.navigate(['/sdtmHome/jobExecution', this.searchBRStudy.brStudy]);
+            this.router.navigate(['/sdtm/jobExecution', this.searchBRStudy.brStudy]);
          } else if(data.flag === 'lineage'){
             window.open("https://portal.graphgist.org/", '_blank');
          }else {

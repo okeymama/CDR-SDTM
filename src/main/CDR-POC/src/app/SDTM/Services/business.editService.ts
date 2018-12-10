@@ -113,11 +113,11 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
                 let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
                 return this.http.delete(url, searchBRStudy);
         } else if (searchBRStudy === 'clear') {
-                return this.http.get<any[]>(`/api/CDR/matrix/fetchOrInsert/${searchBRStudy}/${searchBRStudy}/${searchBRStudy}`)
-                .pipe(map(res => <any[]>res));
+                params =  params.set('StudId', 'xxx');
+            return this.http.get<any[]>(`/api/CDR/matrix/search`, { params: params })
+            .pipe(map(res => <any[]>res));
         } else if (action === 'import') {
                 console.log(JSON.stringify(searchBRStudy)+"=aaa==searchBRStudy=="+searchBRStudy.study);
-                params =  params.set('domain', 'Invalid');
                 return this.http.get<any[]>(`/api/CDR/matrix/fetchOrInsert/${searchBRStudy.study}/${searchBRStudy.matrixStudy}/${searchBRStudy.domain}`)
                 .pipe(map(res => <any[]>res));
         } else {
