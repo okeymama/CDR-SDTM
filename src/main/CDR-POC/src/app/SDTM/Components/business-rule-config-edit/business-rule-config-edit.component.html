@@ -115,6 +115,9 @@
   </form>
   <form name="form"  [formGroup]="editBusinessForm" novalidate  *ngIf="(isNew=='import')">
   <div class="container" style="background-color: white;">
+          
+    <div *ngIf="opened" style="color : #f31700;font-size:10px;font-family: Open Sans;">{{errorMsg}}</div>
+        
       <div class="row">
           <div class="col-25">
             <label style="padding-bottom: 0px;" for="I want to create a new set of rules for">I want to create a new set of rules for:</label>

@@ -1,9 +1,7 @@
 package com.cdr.sdtm.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -192,6 +190,11 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 		 _matrix.setBack_transformation_logic(getTransformationLogic(pathToSdtmMatrix.getTransformation_type(),pathToSdtmMatrix.getTransformation_logic()));
 		 }
 		return sdtmMatrixRepository.save(_matrix);
+	}
+
+	@Override
+	public int deleteMatricesByStudyandDomain(String study, String domain) {
+		return sdtmMatrixRepository.deleteMatricesByStudyandDomain(study, domain); 
 	}
 
 
