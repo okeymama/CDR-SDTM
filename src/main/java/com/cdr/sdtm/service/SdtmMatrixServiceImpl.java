@@ -194,5 +194,10 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 		return sdtmMatrixRepository.save(_matrix);
 	}
 
+	@Override
+	public int deleteMatricesByStudyandDomain(String study, String domain) {
+		return sdtmMatrixRepository.deleteMatricesByStudyandDomain(study, domain);
+	}
+
 
 }

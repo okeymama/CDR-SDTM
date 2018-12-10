@@ -145,6 +145,19 @@ public class SdtmMatrixController {
 		return domains;
 	}
 
+	@GetMapping("/matrix/checkOverride/{newStudy}/{study}/{domains}")
+	public ResponseEntity<List<String>> checkForDomains(@PathVariable String newStudy, @PathVariable String study, @PathVariable List<String> domains) {
+		List<String> existingDomains = new ArrayList<String>();
+		List<PathToSdtmMatrix> matrices = null;
+		for(String domain : domains) {
+			matrices = sdtmMatrixService.findByStudyAndDomain(newStudy,domain);
+				if(matrices != null && matrices.size() > 0) {
+					existingDomains.add(domain);
+				} 
+		}
+		return new ResponseEntity<>(existingDomains, HttpStatus.OK);
+	}
+	
 	
 	@GetMapping("/matrix/fetchOrInsert/{newStudy}/{study}/{domains}")
 	public List<PathToSdtmMatrix> importData(@PathVariable String newStudy, @PathVariable String study, @PathVariable List<String> domains) {
@@ -152,11 +165,14 @@ public class SdtmMatrixController {
 		List<PathToSdtmMatrix> allMatrices = new ArrayList<PathToSdtmMatrix>();
 		PathToSdtmMatrix matrix = null;
 		
-		for(String domain : domains) {
+		for(String domain : domains) { 
 				matrices = sdtmMatrixService.findByStudyAndDomain(newStudy,domain);
 					if(matrices != null && matrices.size() > 0) {
-						   allMatrices.addAll(matrices);
-					} else {
+						   int deleted = sdtmMatrixService.deleteMatricesByStudyandDomain(newStudy, domain);
+						   LOGGER.info("Business rules deleted for study " + newStudy + " and domain " + domain + ". Deleted entries:" + deleted);
+						   matrices = null;
+						   //allMatrices.addAll(matrices);
+					} //else {
 							matrices = sdtmMatrixService.findByStudyAndDomain(study,domain);
 							if(matrices != null && matrices.size() > 0) {
 									insertMatrices = new ArrayList<PathToSdtmMatrix>();
@@ -182,7 +198,7 @@ public class SdtmMatrixController {
 									}
 									allMatrices.addAll(sdtmMatrixService.saveMatrixForDomain(insertMatrices));
 							}
-				   }
+				  // }
 		}
 		return allMatrices;
 	}
