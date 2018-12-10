@@ -4,11 +4,38 @@
     <span *ngIf="(isNew=='edit')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Edit Business Rule</b></span>
     <span *ngIf="(isNew=='import')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Import Business Rules</b></span>
     <span *ngIf="(isNew=='delete')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Confirm Delete</b></span>  
+    <span *ngIf="(isNew=='lineage')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Data Lineage</b></span>  
   </kendo-dialog-titlebar> 
  <!-- <kendo-dialog-titlebar style="background-color : white;border-radius: 30px 30px 0 0;padding: 5px;" *ngIf="(isNew=='delete')">
     <b style="color : black;font-size: 14px;font-family: Open Sans;">Confirm Delete</b>
   </kendo-dialog-titlebar> -->
-  
+  <form novalidate *ngIf="(isNew=='lineage')">
+      <div class="container" style="background-color: white;" >
+   <carousel>
+      <slide>
+        <img src="../assets/images/1.PNG" alt="first slide">
+      </slide>
+      <slide>
+        <img src="../assets/images/2.PNG" alt="second slide">
+      </slide>
+      <slide>
+        <img src="../assets/images/3.PNG" alt="third slide">
+      </slide>
+      <slide>
+          <img src="../assets/images/4.PNG" alt="third slide">
+      </slide>
+      <slide>
+            <img src="../assets/images/5.PNG" alt="third slide">
+      </slide>
+      <slide>
+          <img src="../assets/images/6.PNG" alt="third slide">
+      </slide>
+      <slide>
+          <img src="../assets/images/7.PNG" alt="third slide" style="width: 50%">
+      </slide>
+      </carousel>
+      </div>
+    </form>
     <form novalidate [formGroup]="editBusinessForm" *ngIf="(isNew=='add' || isNew=='edit')">
       <div class="container" style="background-color: white" >
      <!-- <div class="row">

@@ -12,6 +12,10 @@ input[type=text], select, textarea {
     font-family: Open Sans;
 }
 
+img {
+    width: 50%;
+}
+
 label {
     padding: 12px 12px 12px 0;
     display: inline-block;

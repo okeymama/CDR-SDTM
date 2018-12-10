@@ -59,7 +59,7 @@ export class BusinessRuleConfigComponent implements OnInit {
   }
   public ngOnInit(): void {
       this.configTypeIcons = [
-        {"icontitle": "Data Lineage", "iconImageSrc": "assets/images/DataLineage.png","action":"lineage","inputParam":""},
+        {"icontitle": "Data Lineage", "iconImageSrc": "assets/images/DataLineage.png","action":"lineage","inputParam":this.searchBRStudy},
         {"icontitle": "Import from Template or Library", "iconImageSrc": "assets/images/RightImage1.png",  "action":"import","inputParam":this.importTemplate},
         {"icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png", "action":"","inputParam":""},
         {"icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "action":"","inputParam":""},
@@ -132,9 +132,10 @@ export class BusinessRuleConfigComponent implements OnInit {
          if (!data.flag) return; 
          else if (data.flag === 'job') {
             this.router.navigate(['/sdtm/jobExecution', this.searchBRStudy.brStudy]);
-         } else if(data.flag === 'lineage'){
-            window.open("https://portal.graphgist.org/", '_blank');
-         }else {
+         } else if (data.flag === 'lineage'){
+            // window.open("https://portal.graphgist.org/", '_blank');
+            this.addHandler(data.flag, data.inputParam);
+         } else {
              this.addHandler(data.flag, data.inputParam);
          }
     }
