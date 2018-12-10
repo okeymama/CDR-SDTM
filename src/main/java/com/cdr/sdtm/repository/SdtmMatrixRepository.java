@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cdr.sdtm.model.PathToSdtmMatrix;
 
 public interface SdtmMatrixRepository extends JpaRepository<PathToSdtmMatrix, Long>{
-	
+	 
 	List<PathToSdtmMatrix> findByStudyAndDomain(String study, String domain);
 	
 	@Query(nativeQuery=true,value="select distinct Study_Title from path_to_sdtm_matrix where Study_Title is not null order by Study_Title asc")

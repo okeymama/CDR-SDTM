@@ -1,7 +1,6 @@
 package com.cdr.sdtm.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -171,7 +170,7 @@ public class SdtmMatrixController {
 						   int deleted = sdtmMatrixService.deleteMatricesByStudyandDomain(newStudy, domain);
 						   LOGGER.info("Business rules deleted for study " + newStudy + " and domain " + domain + ". Deleted entries:" + deleted);
 						   matrices = null;
-						   //allMatrices.addAll(matrices);
+						   //allMatrices.addAll(matrices); 
 					} //else {
 							matrices = sdtmMatrixService.findByStudyAndDomain(study,domain);
 							if(matrices != null && matrices.size() > 0) {

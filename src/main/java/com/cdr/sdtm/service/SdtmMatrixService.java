@@ -22,7 +22,7 @@ public interface SdtmMatrixService {
 
 	boolean deleteById(Long matrixId);
 	
-	int deleteMatricesByStudyandDomain(String study, String domain);
+	int deleteMatricesByStudyandDomain(String study, String domain); 
 	
 	List<Transformation> getTransTypes();
 	
