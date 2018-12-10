@@ -356,7 +356,7 @@ export class JobExecutionComponent implements OnInit {
     
     public therapeuticAreaDropdown(): void {
    
-        if (this.studyTitleDropdownSelected === false) {
+        if (this.therapeuticAreaDropdownSelected === false) {
           this.therapeuticAreaShowOptions = true;
           this.therapeuticAreaDropdownSelected = true;
         } else {
