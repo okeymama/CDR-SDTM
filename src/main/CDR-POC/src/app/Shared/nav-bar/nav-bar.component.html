@@ -3,11 +3,13 @@
   .nav-tabs.tab-color-blue > li.active > a, .nav-tabs.tab-color-blue > li.active > a:focus, .nav-tabs.tab-color-blue > li.active > a:hover {
     background: #eef0f3;
       color: black;
-      min-width: 70px;
-      text-align: center;
-      font-family: 'Open Sans Regular';
+    min-width: 145px;
+     /* text-align: center;
+      font-family: 'Open Sans Regular';*/
       border-top: 4px solid #074982;
   }
+
+
 
   .nav-tabs > li > a, .nav-tabs > li > a:focus {
  
@@ -21,9 +23,9 @@
 <div>
   <ul class="nav nav-tabs padding-6 tab-color-blue background-blue navigation"
     id="myTab4">
-    <li ><a data-toggle="tab"
+    <li><a data-toggle="tab"
       routerLink="/sdtm"
-      style="width: 70px;padding-left: 20px">Home</a>
+      style="padding-left: 20px">Home</a>
     </li>
     <li [routerLinkActive]="['active']"><a data-toggle="tab"
       routerLink="studySetup"
