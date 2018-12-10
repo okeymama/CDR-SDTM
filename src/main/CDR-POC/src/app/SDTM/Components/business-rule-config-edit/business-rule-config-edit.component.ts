@@ -23,6 +23,7 @@ export class BusinessRuleConfigEditComponent implements OnInit {
   public matrixStudyTitles: any[];
   public studyTitles: any[];
   public studyDomains: any[];
+  public selectedDomains: any[];
   public searchBRStudy: any = {};
   public transPlaceHolder = 'Enter Transformation Logic';
   private businessEditService: BusinessEditService;
@@ -34,6 +35,7 @@ export class BusinessRuleConfigEditComponent implements OnInit {
   public active = false;
   public opened: boolean = false;
   public errorMsg: string;
+  public override = false;
   public editBusinessForm: FormGroup = new FormGroup({
       'id': new FormControl(),
       'study': new FormControl(),
@@ -182,8 +184,37 @@ export class BusinessRuleConfigEditComponent implements OnInit {
   }
 
   public fetchTemplate(): void {
-    this.fetch.emit(this.editBusinessForm.value);
-    this.active = false;
+    const checkUrl = '/api/CDR/matrix/checkOverride';
+    const study = this.editBusinessForm.value.study;
+    const matrixStudy = this.editBusinessForm.value.matrixStudy;
+    let domains = [];
+    this.selectedDomains = this.editBusinessForm.value.importDomain;
+    for (let i = 0; i < this.selectedDomains.length; i++) {
+        domains.push(this.selectedDomains[i].domain);
+    }
+    const url = `${checkUrl}/${study}/${matrixStudy}/${domains}`;
+    this.http.get<any[]>(url).subscribe(res => {
+        if (res != null && res.length > 0 && !this.override) {
+            let commaDomains = [];
+            for (let i = 0; i < res.length; i++) {
+                for (let j = 0; j < this.studyDomains.length; j++) {
+                    if (res[i] === this.studyDomains[j].domain) {
+                        commaDomains.push(this.studyDomains[j].domainLabel);
+                        break;
+                    }
+                }
+              }
+            this.opened = true;
+            this.override = true;
+            this.errorMsg = 'Business rules have already been configured for`' +  study +
+            '` study for `' + commaDomains + '` domains. Do you want to override existing rules?(Cancel/Submit)';
+        } else {
+            this.fetch.emit(this.editBusinessForm.value);
+            this.active = false;
+            this.errorMsg = '';
+            this.studyDomains = [];
+        }
+    });
   }
 }
 

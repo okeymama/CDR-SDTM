@@ -89,10 +89,18 @@
             (remove)="removeHandler($event)"  [resizable]="true" (add)="addHandler('add',$event)" style="width: 99.5%;" [sortable]="sortable">
             <kendo-grid-column [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
               field="targetField" title="SDTM Variables"></kendo-grid-column>
+              <kendo-grid-column [width]="150" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
+              field="formLable" title="Source Form">
+              <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                {{dataItem.formLable}} ({{dataItem.formName}}) 
+              </ng-template>
+             </kendo-grid-column>
               <kendo-grid-column [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
-              field="sourceFile" title="Source Form"></kendo-grid-column>
-              <kendo-grid-column [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
-              field="sourceField" title="Source Variable"></kendo-grid-column>
+              field="sourceField" title="Source Variable">
+              <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                {{dataItem.sourceField}} {{(dataItem.sourceFile != null && dataItem.sourceFile != '') ? "("+(dataItem.sourceFile)+")" : ""}} 
+              </ng-template>
+             </kendo-grid-column>
               <kendo-grid-column [style]="{'text-align':'left'}" [width]="170" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
               field="transformation_type" title="Transformation Type"></kendo-grid-column>
             <kendo-grid-column [style]="{'text-align':'left'}" [width]="170" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
