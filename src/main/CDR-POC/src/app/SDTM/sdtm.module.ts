@@ -22,6 +22,7 @@ import { StudySetupEditComponent } from './Components/study-setup-edit/study-set
 import { SdtmHomeComponent } from './Components/sdtm-home/sdtm-home.component';
 import { AppPropertiesComponent } from './Components/app-properties/app-properties.component';
 import { SdtmComponent } from './Components/sdtm/sdtm.component';
+import { CarouselModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { SdtmComponent } from './Components/sdtm/sdtm.component';
     ReactiveFormsModule,
     RouterModule,
     SharedModule,
+    CarouselModule.forRoot()
    ],
    declarations: [
     BusinessRuleConfigComponent,
