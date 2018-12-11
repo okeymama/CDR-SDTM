@@ -11,9 +11,11 @@ import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 
 import com.cdr.sdtm.model.Domain;
+import com.cdr.sdtm.model.JobRunStatus;
 import com.cdr.sdtm.model.PathToSdtmMatrix;
 import com.cdr.sdtm.model.TherapeuticAreas;
 import com.cdr.sdtm.model.Transformation;
+import com.cdr.sdtm.repository.JobRunStatusRepository;
 import com.cdr.sdtm.repository.SdtmMatrixRepository;
 import com.cdr.sdtm.repository.TherapeuticRepository;
 import com.cdr.sdtm.repository.TransRepository;
@@ -23,6 +25,9 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 	
 	@Autowired
 	SdtmMatrixRepository sdtmMatrixRepository;
+	
+	@Autowired
+	JobRunStatusRepository jobRunStatusRepository;
 	
 	@Autowired
 	TransRepository transRepository;
@@ -42,6 +47,17 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 
 	@Override
 	public List<PathToSdtmMatrix> findByStudyAndDomain(String study, String domain) {
+		List<JobRunStatus> jobRunList = jobRunStatusRepository.findByStudyAndDomain(study, domain);
+		if(jobRunList.size() == 0) {
+			JobRunStatus jobRun = new JobRunStatus();
+			jobRun.setStudy(study);
+			jobRun.setDomain(domain);
+			jobRun.setJobDisabled("N");
+			jobRun.setMessage("Job Not Started");
+			jobRun.setJob_status("");
+			jobRunStatusRepository.save(jobRun);
+			
+		}
 		return sdtmMatrixRepository.findByStudyAndDomain(study, domain);
 	}
 

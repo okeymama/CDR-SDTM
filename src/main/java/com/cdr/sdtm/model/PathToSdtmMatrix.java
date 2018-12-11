@@ -7,8 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name="path_to_sdtm_matrix")
-@Table(name="path_to_sdtm_matrix")
+@Entity(name="path_to_sdtm_matrix_2")
+@Table(name="path_to_sdtm_matrix_2")
 public class PathToSdtmMatrix {
 	
 	@Id

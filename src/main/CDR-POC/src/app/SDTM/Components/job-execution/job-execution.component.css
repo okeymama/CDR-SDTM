@@ -7,8 +7,8 @@
     padding: 6px 11px;
     line-height: 1.42857143;
     vertical-align: top;
-    border-top: 1px solid #ddd;
-    text-align: centre;
+    border: 1px solid rgb(143, 137, 137);
+    text-align: left;
     font-family: Open Sans Regular;
     font-size: 12px;
     background-color: #074982;
@@ -18,8 +18,8 @@
     padding: 8px;
     line-height: 1.42857143;
     vertical-align: top;
-    border-top: 1px solid #ddd;
-    text-align: centre;
+    border: 1px solid rgb(136, 129, 129);
+    text-align: left;
     font-family: Open Sans Regular;
     font-size: 12px;
     background-color: white;
@@ -27,12 +27,12 @@
 }
 
 .table>tbody {
-    border: 1px solid;
+    border: 1px solid  rgb(114, 106, 106);
     border-color: #ddd;
 }
 
 th {
-    text-align: centre;
+    text-align: left;
 }
 body {
     font-family: "Lato", sans-serif;
