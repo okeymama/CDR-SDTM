@@ -23,6 +23,7 @@ import { SdtmHomeComponent } from './Components/sdtm-home/sdtm-home.component';
 import { AppPropertiesComponent } from './Components/app-properties/app-properties.component';
 import { SdtmComponent } from './Components/sdtm/sdtm.component';
 import { CarouselModule } from 'ngx-bootstrap';
+import { DataLineageComponent } from './Components/data-lineage/data-lineage.component';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { CarouselModule } from 'ngx-bootstrap';
     StudySetupEditComponent,
     SdtmHomeComponent,
     AppPropertiesComponent,
-    SdtmComponent
+    SdtmComponent,
+    DataLineageComponent
   ],
   exports: [],
  providers: [

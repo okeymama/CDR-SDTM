@@ -143,7 +143,8 @@ export class BusinessRuleConfigComponent implements OnInit {
             this.router.navigate(['/sdtm/jobExecution', this.searchBRStudy.brStudy]);
          } else if (data.flag === 'lineage'){
         // window.open("/dataLineage", '_blank');
-           this.addHandler(data.flag, data.inputParam);
+           // this.addHandler(data.flag, data.inputParam);
+           this.router.navigate(['/sdtm/dataLineage']);
          } else {
              this.addHandler(data.flag, data.inputParam);
          }

@@ -15,6 +15,7 @@ import { DataqualityHomeComponent } from './DataQuality/Components/dataquality-h
 import { DataQualityModule } from './DataQuality/data-quality.module';
 import { BusinessResolverService } from './SDTM/Services/business-resolver.service';
 import { SdtmComponent } from './SDTM/Components/sdtm/sdtm.component';
+import { DataLineageComponent } from './SDTM/Components/data-lineage/data-lineage.component';
 
 
 
@@ -55,6 +56,10 @@ const routes: Routes = [
         path: 'jobExecution/:studyTitle',
         component: JobExecutionComponent
     
+      },
+      {
+        path: 'dataLineage',
+        component: DataLineageComponent
       }
        
 
