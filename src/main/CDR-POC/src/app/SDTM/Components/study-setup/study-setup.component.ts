@@ -6,7 +6,7 @@ import { GridDataResult } from '@progress/kendo-angular-grid';
 import { State, process } from '@progress/kendo-data-query';
 import { map } from 'rxjs/operators/map';
 import { StudyDetails } from '../../Models';
-import { EditService, UserService } from '../../Services';
+import { EditService, UserService, BusinessEditService } from '../../Services';
 
 @Component({
   selector: 'study-setup',
@@ -33,6 +33,7 @@ export class StudySetupComponent implements OnInit {
     public isDelete: boolean;
     public searchStudy: any = {};
     private editService: EditService;
+    private businessEditService: BusinessEditService;
     paramId: string;
     therapeuticAreaDrpSelected: boolean = false;
     therapeuticAreasShowOptions: boolean = false;
@@ -49,12 +50,16 @@ export class StudySetupComponent implements OnInit {
     configTypeImage: string;
     configTypeTitle: string;
     navBarItems: Object[];
+    isImportFromStudy: boolean=false;
 
 
     constructor(private userService: UserService,
       private router: Router,
-      private route: ActivatedRoute, @Inject(EditService) editServiceFactory: any) {
+      private route: ActivatedRoute, @Inject(EditService) editServiceFactory: any,
+      @Inject(BusinessEditService) businessEditServiceFactory: any
+     ) {
         this.editService = editServiceFactory();
+        this.businessEditService = businessEditServiceFactory();
     }
 
     public ngOnInit(): void {
@@ -232,6 +237,7 @@ export class StudySetupComponent implements OnInit {
 
   public navigateBusinessImport(dataItem: any) {
       // this.router.navigate(['/sdtmHome/businessRules', {studyTitle: dataItem.title, therapeuticArea: dataItem.therapeuticArea}]);
+      this.businessEditService.setImportStudyMessage("true");
       this.router.navigate([`/sdtm/businessRules/${dataItem.title}/${dataItem.therapeuticArea.replace(new RegExp(/\//g), '-')}`]);
     }
 }

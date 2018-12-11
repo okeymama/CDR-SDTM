@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Headers, RequestOptions } from '@angular/http';
 import { tap } from 'rxjs/operators/tap';
 import { map } from 'rxjs/operators/map';
+import { Subject } from 'rxjs';
 
 const CREATE_ACTION = 'create';
 const UPDATE_ACTION = 'update';
@@ -20,6 +21,7 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
     private data: any[] = [];
     public searchBRStudy: any = {};
     private res: any[] = [];
+    private isImportFromStudy = new Subject<any>();
 
     public read(searchBRStudy) {
         /*if (this.data.length) {
@@ -130,4 +132,13 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
                 return this.http.get<any[]>(`/api/CDR/matrix/search`, { params: params })
                     .pipe(map(res => <any[]>res));
         }}
+
+        setImportStudyMessage(message: string) {
+            this.isImportFromStudy.next({ text: message });
+        }
+   
+     
+        getImportStudyMessage(): Observable<any> {
+            return this.isImportFromStudy.asObservable();
+        }
 }

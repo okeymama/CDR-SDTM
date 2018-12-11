@@ -36,6 +36,7 @@ export class BusinessRuleConfigComponent implements OnInit {
   public searchBRStudy: any = {};
   public importTemplate: any = {};
   public selectedDomains: any[];
+  public isImportFromStudy: string = "false";
   public view: Observable<GridDataResult>;
    public gridState: State = {
        sort: [],
@@ -89,12 +90,18 @@ export class BusinessRuleConfigComponent implements OnInit {
      /* this.businessEditService.fetchMatrixStudyTitles().subscribe(data => {
         this.matrixStudyTitles = data;
     });*/
+    this.businessEditService.getImportStudyMessage().subscribe(data => {
+        this.isImportFromStudy = data;
+    });
     const title = this.route.snapshot.paramMap.get('studyTitle');
     let therapeuticArea = this.route.snapshot.paramMap.get('therapeuticArea');
        if (title != null && therapeuticArea != null) {
         therapeuticArea = therapeuticArea.replace(new RegExp(/-/g), '/');
         this.studyDomains = this.route.snapshot.data['reqDomains'];
             if (this.studyDomains != null && this.studyDomains.length > 0) {
+                if(this.configTypeIcons.length === 5){
+                    this.configTypeIcons.unshift( {"icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png","action":"job","inputParam":this.searchBRStudy});
+                    }
                 this.searchBRStudy.brStudy = title;
                 this.searchBRStudy.brSdtmDomain = this.studyDomains[0].domain;
                 this.businessEditService.read(this.searchBRStudy);
@@ -133,8 +140,8 @@ export class BusinessRuleConfigComponent implements OnInit {
          else if (data.flag === 'job') {
             this.router.navigate(['/sdtm/jobExecution', this.searchBRStudy.brStudy]);
          } else if (data.flag === 'lineage'){
-            // window.open("https://portal.graphgist.org/", '_blank');
-            this.addHandler(data.flag, data.inputParam);
+        // window.open("/dataLineage", '_blank');
+           this.addHandler(data.flag, data.inputParam);
          } else {
              this.addHandler(data.flag, data.inputParam);
          }

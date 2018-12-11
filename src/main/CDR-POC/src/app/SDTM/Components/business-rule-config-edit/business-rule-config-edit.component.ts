@@ -20,6 +20,7 @@ import { Matrix } from '../../Models';
 })
 export class BusinessRuleConfigEditComponent implements OnInit {
 
+    public isImportFromStudy: boolean= false;
   public matrixStudyTitles: any[];
   public studyTitles: any[];
   public studyDomains: any[];
@@ -135,6 +136,8 @@ export class BusinessRuleConfigEditComponent implements OnInit {
       this.businessEditService.fetchMatrixStudyTitles().subscribe(data => {
         this.matrixStudyTitles = data;
     });
+
+   
   }
 
   public changePlaceholderAndValue(value: any) {
@@ -206,8 +209,8 @@ export class BusinessRuleConfigEditComponent implements OnInit {
               }
             this.opened = true;
             this.override = true;
-            this.errorMsg = 'Business rules have already been configured for`' +  study +
-            '` study for `' + commaDomains + '` domains. Do you want to override existing rules?(Cancel/Submit)';
+            this.errorMsg = 'Business rules have already been configured for '+commaDomains+' domains for '+ study +
+            ' study and clicking submit will replace these existing business rules. Please review and de-select any domains you do not want to override';
         } else {
             this.fetch.emit(this.editBusinessForm.value);
             this.active = false;
