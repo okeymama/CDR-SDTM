@@ -105,6 +105,8 @@ export class BusinessRuleConfigComponent implements OnInit {
                 this.searchBRStudy.brStudy = title;
                 this.searchBRStudy.brSdtmDomain = this.studyDomains[0].domain;
                 this.businessEditService.read(this.searchBRStudy);
+                this.sortable=true;
+                
             } else {
              this.importTemplate.brStudy = title;
              this.importTemplate.therapeuticArea = therapeuticArea;
