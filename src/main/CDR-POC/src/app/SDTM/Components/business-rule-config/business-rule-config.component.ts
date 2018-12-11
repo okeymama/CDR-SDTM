@@ -209,6 +209,7 @@ export class BusinessRuleConfigComponent implements OnInit {
             this.studyDomains = data;
         });
         this.editBizDataItem = undefined;
+        this.sortable = true;
       }
 
      filterDomains(studyTitle: any) {
