@@ -1,5 +1,4 @@
 <div class="main-container ace-save-state" id="main-container">
-
   <header-icons [configTypeImage]="configTypeImage" [configTypeTitle]="configTypeTitle" [configTypeIcons]="configTypeIcons" [studyInHeader]="getStudy()" [domainInHeader]="searchBRStudy.brSdtmDomain"
     (iconClick)="addHandlerIconClick($event)"></header-icons>
   <div class="panel panel-default" style="height:410px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
@@ -92,7 +91,7 @@
               <kendo-grid-column [width]="150" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
               field="formLable" title="Source Form">
               <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                {{dataItem.formLable}} ({{dataItem.formName}}) 
+                {{dataItem.formLable}} {{(dataItem.formName != null && dataItem.formName != '') ? "("+(dataItem.formName)+")" : ""}}
               </ng-template>
              </kendo-grid-column>
               <kendo-grid-column [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"

@@ -23,7 +23,7 @@ export class BusinessRuleConfigEditComponent implements OnInit {
     public isImportFromStudy: boolean= false;
   public matrixStudyTitles: any[];
   public studyTitles: any[];
-  public studyDomains: any[];
+  public studyPopDomains: any[];
   public selectedDomains: any[];
   public searchBRStudy: any = {};
   public transPlaceHolder = 'Enter Transformation Logic';
@@ -109,7 +109,7 @@ export class BusinessRuleConfigEditComponent implements OnInit {
   private closeForm(): void {
       this.active = false;
       this.cancel.emit();
-      this.studyDomains = [];
+      this.studyPopDomains = [];
       this.transPlaceHolder = 'Enter Transformation';
   }
 
@@ -178,10 +178,10 @@ export class BusinessRuleConfigEditComponent implements OnInit {
 
   filterDomains(studyTitle: any) {
       if (studyTitle === 'undefined') {
-         this.studyDomains = [];
+         this.studyPopDomains = [];
       } else {
          this.businessEditService.fetchDomainsByStudy(studyTitle).subscribe(data => {
-             this.studyDomains = data;
+             this.studyPopDomains = data;
          });
       }
   }
@@ -200,9 +200,9 @@ export class BusinessRuleConfigEditComponent implements OnInit {
         if (res != null && res.length > 0 && !this.override) {
             let commaDomains = [];
             for (let i = 0; i < res.length; i++) {
-                for (let j = 0; j < this.studyDomains.length; j++) {
-                    if (res[i] === this.studyDomains[j].domain) {
-                        commaDomains.push(this.studyDomains[j].domainLabel);
+                for (let j = 0; j < this.studyPopDomains.length; j++) {
+                    if (res[i] === this.studyPopDomains[j].domain) {
+                        commaDomains.push(this.studyPopDomains[j].domainLabel);
                         break;
                     }
                 }
@@ -215,7 +215,7 @@ export class BusinessRuleConfigEditComponent implements OnInit {
             this.fetch.emit(this.editBusinessForm.value);
             this.active = false;
             this.errorMsg = '';
-            this.studyDomains = [];
+            this.studyPopDomains = [];
         }
     });
   }

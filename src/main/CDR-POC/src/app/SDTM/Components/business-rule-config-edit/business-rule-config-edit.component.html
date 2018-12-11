@@ -178,7 +178,7 @@
                   <option *ngFor="let domain of studyDomains" value="{{domain}}">{{domain}}</option>
                 </select>-->
                 <kendo-multiselect style="width: 80%;height: 30px;font-size:11px;font-family: Open Sans;border-color: #ccc"
-                  [data]="studyDomains"
+                  [data]="studyPopDomains"
                   formControlName="importDomain"
                   [autoClose]="true"
                   placeholder="Domain"
