@@ -222,6 +222,7 @@ export class BusinessRuleConfigEditComponent implements OnInit {
             this.errorMsg = '';
             this.defaultMessage = '';
             this.studyPopDomains = [];
+            this.override = false;
         }
     });
   }
