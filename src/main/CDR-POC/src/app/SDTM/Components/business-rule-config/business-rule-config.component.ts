@@ -108,8 +108,7 @@ export class BusinessRuleConfigComponent implements OnInit {
             } else {
              this.importTemplate.brStudy = title;
              this.importTemplate.therapeuticArea = therapeuticArea;
-             this.importTemplate.defaultMessage = 'There are no business rules configured for this study.'
-             + 'Please select a template below to get started.';
+             this.importTemplate.defaultMessage = 'Business rules have not been configured for this study. Please select a template below to get started';
              this.addHandler('import', this.importTemplate);
            }
        }
@@ -137,9 +136,9 @@ export class BusinessRuleConfigComponent implements OnInit {
          else if (data.flag === 'job') {
             this.router.navigate(['/sdtm/jobExecution', this.searchBRStudy.brStudy]);
          } else if (data.flag === 'lineage') {
-        // window.open("/dataLineage", '_blank');
+        window.open("http://http://ec2-52-90-18-39.compute-1.amazonaws.com:8080/Lineage.html", '_blank');
            // this.addHandler(data.flag, data.inputParam);
-           this.router.navigate(['/sdtm/dataLineage']);
+          // this.router.navigate(['/sdtm/dataLineage']);
          } else {
              this.addHandler(data.flag, this.searchBRStudy);
          }
