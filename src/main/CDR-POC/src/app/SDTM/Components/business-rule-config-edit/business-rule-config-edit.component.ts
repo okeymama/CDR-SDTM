@@ -36,6 +36,7 @@ export class BusinessRuleConfigEditComponent implements OnInit {
   public active = false;
   public opened: boolean = false;
   public errorMsg: string;
+  public defaultMessage = '';
   public override = false;
   public editBusinessForm: FormGroup = new FormGroup({
       'id': new FormControl(),
@@ -50,7 +51,8 @@ export class BusinessRuleConfigEditComponent implements OnInit {
       'sourceField': new FormControl(),
       'joinLogic': new FormControl(),
       'transformation_type': new FormControl(),
-      'transformation_logic': new FormControl()
+      'transformation_logic': new FormControl(),
+      'defaultMessage': new FormControl()
   });
 
   constructor(private http: HttpClient, @Inject(BusinessEditService) businessEditServiceFactory: any) {
@@ -68,7 +70,9 @@ export class BusinessRuleConfigEditComponent implements OnInit {
       if (this.active && matrix.sourceFile) {
           this.onSelect(matrix.sourceFile);
       }
-
+      if (this.active && matrix.defaultMessage) {
+         this.defaultMessage = matrix.defaultMessage;
+    }
   }
 
   @Output() cancel: EventEmitter<any> = new EventEmitter();
@@ -103,14 +107,15 @@ export class BusinessRuleConfigEditComponent implements OnInit {
   public onCancel(e): void {
       e.preventDefault();
       this.closeForm();
-      this.errorMsg = '';
   }
 
   private closeForm(): void {
-      this.active = false;
-      this.cancel.emit();
+      this.errorMsg = '';
+      this.defaultMessage = '';
       this.studyPopDomains = [];
       this.transPlaceHolder = 'Enter Transformation';
+      this.active = false;
+      this.cancel.emit();
   }
 
   public onDelete(e): void {
@@ -136,8 +141,6 @@ export class BusinessRuleConfigEditComponent implements OnInit {
       this.businessEditService.fetchMatrixStudyTitles().subscribe(data => {
         this.matrixStudyTitles = data;
     });
-
-   
   }
 
   public changePlaceholderAndValue(value: any) {
@@ -177,12 +180,11 @@ export class BusinessRuleConfigEditComponent implements OnInit {
   }
 
   filterDomains(studyTitle: any) {
-      if (studyTitle === 'undefined') {
-         this.studyPopDomains = [];
-      } else {
-         this.businessEditService.fetchDomainsByStudy(studyTitle).subscribe(data => {
-             this.studyPopDomains = data;
-         });
+    this.studyPopDomains = [];
+      if (studyTitle !== 'undefined') {
+        this.businessEditService.fetchDomainsByStudy(studyTitle).subscribe(data => {
+            this.studyPopDomains = data;
+        });
       }
   }
 
@@ -197,7 +199,10 @@ export class BusinessRuleConfigEditComponent implements OnInit {
     }
     const url = `${checkUrl}/${study}/${matrixStudy}/${domains}`;
     this.http.get<any[]>(url).subscribe(res => {
-        if (res != null && res.length > 0 && !this.override) {
+        if (study != null && matrixStudy != null && study === matrixStudy) {
+            this.opened = true;
+            this.errorMsg = 'New study and template study should not be the same. Please select another template';
+        } else if (res != null && res.length > 0 && !this.override) {
             let commaDomains = [];
             for (let i = 0; i < res.length; i++) {
                 for (let j = 0; j < this.studyPopDomains.length; j++) {
@@ -211,10 +216,11 @@ export class BusinessRuleConfigEditComponent implements OnInit {
             this.override = true;
             this.errorMsg = 'Business rules have already been configured for '+commaDomains+' domains for '+ study +
             ' study and clicking submit will replace these existing business rules. Please review and de-select any domains you do not want to override';
-        } else {
+        }  else {
             this.fetch.emit(this.editBusinessForm.value);
             this.active = false;
             this.errorMsg = '';
+            this.defaultMessage = '';
             this.studyPopDomains = [];
         }
     });

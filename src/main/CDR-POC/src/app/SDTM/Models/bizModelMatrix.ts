@@ -12,4 +12,5 @@ export class Matrix {
     public transformation_type: string;
     public transformation_logic: string;
     public id: number;
+    public defaultMessage: string;
 }

@@ -65,7 +65,6 @@ export class BusinessRuleConfigComponent implements OnInit {
         {"icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png", "action":"","inputParam":""},
         {"icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "action":"","inputParam":""},
         {"icontitle": "Add Business Rule", "iconImageSrc": "assets/images/AddStudy.png","action":"add","inputParam":this.searchBRStudy}
-       
       ];
       this.navBarItems = [
         {"navBarTitle": "Home", "navBarLink": "/sdtmHome"},
@@ -105,11 +104,12 @@ export class BusinessRuleConfigComponent implements OnInit {
                 this.searchBRStudy.brStudy = title;
                 this.searchBRStudy.brSdtmDomain = this.studyDomains[0].domain;
                 this.businessEditService.read(this.searchBRStudy);
-                this.sortable=true;
-                
+                this.sortable = true;
             } else {
              this.importTemplate.brStudy = title;
              this.importTemplate.therapeuticArea = therapeuticArea;
+             this.importTemplate.defaultMessage = 'There are no business rules configured for this study.'
+             + 'Please select a template below to get started.';
              this.addHandler('import', this.importTemplate);
            }
        }
@@ -117,36 +117,31 @@ export class BusinessRuleConfigComponent implements OnInit {
 
      public fetchTemplate(searchBRStudy): void {
         if (searchBRStudy.brSdtmDomain) {
-           if(this.configTypeIcons.length === 5){
+           if (this.configTypeIcons.length === 5) {
             this.configTypeIcons.unshift( {"icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png","action":"job","inputParam":this.searchBRStudy});
             }
         }
-       this.sortable=true;
-       console.log("sortable in fetch template");
+       this.sortable = true;
        this.businessEditService.read(searchBRStudy);
-       
      }
 
      public onStateChange(searchBRStudy, state: State) {
          this.gridState = state;
-         console.log("sortable value: "+this.sortable);
-         if(this.sortable == true){
-         	this.businessEditService.read(searchBRStudy);
+         if (this.sortable === true) {
+            this.businessEditService.read(searchBRStudy);
          }
-         
      }
 
      addHandlerIconClick(data) {
-        
          if (!data.flag) return; 
          else if (data.flag === 'job') {
             this.router.navigate(['/sdtm/jobExecution', this.searchBRStudy.brStudy]);
-         } else if (data.flag === 'lineage'){
+         } else if (data.flag === 'lineage') {
         // window.open("/dataLineage", '_blank');
            // this.addHandler(data.flag, data.inputParam);
            this.router.navigate(['/sdtm/dataLineage']);
          } else {
-             this.addHandler(data.flag, data.inputParam);
+             this.addHandler(data.flag, this.searchBRStudy);
          }
     }
      public addHandler(flag: any, searchBRStudy: any) {
@@ -155,6 +150,9 @@ export class BusinessRuleConfigComponent implements OnInit {
          if (flag === 'add') {
          this.editBizDataItem.domain = searchBRStudy.brSdtmDomain;
          }
+         if (flag === 'import') {
+            this.editBizDataItem.defaultMessage = searchBRStudy.defaultMessage;
+        }
          this.isNew = flag;
      }
 
@@ -165,11 +163,11 @@ export class BusinessRuleConfigComponent implements OnInit {
 
      public cancelHandler() {
          this.editBizDataItem = undefined;
+         this.importTemplate = {};
      }
 
      public saveHandler(template: Matrix) {
          this.businessEditService.save(template, this.searchBRStudy, this.isNew);
-
          this.editBizDataItem = undefined;
      }
 
@@ -259,7 +257,7 @@ export class BusinessRuleConfigComponent implements OnInit {
         if (this.configTypeIcons.length === 6) {
                  this.configTypeIcons.shift();
         }
-        this.sortable=false;
+        this.sortable = false;
      }
 
      public getDomain(): String {
