@@ -40,7 +40,7 @@ public class JobRunStatus {
 	@Column(name="MESSAGE")
 	private String message;
 	
-	@Column(name="JOB_DISABLED")
+	@Column(name="status")
 	private String jobDisabled;
 
 	
