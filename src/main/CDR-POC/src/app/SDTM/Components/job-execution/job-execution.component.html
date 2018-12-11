@@ -16,7 +16,7 @@
 		<div *ngIf="data?.length>0" style="margin-top: 5px">
 			<!-- class="pull-right" style="margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;"> -->
 
-			<a type="button" (click)="runForAllSelectedDomains()"> <img *ngIf="!(allDomainsLive) || (allDomainsLive && jobStatus == 'job completed')"
+			<a type="button" (click)="runForAllSelectedDomains()"> <img *ngIf="!(allDomainsLive) || (allDomainsLive && jobStatus == 'Job is completed')"
 				 src="../assets/images/Run.png" alt="Run All Selected" data-toggle="tooltip" title="Run All Selected" style="width: 25px; height: 25px; margin-left: 1135px">
 			</a> <a *ngIf="allDomainsLive" style="width: 25px; height: 25px;"> <i class="fa fa-spinner fa-spin " style="margin-left: 1135px"></i>
 
