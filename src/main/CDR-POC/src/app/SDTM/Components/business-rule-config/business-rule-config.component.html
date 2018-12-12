@@ -91,14 +91,14 @@
               <div *ngIf="kendoOneShow">
               <kendo-grid [data]="view | async" [height]="150" [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
               [pageable]="true" (dataStateChange)="onStateChange(searchBRStudy, $event)" (edit)="editHandler($event, searchBRStudy)"
-              (remove)="removeHandler($event)"  [resizable]="true" (add)="addHandler('add',$event)" style="width: 99.5%;" [sortable]="sortable">
-              <kendo-grid-column [width]="150" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
+              (remove)="removeHandler($event)"  [resizable]="true" (add)="addHandler('add',$event)" style="width: 60%;" [sortable]="sortable">
+              <kendo-grid-column [width]="100" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                 field="domainLabel" title="SDTM Domain">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                   {{dataItem.domainLabel}} {{(dataItem.domain != null && dataItem.domain != '') ? "("+(dataItem.domain)+")" : ""}}
                 </ng-template>
                </kendo-grid-column> 
-              <kendo-grid-column [width]="150" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
+              <kendo-grid-column [width]="100" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                 field="formLable" title="Source Form">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                   {{dataItem.formLable}} {{(dataItem.formName != null && dataItem.formName != '') ? "("+(dataItem.formName)+")" : ""}}
@@ -119,7 +119,7 @@
                 <b>Variable Level Transformation</b>
               </div>
               <div *ngIf="kendoTwoShow"> 
-            <kendo-grid [data]="view | async" [height]="150" [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
+            <kendo-grid [data]="view | async" [height]="300" [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
             [pageable]="true" (dataStateChange)="onStateChange(searchBRStudy, $event)" (edit)="editHandler($event, searchBRStudy)"
             (remove)="removeHandler($event)"  [resizable]="true" (add)="addHandler('add',$event)" style="width: 99.5%;" [sortable]="sortable">
             <kendo-grid-column [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"

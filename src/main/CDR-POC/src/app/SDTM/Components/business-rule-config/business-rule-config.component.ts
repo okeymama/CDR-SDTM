@@ -26,7 +26,7 @@ export class BusinessRuleConfigComponent implements OnInit {
   phaseShowOptions = false;
   statusDrpSelected = false;
   statusShowOptions = false;
-  public kendoOneShow = true;
+  public kendoOneShow = false;
   public kendoTwoShow = true;
   public drpSelected = false;
   userName = '';
@@ -62,7 +62,7 @@ export class BusinessRuleConfigComponent implements OnInit {
   }
   public ngOnInit(): void {
       this.configTypeIcons = [
-        {"icontitle": "Data Lineage", "iconImageSrc": "assets/images/DataLineage.png","action":"lineage","inputParam":this.searchBRStudy},
+       
         {"icontitle": "Import from Template or Library", "iconImageSrc": "assets/images/RightImage1.png",  "action":"import","inputParam":this.importTemplate},
         {"icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png", "action":"","inputParam":""},
         {"icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "action":"","inputParam":""},
@@ -96,11 +96,18 @@ export class BusinessRuleConfigComponent implements OnInit {
     });
     const title = this.route.snapshot.paramMap.get('studyTitle');
     let therapeuticArea = this.route.snapshot.paramMap.get('therapeuticArea');
+    let domain = this.route.snapshot.paramMap.get('domain');
+    if(domain){
+        this.searchBRStudy.brStudy = title;
+        this.searchBRStudy.brSdtmDomain = domain;
+        this.businessEditService.read(this.searchBRStudy);
+    }
        if (title != null && therapeuticArea != null) {
         therapeuticArea = therapeuticArea.replace(new RegExp(/-/g), '/');
         this.studyDomains = this.route.snapshot.data['reqDomains'];
             if (this.studyDomains != null && this.studyDomains.length > 0) {
-                if(this.configTypeIcons.length === 5){
+                if(this.configTypeIcons.length === 4){
+                    this.configTypeIcons.unshift(  {"icontitle": "Data Lineage", "iconImageSrc": "assets/images/DataLineage.png","action":"lineage","inputParam":this.searchBRStudy});
                     this.configTypeIcons.unshift( {"icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png","action":"job","inputParam":this.searchBRStudy});
                     }
                 this.searchBRStudy.brStudy = title;
@@ -118,7 +125,8 @@ export class BusinessRuleConfigComponent implements OnInit {
 
      public fetchTemplate(searchBRStudy): void {
         if (searchBRStudy.brSdtmDomain) {
-           if (this.configTypeIcons.length === 5) {
+           if (this.configTypeIcons.length === 4) {
+            this.configTypeIcons.unshift(  {"icontitle": "Data Lineage", "iconImageSrc": "assets/images/DataLineage.png","action":"lineage","inputParam":this.searchBRStudy});
             this.configTypeIcons.unshift( {"icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png","action":"job","inputParam":this.searchBRStudy});
             }
         }
@@ -138,7 +146,7 @@ export class BusinessRuleConfigComponent implements OnInit {
          else if (data.flag === 'job') {
             this.router.navigate(['/sdtm/jobExecution', this.searchBRStudy.brStudy]);
          } else if (data.flag === 'lineage') {
-        window.open("http://http://ec2-52-90-18-39.compute-1.amazonaws.com:8080/Lineage.html", '_blank');
+        window.open("http://ec2-52-90-18-39.compute-1.amazonaws.com:8080/Lineage.html", '_blank');
            // this.addHandler(data.flag, data.inputParam);
           // this.router.navigate(['/sdtm/dataLineage']);
          } else {
@@ -258,6 +266,8 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.businessEditService.read('clear');
         if (this.configTypeIcons.length === 6) {
                  this.configTypeIcons.shift();
+                 this.configTypeIcons.shift();
+                 
         }
         this.sortable = false;
         this.kendoOneShow = true;

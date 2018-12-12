@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject  } from '@angular/core';
-import { Params,ActivatedRoute } from '@angular/router';
+import { Params,ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { GridDataResult } from '@progress/kendo-angular-grid';
@@ -23,7 +23,8 @@ export class JobExecutionComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private alertService: AlertService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ){ }
 
   public view: Observable<GridDataResult>;
@@ -375,10 +376,11 @@ export class JobExecutionComponent implements OnInit {
         console.log('Job Status:' + data);
       });
    }
-   /*
+   
     public navigateBusinessImport(dataItem: any) {
-      // this.router.navigate(['/sdtmHome/businessRules', {studyTitle: dataItem.title, therapeuticArea: dataItem.therapeuticArea}]);
-      this.businessEditService.setImportStudyMessage("true");
-      this.router.navigate([`/sdtm/businessRules/${dataItem.title}/${dataItem.therapeuticArea.replace(new RegExp(/\//g), '-')}`]);
-    }*/
+    
+        this.router.navigate([`/sdtm/businessRules/${dataItem.study}/${dataItem.domain}`]);
+     
+     
+    }
 }
