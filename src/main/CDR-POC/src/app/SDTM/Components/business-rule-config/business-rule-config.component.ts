@@ -26,6 +26,8 @@ export class BusinessRuleConfigComponent implements OnInit {
   phaseShowOptions = false;
   statusDrpSelected = false;
   statusShowOptions = false;
+  public kendoOneShow = true;
+  public kendoTwoShow = true;
   public drpSelected = false;
   userName = '';
   results: any[];
@@ -258,6 +260,8 @@ export class BusinessRuleConfigComponent implements OnInit {
                  this.configTypeIcons.shift();
         }
         this.sortable = false;
+        this.kendoOneShow = true;
+        this.kendoTwoShow = true;
      }
 
      public getDomain(): String {
@@ -320,5 +324,13 @@ export class BusinessRuleConfigComponent implements OnInit {
             return this.capitalizeFirstLetter(this.searchBRStudy.brStudy) + ' Study';
         }
      }
+
+     public KendoGridOne() {
+         this.kendoOneShow = !this.kendoOneShow;
+     }
+
+     public KendoGridTwo() {
+        this.kendoTwoShow = !this.kendoTwoShow;
+    }
  }
 
