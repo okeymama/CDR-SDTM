@@ -239,7 +239,7 @@ export class JobExecutionComponent implements OnInit {
     this.studyTitleDropdownSelected = false;
     this.therapeuticAreaDropdownSelected = false;
     this.studyInHeader = '';
-    
+    this.msg = '';
     
     //this.view = '';
     f.form.reset();
@@ -336,6 +336,7 @@ export class JobExecutionComponent implements OnInit {
     this.checkbox = false;
     this.selectedItemsList = [];
     this.searchJobExecution(searchJob,selectedItems);
+    this.msg = '';
 
   }
    

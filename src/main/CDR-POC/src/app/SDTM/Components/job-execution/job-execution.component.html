@@ -16,7 +16,7 @@
 		<div *ngIf="data?.length>0" style="margin-top: 5px">
 			<!-- class="pull-right" style="margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;"> -->
 
-			<a type="button" (click)="runForAllSelectedDomains()"> <img *ngIf="!(allDomainsLive) || (allDomainsLive && jobStatus == 'Job is completed')"
+			<a type="button" (click)="runForAllSelectedDomains()"> <img *ngIf="!(allDomainsLive) || (allDomainsLive && msg)"
 				 src="../assets/images/Run.png" alt="Run All Selected" data-toggle="tooltip" title="Run All Selected" style="width: 25px; height: 25px; margin-left: 1135px">
 			</a> <a *ngIf="allDomainsLive" style="width: 25px; height: 25px;"> <i class="fa fa-spinner fa-spin " style="margin-left: 1135px"></i>
 
@@ -131,7 +131,7 @@
 										</a> -->
 									   <a *ngIf="(item.jobDisabled =='N' && 
 												  (!item['isLive']
-										          || (item['isLive'] && item['jobStatus']=='job completed'))
+										          || (item['isLive'] && msg))
 										          );else jobDisabled"
 										type="button"
 										(click)="actionOnJobExecution(item,'Run')">
@@ -143,9 +143,11 @@
 									 	<a *ngIf = "item.jobDisabled =='Y' "> <img src="../assets/images/Run_Disable.png" alt="Run" data-toggle="tooltip" alt="Run"
 											 style="width: 20px; height: 20px;"> &nbsp; 
 										</a>						 
-											 </ng-template> <a *ngIf="item['isLive'] " type="button" style="width: 25px; height: 25px;">
+										</ng-template> 
+										<a *ngIf="item['isLive'] && !msg" type="button" style="width: 25px; height: 25px;">
 											<i class="fa fa-spinner fa-spin"></i> &nbsp;
-										</a> <a *ngIf="item.jobDisabled =='N' &&  !item.isLive" type="button" 
+										</a> 
+										<a *ngIf="item.jobDisabled =='N' &&  !item.isLive" type="button" 
 										(click)="actionOnJobExecution(item,'Disable')"> <img src="../assets/images/Disable_Inactive.png"
 											 data-toggle="tooltip" alt="Disable" title="Click to disable the execution of this job"
 											  style="width: 19px; height: 19px;">
