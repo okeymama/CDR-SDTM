@@ -54,7 +54,7 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 			jobRun.setDomain(domain);
 			jobRun.setJobDisabled("N");
 			
-			jobRun.setMessage("Not Started");
+			jobRun.setMessage("Not started");
 			jobRun.setJob_status("");
 			jobRunStatusRepository.save(jobRun);
 			
