@@ -319,7 +319,7 @@ export class JobExecutionComponent implements OnInit {
     
     let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
- 	return this.http.post(`http://10.0.2.254?Study_name=${this.searchJob.study}&domain_array=${this.selectedItemsList}&Action=Run`,{headers: headers})
+ 	return this.http.post(`http://10.0.2.156?Study_name=${this.searchJob.study}&domain_array=${this.selectedItemsList}&Action=Run`,{headers: headers})
        .subscribe(data => {this.msg = data });
  	
  }
@@ -374,4 +374,10 @@ export class JobExecutionComponent implements OnInit {
         console.log('Job Status:' + data);
       });
    }
+   /*
+    public navigateBusinessImport(dataItem: any) {
+      // this.router.navigate(['/sdtmHome/businessRules', {studyTitle: dataItem.title, therapeuticArea: dataItem.therapeuticArea}]);
+      this.businessEditService.setImportStudyMessage("true");
+      this.router.navigate([`/sdtm/businessRules/${dataItem.title}/${dataItem.therapeuticArea.replace(new RegExp(/\//g), '-')}`]);
+    }*/
 }

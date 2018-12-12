@@ -92,7 +92,7 @@
 		</div>
 		
 
-			<div class="main-content col-sm-8 col-md-8">
+			<div class="main-content col-sm-10 col-md-9">
 			<div class="main-content-inner">
 				<div class="page-content">
 					<div class="row" style="margin-top: -19px;">
@@ -111,13 +111,15 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let item of data">
-									<td><input type="checkbox" [checked]="isCheckboxSelected && item.jobDisabled==='N'" [disabled]="item.jobDisabled =='Y'" (change)="onItemSelect(item)" /></td>
+								<tr *ngFor="let item of data" ng-class-odd="'striped'">
+									<td style="text-align:center" ><input type="checkbox" 
+									[checked]="isCheckboxSelected && item.jobDisabled==='N'" 
+									[disabled]="item.jobDisabled =='Y'" (change)="onItemSelect(item)" /></td>
 									<td style="text-align: left;">{{item.domain}}</td>
 									<td>{{item.job_end_timestamp}}</td>
 									<td>{{item.job_status}}</td>
 									<td style="text-align: left;">{{item.message}}</td>
-									<td>
+									<td style="text-align:center">
 										<!--<a *ngIf="(!item['isLive']) 
 										          || (item['isLive'] && item['jobStatus']=='job completed')
 										          && (!item['isDisabled']) " type="button"
@@ -133,27 +135,38 @@
 										          );else jobDisabled"
 										type="button"
 										(click)="actionOnJobExecution(item,'Run')">
-											<img src="../assets/images/Run.png" alt="Run" data-toggle="tooltip" alt="Run" style="width: 25px; height: 25px;">
+											<img src="../assets/images/Run.png" alt="Run" 
+											data-toggle="tooltip" alt="Run" style="width: 20px; height: 20px;">
 											&nbsp;
 										</a>
 									   <ng-template #jobDisabled>
 									 	<a *ngIf = "item.jobDisabled =='Y' "> <img src="../assets/images/Run_Disable.png" alt="Run" data-toggle="tooltip" alt="Run"
-											 style="width: 25px; height: 25px;"> &nbsp; 
+											 style="width: 20px; height: 20px;"> &nbsp; 
 										</a>						 
 											 </ng-template> <a *ngIf="item['isLive'] " type="button" style="width: 25px; height: 25px;">
 											<i class="fa fa-spinner fa-spin"></i> &nbsp;
 										</a> <a *ngIf="item.jobDisabled =='N' &&  !item.isLive" type="button" 
 										(click)="actionOnJobExecution(item,'Disable')"> <img src="../assets/images/Disable_Inactive.png"
-											 data-toggle="tooltip" alt="Disable" title="Click to disable the execution of this job" style="width: 23px; height: 23px;">
+											 data-toggle="tooltip" alt="Disable" title="Click to disable the execution of this job"
+											  style="width: 19px; height: 19px;">
 											&nbsp;
 										</a> <a *ngIf="item.jobDisabled =='Y'" type="button" 
 											(click)="actionOnJobExecution(item,'Enable')" > <img src="../assets/images/Disable_Active.png"
-											 data-toggle="tooltip" alt="Enable" title="Job Execution is disabled.Click to re-enable" style="width: 23px; height: 23px;">
+											 data-toggle="tooltip" alt="Enable" title="Job Execution is disabled.Click to re-enable" 
+											 style="width: 19px; height: 19px;">
 											&nbsp;
 										</a>
-										<a *ngIf="item['isLive']" type="button" (click)="actionOnJobExecution(item,'Abort')"> <img src="../assets/images/Abort.png"
-											 alt="Abort" data-toggle="tooltip" alt="Abort" style="width: 25px; height: 25px;">
+										<a *ngIf="item['isLive']" type="button" (click)="actionOnJobExecution(item,'Abort')"> 
+										<img src="../assets/images/Abort.png"
+											 alt="Abort" data-toggle="tooltip" alt="Abort" style="width: 20px; height: 20px;">
+										&nbsp;
+										
 										</a>
+										
+										 <a type="button" (click)="navigateBusinessImport(item)">
+                                        <img data-toggle="tooltip" title="Go to Business Rules" src="assets/images/BussRulesGrey.png"
+                                            alt="Logo" style="width: 22px; height: 22px;"/>
+                                    </a>
 										<!-- <a *ngIf="!item['isLive'] && item['isJobAborted']" type="button"
 											style="width: 25px; height: 25px;"> <i
 												class="fa fa-spinner fa-spin"></i> &nbsp;
