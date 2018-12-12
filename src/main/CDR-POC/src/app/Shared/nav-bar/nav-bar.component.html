@@ -24,7 +24,7 @@
 <div>
   <ul class="nav nav-tabs padding-6 tab-color-blue background-blue navigation"
     id="myTab4">
-    <li><a data-toggle="tab"
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"><a data-toggle="tab"
       routerLink="/sdtm"
       style="padding-left: 20px">Home</a>
     </li>

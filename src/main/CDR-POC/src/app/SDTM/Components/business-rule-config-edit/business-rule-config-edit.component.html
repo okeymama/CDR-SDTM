@@ -1,3 +1,5 @@
+
+ 
  <kendo-dialog *ngIf="active" (close)="closeForm()" [width]="450">
  
   <kendo-dialog-titlebar style="background-color : white;border-radius: 30px 30px 0 0"> 
@@ -151,16 +153,16 @@
                   <option  [ngValue]="null" disabled selected style="display: none;">Domain</option>
                   <option *ngFor="let domain of studyDomains" value="{{domain}}">{{domain}}</option>
                 </select>-->
-                <kendo-multiselect style="width: 80%;height: 30px;font-size:11px;font-family: Open Sans;border-color: #ccc"
+                <kendo-multiselect style="width: 80%; font-size:11px;font-family: Open Sans;border-color: #ccc"
                   [data]="studyPopDomains"
                   formControlName="importDomain"
                   [autoClose]="true"
                   placeholder="Domain"
                   [textField]="'domainLabel'"
                   [valueField]="'domain'">
-                <ng-template kendoMultiSelectSummaryTag let-dataItem>
+                <!--<ng-template kendoMultiSelectSummaryTag let-dataItem>
                   <label>{{ dataItem }}</label>
-                </ng-template>
+                </ng-template>-->
                 </kendo-multiselect>
                 &nbsp;
               </div>
