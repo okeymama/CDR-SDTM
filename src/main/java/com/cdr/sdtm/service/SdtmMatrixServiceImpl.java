@@ -68,6 +68,8 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 		 if(_matrixData.isPresent()) {
 			 PathToSdtmMatrix _matrix = _matrixData.get();
 			 _matrix.setTargetField(pathToSdtmMatrix.getTargetField());
+			 _matrix.setFormLable(pathToSdtmMatrix.getFormLable());
+			 _matrix.setFormName(pathToSdtmMatrix.getFormName());
 			 _matrix.setSourceFile(pathToSdtmMatrix.getSourceFile());
 			 _matrix.setSourceField(pathToSdtmMatrix.getSourceField());
 			 _matrix.setJoinLogic(pathToSdtmMatrix.getJoinLogic());
@@ -198,6 +200,8 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 		 _matrix.setDomain(pathToSdtmMatrix.getDomain());
 		 _matrix.setSubDomain(pathToSdtmMatrix.getSubDomain());
 		 _matrix.setTargetField(pathToSdtmMatrix.getTargetField());
+		 _matrix.setFormLable(pathToSdtmMatrix.getFormLable());
+		 _matrix.setFormName(pathToSdtmMatrix.getFormName());
 		 _matrix.setSourceFile(pathToSdtmMatrix.getSourceFile());
 		 _matrix.setSourceField(pathToSdtmMatrix.getSourceField());
 		 _matrix.setJoinLogic(pathToSdtmMatrix.getJoinLogic());
