@@ -97,7 +97,7 @@ export class BusinessRuleConfigComponent implements OnInit {
     const title = this.route.snapshot.paramMap.get('studyTitle');
     let therapeuticArea = this.route.snapshot.paramMap.get('therapeuticArea');
     let domain = this.route.snapshot.paramMap.get('domain');
-    if(domain){
+    if (domain) {
         this.searchBRStudy.brStudy = title;
         this.searchBRStudy.brSdtmDomain = domain;
         this.businessEditService.read(this.searchBRStudy);

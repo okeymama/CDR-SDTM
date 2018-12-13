@@ -53,7 +53,11 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
     }
 
     public fetchLookUpData() {
-        return this.http.get<any[]>(`/api/CDR/lookup/sourcetables`);
+        return this.http.get<any[]>(`/api/CDR/lookup/sourceForms`);
+    }
+
+    public fetchLookUpVariables(formName) {
+        return this.http.get<any[]>(`/api/CDR/lookup/sourceVariables/${formName}`);
     }
 
     public fetchSDTMVariables() {

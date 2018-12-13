@@ -13,4 +13,7 @@ export class Matrix {
     public transformation_logic: string;
     public id: number;
     public defaultMessage: string;
+    public formName: string;
+    public formLable: string;
+
 }

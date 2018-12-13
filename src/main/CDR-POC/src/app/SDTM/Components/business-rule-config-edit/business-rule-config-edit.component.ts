@@ -29,9 +29,9 @@ export class BusinessRuleConfigEditComponent implements OnInit {
   public transPlaceHolder = 'Enter Transformation Logic';
   private businessEditService: BusinessEditService;
   public transTypes: any[];
-  public lookups: any[];
-  public lookupVariables: any[];
-  public lookupTables: any[];
+  public lookups: any[] = [];
+  public lookupVariables: any[] = [];
+  public lookupTables: any[] = [];
   public sdtmVariables: any[];
   public active = false;
   public opened: boolean = false;
@@ -52,7 +52,9 @@ export class BusinessRuleConfigEditComponent implements OnInit {
       'joinLogic': new FormControl(),
       'transformation_type': new FormControl(),
       'transformation_logic': new FormControl(),
-      'defaultMessage': new FormControl()
+      'defaultMessage': new FormControl(),
+      'formName': new FormControl(),
+      'formLable': new FormControl()
   });
 
   constructor(private http: HttpClient, @Inject(BusinessEditService) businessEditServiceFactory: any) {
@@ -67,8 +69,8 @@ export class BusinessRuleConfigEditComponent implements OnInit {
       if (this.active && matrix.transformation_type) {
           this.changePlaceholderAndValue(matrix.transformation_type);
       }
-      if (this.active && matrix.sourceFile) {
-          this.onSelect(matrix.sourceFile);
+      if (this.active && matrix.formName) {
+          this.onSelect(matrix.formName);
       }
       if (this.active && matrix.defaultMessage) {
          this.defaultMessage = matrix.defaultMessage;
@@ -129,8 +131,7 @@ export class BusinessRuleConfigEditComponent implements OnInit {
           this.transTypes = data;
       });
       this.businessEditService.fetchLookUpData().subscribe(data => {
-          this.lookups = data[0];
-          this.lookupTables = data[1];
+          this.lookupTables = data;
       });
       this.businessEditService.fetchSDTMVariables().subscribe(data => {
           this.sdtmVariables = data;
@@ -171,12 +172,30 @@ export class BusinessRuleConfigEditComponent implements OnInit {
   }
 
   public onSelect(table: any) {
-      this.lookupVariables = [];
-      for (let i = 0; i < this.lookups.length; i++) {
-        if (this.lookups[i].lookUpTable === table) {
-          this.lookupVariables.push(this.lookups[i].lookUpVariable);
-        }
-      }
+      if (this.lookupTables != null) {
+          const selectedItem = this.lookupTables.find((x: any) => x[0] === table);
+            if (selectedItem) {
+             this.editBusinessForm.value.formLable = selectedItem[1];
+            }
+       }
+      this.businessEditService.fetchLookUpVariables(table).subscribe(data => {
+        this.lookupVariables = data;
+      });
+  }
+
+  public onSelectVariable(table: any) {
+    if (this.lookupTables != null && this.editBusinessForm.value.formName) {
+    const sourceForm = this.lookupTables.find((x: any) => x[0] === this.editBusinessForm.value.formName);
+    if (sourceForm) {
+    this.editBusinessForm.value.formLable = sourceForm[1];
+    }
+    }
+    if (this.lookupVariables != null) {
+    const selectedItem = this.lookupVariables.find((x: any) => x.fieldName === table);
+    if (selectedItem) {
+    this.editBusinessForm.value.sourceField = selectedItem['fieldDesc'];
+    }
+    }
   }
 
   filterDomains(studyTitle: any) {

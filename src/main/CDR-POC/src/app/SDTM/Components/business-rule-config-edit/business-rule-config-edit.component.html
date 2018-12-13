@@ -68,9 +68,9 @@
         </div>
         <div class="col-75">
           <!--<input type="text" placeholder="Select Source File" formControlName="sourceFile"/>&nbsp;-->
-          <select placeholder="Select Source File" formControlName="sourceFile" (change)="onSelect($event.target.value)">
+          <select placeholder="Select Source File" formControlName="formName" (change)="onSelect($event.target.value)">
             <option  value="null" disabled selected style="display: none;">Select Source Name</option>
-            <option *ngFor="let table of lookupTables" value="{{table}}">{{table}}</option>
+            <option *ngFor="let table of lookupTables" value="{{table[0]}}">{{table[1]}}</option>
           </select>&nbsp;&nbsp;
         </div>
       </div>
@@ -80,9 +80,9 @@
         </div>
         <div class="col-75">
          <!-- <input type="text" placeholder="Select Source Variable" formControlName="sourceField" />&nbsp;&nbsp;-->
-         <select placeholder="Select Source Variable" formControlName="sourceField">
+         <select placeholder="Select Source Variable" formControlName="sourceFile" (change)="onSelectVariable($event.target.value)">
           <option  value="null" disabled selected style="display: none;">Select Variable Name</option>
-          <option *ngFor="let variable of lookupVariables" value="{{variable}}">{{variable}}</option>
+          <option *ngFor="let variable of lookupVariables" value="{{variable.fieldName}}">{{variable.fieldDesc}}</option>
         </select>&nbsp;&nbsp;
         </div>
       </div>
