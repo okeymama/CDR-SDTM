@@ -194,6 +194,7 @@ export class BusinessRuleConfigComponent implements OnInit {
         let domains = [];
         this.importTemplate.study = template.study;
         this.selectedDomains = template.importDomain;
+        this.studyDomains = template.importDomain;
 
         this.selectedDomains.sort(function(a, b) {
             const nameA = a.domainLabel.toLowerCase();
@@ -214,9 +215,9 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.searchBRStudy.brStudy = template.study;
         this.searchBRStudy.brSdtmDomain = domains[0];
         this.businessEditService.save(this.importTemplate, this.searchBRStudy, 'import');
-        this.businessEditService.fetchDomainsByStudy(this.searchBRStudy.brStudy).subscribe(data => {
+        /*this.businessEditService.fetchDomainsByStudy(this.searchBRStudy.brStudy).subscribe(data => {
             this.studyDomains = data;
-        });
+        });*/
         this.editBizDataItem = undefined;
         this.sortable = true;
       }
@@ -270,7 +271,7 @@ export class BusinessRuleConfigComponent implements OnInit {
                  
         }
         this.sortable = false;
-        this.kendoOneShow = true;
+        this.kendoOneShow = false;
         this.kendoTwoShow = true;
      }
 
