@@ -68,6 +68,10 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
         return this.http.get<any[]>(`/api/CDR/matrix/therapeutics`);
     }
 
+    public kendoDataFetch(study: any, domain: any) {
+        return this.http.get<any[]>(`/api/CDR/ObjectMatrices/${study}/${domain}`);
+    }
+
     public fetchStudiessBytherapeuticArea(therapeuticArea: any) {
         let params = new HttpParams();
         params =  params.set('therapeuticArea', therapeuticArea);
