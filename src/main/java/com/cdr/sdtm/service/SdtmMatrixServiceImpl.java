@@ -218,7 +218,7 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 		return sdtmMatrixRepository.deleteMatricesByStudyandDomain(study, domain); 
 	}
 	
-	public List<PathToSdtmMatrix> fetchObjectLevelByStudyAndDomain(String study, String domain) {
+	public List<Object[]> fetchObjectLevelByStudyAndDomain(String study, String domain) {
 		return sdtmMatrixRepository.fetchObjectLevelByStudyAndDomain(study, domain);
 	}
 

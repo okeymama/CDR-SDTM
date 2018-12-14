@@ -38,6 +38,6 @@ public interface SdtmMatrixService {
 	
 	List<TherapeuticAreas> getAllTherapeuticAreas();
 	
-	List<PathToSdtmMatrix> fetchObjectLevelByStudyAndDomain(String study, String domain);
+	List<Object[]> fetchObjectLevelByStudyAndDomain(String study, String domain);
 
 }

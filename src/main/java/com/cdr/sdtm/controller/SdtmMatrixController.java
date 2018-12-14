@@ -236,12 +236,16 @@ public class SdtmMatrixController {
 	
 	
 	@GetMapping("/ObjectMatrices/{study}/{domain}")
-	public List<PathToSdtmMatrix> findObjectMatrices(@PathVariable String study, @PathVariable String domain) {
+	public List findObjectandVariableMatrices(@PathVariable String study, @PathVariable String domain) {
 		LOGGER.info("Method Starts requested template for domain " + domain +" And Study " + study);
-		List<PathToSdtmMatrix> matrices = new ArrayList<PathToSdtmMatrix>();
-		 matrices = sdtmMatrixService.fetchObjectLevelByStudyAndDomain(study, domain);
-		LOGGER.info("Method Ends."+ matrices.size());
-		return matrices;
-		
+		List lookup = new ArrayList<>();
+		List<Object[]> matrices = new ArrayList<Object[]>();
+		matrices = sdtmMatrixService.fetchObjectLevelByStudyAndDomain(study, domain);
+		lookup.add(matrices);
+		List<PathToSdtmMatrix> matricesTwo = new ArrayList<PathToSdtmMatrix>();
+		PathToSdtmMatrix matrix = new PathToSdtmMatrix(study,domain);
+		matricesTwo = sdtmMatrixService.findAll(matrix);
+		lookup.add(matricesTwo);
+		return lookup;
 	}
 }
