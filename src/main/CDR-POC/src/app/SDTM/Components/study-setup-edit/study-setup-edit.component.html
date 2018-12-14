@@ -79,6 +79,35 @@
       </select><span style="color: red">*</span>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-25">
+      <label for="title">Study Analyst:</label>
+    </div>
+    <div class="col-75">
+      <input type="text" class="searchLabel" placeholder="Enter Study Analyst" formControlName="analyst" />&nbsp;&nbsp;
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-25">
+      <label for="title">Study Manager:</label>
+    </div>
+    <div class="col-75">
+      <input type="text" class="searchLabel" placeholder="Enter Study Manager" formControlName="manager" />&nbsp;&nbsp;
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-25">
+      <label for="title">DB Lock Date:</label>
+    </div>
+    <div class="col-75">
+      <kendo-datepicker class="study-kendo-datepicker"
+      [navigation]="false" format="MM/dd/yyyy" formatPlaceholder="formatPattern" formControlName="dbLockDate"></kendo-datepicker>
+    </div>
+  </div>
+
 </div>
 
 </form>

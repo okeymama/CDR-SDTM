@@ -24,6 +24,7 @@ import { AppPropertiesComponent } from './Components/app-properties/app-properti
 import { SdtmComponent } from './Components/sdtm/sdtm.component';
 import { CarouselModule } from 'ngx-bootstrap';
 import { DataLineageComponent } from './Components/data-lineage/data-lineage.component';
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { DataLineageComponent } from './Components/data-lineage/data-lineage.com
     ReactiveFormsModule,
     RouterModule,
     SharedModule,
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    DateInputsModule
    ],
    declarations: [
     BusinessRuleConfigComponent,

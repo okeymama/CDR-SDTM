@@ -32,7 +32,10 @@ export class StudySetupEditComponent implements OnInit {
       'phase': new FormControl(),
       'status': new FormControl(),
       'therapeuticArea': new FormControl(),
-      'source': new FormControl()
+      'source': new FormControl(),
+      'analyst': new FormControl(),
+      'manager': new FormControl(),
+      'dbLockDate': new FormControl()
     });
 
     constructor(private http: HttpClient, @Inject(EditService) editServiceFactory: any) {
@@ -43,6 +46,9 @@ export class StudySetupEditComponent implements OnInit {
     @Input() public isDelete = false;
 
     @Input() public set model(studyDetails: StudyDetails) {
+      if (studyDetails !== undefined && studyDetails.dbLockDate !== undefined && studyDetails.dbLockDate !== null) {
+        studyDetails.dbLockDate = new Date(studyDetails.dbLockDate);
+       }
         this.editForm.reset(studyDetails);
         this.active = studyDetails !== undefined && this.isDelete === false;
     }

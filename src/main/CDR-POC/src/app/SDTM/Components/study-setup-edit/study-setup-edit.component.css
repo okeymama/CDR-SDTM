@@ -59,3 +59,14 @@
   .k-window-titlebar {
     border-color: rgb(7, 73, 130);
   }
+
+  .study-kendo-datepicker {
+    width: 85%; 
+    font-size:11px;
+    font-family: Open Sans;
+    border-color: #ccc;
+    padding: 5px;
+    margin-left: -3px;
+    margin-right: 4px;
+    margin-top: -5px
+  }
