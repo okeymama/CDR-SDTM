@@ -37,5 +37,7 @@ public interface SdtmMatrixService {
 	PathToSdtmMatrix createMatrix(PathToSdtmMatrix matrix);
 	
 	List<TherapeuticAreas> getAllTherapeuticAreas();
+	
+	List<PathToSdtmMatrix> fetchObjectLevelByStudyAndDomain(String study, String domain);
 
 }

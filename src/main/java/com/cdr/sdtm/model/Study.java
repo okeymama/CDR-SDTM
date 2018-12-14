@@ -1,5 +1,7 @@
 package com.cdr.sdtm.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -33,6 +35,15 @@ public class Study {
     
     @Column(name="Study_Type")
     private String type;
+    
+    @Column(name="Study_Analyst")
+    private String analyst;
+    
+    @Column(name="Study_Manager")
+    private String manager;
+    
+    @Column(name="Db_Lock_Date")
+    private Timestamp dbLockDate;
     
     
     
@@ -100,6 +111,30 @@ public class Study {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getAnalyst() {
+		return analyst;
+	}
+
+	public void setAnalyst(String analyst) {
+		this.analyst = analyst;
+	}
+
+	public String getManager() {
+		return manager;
+	}
+
+	public void setManager(String manager) {
+		this.manager = manager;
+	}
+
+	public Timestamp getDbLockDate() {
+		return dbLockDate;
+	}
+
+	public void setDbLockDate(Timestamp dbLockDate) {
+		this.dbLockDate = dbLockDate;
 	}
     
     

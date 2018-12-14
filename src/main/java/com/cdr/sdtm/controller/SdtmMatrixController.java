@@ -233,4 +233,15 @@ public class SdtmMatrixController {
 		LOGGER.info("Distinct SDTM Variables method - ENDS"); 
 		return targetVariables;
 	}
+	
+	
+	@GetMapping("/ObjectMatrices/{study}/{domain}")
+	public List<PathToSdtmMatrix> findObjectMatrices(@PathVariable String study, @PathVariable String domain) {
+		LOGGER.info("Method Starts requested template for domain " + domain +" And Study " + study);
+		List<PathToSdtmMatrix> matrices = new ArrayList<PathToSdtmMatrix>();
+		 matrices = sdtmMatrixService.fetchObjectLevelByStudyAndDomain(study, domain);
+		LOGGER.info("Method Ends."+ matrices.size());
+		return matrices;
+		
+	}
 }

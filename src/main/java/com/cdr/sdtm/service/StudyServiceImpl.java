@@ -34,7 +34,9 @@ public class StudyServiceImpl implements StudyService {
 		newStudy.setStatus(study.getStatus());
 		newStudy.setTherapeuticArea(study.getTherapeuticArea());
 		newStudy.setSource(study.getSource());
-		
+		newStudy.setManager(study.getManager());
+		newStudy.setAnalyst(study.getAnalyst());
+		newStudy.setDbLockDate(study.getDbLockDate());
 		return studyRepository.save(study);
 		
 	}
@@ -49,6 +51,9 @@ public class StudyServiceImpl implements StudyService {
 		 _study.setStatus(study.getStatus());
 		 _study.setTherapeuticArea(study.getTherapeuticArea());
 		 _study.setSource(study.getSource());
+		 _study.setManager(study.getManager());
+		 _study.setAnalyst(study.getAnalyst());
+		 _study.setDbLockDate(study.getDbLockDate());
 		  studyRepository.save(_study);
 		  return true;
 		 }
@@ -120,8 +125,6 @@ public class StudyServiceImpl implements StudyService {
 	public List<String> findStudiesBytherapeuticArea(String therapeuticArea) {
 		return studyRepository.findStudiesBytherapeuticArea(therapeuticArea);
 	}
-	
-	
 	
 
 }
