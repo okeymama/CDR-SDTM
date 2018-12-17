@@ -1,19 +1,26 @@
+<<style>
+<!--
+#customHeader{
+	background-color:#074982;
+}
+-->
+</style>
 <div class="main-container ace-save-state" id="main-container">
 	<header-icons [configTypeImage]="configTypeImage" [configTypeTitle]="configTypeTitle" [configTypeIcons]="configTypeIcons"
 	 (iconClick)="addHandlerIconClick($event)" [studyInHeader]="studyInHeader"></header-icons>
 
-	<div class="panel panel-default" style="height: 425px; margin-left: 6px; border-radius: 10px; border-width: 1px; width: 99%; margin-top: 2px; padding-bottom: 3px; background: white;">
+	<div class="panel panel-default" style="height: 410px; margin-left: 6px; border-radius: 10px; border-width: 1px; width: 99%; margin-top: 2px; padding-bottom: 3px; background: white;">
 		
-		<div *ngIf="(data?.length==0)">
+		<div *ngIf="(dataResult?.length==0)">
 			<h3 class="row-label" style="margin-top: 7px; text-align: left; font-family: Open Sans Regular; font-size: 12px; width: 90%;">
 				Select a study to see job execution details
 				<!-- Filtered by -->
 				<!--  <a class="float:right" style="margin-right: -111px;padding-top: 0px;padding-bottom: 5px;float: right;color: #074982;font-family: Open Sans Regular;font-size: 12px;"><b>Clear all Filters</b></a>-->
 			</h3>
 		</div>
-		<hr *ngIf="data?.length==0" style="margin-top: -6px; border-width: 2px;" />
+		<hr *ngIf="dataResult?.length==0" style="margin-top: -6px; border-width: 2px;" />
 
-		<div *ngIf="data?.length>0" style="margin-top: 5px">
+		<div *ngIf="dataResult?.length>0" style="margin-top: 5px">
 			<!-- class="pull-right" style="margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;"> -->
 
 			<a type="button" (click)="runForAllSelectedDomains()"> <img *ngIf="!(allDomainsLive) || (allDomainsLive && msg)"
@@ -24,21 +31,27 @@
 			<h3 style="font-family: Open Sans Regular; font-size: 12px; color: black; padding-right: 15px; margin-top: 5px"
 			 class="pull-right">All selected</h3>
 		</div>
-		<hr *ngIf="data?.length>0" style="margin-top: 6px; border-width: 2px;" />
+		<hr *ngIf="dataResult?.length>0" style="margin-top: 6px; border-width: 2px;" />
 
 		<div id="sidebar" class="col-sm-2 col-md-3" style="width: 214px;border-style: solid;border-width: 1px;border-color: #E5E5E5;margin-left:3px">
 			<filter-icon-heading></filter-icon-heading>
-			<div ng-if="paramId == studyInfo" style="background-color: white;overflow:auto; width:200px;height: 316px;" id="studyInfo"
+			<div ng-if="paramId == studyInfo" style="background-color: white;overflow:auto; width:200px;height: 295px;" id="studyInfo"
 			 class="tab-pane in active">
 				<form name="jobForm" #f="ngForm" novalidate>
 					<fieldset>
 
-						<div style="overflow:auto; width:200px;height: 304px;" class="tab-pane in active">
+						
 
 							<div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
 								<ul class="nav  nav-tabs" style="border-bottom: 0px;">
-									<li style="border-bottom: 0px;"><a data-toggle="tab" (click)="therapeuticAreaDropdown()" style="margin-top: 9px; margin-left: 10px; margin-bottom: 6px; padding-top: 3px; color: black; width: 178px; background-color: #E4E6E9; height: 24px; text-align: left; font-family: Open Sans Regular; font-size: 12px;">
-											Therapeutic Area<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
+									<li style="border-bottom: 0px;"><a data-toggle="tab"
+									(click)="therapeuticAreaDropdown()" 
+									style="margin-top: 9px; margin-left: 10px; 
+									margin-bottom: 6px; padding-top: 3px; color: black; width: 178px;
+									background-color: #E4E6E9; height: 24px; text-align: left; 
+									font-family: Open Sans Regular; font-size: 12px;">
+											Therapeutic Area<span class="pull-right">
+											<i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
 										</a></li>
 								</ul>
 								<div *ngIf="therapeuticAreaShowOptions" class="dropdown-container" style="border-bottom: 0px; margin-top: 7px; margin-left: 10px; font-family: Open Sans Regular; font-size: 12px; width: 89%; height: 35px;"
@@ -84,106 +97,112 @@
 							</div>
 							<div class="space"></div>
 
-						</div>
+						
 
 					</fieldset>
 				</form>
 			</div>
 		</div>
 		
+		
 
-			<div class="main-content col-sm-10 col-md-9">
-			<div class="main-content-inner">
-				<div class="page-content">
-					<div class="row" style="margin-top: -19px;">
-						<table class="table">
-							<thead>
-								<tr>
-									<td>
-										<!-- *ngIf="loading"-->
-										<input type="checkbox" name="all" [(ngModel)]='checkbox' (change)="isCheckboxSelected = !isCheckboxSelected;" />
-									</td>
-									<td>SDTM Domain</td>
-									<td>Last Run</td>
-									<td>Status</td>
-									<td>Message</td>
-									<td>Actions</td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr *ngFor="let item of data" ng-class-odd="'striped'">
-									<td style="text-align:center" ><input type="checkbox" 
-									[checked]="isCheckboxSelected && item.jobDisabled==='N'" 
-									[disabled]="item.jobDisabled =='Y'" (change)="onItemSelect(item)" /></td>
-									<td style="text-align: left;">{{item.domain}}</td>
-									<td>{{item.job_end_timestamp}}</td>
-									<td>{{item.job_status}}</td>
-									<td style="text-align: left;">{{item.message}}</td>
-									<td style="text-align:center">
-										<!--<a *ngIf="(!item['isLive']) 
-										          || (item['isLive'] && item['jobStatus']=='job completed')
-										          && (!item['isDisabled']) " type="button"
-											(click)="actionOnJobExecution(item,'Run')" > <img
-												src="../assets/images/Run.png" alt="Run"
-												data-toggle="tooltip"
-												alt="Run"
-												style="width: 25px; height: 25px;"> &nbsp;
-										</a> -->
-									   <a *ngIf="(item.jobDisabled =='N' && 
-												  (!item['isLive']
-										          || (item['isLive'] && msg))
+	
+        <div class="main-content">
+            <div class="main-content-inner">
+                <div class="page-content">
+                    <div class="row" style="margin-top: -23px;">
+                        <kendo-grid [data]="view" [height]="340" 
+                            [pageSize]="pageSize" [skip]="skip"
+                            [pageable]="true"
+        					[scrollable]="'none'"  (pageChange)="pageChange($event)"
+                            style="width: 99.5%;" [resizable]="true">
+                        <kendo-grid-column [width]="20" [headerStyle]="{'background-color': '#074982'}">
+                                <ng-template kendoGridHeaderTemplate let-dataItem >
+        						<input id="customHeader" type="checkbox" name="all" [(ngModel)]='checkbox' 
+        						 (change)="isCheckboxSelected = !isCheckboxSelected;" />
+   								</ng-template>
+    							<ng-template kendoGridCellTemplate let-dataItem>
+        						<input type="checkbox" 
+									[checked]="isCheckboxSelected && dataItem['jobDisabled']==='N'" 
+									[disabled]="dataItem['jobDisabled'] =='Y'" (change)="onItemSelect(dataItem)" />
+   								</ng-template> 
+						</kendo-grid-column>
+                        <kendo-grid-column [width]="180" [style]="{'text-align':'left'}" 
+                        	[headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular',
+                        	'font-size': '12px','background-color': '#074982','color':'white'}"
+                            field="domain" title="SDTM Domain"></kendo-grid-column>
+                        <kendo-grid-column [width]="120" [style]="{'text-align':'left'}" 
+                        	[headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular',
+                        	'font-size': '12px','background-color': '#074982','color':'white'}"
+                            field="job_end_timestamp" title="Last Run"></kendo-grid-column>
+                        <kendo-grid-column [width]="120" [style]="{'text-align':'left'}"
+                        	[headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular',
+                        	'font-size': '12px','background-color': '#074982','color':'white'}"
+                            field="job_status" title="Status"></kendo-grid-column>
+                        <kendo-grid-column [width]="100" [style]="{'text-align':'left'}" 
+                        	[headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular',
+                        	'font-size': '12px','background-color': '#074982','color':'white'}"
+                            field="message" title="Message"></kendo-grid-column>
+                        <kendo-grid-command-column [style]="{'text-align':'center'}" [width]="150" 
+                        [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular',
+                        'font-size': '12px','background-color': '#074982','color':'white'}"
+                            title="Actions">             
+                        
+                                
+                                <ng-template kendoGridCellTemplate let-dataItem>
+                                            
+                                                              
+                                    	<a *ngIf="( dataItem['jobDisabled'] =='N' && 
+												  (!dataItem['isLive'] ||
+										           (dataItem['isLive'] && msg))
 										          );else jobDisabled"
 										type="button"
-										(click)="actionOnJobExecution(item,'Run')">
+										(click)="actionOnJobExecution(dataItem,'Run')">
 											<img src="../assets/images/Run.png" alt="Run" 
-											data-toggle="tooltip" alt="Run" style="width: 20px; height: 20px;">
+											data-toggle="tooltip" alt="Run" title="Run job" style="width: 20px; height: 20px;">
 											&nbsp;
 										</a>
+										
 									   <ng-template #jobDisabled>
-									 	<a *ngIf = "item.jobDisabled =='Y' "> <img src="../assets/images/Run_Disable.png" alt="Run" data-toggle="tooltip" alt="Run"
+									 	<a *ngIf = "dataItem['jobDisabled'] =='Y' "> <img src="../assets/images/Run_Disable.png" alt="Run" data-toggle="tooltip" alt="Run"
 											 style="width: 20px; height: 20px;"> &nbsp; 
 										</a>						 
 										</ng-template> 
-										<a *ngIf="item['isLive'] && !msg" type="button" style="width: 25px; height: 25px;">
+										<a *ngIf="dataItem['isLive'] && !msg" type="button" style="width: 25px; height: 25px;">
 											<i class="fa fa-spinner fa-spin"></i> &nbsp;
 										</a> 
-										<a *ngIf="item.jobDisabled =='N' &&  !item.isLive" type="button" 
-										(click)="actionOnJobExecution(item,'Disable')"> <img src="../assets/images/Disable_Inactive.png"
+										<a *ngIf="dataItem['jobDisabled'] =='N' &&  !dataItem['isLive']" type="button" 
+										(click)="actionOnJobExecution(dataItem,'Disable')"> <img src="../assets/images/Disable_Inactive.png"
 											 data-toggle="tooltip" alt="Disable" title="Click to disable the execution of this job"
 											  style="width: 19px; height: 19px;">
 											&nbsp;
-										</a> <a *ngIf="item.jobDisabled =='Y'" type="button" 
-											(click)="actionOnJobExecution(item,'Enable')" > <img src="../assets/images/Disable_Active.png"
+										</a> <a *ngIf="dataItem['jobDisabled'] =='Y'" type="button" 
+											(click)="actionOnJobExecution(dataItem,'Enable')" > <img src="../assets/images/Disable_Active.png"
 											 data-toggle="tooltip" alt="Enable" title="Job Execution is disabled.Click to re-enable" 
 											 style="width: 19px; height: 19px;">
 											&nbsp;
 										</a>
-										<a *ngIf="item['isLive']" type="button" (click)="actionOnJobExecution(item,'Abort')"> 
+										<a *ngIf="dataItem['isLive']" type="button" (click)="actionOnJobExecution(dataItem,'Abort')"> 
 										<img src="../assets/images/Abort.png"
 											 alt="Abort" data-toggle="tooltip" alt="Abort" style="width: 20px; height: 20px;">
 										&nbsp;
 										
 										</a>
 										
-										 <a type="button" (click)="navigateBusinessImport(item)">
+										 <a type="button" (click)="navigateBusinessImport(dataItem)">
                                         <img data-toggle="tooltip" title="Go to Business Rules" src="assets/images/BussRulesGrey.png"
                                             alt="Logo" style="width: 22px; height: 22px;"/>
                                     </a>
-										<!-- <a *ngIf="!item['isLive'] && item['isJobAborted']" type="button"
-											style="width: 25px; height: 25px;"> <i
-												class="fa fa-spinner fa-spin"></i> &nbsp;
-										</a> -->
-									</td>
-
-								</tr>
-
-							</tbody>
-						</table>
-					</div>
-					<!-- /.row -->
-				</div>
-				<!-- /.page-content -->
-			</div>
-		</div>
+                                </ng-template>
+                            </kendo-grid-command-column>
+                        </kendo-grid>
+                        
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.page-content -->
+            </div>
+        </div>	
+		
 	</div>
 </div>

@@ -2,3 +2,4 @@
 ﻿export * from './model';
 export * from './bizModelTemplate';
 ﻿export * from './bizModelMatrix';
+﻿export * from './JobExecutionDetails';

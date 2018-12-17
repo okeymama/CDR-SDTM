@@ -2,12 +2,13 @@ import { Component, OnInit, Inject  } from '@angular/core';
 import { Params,ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { GridDataResult } from '@progress/kendo-angular-grid';
+import { GridDataResult,PageChangeEvent} from '@progress/kendo-angular-grid';
 import { State, process } from '@progress/kendo-data-query';
 import { map } from 'rxjs/operators/map';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { UserService, AlertService } from '../../Services';
+import { JobExecutionDetails } from '../../Models';
 
 
 
@@ -26,21 +27,21 @@ export class JobExecutionComponent implements OnInit {
     private userService: UserService,
     private router: Router
   ){ }
-
-  public view: Observable<GridDataResult>;
-  data: any[] = [];
+  //START
+  public gridState: State = {
+        sort: [],
+        skip: 0,
+        take: 10
+    };
+  //STOP
+  public view: GridDataResult;
+  dataResult: JobExecutionDetails[] = [];
   private msg: any;
   jobStatus: boolean = false;
   isLive: boolean = false;
   isJobAborted = false;
   isDomain: boolean = false;
   allDomainsLive: boolean = false;
-  public gridState: State = {
-      sort: [],
-      skip: 0,
-    };
-    take: 10;
-
   public formGroup: FormGroup;
   public searchJob: any = {};
   dropdownList = [];
@@ -71,7 +72,10 @@ export class JobExecutionComponent implements OnInit {
   configTypeImage: string;
   configTypeTitle: string;
   navBarItems: Object[];
-
+  public pageSize = 7;
+  public skip = 0;
+  private data: Object[];
+  height = 360;
   
   public ngOnInit() {
 
@@ -176,15 +180,7 @@ export class JobExecutionComponent implements OnInit {
    }
   
 
-  loadDropdown(){
-        let params = new HttpParams();
-		const searchUrl = '/api/CDR/study/dropdown';
-        let url = `${searchUrl}`;
-        let headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/json');
-        return this.http.get(url, {headers: headers});
-   }
-
+ 
  onSelectAll (items: any) {
    console.log(items);
  }
@@ -209,13 +205,33 @@ export class JobExecutionComponent implements OnInit {
       console.log( "params4");
     
     	return this.http.get<any[]>(`/api/CDR/jobsForStudy/${searchJob.study}`)
-       .subscribe(data => {this.data = data });
+       .subscribe(data => {this.parseData(data) });
 
     }else{
      this.missingFields = true;
     }
+   
 
-
+  }
+  
+  public parseData(results){
+      this.dataResult = [];
+      for (let item of results) {
+      	   let customObj = new JobExecutionDetails();
+      	   //Model values in LHS and DB columns in RHS
+      	   customObj.domain = item.domain;
+           customObj.job_end_timestamp = item.job_end_timestamp;
+           customObj.job_status = item.job_status;
+           customObj.message = item.message;
+           customObj.jobDisabled = item.jobDisabled;
+           customObj.study = item.study;
+           customObj.job_id = item.job_id;
+           console.log("jobDisabled"+customObj.jobDisabled);
+           this.dataResult.push(customObj);      	
+      }
+      
+      this.loadTable();
+  
   }
 
   public onStateChange(state: State) {
@@ -229,7 +245,7 @@ export class JobExecutionComponent implements OnInit {
     this.selectedItemsList = [];
     this.jobStatus =  false;
     this.loading = false;
-    this.data = [];
+    this.dataResult = [];
     this.domainList = [];
    	this.allDomainsLive = false;
     this.hideInstructions = false;
@@ -242,7 +258,7 @@ export class JobExecutionComponent implements OnInit {
     this.studyInHeader = '';
     this.msg = '';
     
-    //this.view = '';
+    this.view = null;
     f.form.reset();
 
   }
@@ -286,10 +302,11 @@ export class JobExecutionComponent implements OnInit {
  
     console.log("selected items run all"+this.selectedItemsList);
 	this.allDomainsLive = true;
+	this.height = 320;
 	
 	if(this.checkbox && this.isCheckboxSelected){
 	// header checkbox has been clicked so push all domains into selectedItemsList
-	    for (let item of this.data) {
+	    for (let item of this.dataResult) {
 	    //if (!item.isDisabled){
 	    if (item.jobDisabled!='Y'){	    
 	     this.selectedItemsList.push(item.domain);
@@ -301,19 +318,20 @@ export class JobExecutionComponent implements OnInit {
     //reload table to disable run buttons
          this.hideInstructions=true;
          this.loading= true;
-     
-    for (let item of this.data) {
+    console.log("hi"+ this.view.data);
+    //TODO null check
+    for (let item of this.view.data) {
     //this.domainList.push(item.domain);
     //above line is not reqd instead setting isLive status to true
     console.log("printing...domain..."+ item.domain + "... "+this.selectedItemsList.includes(item.domain))
     	if(this.selectedItemsList.includes(item.domain)){
     	 console.log("match found");
-    	 this.index = this.data.indexOf(item); 
+    	 this.index = this.view.data.indexOf(item); 
     	 console.log("index found "+this.index);
-    	 console.log("printing data at index "+JSON.stringify(this.data[this.index]));
-    	 this.data[this.index].isLive = true;
+    	 console.log("printing data at index "+JSON.stringify(this.view.data[this.index]));
+    	 this.view.data[this.index].isLive = true;
     	 //this.data[this.index].isDisabled = false;
-    	 console.log("printing data at index after setting property"+JSON.stringify(this.data[this.index]));
+    	 console.log("printing data at index after setting property"+JSON.stringify(this.view.data[this.index]));
     	 
    	 }
     }
@@ -330,7 +348,7 @@ export class JobExecutionComponent implements OnInit {
    
     this.jobStatus =  false;
     this.loading = false;
-    this.data = [];
+    this.dataResult = [];
     this.domainList = [];
    	this.allDomainsLive = false;
     this.isCheckboxSelected = false;
@@ -376,7 +394,23 @@ export class JobExecutionComponent implements OnInit {
         console.log('Job Status:' + data);
       });
    }
+   
     public navigateBusinessImport(dataItem: any) {
+    
         this.router.navigate([`/sdtm/businessRulesFromJob/${dataItem.study}/${dataItem.domain}`]);
+     
+     
+    }
+    
+   public pageChange(event: PageChangeEvent): void {
+        this.skip = event.skip;
+ 		this.loadTable();
+    }
+
+    private loadTable(): void {
+        this.view = {
+            data: this.dataResult.slice(this.skip, this.skip + this.pageSize),
+            total: this.dataResult.length
+        };
     }
 }
