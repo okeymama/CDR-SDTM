@@ -28,6 +28,7 @@ export class BusinessRuleConfigComponent implements OnInit {
     statusShowOptions = false;
     public kendoOneShow = false;
     public kendoTwoShow = true;
+    public kendoTwoHeight = 300;
     userName = '';
     results: any[];
     public therapeuticAreas: any[];
@@ -258,6 +259,7 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.sortable = false;
         this.kendoOneShow = false;
         this.kendoTwoShow = true;
+        this.kendoTwoHeight = 300;
     }
 
     public getDomain(): String {
@@ -320,6 +322,11 @@ export class BusinessRuleConfigComponent implements OnInit {
 
     public KendoGridOne() {
         this.kendoOneShow = !this.kendoOneShow;
+        if (this.kendoOneShow) {
+            this.kendoTwoHeight = 170;
+        } else {
+            this.kendoTwoHeight = 300;
+        }
     }
 
     public KendoGridTwo() {

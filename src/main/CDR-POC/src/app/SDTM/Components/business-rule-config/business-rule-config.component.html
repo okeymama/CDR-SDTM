@@ -122,7 +122,7 @@
                 <b>Variable Level Transformation</b>
               </div>
               <div *ngIf="kendoTwoShow"> 
-            <kendo-grid [data]="view2 | async" [height]="170" [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
+            <kendo-grid [data]="view2 | async" [height]="kendoTwoHeight" [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
             [pageable]="true" (dataStateChange)="onStateChange(searchBRStudy, $event)" (edit)="editHandler($event, searchBRStudy)"
             (remove)="removeHandler($event)"  [resizable]="true" (add)="addHandler('add',$event)" style="width: 99.5%;" [sortable]="sortable">
             <kendo-grid-column [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
