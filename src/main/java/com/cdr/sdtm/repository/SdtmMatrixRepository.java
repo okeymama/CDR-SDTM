@@ -36,7 +36,7 @@ public interface SdtmMatrixRepository extends JpaRepository<PathToSdtmMatrix, Lo
 			" FROM SDTM.path_to_sdtm_matrix_2 a " + 
 			" WHERE Form_Label <> ''" + 
 			" AND Study_Title=:study and Domain_Name=:domain " + 
-			" GROUP BY Domain_Label,CONCAT(Form_Label, ' (', Domain_Name, ') ')" + 
+			" GROUP BY Domain_Label,CONCAT(Form_Label, ' (', Form_Name, ') ')" + 
 			" ORDER BY MAX(Join_Criteria)  ASC")
 	List<Object[]> fetchObjectLevelByStudyAndDomain(@Param("study") String study,@Param("domain") String domain);
 
