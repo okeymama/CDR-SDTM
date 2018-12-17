@@ -237,7 +237,6 @@ export class StudySetupComponent implements OnInit {
 
   public navigateBusinessImport(dataItem: any) {
       // this.router.navigate(['/sdtmHome/businessRules', {studyTitle: dataItem.title, therapeuticArea: dataItem.therapeuticArea}]);
-      this.businessEditService.setImportStudyMessage("true");
       this.router.navigate([`/sdtm/businessRules/${dataItem.title}/${dataItem.therapeuticArea.replace(new RegExp(/\//g), '-')}`]);
     }
 }

@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'business-rule-config',
-  templateUrl: './business-rule-config.component.html',
-  styleUrls: ['./business-rule-config.component.css']
+    selector: 'business-rule-config',
+    templateUrl: './business-rule-config.component.html',
+    styleUrls: ['./business-rule-config.component.css']
 })
 export class BusinessRuleConfigComponent implements OnInit {
 
@@ -20,183 +20,170 @@ export class BusinessRuleConfigComponent implements OnInit {
     configTypeTitle: string;
     configTypeIcons: Object[];
     navBarItems: Object[];
-  studyDrpSelected = false;
-  studyShowOptions = false;
-  phaseDrpSelected = false;
-  phaseShowOptions = false;
-  statusDrpSelected = false;
-  statusShowOptions = false;
-  public kendoOneShow = false;
-  public kendoTwoShow = true;
-  public drpSelected = false;
-  userName = '';
-  results: any[];
-  public matrixStudyTitles: any[];
-  public therapeuticAreas: any[];
-  public studyTitles: any[];
-  public studyDomains: any[];
-  public searchBRStudy: any = {};
-  public importTemplate: any = {};
-  public selectedDomains: any[];
-  public isImportFromStudy: string = "false";
-  public view: Observable<GridDataResult>;
-   public gridState: State = {
-       sort: [],
-       skip: 0,
-       take: 50
-   };
-   public sortable= false; 
-   public editBizDataItem: Matrix;
-   public isNew: any;
-   private businessEditService: BusinessEditService;
+    studyDrpSelected = false;
+    studyShowOptions = false;
+    phaseDrpSelected = false;
+    phaseShowOptions = false;
+    statusDrpSelected = false;
+    statusShowOptions = false;
+    public kendoOneShow = false;
+    public kendoTwoShow = true;
+    userName = '';
+    results: any[];
+    public therapeuticAreas: any[];
+    public studyTitles: any[];
+    public studyDomains: any[];
+    public searchBRStudy: any = {};
+    public importTemplate: any = {};
+    public selectedDomains: any[];
+    public gridState: State = {
+        sort: [],
+        skip: 0,
+        take: 50
+    };
+    public sortable = false;
+    public editBizDataItem: Matrix;
+    public isNew: any;
+    private businessEditService: BusinessEditService;
+    view1: Observable<GridDataResult>;
+    view2: Observable<GridDataResult>;
 
-   public drp(): void {
-    this.drpSelected = !this.drpSelected;
-  }
-
-  constructor(private route: ActivatedRoute,
-    private userService: UserService,
-    @Inject(BusinessEditService) businessEditServiceFactory: any,
-    private router: Router) {
+    constructor(private route: ActivatedRoute,
+        private userService: UserService,
+        @Inject(BusinessEditService) businessEditServiceFactory: any,
+        private router: Router) {
         this.businessEditService = businessEditServiceFactory();
-  }
-  public ngOnInit(): void {
-      this.configTypeIcons = [
-       
-        {"icontitle": "Import from Template or Library", "iconImageSrc": "assets/images/RightImage1.png",  "action":"import","inputParam":this.importTemplate},
-        {"icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png", "action":"","inputParam":""},
-        {"icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "action":"","inputParam":""},
-        {"icontitle": "Add Business Rule", "iconImageSrc": "assets/images/AddStudy.png","action":"add","inputParam":this.searchBRStudy}
-      ];
-      this.navBarItems = [
-        {"navBarTitle": "Home", "navBarLink": "/sdtmHome"},
-        {"navBarTitle": "Study Configuration", "navBarLink": "studySetup"},
-        {"navBarTitle": "Business Rule Configuration", "navBarLink": "businessRules"},
-        {"navBarTitle": "Job Execution", "navBarLink": "jobExecution"}];
-    this.configTypeImage = '../../../assets/images/BussRules.png';
-    this.configTypeTitle = 'Business Rule Configuration';
-         this.view = this.businessEditService.pipe(map(data => process(data, this.gridState)));
-        /* console.log("view: "+this.view.length);
-         if (this.view.length!=undefined){
-                  console.log("sortable ngOnit: "+this.sortable);
-                 this.sortable=true;
-         } */
-      //   this.businessEditService.read();
-      this.businessEditService.fetchStudyTitles().subscribe(data => {
-          this.studyTitles = data;
-      });
-      this.businessEditService.fetchTherapeuticAreas().subscribe(data => {
-        this.therapeuticAreas = data;
-    });
-     /* this.businessEditService.fetchMatrixStudyTitles().subscribe(data => {
-        this.matrixStudyTitles = data;
-    });*/
-    this.businessEditService.getImportStudyMessage().subscribe(data => {
-        this.isImportFromStudy = data;
-    });
-    const title = this.route.snapshot.paramMap.get('studyTitle');
-    let therapeuticArea = this.route.snapshot.paramMap.get('therapeuticArea');
-    let domain = this.route.snapshot.paramMap.get('domain');
-    if (domain) {
-        this.searchBRStudy.brStudy = title;
-        this.searchBRStudy.brSdtmDomain = domain;
-        this.businessEditService.read(this.searchBRStudy);
     }
-       if (title != null && therapeuticArea != null) {
-        therapeuticArea = therapeuticArea.replace(new RegExp(/-/g), '/');
-        this.studyDomains = this.route.snapshot.data['reqDomains'];
+    public ngOnInit(): void {
+        this.configTypeIcons = [
+
+            { "icontitle": "Import from Template or Library", "iconImageSrc": "assets/images/RightImage1.png", "action": "import", "inputParam": this.importTemplate },
+            { "icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png", "action": "", "inputParam": "" },
+            { "icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "action": "", "inputParam": "" },
+            { "icontitle": "Add Business Rule", "iconImageSrc": "assets/images/AddStudy.png", "action": "add", "inputParam": this.searchBRStudy }
+        ];
+        this.navBarItems = [
+            { "navBarTitle": "Home", "navBarLink": "/sdtmHome" },
+            { "navBarTitle": "Study Configuration", "navBarLink": "studySetup" },
+            { "navBarTitle": "Business Rule Configuration", "navBarLink": "businessRules" },
+            { "navBarTitle": "Job Execution", "navBarLink": "jobExecution" }];
+        this.configTypeImage = '../../../assets/images/BussRules.png';
+        this.configTypeTitle = 'Business Rule Configuration';
+        this.view1 = this.businessEditService.pipe(map((data) => {
+            const test = data && data.length > 0 ? data[0] : data;
+            return process(test, this.gridState);
+        }));
+        this.view2 = this.businessEditService.pipe(map((data) => {
+            const test = data && data.length > 1 ? data[1] : data;
+            return process(test, this.gridState);
+        }));
+        this.businessEditService.fetchStudyTitles().subscribe(data => {
+            this.studyTitles = data;
+        });
+        this.businessEditService.fetchTherapeuticAreas().subscribe(data => {
+            this.therapeuticAreas = data;
+        });
+        const title = this.route.snapshot.paramMap.get('studyTitle');
+        let therapeuticArea = this.route.snapshot.paramMap.get('therapeuticArea');
+        let domain = this.route.snapshot.paramMap.get('domain');
+        if (domain) {
+            this.searchBRStudy.brStudy = title;
+            this.searchBRStudy.brSdtmDomain = domain;
+            this.businessEditService.read(this.searchBRStudy);
+        }
+        if (title != null && therapeuticArea != null) {
+            therapeuticArea = therapeuticArea.replace(new RegExp(/-/g), '/');
+            this.studyDomains = this.route.snapshot.data['reqDomains'];
             if (this.studyDomains != null && this.studyDomains.length > 0) {
-                if(this.configTypeIcons.length === 4){
-                    this.configTypeIcons.unshift(  {"icontitle": "Data Lineage", "iconImageSrc": "assets/images/DataLineage.png","action":"lineage","inputParam":this.searchBRStudy});
-                    this.configTypeIcons.unshift( {"icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png","action":"job","inputParam":this.searchBRStudy});
-                    }
+                if (this.configTypeIcons.length === 4) {
+                    this.configTypeIcons.unshift({ "icontitle": "Data Lineage", "iconImageSrc": "assets/images/DataLineage.png", "action": "lineage", "inputParam": this.searchBRStudy });
+                    this.configTypeIcons.unshift({ "icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png", "action": "job", "inputParam": this.searchBRStudy });
+                }
                 this.searchBRStudy.brStudy = title;
                 this.searchBRStudy.brSdtmDomain = this.studyDomains[0].domain;
                 this.businessEditService.read(this.searchBRStudy);
                 this.sortable = true;
             } else {
-             this.importTemplate.brStudy = title;
-             this.importTemplate.therapeuticArea = therapeuticArea;
-             this.importTemplate.defaultMessage = 'Business rules have not been configured for this study. Please select a template below to get started';
-             this.addHandler('import', this.importTemplate);
-           }
-       }
-     }
-
-     public fetchTemplate(searchBRStudy): void {
-        if (searchBRStudy.brSdtmDomain) {
-           if (this.configTypeIcons.length === 4) {
-            this.configTypeIcons.unshift(  {"icontitle": "Data Lineage", "iconImageSrc": "assets/images/DataLineage.png","action":"lineage","inputParam":this.searchBRStudy});
-            this.configTypeIcons.unshift( {"icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png","action":"job","inputParam":this.searchBRStudy});
+                this.importTemplate.brStudy = title;
+                this.importTemplate.therapeuticArea = therapeuticArea;
+                this.importTemplate.defaultMessage = 'Business rules have not been configured for this study. Please select a template below to get started';
+                this.addHandler('import', this.importTemplate);
             }
         }
-       this.sortable = true;
-       this.businessEditService.read(searchBRStudy);
-     }
-
-     public onStateChange(searchBRStudy, state: State) {
-         this.gridState = state;
-         if (this.sortable === true) {
-            this.businessEditService.read(searchBRStudy);
-         }
-     }
-
-     addHandlerIconClick(data) {
-         if (!data.flag) return; 
-         else if (data.flag === 'job') {
-            this.router.navigate(['/sdtm/jobExecution', this.searchBRStudy.brStudy]);
-         } else if (data.flag === 'lineage') {
-        window.open("http://ec2-52-90-18-39.compute-1.amazonaws.com:8080/Lineage.html", '_blank');
-           // this.addHandler(data.flag, data.inputParam);
-          // this.router.navigate(['/sdtm/dataLineage']);
-         } else {
-             this.addHandler(data.flag, this.searchBRStudy);
-         }
     }
-     public addHandler(flag: any, searchBRStudy: any) {
-         this.editBizDataItem = new Matrix();
-         this.editBizDataItem.study = searchBRStudy.brStudy;
-         if (flag === 'add') {
-         this.editBizDataItem.domain = searchBRStudy.brSdtmDomain;
-         }
-         if (flag === 'import') {
+
+    public fetchTemplate(searchBRStudy): void {
+        if (searchBRStudy.brSdtmDomain) {
+            if (this.configTypeIcons.length === 4) {
+                this.configTypeIcons.unshift({ "icontitle": "Data Lineage", "iconImageSrc": "assets/images/DataLineage.png", "action": "lineage", "inputParam": this.searchBRStudy });
+                this.configTypeIcons.unshift({ "icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png", "action": "job", "inputParam": this.searchBRStudy });
+            }
+        }
+        this.sortable = true;
+        this.businessEditService.read(searchBRStudy);
+    }
+
+    public onStateChange(searchBRStudy, state: State) {
+        this.gridState = state;
+        if (this.sortable === true) {
+            this.businessEditService.read(searchBRStudy);
+        }
+    }
+
+    addHandlerIconClick(data) {
+        if (!data.flag) return;
+        else if (data.flag === 'job') {
+            this.router.navigate(['/sdtm/jobExecution', this.searchBRStudy.brStudy]);
+        } else if (data.flag === 'lineage') {
+            window.open("http://ec2-52-90-18-39.compute-1.amazonaws.com:8080/Lineage.html", '_blank');
+        } else {
+            this.addHandler(data.flag, this.searchBRStudy);
+        }
+    }
+    public addHandler(flag: any, searchBRStudy: any) {
+        this.editBizDataItem = new Matrix();
+        this.editBizDataItem.study = searchBRStudy.brStudy;
+        if (flag === 'add') {
+            this.editBizDataItem.domain = searchBRStudy.brSdtmDomain;
+        }
+        if (flag === 'import') {
             this.editBizDataItem.defaultMessage = searchBRStudy.defaultMessage;
         }
-         this.isNew = flag;
-     }
+        this.isNew = flag;
+    }
 
-     public editHandler({dataItem}) {
-         this.editBizDataItem = dataItem;
-         this.isNew = 'edit';
-     }
+    public editHandler({ dataItem }) {
+        this.editBizDataItem = dataItem;
+        this.isNew = 'edit';
+    }
 
-     public cancelHandler() {
-         this.editBizDataItem = undefined;
-         this.importTemplate = {};
-     }
+    public cancelHandler() {
+        this.editBizDataItem = undefined;
+        this.importTemplate = {};
+    }
 
-     public saveHandler(template: Matrix) {
-         this.businessEditService.save(template, this.searchBRStudy, this.isNew);
-         this.editBizDataItem = undefined;
-     }
+    public saveHandler(template: Matrix) {
+        this.businessEditService.save(template, this.searchBRStudy, this.isNew);
+        this.editBizDataItem = undefined;
+    }
 
-     public removeHandler({dataItem}) {
+    public removeHandler({ dataItem }) {
         this.editBizDataItem = dataItem;
         this.isNew = 'delete';
-     }
+    }
 
-     public deleteHandler(template: Matrix) {
+    public deleteHandler(template: Matrix) {
         this.businessEditService.remove(template, this.searchBRStudy);
         this.editBizDataItem = undefined;
-      }
+    }
 
-      public fetchHandler(template: Matrix) {
+    public fetchHandler(template: Matrix) {
         let domains = [];
         this.importTemplate.study = template.study;
         this.selectedDomains = template.importDomain;
         this.studyDomains = template.importDomain;
 
-        this.selectedDomains.sort(function(a, b) {
+        this.selectedDomains.sort(function (a, b) {
             const nameA = a.domainLabel.toLowerCase();
             const nameB = b.domainLabel.toLowerCase();
             if (nameA < nameB) {
@@ -215,25 +202,22 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.searchBRStudy.brStudy = template.study;
         this.searchBRStudy.brSdtmDomain = domains[0];
         this.businessEditService.save(this.importTemplate, this.searchBRStudy, 'import');
-        /*this.businessEditService.fetchDomainsByStudy(this.searchBRStudy.brStudy).subscribe(data => {
-            this.studyDomains = data;
-        });*/
         this.editBizDataItem = undefined;
         this.sortable = true;
-      }
+    }
 
-     filterDomains(studyTitle: any) {
+    filterDomains(studyTitle: any) {
         this.searchBRStudy.brSdtmDomain = undefined;
         this.businessEditService.read('clear');
         this.studyDomains = [];
-         if (studyTitle !== 'undefined') {
+        if (studyTitle !== 'undefined') {
             this.businessEditService.fetchDomainsByStudy(studyTitle).subscribe(data => {
                 this.studyDomains = data;
             });
-         }
-     }
+        }
+    }
 
-     filterStudies(therapeuticArea: any) {
+    filterStudies(therapeuticArea: any) {
         this.businessEditService.read('clear');
         this.studyDomains = [];
         this.searchBRStudy.brSdtmDomain = undefined;
@@ -245,13 +229,13 @@ export class BusinessRuleConfigComponent implements OnInit {
                 this.studyTitles = data;
             });
         } else {
-           this.businessEditService.fetchStudiessBytherapeuticArea(therapeuticArea).subscribe(data => {
-               this.studyTitles = data;
-           });
+            this.businessEditService.fetchStudiessBytherapeuticArea(therapeuticArea).subscribe(data => {
+                this.studyTitles = data;
+            });
         }
     }
 
-     public clear() {
+    public clear() {
         this.businessEditService.fetchStudyTitles().subscribe(data => {
             this.studyTitles = data;
         });
@@ -266,19 +250,19 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.statusDrpSelected = false;
         this.businessEditService.read('clear');
         if (this.configTypeIcons.length === 6) {
-                 this.configTypeIcons.shift();
-                 this.configTypeIcons.shift();
-                 
+            this.configTypeIcons.shift();
+            this.configTypeIcons.shift();
+
         }
         this.sortable = false;
         this.kendoOneShow = false;
         this.kendoTwoShow = true;
-     }
+    }
 
-     public getDomain(): String {
+    public getDomain(): String {
         let selectedDomain = '';
         if (this.searchBRStudy != null && this.searchBRStudy.brSdtmDomain != null
-             && this.studyDomains != null && this.studyDomains.length > 0) {
+            && this.studyDomains != null && this.studyDomains.length > 0) {
             for (let i = 0; i < this.studyDomains.length; i++) {
                 if (this.studyDomains[i].domain === this.searchBRStudy.brSdtmDomain) {
                     selectedDomain = this.studyDomains[i].domainLabel;
@@ -287,61 +271,58 @@ export class BusinessRuleConfigComponent implements OnInit {
             }
             return this.capitalizeFirstLetter(selectedDomain) + ' Domain';
         }
-          return null;
-          // else {
-           // return 'Select a study and SDTM domain to see business rules';
-        // }
-     }
+        return null;
+    }
 
-     public studyDrp(): void {
+    public studyDrp(): void {
         if (this.studyDrpSelected === false) {
-          this.studyShowOptions = true;
-          this.studyDrpSelected = true;
+            this.studyShowOptions = true;
+            this.studyDrpSelected = true;
         } else {
-          this.studyShowOptions = false;
-          this.studyDrpSelected = false;
+            this.studyShowOptions = false;
+            this.studyDrpSelected = false;
         }
-      }
-      public phaseDrp(): void {
+    }
+    public phaseDrp(): void {
         if (this.phaseDrpSelected === false) {
-          this.phaseShowOptions = true;
-          this.phaseDrpSelected = true;
+            this.phaseShowOptions = true;
+            this.phaseDrpSelected = true;
         } else {
-          this.phaseShowOptions = false;
-          this.phaseDrpSelected = false;
+            this.phaseShowOptions = false;
+            this.phaseDrpSelected = false;
         }
-      }
+    }
 
-      public statusDrp(): void {
+    public statusDrp(): void {
         if (this.statusDrpSelected === false) {
-          this.statusShowOptions = true;
-          this.statusDrpSelected = true;
+            this.statusShowOptions = true;
+            this.statusDrpSelected = true;
         } else {
-          this.statusShowOptions = false;
-          this.statusDrpSelected = false;
+            this.statusShowOptions = false;
+            this.statusDrpSelected = false;
         }
-      }
+    }
 
-      capitalizeFirstLetter(str) {
-          let temp = str;
-          if (str != null && str.length > 2) {
+    capitalizeFirstLetter(str) {
+        let temp = str;
+        if (str != null && str.length > 2) {
             temp = str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-          }
-         return temp;
-      }
+        }
+        return temp;
+    }
 
-      public getStudy(): String {
+    public getStudy(): String {
         if (this.searchBRStudy != null && this.searchBRStudy.brStudy != null && this.searchBRStudy.brSdtmDomain != null) {
             return this.capitalizeFirstLetter(this.searchBRStudy.brStudy) + ' Study';
         }
-     }
+    }
 
-     public KendoGridOne() {
-         this.kendoOneShow = !this.kendoOneShow;
-     }
+    public KendoGridOne() {
+        this.kendoOneShow = !this.kendoOneShow;
+    }
 
-     public KendoGridTwo() {
+    public KendoGridTwo() {
         this.kendoTwoShow = !this.kendoTwoShow;
     }
- }
+}
 

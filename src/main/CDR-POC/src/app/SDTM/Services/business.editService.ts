@@ -21,12 +21,8 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
     private data: any[] = [];
     public searchBRStudy: any = {};
     private res: any[] = [];
-    private isImportFromStudy = new Subject<any>();
 
     public read(searchBRStudy) {
-        /*if (this.data.length) {
-            return super.next(this.data);
-        }*/
         this.fetch(searchBRStudy)
             .pipe(
                 tap(data => {
@@ -106,47 +102,40 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
         let params = new HttpParams();
         if (action === 'create') {
             const searchUrl = '/api/CDR/matrix/create';
-            let url = `${searchUrl}`;
+            const url = `${searchUrl}`;
             let headers = new HttpHeaders();
             headers.append('Content-Type', 'application/json');
               return this.http.post(url, searchBRStudy, {headers: headers});
           } else if (action === 'update') {
                 const updateUrl = '/api/CDR/matrix/update';
-                let url = `${updateUrl}/${searchBRStudy.id}`;
-                let body = JSON.stringify(searchBRStudy);
-                let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+                const url = `${updateUrl}/${searchBRStudy.id}`;
+                const body = JSON.stringify(searchBRStudy);
+                const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
                 return this.http.put(url, searchBRStudy, {headers: headers});
         } else if (action === 'delete') {
                 const deleteUrl = '/api/CDR/matrix/delete';
-                let url = `${deleteUrl}/${searchBRStudy.id}`;
-                let body = JSON.stringify(searchBRStudy);
-                let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+                const url = `${deleteUrl}/${searchBRStudy.id}`;
+                const body = JSON.stringify(searchBRStudy);
+                const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
                 return this.http.delete(url, searchBRStudy);
         } else if (searchBRStudy === 'clear') {
                 params =  params.set('StudId', 'xxx');
             return this.http.get<any[]>(`/api/CDR/matrix/search`, { params: params })
             .pipe(map(res => <any[]>res));
         } else if (action === 'import') {
-                console.log(JSON.stringify(searchBRStudy)+"=aaa==searchBRStudy=="+searchBRStudy.study);
-                return this.http.get<any[]>(`/api/CDR/matrix/fetchOrInsert/${searchBRStudy.study}/${searchBRStudy.matrixStudy}/${searchBRStudy.domain}`)
+            const importUrl = '/api/CDR/matrix/fetchOrInsert';
+                return this.http.get<any[]>(`${importUrl}/${searchBRStudy.study}/${searchBRStudy.matrixStudy}/${searchBRStudy.domain}`)
                 .pipe(map(res => <any[]>res));
         } else {
-                if (searchBRStudy.brStudy) {
+               /* if (searchBRStudy.brStudy) {
                     params =  params.set('StudId', searchBRStudy.brStudy);
                     }
                     if (searchBRStudy.brSdtmDomain) {
                     params =  params.set('StudDomain', searchBRStudy.brSdtmDomain);
                     }
                 return this.http.get<any[]>(`/api/CDR/matrix/search`, { params: params })
-                    .pipe(map(res => <any[]>res));
+                    .pipe(map(res => <any[]>res));*/
+            return this.http.get<any[]>(`/api/CDR/ObjectMatrices/${searchBRStudy.brStudy}/${searchBRStudy.brSdtmDomain}`)
+                   .pipe(map(res => <any[]>res));
         }}
-
-        setImportStudyMessage(message: string) {
-            this.isImportFromStudy.next({ text: message });
-        }
-   
-     
-        getImportStudyMessage(): Observable<any> {
-            return this.isImportFromStudy.asObservable();
-        }
 }
