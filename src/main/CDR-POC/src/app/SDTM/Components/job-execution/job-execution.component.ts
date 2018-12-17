@@ -376,11 +376,7 @@ export class JobExecutionComponent implements OnInit {
         console.log('Job Status:' + data);
       });
    }
-   
     public navigateBusinessImport(dataItem: any) {
-    
-        this.router.navigate([`/sdtm/businessRules/${dataItem.study}/${dataItem.domain}`]);
-     
-     
+        this.router.navigate([`/sdtm/businessRulesFromJob/${dataItem.study}/${dataItem.domain}`]);
     }
 }

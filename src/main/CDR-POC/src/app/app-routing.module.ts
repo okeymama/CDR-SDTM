@@ -48,7 +48,7 @@ const routes: Routes = [
     
       },
       {
-        path: 'businessRules/:studyTitle/:domain',
+        path: 'businessRulesFromJob/:studyTitle/:domain',
         component: BusinessRuleConfigComponent,
         resolve: {
           reqDomains: BusinessResolverService
