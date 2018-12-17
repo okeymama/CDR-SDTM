@@ -95,19 +95,19 @@
               <kendo-grid-column [width]="130" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                 field="domainLabel" title="SDTM Domain">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                  {{dataItem[0]}}
+                  {{dataItem[1]}}
                 </ng-template>
                </kendo-grid-column> 
               <kendo-grid-column [width]="125" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                 field="formLable" title="Source Form">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                  {{dataItem[1]}}
+                  {{dataItem[2]}}
                 </ng-template>
                </kendo-grid-column>
               <kendo-grid-column [width]="150" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                 field="joinLogic" title="Join Logic">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                    {{dataItem[2]}}
+                    {{dataItem[3]}}
                   </ng-template>
                 <ng-template kendoGridNoRecordsTemplate>
                     <span *ngIf="searchBRStudy != null && searchBRStudy.brSdtmDomain != null && searchBRStudy.brStudy != null">No
