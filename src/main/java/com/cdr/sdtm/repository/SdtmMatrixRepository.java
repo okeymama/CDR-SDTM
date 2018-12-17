@@ -32,7 +32,7 @@ public interface SdtmMatrixRepository extends JpaRepository<PathToSdtmMatrix, Lo
 	List<PathToSdtmMatrix> findAll(Example exp);
 	
 	@Query(nativeQuery=true,value="Select distinct " + 
-			" Domain_Label,CONCAT(Form_Label, ' (', Form_Name, ') ') AS FORM ,MAX(Join_Criteria)  AS JOIN_CRITERIA" + 
+			" Domain_Label,CONCAT(Domain_Label, ' (', Domain_Name, ') ') AS SDTM_DOMAIN, CONCAT(Form_Label, ' (', Form_Name, ') ') AS SOURCE_FORM ,MAX(Join_Criteria) AS JOIN_LOGIC" + 
 			" FROM SDTM.path_to_sdtm_matrix_2 a " + 
 			" WHERE Form_Label <> ''" + 
 			" AND Study_Title=:study and Domain_Name=:domain " + 
